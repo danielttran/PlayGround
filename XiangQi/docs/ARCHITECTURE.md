@@ -1,12 +1,19 @@
 # Architecture
 
-Xiangqi Study 0.3.0 is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.4.0 is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
 `MainActivity` builds the searchable library and replay screen. Both screens have separate labelled Red/Black player rows. `PlayerNames` provides readable romanized display/search aliases for all 110 bundled player names, with source references; original player metadata and exports remain unchanged. Search folds case/diacritics and includes Chinese names, aliases, event, round and collection.
 
 `GameDateSort` implements newest, oldest and original collection order. Only complete valid calendar dates participate in date ordering. Partial, invalid and unknown dates stay at the bottom in either direction; stable sorting preserves collection order for equal or incomplete dates. The selected sort order is persisted.
+
+Replay has exactly five navigation buttons, ordered Previous game, Next game,
+Play, Previous move, Next move. Game navigation follows the current library search
+and sort and restores each game's saved ply/variation; if the current game is
+outside that search it uses the complete sorted library. Play toggles autoplay.
+Slider endpoints select the first/last positions. The top-right Game menu holds
+Flip board, Start/Stop analysis, Play against engine, Export game and Settings.
 
 Library view inflation is bounded to 40 games per page; search and sorting still
 use the entire library. Page controls retain their position on library return and
@@ -16,9 +23,38 @@ and variation histories remain available through the position slider and export.
 
 `BoardView` draws the nine-file, ten-rank board, Chinese-text pieces, selection and legal targets. A small board-edge dot shows the side to move without a wrapping turn label. Played moves and best-move hints use distinct arrows. The best-move arrow changes with completed analysis updates. Replay positions are reconstructed from a game's starting FEN and move sequence. Exploring a variation works on a separate sequence so the recorded game and its source result remain intact. Exporting a variation gives it the unfinished result `*`.
 
-`StudySettings` persists six board presets, six disc presets, Traditional/Simplified Chinese characters, coordinates and result visibility. Independent opaque RGB overrides control the board and each side's piece backgrounds; contrast-aware inks remain readable. The settings preview uses the real board renderer. ICCS/numeric coordinate labels share the existing rim: switching them on preserves grid size, piece size and touch intersections. Results are hidden by default, including accessibility descriptions; engine evaluations and exported source results are retained.
+`AppearancePresets` is an Android-free catalog shared by settings and the renderer:
+20 boards and 18 Chinese-character disc finishes, retaining the original six IDs
+and their surface colors. New wood/paper/stone materials, frames and disc rims
+are original Canvas drawings. [Appearance sources](APPEARANCE-SOURCES.md) document
+Xiangqi.com and Android references and the contrast-adjusted adaptations.
+
+`StudySettings` persists preset IDs, Traditional/Simplified characters,
+coordinates, result visibility and independent opaque RGB overrides. The latest
+user choice wins per affected surface: selecting a board preset removes only the
+custom board color; selecting a disc preset removes both piece background
+overrides; a custom picker changes only its selected surface. Explicit selection
+of the same preset also restores its colors. The settings selector distinguishes
+that choice from initialization callbacks, so opening settings or changing
+unrelated controls does not clear custom colors. The live preview uses the same
+renderer as replay. Glyph contrast adapts to the selected fill; custom board RGB
+suppresses material tint to keep its exact color. ICCS/numeric coordinates share
+the existing rim and retain grid, disc and touch geometry. Results remain hidden
+by default, including accessibility descriptions, while engine evaluations and
+exported source results are retained.
 
 Shared preferences also retain the last game, replay offset, board orientation and variation. Guarded horizontal swipes switch between the library and current game without losing study state; an explicit return button provides the same route. Swipe detection excludes sliders, text fields, spinners and multitouch. A shared serial file-I/O executor outlives Activity recreation; each Activity owns its analysis executor. Analysis generation identifiers reject stale progress and final results. Leaving the app or changing the position cancels search and autoplay; explicit Stop retains the latest estimate and arrow.
+
+Play against engine begins at the current position with the chosen human color.
+It trims only the working variation at the selected ply and sends its complete
+starting FEN/history to the same native adapter used for analysis. A legal engine
+reply is committed only if its generation, game state and root ply still match.
+Human moves are disabled during the computer's turn. Opponent searches use the
+configured finite time budget, or 3 seconds when analysis is untimed; native
+depth/thread/hash settings otherwise remain unchanged. Stop playing preserves
+the variation and resumes free editing. Position/game navigation, starting
+analysis, backgrounding and destruction cancel the pending opponent search and
+invalidate late replies. The original record and source result are unchanged.
 
 ## Records and import boundary
 
@@ -60,4 +96,4 @@ The Android manifest requests no `INTERNET` permission and disables automatic ap
 
 Pikafish's GPL-3.0 code and separately licensed NNUE weights retain their upstream notices and exact release source pointers under `third_party/pikafish`. WXF source material retains its own rights; app source licensing does not relicense game pages or engine assets.
 
-See [AUDIT-0.3.md](AUDIT-0.3.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover both bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.
+See [AUDIT-0.4.md](AUDIT-0.4.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover both bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.

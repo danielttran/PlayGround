@@ -43,7 +43,8 @@ public final class AuditSettingsTest extends InstrumentationTestCase {
         Intent intent=new Intent(target,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Activity activity=getInstrumentation().startActivitySync(intent);
         try {
-            waitFor(activity,"Settings");
+            long ready=SystemClock.uptimeMillis()+15000;final boolean[] shown={false};
+            while(!shown[0]&&SystemClock.uptimeMillis()<ready){getInstrumentation().runOnMainSync(()->shown[0]=findText(activity.getWindow().getDecorView(),"Settings")!=null||findText(activity.getWindow().getDecorView(),"‹  Library")!=null);if(!shown[0])Thread.sleep(50);}assertTrue(shown[0]);
             getInstrumentation().runOnMainSync(()->{View back=findText(activity.getWindow().getDecorView(),"‹  Library");if(back!=null)back.performClick();});
             waitFor(activity,"Xiangqi Study");
             getInstrumentation().runOnMainSync(()->{
@@ -73,7 +74,7 @@ public final class AuditSettingsTest extends InstrumentationTestCase {
                 assertNull(findText(activity.getWindow().getDecorView(),"0–1"));assertFalse(hasResultDescription(activity.getWindow().getDecorView()));
                 View player=findText(activity.getWindow().getDecorView(),"Yin Sheng");assertNotNull(player);((View)player.getParent().getParent()).performClick();
                 assertNull("Replay heading must hide the result too",findTextContaining(activity.getWindow().getDecorView(),"0–1"));
-                assertNotNull(findText(activity.getWindow().getDecorView(),"Settings"));
+                assertNotNull(findDescription(activity.getWindow().getDecorView(),"Game menu"));
             });
             // Visibility preferences never rewrite source results used by export.
             GameRepository.Game game=new GameRepository(target).load().get(0);assertEquals("0-1",game.result);

@@ -1,6 +1,6 @@
 # Xiangqi Study
 
-A native Android app for replaying Xiangqi games, exploring alternatives, and analyzing positions offline. Version **0.3.0** adds historical master games, date sorting, readable player names and customizable boards and pieces.
+A native Android app for replaying Xiangqi games, exploring alternatives, and analyzing positions offline. Version **0.4.0** adds 20 board styles, 18 Chinese-text piece finishes, consistent preset/custom-color selection, compact game controls and play against the offline engine.
 
 The starter library contains **337 recorded classical games and 28,177 half-moves**: 285 adult 2025 World Championship games, plus 52 selected master games from the 1991–2003 World Championships. The 2025 time control was **60 minutes plus 30 seconds per move**. Every historical record explicitly marks slow/classical play; its exact clock is shown only when recorded. See [2025 source evidence](docs/SOURCES.md) and [historical source evidence](docs/HISTORICAL-SOURCES.md).
 
@@ -14,13 +14,16 @@ The 2025 collection prioritizes the Yin Sheng–Lai Ly Huynh final and the reque
   records show a window around the current position, with the slider and controls
   available for the complete game.
 - Red and Black have separate labelled player rows in the library and game. A small dot on the board edge marks the side to move. Swipe right from the game to the library; swipe left to return to the current game, or use **Return to current game**. Your position and variation are restored.
-- Step through moves, drag the replay slider, autoplay, or flip the board. The app remembers replay and variation positions.
-- Tap **Analyze** for a Red-perspective evaluation, suggested move, depth, and continuation. Positive centipawns favor Red; negative values favor Black.
+- The five replay buttons are **Previous game, Next game, Play, Previous move, Next move**, in that order. Previous/Next game follow the library's search and sort order and restore each game's saved position or variation. Play toggles autoplay. Use the slider ends for the first and last positions.
+- Open the top-right **Game menu** for **Flip board**, **Start analysis / Stop analysis**, **Play against engine**, **Export game** and **Settings**.
+- Choose **Start analysis** for a Red-perspective evaluation, suggested move, depth, and continuation. Positive centipawns favor Red; negative values favor Black.
 - Analysis updates the evaluation and best-move arrow during search. **Stop analysis** retains the latest estimate; moving to another position clears it. Played moves use a separate arrow instead of highlighted squares.
 - Tap **Play from here** to explore a variation using the board or legal-move list. Return to the recorded game whenever needed.
-- Use **Import games** to choose a file or paste text. Use **Export** to save the recorded game or current variation as ICCS PGN.
+- Choose **Game menu → Play against engine**, then Red or Black, to play from the current position. The computer replies with legal moves. It uses the time-per-position setting, or 3 seconds per move when analysis is untimed. **Stop playing** keeps your variation; moving through the game or leaving the app cancels a pending reply and restores normal variation editing. The recorded source game is preserved.
+- Use **Import games** to choose a file or paste text. Use **Game menu → Export game** to save the recorded game or current variation as ICCS PGN.
 - **Settings** hides recorded results by default, including accessibility announcements. Engine evaluations stay visible, and PGN exports retain the actual result.
-- Choose six board presets (**Moss, Wood, Ink, Rosewood, Slate, Bamboo**), six piece-disc presets (**Cream, Wood, Jade, Porcelain, Rosewood, Obsidian**), and Traditional/Simplified Chinese characters. Every piece style uses Chinese text. A live preview and custom RGB colors let you set the board, Red piece backgrounds and Black piece backgrounds independently.
+- Choose **20 board presets** and **18 Chinese-text piece finishes**, with Traditional/Simplified characters. Styles include Xiangqi.com-inspired paper, maple and lacquer, plus ivory/coral, golden wood, jade, porcelain and dark palettes. The [appearance sources](docs/APPEARANCE-SOURCES.md) distinguish the inspected references from our Canvas adaptations. No international-symbol pieces are offered.
+- Custom RGB colors set the board, Red piece backgrounds and Black piece backgrounds independently. **The latest selection takes effect:** a board preset replaces the custom board color; a piece preset replaces both custom piece backgrounds; a custom color replaces only its selected surface. Selecting the same preset again also restores its colors. Opening settings or changing coordinates, characters or result visibility preserves unrelated colors.
 - Toggle **Off**, **ICCS** or **Numeric** coordinates. Labels fit the existing board rim, so enabling coordinates does not shrink the grid or pieces.
 - **Engine settings** controls search depth, time, threads, and hash memory. Native defaults are depth 128, untimed until stopped, all available CPU cores, and RAM-aware hash allocation. Saving settings restarts an active search. The built-in engine is limited to depth 64 and is substantially weaker.
 
@@ -36,11 +39,11 @@ The delivery file is **`dist/XiangqiStudy-latest.apk`**. Copy it to the phone, o
 adb install -r dist/XiangqiStudy-latest.apk
 ```
 
-The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. Each verified delivery atomically replaces the latest APK, then removes older Xiangqi Study APKs from `dist`. Portable audit APKs stay under `test-results/apk-audit` and are not delivered as phone builds. See [the 0.3 audit](docs/AUDIT-0.3.md) for the exact host, emulator and physical-device checks performed.
+The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. Each verified delivery atomically replaces the latest APK, then removes older Xiangqi Study APKs from `dist`. Portable audit APKs stay under `test-results/apk-audit` and are not delivered as phone builds. See [the 0.4 audit](docs/AUDIT-0.4.md) for the exact host, emulator and physical-device checks performed.
 
 ## Build and check
 
-Run commands from `C:\Dev\PlayGround\XiangQi`. Install a JDK 17 or newer, Android SDK platform/build tools 35, Python 3.10+ and 7-Zip. Set `JAVA_HOME` to the JDK and configure the SDK with `ANDROID_HOME` or an untracked `local.properties` file containing `sdk.dir=...`. The wrapper uses **Gradle 8.11.1**, with **Android Gradle Plugin 8.9.3**. Native builds require network access for the official Pikafish release check; first builds also download Gradle dependencies.
+Run commands from `C:\Dev\PlayGround\XiangQi`. Install a JDK 17 or newer, Android SDK platform/build tools 35, Python 3.11+ and 7-Zip. Set `JAVA_HOME` to the JDK and configure the SDK with `ANDROID_HOME` or an untracked `local.properties` file containing `sdk.dir=...`. The wrapper uses **Gradle 8.11.1**, with **Android Gradle Plugin 8.9.3**. Native builds require network access for the official Pikafish release check; first builds also download Gradle dependencies.
 
 ```powershell
 .\scripts\test-core.ps1
@@ -61,7 +64,7 @@ python scripts/test-pikafish.py --engine C:\path\to\Pikafish-Windows-x86-64-univ
 
 Place the matching official `pikafish.nnue` beside that executable, or pass `--network`. This check sends the same UCI initialization/history commands and parses the actual engine output with the production Java parser; it does not execute Android code.
 
-See [the 0.3 audit](docs/AUDIT-0.3.md) for current validation, known limits and screenshots. The [0.2 audit](docs/AUDIT.md) and [initial 0.1 validation](docs/VALIDATION.md) remain historical evidence and do not describe the current APK.
+See [the 0.4 audit](docs/AUDIT-0.4.md) for current validation, known limits and screenshots. The [0.3 audit](docs/AUDIT-0.3.md), [0.2 audit](docs/AUDIT.md) and [initial 0.1 validation](docs/VALIDATION.md) remain historical evidence and do not describe the current APK.
 
 ## Import formats
 

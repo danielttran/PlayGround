@@ -2,6 +2,7 @@ package org.xiangqi.study;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import org.xiangqi.study.core.AppearancePresets;
 import java.util.Arrays;
 
 /** Persisted appearance and spoiler preferences, separate from game study state. */
@@ -11,9 +12,9 @@ public final class StudySettings {
     public final boolean hideResults;
     public final Integer boardColor, redBackground, blackBackground;
     private StudySettings(String board,String glyph,String disc,String coordinates,boolean hide,Integer customBoard,Integer customRed,Integer customBlack) {
-        boardStyle=choice(board,"moss","wood","ink","rosewood","slate","bamboo");
+        boardStyle=AppearancePresets.board(board).id;
         glyphStyle=choice(glyph,"traditional","simplified");
-        discStyle=choice(disc,"cream","wood","jade","porcelain","rosewood","obsidian");coordinateStyle=choice(coordinates,"none","iccs","numeric");hideResults=hide;
+        discStyle=AppearancePresets.disc(disc).id;coordinateStyle=choice(coordinates,"none","iccs","numeric");hideResults=hide;
         boardColor=opaque(customBoard);redBackground=opaque(customRed);blackBackground=opaque(customBlack);
     }
     public static StudySettings load(Context context) {
@@ -28,8 +29,22 @@ public final class StudySettings {
     public static void save(Context context,String board,String glyph,String disc,String coordinates,boolean hide) {
         StudySettings old=load(context);
         StudySettings s=new StudySettings(board,glyph,disc,coordinates,hide,old.boardColor,old.redBackground,old.blackBackground);
-        context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE).edit().putString("board",s.boardStyle)
-            .putString("glyph",s.glyphStyle).putString("disc",s.discStyle).putString("coordinates",s.coordinateStyle).putBoolean("hideResults",s.hideResults).apply();
+        SharedPreferences.Editor edit=context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE).edit().putString("board",s.boardStyle)
+            .putString("glyph",s.glyphStyle).putString("disc",s.discStyle).putString("coordinates",s.coordinateStyle).putBoolean("hideResults",s.hideResults);
+        // Changing a preset replaces the older custom colors on its own surface.
+        // Unrelated settings preserve the user's colors.
+        if(!old.boardStyle.equals(s.boardStyle))edit.remove("boardColor");
+        if(!old.discStyle.equals(s.discStyle))edit.remove("redBackground").remove("blackBackground");
+        edit.apply();
+    }
+    /** Explicit selection also replaces a custom color when choosing the same preset. */
+    public static void selectBoardPreset(Context context,String board) {
+        context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE).edit()
+            .putString("board",AppearancePresets.board(board).id).remove("boardColor").apply();
+    }
+    public static void selectDiscPreset(Context context,String disc) {
+        context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE).edit()
+            .putString("disc",AppearancePresets.disc(disc).id).remove("redBackground").remove("blackBackground").apply();
     }
     public static void setCustomColor(Context context,String surface,Integer color) {
         if(!Arrays.asList("boardColor","redBackground","blackBackground").contains(surface))throw new IllegalArgumentException("Unknown color surface");

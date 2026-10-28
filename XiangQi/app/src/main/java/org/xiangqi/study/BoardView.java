@@ -5,6 +5,7 @@ import android.graphics.*;
 import android.view.MotionEvent;
 import android.view.View;
 import org.xiangqi.study.core.Position;
+import org.xiangqi.study.core.AppearancePresets;
 import java.util.*;
 
 /** A resolution-independent Xiangqi board using intersection coordinates. */
@@ -25,7 +26,8 @@ public final class BoardView extends View {
         presetGrid=bronze,presetRed=red,presetBlack=black,presetMove=moveArrow,presetBest=bestArrow;
     private Integer customBoard,customRedDisc,customBlackDisc;
     private boolean simplified;
-    private String discStyle="cream";
+    private int boardTexture=AppearancePresets.FLAT,boardBorder,discFinish=AppearancePresets.PLAIN;
+    private final Path surfaceClip=new Path(),surfaceGrain=new Path();
     private final Typeface pieceTypeface=Typeface.create("serif",Typeface.NORMAL);
     private String coordinateStyle="none";
     private static final String[] FILE_LABELS={"a","b","c","d","e","f","g","h","i"};
@@ -33,26 +35,12 @@ public final class BoardView extends View {
     public BoardView(Context context) { super(context); setLayerType(View.LAYER_TYPE_SOFTWARE,null); setFocusable(true); setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES); }
     public void setMoveListener(MoveListener listener) { this.listener=listener; }
     public void setAppearance(String boardStyle,String glyphStyle,String discStyle) {
-        simplified="simplified".equals(glyphStyle);this.discStyle=discStyle==null?"cream":discStyle;
-        if("wood".equals(boardStyle)) {
-            palette(0xffd4b580,0xff785b36,0xffa02b21,0xff28332d,0xff9a541e,0xff1b784e);
-        } else if("ink".equals(boardStyle)) {
-            palette(0xffe8e6dc,0xff817c6c,0xffb32725,0xff253942,0xffb56a29,0xff266c8a);
-        } else if("rosewood".equals(boardStyle)) {
-            palette(0xff582e2a,0xffc99871,0xffa02b21,0xff28332d,0xffffc476,0xffa6ebbe);
-        } else if("slate".equals(boardStyle)) {
-            palette(0xff263843,0xffa4b7bd,0xffa02b21,0xff28332d,0xffffc27e,0xffb6edca);
-        } else if("bamboo".equals(boardStyle)) {
-            palette(0xffc1d29e,0xff627244,0xffa02b21,0xff28332d,0xff9d4b25,0xff17634c);
-        } else {
-            palette(0xff3f3b2a,0xff9f9065,0xffb2392b,0xff274440,0xffd7ae5c,0xffb3dea5);
-        }
-        if("wood".equals(discStyle))presetRedDisc=presetBlackDisc=0xffe1be80;
-        else if("jade".equals(discStyle))presetRedDisc=presetBlackDisc=0xffc2d9c4;
-        else if("porcelain".equals(discStyle))presetRedDisc=presetBlackDisc=0xfff6f2e9;
-        else if("rosewood".equals(discStyle)){presetRedDisc=0xff6d2d29;presetBlackDisc=0xff382b27;}
-        else if("obsidian".equals(discStyle)){presetRedDisc=0xff323038;presetBlackDisc=0xff171e25;}
-        else presetRedDisc=presetBlackDisc=0xffe8debb;
+        AppearancePresets.Board board=AppearancePresets.board(boardStyle);
+        AppearancePresets.Disc disc=AppearancePresets.disc(discStyle);
+        simplified="simplified".equals(glyphStyle);
+        boardTexture=board.texture;boardBorder=board.border;discFinish=disc.finish;
+        palette(board.background,board.grid,disc.redInk,disc.blackInk,board.playedArrow,board.bestArrow);
+        presetRedDisc=disc.redBackground;presetBlackDisc=disc.blackBackground;
         applyColors();
     }
     private void palette(int board,int grid,int redInk,int blackInk,int played,int best){presetBoard=board;presetGrid=grid;presetRed=redInk;presetBlack=blackInk;presetMove=played;presetBest=best;}
@@ -103,6 +91,7 @@ public final class BoardView extends View {
         step=Math.min((w-2*margin)/9,(h-2*margin)/10);
         left=(w-step*8)/2; top=(h-step*9)/2; radius=step*0.405f;
         paint.setColor(boardColor); c.drawRoundRect(0,0,w,h,14*density,14*density,paint);
+        drawSurface(c,w,h,density);
         paint.setColor(bronze); paint.setStrokeWidth(Math.max(1,w/400));
         for(int row=0;row<10;row++) c.drawLine(left,top+row*step,left+8*step,top+row*step,paint);
         for(int col=0;col<9;col++) {
@@ -122,11 +111,17 @@ public final class BoardView extends View {
             paint.setColor(fill); c.drawCircle(x(i),y(i),radius,paint);
             paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.026f); paint.setColor(Character.isUpperCase(position.board[i])?red:black);
             c.drawCircle(x(i),y(i),radius*.88f,paint); paint.setStyle(Paint.Style.FILL);
-            if("wood".equals(discStyle)||"rosewood".equals(discStyle)){paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.012f);c.drawCircle(x(i),y(i),radius*.76f,paint);paint.setStyle(Paint.Style.FILL);}
-            if("porcelain".equals(discStyle)||"obsidian".equals(discStyle)){
+            if(discFinish==AppearancePresets.ENGRAVED){paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.012f);c.drawCircle(x(i),y(i),radius*.76f,paint);paint.setStyle(Paint.Style.FILL);}
+            if(discFinish==AppearancePresets.GLAZED){
                 paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.018f);paint.setColor(readableMonochrome(fill));paint.setAlpha(70);
                 c.drawArc(x(i)-radius*.96f,y(i)-radius*.96f,x(i)+radius*.96f,y(i)+radius*.96f,205,105,false,paint);
                 paint.setStyle(Paint.Style.FILL);paint.setAlpha(255);paint.setColor(Character.isUpperCase(position.board[i])?red:black);
+            }
+            if(discFinish==AppearancePresets.LACQUER){
+                paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.014f);c.drawCircle(x(i),y(i),radius*.76f,paint);
+                paint.setColor(readableMonochrome(fill));paint.setAlpha(110);paint.setStrokeWidth(step*.018f);
+                c.drawArc(x(i)-radius*.97f,y(i)-radius*.97f,x(i)+radius*.97f,y(i)+radius*.97f,205,110,false,paint);
+                paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);paint.setColor(Character.isUpperCase(position.board[i])?red:black);
             }
             paint.setTextSize(step*.60f); paint.setTypeface(pieceTypeface);
             paint.getFontMetrics(fontMetrics); c.drawText(glyph(position.board[i]),x(i),y(i)-(fontMetrics.ascent+fontMetrics.descent)/2,paint);
@@ -137,6 +132,38 @@ public final class BoardView extends View {
         }
         drawArrow(c,hintMove,bestArrow,.115f,.32f,true);
         drawTurnIndicator(c,density);
+    }
+    /** Light procedural material cues; custom RGB always keeps a flat exact fill. */
+    private void drawSurface(Canvas canvas,float w,float h,float density){
+        if(customBoard!=null)return;
+        if(boardTexture!=AppearancePresets.FLAT){
+            surfaceClip.reset();surfaceClip.addRoundRect(0,0,w,h,14*density,14*density,Path.Direction.CW);
+            int save=canvas.save();canvas.clipPath(surfaceClip);
+            paint.setColor(readableMonochrome(boardColor));paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(.5f*density);
+            if(boardTexture==AppearancePresets.WOOD){
+                paint.setAlpha(13);
+                for(int line=1;line<35;line++){
+                    float xx=w*line/35f,bend=(line%5-2)*density;
+                    surfaceGrain.reset();surfaceGrain.moveTo(xx,0);surfaceGrain.cubicTo(xx+bend,h*.3f,xx-bend,h*.7f,xx,h);canvas.drawPath(surfaceGrain,paint);
+                }
+            }else if(boardTexture==AppearancePresets.PAPER){
+                paint.setAlpha(7);
+                for(int line=1;line<32;line++){float yy=h*line/32f;canvas.drawLine(0,yy,w,yy+(line%3-1)*density,paint);}
+            }else{
+                paint.setAlpha(9);
+                for(int line=1;line<20;line++){
+                    float yy=h*line/20f;surfaceGrain.reset();surfaceGrain.moveTo(0,yy);surfaceGrain.cubicTo(w*.25f,yy-4*density,w*.7f,yy+5*density,w,yy);canvas.drawPath(surfaceGrain,paint);
+                }
+            }
+            paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);canvas.restoreToCount(save);
+        }
+        if(boardBorder!=0){
+            paint.setColor(boardBorder);paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(density);
+            canvas.drawRoundRect(2*density,2*density,w-2*density,h-2*density,12*density,12*density,paint);
+            paint.setAlpha(85);paint.setStrokeWidth(.6f*density);
+            canvas.drawRoundRect(4*density,4*density,w-4*density,h-4*density,10*density,10*density,paint);
+            paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);
+        }
     }
     private void drawCoordinates(Canvas canvas,float density) {
         float horizontalRim=left-radius,verticalRim=top-radius;

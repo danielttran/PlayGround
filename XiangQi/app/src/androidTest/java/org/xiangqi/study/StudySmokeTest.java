@@ -8,6 +8,8 @@ import android.test.InstrumentationTestCase;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.SeekBar;
+import android.view.accessibility.AccessibilityNodeInfo;
 import org.xiangqi.study.core.Pgn;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -83,19 +85,25 @@ public final class StudySmokeTest extends InstrumentationTestCase {
                 ((View)player.getParent().getParent()).performClick();
             });
             waitFor(activity,"MOVE RECORD",8000);
-            getInstrumentation().runOnMainSync(()->findDescription(activity.getWindow().getDecorView(),"First position").performClick());
+            getInstrumentation().runOnMainSync(()->{
+                SeekBar slider=findSlider(activity.getWindow().getDecorView());android.os.Bundle args=new android.os.Bundle();args.putFloat(AccessibilityNodeInfo.ACTION_ARGUMENT_PROGRESS_VALUE,0);
+                slider.performAccessibilityAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS.getId(),args);
+            });
             getInstrumentation().waitForIdleSync();
             getInstrumentation().runOnMainSync(()->findDescription(activity.getWindow().getDecorView(),"Next move").performClick());
             getInstrumentation().waitForIdleSync();
             getInstrumentation().runOnMainSync(()->{
                 assertTrue(findBoard(activity.getWindow().getDecorView()).getContentDescription().toString().contains("Black to move."));
-                findText(activity.getWindow().getDecorView(),"Analyze").performClick();
+            });
+            getInstrumentation().runOnMainSync(()->findDescription(activity.getWindow().getDecorView(),"Game menu").performClick());
+            clickPopup("Start analysis");
+            getInstrumentation().runOnMainSync(()->{
                 findDescription(activity.getWindow().getDecorView(),"Next move").performClick();
             });
             getInstrumentation().waitForIdleSync();
             getInstrumentation().runOnMainSync(()->{
-                assertNotNull(findText(activity.getWindow().getDecorView(),"Analyze"));
-                assertNull(findText(activity.getWindow().getDecorView(),"Stop analysis"));
+                assertNotNull(findDescription(activity.getWindow().getDecorView(),"Game menu"));
+                try{java.lang.reflect.Field field=MainActivity.class.getDeclaredField("analysisFuture");field.setAccessible(true);assertNull(field.get(activity));}catch(Exception e){throw new RuntimeException(e);}
                 assertTrue(findBoard(activity.getWindow().getDecorView()).getContentDescription().toString().contains("Red to move."));
             });
         } finally {getInstrumentation().runOnMainSync(activity::finish);}
@@ -146,6 +154,9 @@ public final class StudySmokeTest extends InstrumentationTestCase {
     private static View findText(View view,String text){if(view instanceof TextView&&((TextView)view).getText().toString().startsWith(text))return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findText(group.getChildAt(i),text);if(found!=null)return found;}}return null;}
     private static View findDescription(View view,String text){if(text.contentEquals(view.getContentDescription()==null?"":view.getContentDescription()))return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findDescription(group.getChildAt(i),text);if(found!=null)return found;}}return null;}
     private static View findBoard(View view){if(view instanceof BoardView)return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findBoard(group.getChildAt(i));if(found!=null)return found;}}return null;}
+    private static SeekBar findSlider(View view){if(view instanceof SeekBar)return (SeekBar)view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){SeekBar found=findSlider(group.getChildAt(i));if(found!=null)return found;}}return null;}
+    private void clickPopup(String text)throws Exception{assertTrue("Missing game menu item "+text,UiTestActions.clickPopup(getInstrumentation(),text));}
+    private static AccessibilityNodeInfo popupNode(AccessibilityNodeInfo node,String text){if(node==null)return null;if(text.equalsIgnoreCase(String.valueOf(node.getText())))return node;for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo found=popupNode(node.getChild(i),text);if(found!=null)return found;}return null;}
     private static void collectText(View view,StringBuilder output){
         if(output.length()>=2000)return;
         if(view instanceof TextView){String value=((TextView)view).getText().toString();if(!value.isEmpty()){if(output.length()>0)output.append(" | ");int remaining=Math.max(0,2000-output.length());output.append(value,0,Math.min(value.length(),remaining));}}

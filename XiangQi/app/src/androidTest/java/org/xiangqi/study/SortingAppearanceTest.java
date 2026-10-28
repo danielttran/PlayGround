@@ -17,8 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.CheckBox;
 import org.xiangqi.study.core.PlayerNames;
 import org.xiangqi.study.core.Pgn;
+import org.xiangqi.study.core.AppearancePresets;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -49,6 +51,7 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         Context storage=new ContextWrapper(target){@Override public SharedPreferences getSharedPreferences(String ignored,int mode){return target.getSharedPreferences(name,mode);}};
         try {
             StudySettings initial=StudySettings.load(storage);assertNull(initial.boardColor);assertNull(initial.redBackground);assertNull(initial.blackBackground);
+            StudySettings.save(storage,"bamboo","traditional","obsidian","none",true);
             StudySettings.setCustomColor(storage,"boardColor",0x00123456);StudySettings.setCustomColor(storage,"redBackground",0x00784512);
             StudySettings.setCustomColor(storage,"blackBackground",0x80e8e6dc);
             StudySettings.save(storage,"bamboo","simplified","obsidian","numeric",false);
@@ -104,7 +107,7 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
             Spinner boards=(Spinner)findDescription(settings.getWindow().getDecorView(),"Board style");
             Spinner glyphs=(Spinner)findDescription(settings.getWindow().getDecorView(),"Chinese piece characters");
             Spinner discs=(Spinner)findDescription(settings.getWindow().getDecorView(),"Piece finish");
-            assertEquals(6,boards.getCount());assertEquals(2,glyphs.getCount());assertEquals(6,discs.getCount());boards.setSelection(3);glyphs.setSelection(1);discs.setSelection(5);
+            assertEquals(AppearancePresets.boardIds().length,boards.getCount());assertEquals(2,glyphs.getCount());assertEquals(AppearancePresets.discIds().length,discs.getCount());boards.setSelection(3);glyphs.setSelection(1);discs.setSelection(5);
         });getInstrumentation().waitForIdleSync();
         assertEquals("rosewood",StudySettings.load(activity).boardStyle);assertEquals("simplified",StudySettings.load(activity).glyphStyle);assertEquals("obsidian",StudySettings.load(activity).discStyle);
         openColor(settings,"Board color");AlertDialog picker=dialog("colorDialog");
@@ -122,13 +125,66 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
             BoardView preview=(BoardView)findType(settings.getWindow().getDecorView(),BoardView.class);assertEquals(0xff123456,preview.getBoardColor());
             assertEquals(0xfff4e2cc,preview.getPieceBackground(true));assertEquals(0xff102030,preview.getPieceBackground(false));
             ((Spinner)findDescription(settings.getWindow().getDecorView(),"Board style")).setSelection(4);
-        });getInstrumentation().waitForIdleSync();assertEquals(Integer.valueOf(0xff123456),StudySettings.load(activity).boardColor);
+        });getInstrumentation().waitForIdleSync();assertNull("Latest board preset replaces the custom board color",StudySettings.load(activity).boardColor);
         openColor(settings,"Red piece background");AlertDialog redPicker=dialog("colorDialog");main(()->redPicker.getButton(AlertDialog.BUTTON_NEUTRAL).performClick());getInstrumentation().waitForIdleSync();
         assertNull(StudySettings.load(activity).redBackground);assertEquals(Integer.valueOf(0xff102030),StudySettings.load(activity).blackBackground);
         openColor(settings,"Board color");AlertDialog cancel=dialog("colorDialog");main(()->{((EditText)findDescription(cancel.getWindow().getDecorView(),"Hex color")).setText("#ABCDEF");cancel.getButton(AlertDialog.BUTTON_NEGATIVE).performClick();});
-        assertEquals(Integer.valueOf(0xff123456),StudySettings.load(activity).boardColor);
+        assertNull("Cancelling the picker must keep the latest board preset",StudySettings.load(activity).boardColor);
         main(()->findText(settings.getWindow().getDecorView(),"Reset custom colors").performClick());getInstrumentation().waitForIdleSync();
         StudySettings reset=StudySettings.load(activity);assertNull(reset.boardColor);assertNull(reset.redBackground);assertNull(reset.blackBackground);assertEquals("slate",reset.boardStyle);
+    }
+    public void testLatestPresetAndCustomColorSelectionsWinOnlyTheirOwnSurfaces() throws Exception {
+        Context context=getInstrumentation().getTargetContext();
+        StudySettings.save(context,"wood","traditional","jade","none",true);
+        StudySettings.setCustomColor(context,"boardColor",0xff123456);
+        StudySettings.setCustomColor(context,"redBackground",0xfff4e2cc);
+        StudySettings.setCustomColor(context,"blackBackground",0xff102030);
+        launch();main(()->findText(root(),"Settings").performClick());getInstrumentation().waitForIdleSync();
+        AlertDialog settings=dialog("settingsDialog");
+        assertColors(0xff123456,0xfff4e2cc,0xff102030);
+        main(()->{BoardView preview=(BoardView)findType(settings.getWindow().getDecorView(),BoardView.class);assertEquals(0xff123456,preview.getBoardColor());assertEquals(0xfff4e2cc,preview.getPieceBackground(true));assertEquals(0xff102030,preview.getPieceBackground(false));});
+        choosePreset(settings,"Board style",1); // Reselect the already selected Wood preset.
+        assertColors(null,0xfff4e2cc,0xff102030);assertEquals("wood",StudySettings.load(context).boardStyle);
+        main(()->{BoardView expected=new BoardView(activity);expected.setAppearance("wood","traditional","jade");assertEquals(expected.getBoardColor(),((BoardView)findType(settings.getWindow().getDecorView(),BoardView.class)).getBoardColor());});
+        applyColor(settings,"Board color","#345678");assertColors(0xff345678,0xfff4e2cc,0xff102030);
+        main(()->{
+            ((Spinner)findDescription(settings.getWindow().getDecorView(),"Chinese piece characters")).setSelection(1);
+            ((Spinner)findDescription(settings.getWindow().getDecorView(),"Board coordinates")).setSelection(2);
+            ((CheckBox)findDescription(settings.getWindow().getDecorView(),"Hide game results, including accessibility announcements")).setChecked(false);
+        });getInstrumentation().waitForIdleSync();
+        assertColors(0xff345678,0xfff4e2cc,0xff102030);
+        choosePreset(settings,"Piece finish",2); // Same Jade preset must replace both custom discs.
+        assertColors(0xff345678,null,null);assertEquals("jade",StudySettings.load(context).discStyle);
+        applyColor(settings,"Red piece background","#884422");assertColors(0xff345678,0xff884422,null);
+        choosePreset(settings,"Piece finish",5);assertColors(0xff345678,null,null);
+        choosePreset(settings,"Board style",4);assertColors(null,null,null);
+        applyColor(settings,"Black piece background","#445566");assertColors(null,null,0xff445566);
+        main(()->settings.getButton(AlertDialog.BUTTON_POSITIVE).performClick());getInstrumentation().waitForIdleSync();
+        main(()->findText(root(),"Settings").performClick());getInstrumentation().waitForIdleSync();
+        AlertDialog reopened=dialog("settingsDialog");assertColors(null,null,0xff445566);
+        main(()->((Spinner)findDescription(reopened.getWindow().getDecorView(),"Piece finish")).performClick());getInstrumentation().waitForIdleSync();
+        AlertDialog oldPreset=dialog("presetDialog");assertTrue(oldPreset.isShowing());
+        Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(MainActivity.class.getName(),null,false);
+        main(activity::recreate);Activity replacement=monitor.waitForActivityWithTimeout(10000);getInstrumentation().removeMonitor(monitor);assertNotNull(replacement);activity=replacement;awaitLibrary();
+        assertFalse("Recreation must dismiss the preset popup",oldPreset.isShowing());assertColors(null,null,0xff445566);
+        main(()->findText(root(),"Settings").performClick());getInstrumentation().waitForIdleSync();
+        AlertDialog restored=dialog("settingsDialog");assertColors(null,null,0xff445566);
+        choosePreset(restored,"Piece finish",5);assertColors(null,null,null);
+    }
+    public void testSettingsSaveAndExplicitPresetApisRespectColorPrecedence() {
+        Context context=getInstrumentation().getTargetContext();
+        StudySettings.setCustomColor(context,"boardColor",0xff112233);
+        StudySettings.setCustomColor(context,"redBackground",0xff445566);
+        StudySettings.setCustomColor(context,"blackBackground",0xff778899);
+        StudySettings.save(context,"wood","traditional","cream","numeric",true);
+        assertColors(null,0xff445566,0xff778899);
+        StudySettings.setCustomColor(context,"boardColor",0xff112233);
+        StudySettings.save(context,"wood","simplified","jade","numeric",false);
+        assertColors(0xff112233,null,null);
+        StudySettings.setCustomColor(context,"redBackground",0xff445566);StudySettings.setCustomColor(context,"blackBackground",0xff778899);
+        StudySettings.selectBoardPreset(context,"wood");assertColors(null,0xff445566,0xff778899);
+        StudySettings.setCustomColor(context,"boardColor",0xff112233);
+        StudySettings.selectDiscPreset(context,"jade");assertColors(0xff112233,null,null);
     }
     public void testLongPlayerNamesDoNotMoveBoardOrPositionSliderBetweenTurns() throws Exception {
         launch();GameRepository.Game game=game("Nguyễn Thành Bảo · Vietnamese master — international classical championship record","2025-09-27","");
@@ -200,6 +256,12 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         main(()->assertNotNull("Native accent spelling must find the readable player",findText(root(),"Dam Thi Thuy Dung · 谭氏垂容")));
     }
     private void applyColor(AlertDialog settings,String button,String value)throws Exception{openColor(settings,button);AlertDialog picker=dialog("colorDialog");main(()->{((EditText)findDescription(picker.getWindow().getDecorView(),"Hex color")).setText(value);picker.getButton(AlertDialog.BUTTON_POSITIVE).performClick();});getInstrumentation().waitForIdleSync();}
+    private void choosePreset(AlertDialog settings,String control,int position){
+        main(()->((Spinner)findDescription(settings.getWindow().getDecorView(),control)).performClick());getInstrumentation().waitForIdleSync();
+        AlertDialog preset=dialog("presetDialog");assertNotNull("Preset choices must open",preset);
+        main(()->assertTrue(preset.getListView().performItemClick(null,position,preset.getListView().getAdapter().getItemId(position))));getInstrumentation().waitForIdleSync();
+    }
+    private void assertColors(Integer board,Integer red,Integer black){StudySettings current=StudySettings.load(getInstrumentation().getTargetContext());assertEquals("Board override",board,current.boardColor);assertEquals("Red background override",red,current.redBackground);assertEquals("Black background override",black,current.blackBackground);}
     private void openColor(AlertDialog settings,String text){main(()->{View view=findText(settings.getWindow().getDecorView(),text);assertNotNull(view);view.performClick();});getInstrumentation().waitForIdleSync();}
     private void launch()throws Exception{activity=getInstrumentation().startActivitySync(new Intent(getInstrumentation().getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));awaitLibrary();}
     private void awaitLibrary()throws Exception{long until=SystemClock.uptimeMillis()+15000;boolean[] ready={false};while(SystemClock.uptimeMillis()<until){main(()->ready[0]=findDescription(root(),"Game sort order")!=null);if(ready[0])return;Thread.sleep(50);}fail("Library did not load");}

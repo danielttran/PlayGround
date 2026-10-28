@@ -102,7 +102,7 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         click("Explore suggested move");assertBoardTurn("Black");await("Exploring a variation",3000);
         click("Return to recorded game");click("Analyze");
         recreate();await("Recorded game",8000);
-        assertNull("Recreation must cancel the obsolete search",findPrefix(root(),"Stop analysis"));
+        main(()->{try{Field field=MainActivity.class.getDeclaredField("analysisFuture");field.setAccessible(true);assertNull("Recreation must cancel the obsolete search",field.get(activity));}catch(Exception e){throw new RuntimeException(e);}});
         click("Analyze");click("‹  Library");await("Xiangqi Study",8000);
         Thread.sleep(3500);
         assertNotNull("Old engine callback must not replace library UI",findPrefix(root(),"Xiangqi Study"));
@@ -172,12 +172,22 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         getInstrumentation().waitForIdleSync();
     }
     private int progress() throws Exception {final int[] value={-1};main(()->value[0]=((SeekBar)findType(root(),SeekBar.class)).getProgress());return value[0];}
-    private void click(String text) throws Exception {main(()->{View view=findPrefix(root(),text);assertNotNull("Missing control "+text,view);view.performClick();});getInstrumentation().waitForIdleSync();}
-    private void clickDescription(String text)throws Exception{main(()->{View view=findDescription(root(),text);assertNotNull("Missing control "+text,view);view.performClick();});getInstrumentation().waitForIdleSync();}
+    private void click(String text) throws Exception {
+        if(text.equals("Analyze")){clickDescription("Game menu");clickDialog("Start analysis");return;}
+        main(()->{View view=findPrefix(root(),text);assertNotNull("Missing control "+text,view);view.performClick();});getInstrumentation().waitForIdleSync();
+    }
+    private void clickDescription(String text)throws Exception{
+        main(()->{
+            if(text.equals("First position")||text.equals("Last position")){
+                SeekBar slider=(SeekBar)findType(root(),SeekBar.class);android.os.Bundle args=new android.os.Bundle();
+                args.putFloat(AccessibilityNodeInfo.ACTION_ARGUMENT_PROGRESS_VALUE,text.equals("First position")?0:slider.getMax());
+                slider.performAccessibilityAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS.getId(),args);return;
+            }
+            View view=findDescription(root(),text);assertNotNull("Missing control "+text,view);view.performClick();
+        });getInstrumentation().waitForIdleSync();
+    }
     private void clickDialog(String text)throws Exception{
-        long until=SystemClock.uptimeMillis()+5000;
-        while(SystemClock.uptimeMillis()<until){AccessibilityNodeInfo node=nodeText(getInstrumentation().getUiAutomation().getRootInActiveWindow(),text);if(node!=null){assertTrue(node.performAction(AccessibilityNodeInfo.ACTION_CLICK));getInstrumentation().waitForIdleSync();return;}Thread.sleep(100);}
-        fail("Missing dialog option "+text);
+        assertTrue("Missing dialog option "+text,UiTestActions.clickPopup(getInstrumentation(),text));
     }
     private void await(String prefix,long timeout)throws Exception{awaitText(prefix,timeout,false);}
     private void awaitContains(String text,long timeout)throws Exception{awaitText(text,timeout,true);}

@@ -1,0 +1,8 @@
+<resources>
+    <string name="engine_play_intro">%1$s opponent · you play %2$s.\nUse the board or Legal moves to play. Stop playing keeps your variation.</string>
+    <string name="engine_play_terminal">%1$s has no legal move. %2$s wins.</string>
+    <string name="engine_play_thinking">%1$s is thinking…\nYou play %2$s. Stop playing cancels the engine reply.</string>
+    <string name="engine_play_reply">%1$s played %2$s.\n%3$s</string>
+    <string name="engine_play_your_move">Your move · use the board or Legal moves.</string>
+    <string name="engine_play_error">Engine game stopped: %1$s</string>
+</resources>
