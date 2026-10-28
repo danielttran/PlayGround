@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Curate attributed Vietnamese adult classical games from verified 2022–2023 sources.
+"""Curate additional Vietnamese adult classical games from verified 2022–2023 sources.
 
 Only factual main-line moves and event metadata enter the app. Cached public
 HTML stays out of Git. Earlier inspected archives without clock evidence are
-held out. --fetch-only downloads sources without changing assets;
+held out. The broader 2023 World Championship pack owns its records, retaining
+their original IDs; this supplement deduplicates against it. --fetch-only downloads sources without changing assets;
 --offline reproduces the selected pack from the downloaded source cache.
 """
 from __future__ import annotations
@@ -113,7 +114,7 @@ def build(offline=False, fetch_only=False):
     screening_raw = (ROOT / "data/curation-policy.json").read_bytes()
     excluded_names = json.loads(screening_raw)["excludedNames"]
     existing = []
-    for name in ("games.json", "historical-games.json"):
+    for name in ("games.json", "historical-games.json", "world-2023-games.json"):
         existing += json.loads((ROOT / "app/src/main/assets" / name).read_text(encoding="utf-8"))["games"]
     seen = {sha(" ".join(g["moves"]).encode()): g["id"] for g in existing}
     games, sources, exclusions = [], [], []
@@ -219,12 +220,12 @@ def build(offline=False, fetch_only=False):
     payload = (json.dumps(pack, ensure_ascii=False, indent=2) + "\n").encode()
     manifest = {
         "collection": policy["name"], "screeningDate": policy["screeningDate"],
-        "scope": "2022–2023 international adult classical games with a Vietnamese player; rapid/blitz/youth excluded. Earlier inspected archives without explicit clock evidence are held out.",
+        "scope": "Additional 2022 World Championship and 2023 Phuong Trang international adult classical games with a Vietnamese player. The broader 2023 World Championship pack owns its records; duplicate main lines, rapid/blitz/youth and unverified older clocks are excluded.",
         "games": len(games), "halfMoves": sum(len(g["moves"]) for g in games),
         "yearCounts": dict(Counter(g["date"][:4] for g in games)),
         "vietnamesePlayerCounts": {p: sum(p in (g["red"], g["black"]) for g in games) for p in sorted(set(p for s in policy["sources"] for p in s["vietnamesePlayers"]) | set(policy.get("additionalVietnamesePlayers", [])))},
         "assetSha256": sha(payload), "policySha256": sha(policy_raw), "curationPolicySha256": sha(screening_raw),
-        "deduplicatedAgainst": ["games.json", "historical-games.json"], "excludedRecords": exclusions, "sources": sources,
+        "deduplicatedAgainst": ["games.json", "historical-games.json", "world-2023-games.json"], "excludedRecords": exclusions, "sources": sources,
         "rights": "Attributed factual moves and event metadata only. WXF retains rights in its pages; no annotations, page design or board code copied and no general redistribution license asserted.",
     }
     if not fetch_only:

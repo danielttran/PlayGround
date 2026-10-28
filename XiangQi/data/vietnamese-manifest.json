@@ -1,34 +1,107 @@
 {
   "collection": "Vietnamese international classical 2022–2023",
   "screeningDate": "2026-10-28",
-  "scope": "2022–2023 international adult classical games with a Vietnamese player; rapid/blitz/youth excluded. Earlier inspected archives without explicit clock evidence are held out.",
-  "games": 61,
-  "halfMoves": 5452,
+  "scope": "Additional 2022 World Championship and 2023 Phuong Trang international adult classical games with a Vietnamese player. The broader 2023 World Championship pack owns its records; duplicate main lines, rapid/blitz/youth and unverified older clocks are excluded.",
+  "games": 31,
+  "halfMoves": 2774,
   "yearCounts": {
-    "2023": 34,
+    "2023": 4,
     "2022": 27
   },
   "vietnamesePlayerCounts": {
     "何文进": 1,
     "宗室日新": 1,
     "汪洋北": 1,
-    "赖理兄": 14,
+    "赖理兄": 7,
     "郑亚生": 4,
     "阮成保": 8,
-    "阮明日光": 9,
+    "阮明日光": 0,
     "阮黄林": 1,
-    "阮黄燕": 14,
+    "阮黄燕": 7,
     "高芳青": 0,
-    "黎氏金鸾": 14
+    "黎氏金鸾": 7
   },
-  "assetSha256": "accaccb5dcaf91e5b14208417b4a6b5008fd9b361584108d787c5ac981a20e51",
+  "assetSha256": "b0749d204117709ebb851587d64cf88f08a48b3acb1c1df12ebf6eb266d3828f",
   "policySha256": "a03fed7880443a15fd88aecbc9b43a63adc7be9f3a6432f2ee34f1d8cd6d99da",
   "curationPolicySha256": "6c3f714ff9989cdcdbd3153b9470d858e593bb0c18035b55dd7827d4d4e976a3",
   "deduplicatedAgainst": [
     "games.json",
-    "historical-games.json"
+    "historical-games.json",
+    "world-2023-games.json"
   ],
   "excludedRecords": [
+    {
+      "id": "vietnam-wxf-2023-1590-g1",
+      "red": "阮明日光",
+      "black": "可儿宏晖",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1590:2023-18th-world-xiangqi-championships-men-round-01-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1590-g1"
+    },
+    {
+      "id": "vietnam-wxf-2023-1590-g7",
+      "red": "赖理兄",
+      "black": "郑德铭",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1590:2023-18th-world-xiangqi-championships-men-round-01-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1590-g7"
+    },
+    {
+      "id": "vietnam-wxf-2023-1594-g3",
+      "red": "阮黄燕",
+      "black": "龚勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1594-g3"
+    },
+    {
+      "id": "vietnam-wxf-2023-1594-g6",
+      "red": "陈慧盈",
+      "black": "黎氏金鸾",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1594-g6"
+    },
+    {
+      "id": "vietnam-wxf-2023-1603-g3",
+      "red": "梅俊海",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1603:2023-18th-world-xiangqi-championships-men-round-02-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1603-g3"
+    },
+    {
+      "id": "vietnam-wxf-2023-1603-g5",
+      "red": "叶乃传",
+      "black": "阮明日光",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1603:2023-18th-world-xiangqi-championships-men-round-02-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1603-g5"
+    },
+    {
+      "id": "vietnam-wxf-2023-1604-g1",
+      "red": "黎氏金鸾",
+      "black": "吴兰香",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1604-g1"
+    },
+    {
+      "id": "vietnam-wxf-2023-1604-g4",
+      "red": "林祐萱",
+      "black": "阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1604-g4"
+    },
+    {
+      "id": "vietnam-wxf-2023-1635-g1",
+      "red": "阮明日光",
+      "black": "黄学谦",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1635-g1"
+    },
     {
       "id": "vietnam-wxf-2023-1635-g2",
       "red": "赖理兄",
@@ -38,6 +111,150 @@
         "孟辰"
       ],
       "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2023-1636-g3",
+      "red": "黎德志",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1636-g3"
+    },
+    {
+      "id": "vietnam-wxf-2023-1636-g6",
+      "red": "郑彦隆",
+      "black": "阮明日光",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1636-g6"
+    },
+    {
+      "id": "vietnam-wxf-2023-1637-g4",
+      "red": "赖理兄",
+      "black": "黎英豪",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1637:2023-18th-world-xiangqi-championships-men-round-05-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1637-g4"
+    },
+    {
+      "id": "vietnam-wxf-2023-1637-g5",
+      "red": "阮明日光",
+      "black": "谢汶谕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1637:2023-18th-world-xiangqi-championships-men-round-05-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1637-g5"
+    },
+    {
+      "id": "vietnam-wxf-2023-1641-g2",
+      "red": "赖理兄",
+      "black": "吴宗翰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1641:2023-18th-world-xiangqi-championships-men-round-06-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1641-g2"
+    },
+    {
+      "id": "vietnam-wxf-2023-1641-g7",
+      "red": "黎德志",
+      "black": "阮明日光",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1641:2023-18th-world-xiangqi-championships-men-round-06-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1641-g7"
+    },
+    {
+      "id": "vietnam-wxf-2023-1647-g2",
+      "red": "阮黄燕",
+      "black": "刘欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1647-g2"
+    },
+    {
+      "id": "vietnam-wxf-2023-1647-g5",
+      "red": "陈茗芳",
+      "black": "黎氏金鸾",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1647-g5"
+    },
+    {
+      "id": "vietnam-wxf-2023-1648-g3",
+      "red": "林嘉欣",
+      "black": "阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1648-g3"
+    },
+    {
+      "id": "vietnam-wxf-2023-1648-g5",
+      "red": "黎氏金鸾",
+      "black": "洪千惠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1648-g5"
+    },
+    {
+      "id": "vietnam-wxf-2023-1649-g1",
+      "red": "阮黄燕",
+      "black": "唐思楠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1649-g1"
+    },
+    {
+      "id": "vietnam-wxf-2023-1649-g3",
+      "red": "余欣如",
+      "black": "黎氏金鸾",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1649-g3"
+    },
+    {
+      "id": "vietnam-wxf-2023-1650-g1",
+      "red": "唐思楠",
+      "black": "黎氏金鸾",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1650-g1"
+    },
+    {
+      "id": "vietnam-wxf-2023-1650-g2",
+      "red": "吴兰香",
+      "black": "阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1650-g2"
+    },
+    {
+      "id": "vietnam-wxf-2023-1708-g2",
+      "red": "田荷",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1708:2023-18th-world-xiangqi-championships-men-round-07-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1708-g2"
+    },
+    {
+      "id": "vietnam-wxf-2023-1708-g5",
+      "red": "沈毅豪",
+      "black": "阮明日光",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1708:2023-18th-world-xiangqi-championships-men-round-07-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1708-g5"
+    },
+    {
+      "id": "vietnam-wxf-2023-1709-g2",
+      "red": "黄学谦",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1709-g2"
+    },
+    {
+      "id": "vietnam-wxf-2023-1709-g5",
+      "red": "阮明日光",
+      "black": "刘亿豪",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1709-g5"
     },
     {
       "id": "vietnam-wxf-2023-1710-g1",
@@ -58,6 +275,30 @@
         "孟辰"
       ],
       "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2023-1710-g8",
+      "red": "所司和晴",
+      "black": "阮明日光",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1710-g8"
+    },
+    {
+      "id": "vietnam-wxf-2023-1714-g2",
+      "red": "黎氏金鸾",
+      "black": "刘欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1714-g2"
+    },
+    {
+      "id": "vietnam-wxf-2023-1714-g4",
+      "red": "阮黄燕",
+      "black": "陈茗芳",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "reason": "Duplicate main line",
+      "duplicateOf": "vietnam-wxf-2023-1714-g4"
     },
     {
       "id": "vietnam-wxf-2022-1193-g1",

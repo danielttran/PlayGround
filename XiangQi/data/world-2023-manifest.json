@@ -1,0 +1,663 @@
+{
+  "collection": "World Championship 2023",
+  "scope": "All eligible published adult classical main-line records from the official 2023 World Championship archive; not a best-game ranking and not every tournament slot.",
+  "screeningDate": "2026-10-28",
+  "games": 156,
+  "halfMoves": 13636,
+  "sourceRecordSlots": 176,
+  "divisionCounts": {
+    "Men": 107,
+    "Women": 49
+  },
+  "legacyGamesPreserved": 30,
+  "newGames": 126,
+  "rounds": [
+    {
+      "division": "Men",
+      "round": 1,
+      "article": 1590,
+      "sourceRecords": 14,
+      "admittedGames": 12
+    },
+    {
+      "division": "Men",
+      "round": 2,
+      "article": 1603,
+      "sourceRecords": 14,
+      "admittedGames": 12
+    },
+    {
+      "division": "Men",
+      "round": 3,
+      "article": 1635,
+      "sourceRecords": 14,
+      "admittedGames": 12
+    },
+    {
+      "division": "Men",
+      "round": 4,
+      "article": 1636,
+      "sourceRecords": 14,
+      "admittedGames": 12
+    },
+    {
+      "division": "Men",
+      "round": 5,
+      "article": 1637,
+      "sourceRecords": 14,
+      "admittedGames": 12
+    },
+    {
+      "division": "Men",
+      "round": 6,
+      "article": 1641,
+      "sourceRecords": 14,
+      "admittedGames": 12
+    },
+    {
+      "division": "Men",
+      "round": 7,
+      "article": 1708,
+      "sourceRecords": 14,
+      "admittedGames": 12
+    },
+    {
+      "division": "Men",
+      "round": 8,
+      "article": 1709,
+      "sourceRecords": 14,
+      "admittedGames": 11
+    },
+    {
+      "division": "Men",
+      "round": 9,
+      "article": 1710,
+      "sourceRecords": 15,
+      "admittedGames": 12
+    },
+    {
+      "division": "Women",
+      "round": 1,
+      "article": 1594,
+      "sourceRecords": 7,
+      "admittedGames": 7
+    },
+    {
+      "division": "Women",
+      "round": 2,
+      "article": 1604,
+      "sourceRecords": 7,
+      "admittedGames": 7
+    },
+    {
+      "division": "Women",
+      "round": 3,
+      "article": 1647,
+      "sourceRecords": 7,
+      "admittedGames": 7
+    },
+    {
+      "division": "Women",
+      "round": 4,
+      "article": 1648,
+      "sourceRecords": 7,
+      "admittedGames": 7
+    },
+    {
+      "division": "Women",
+      "round": 5,
+      "article": 1649,
+      "sourceRecords": 7,
+      "admittedGames": 7
+    },
+    {
+      "division": "Women",
+      "round": 6,
+      "article": 1650,
+      "sourceRecords": 7,
+      "admittedGames": 7
+    },
+    {
+      "division": "Women",
+      "round": 7,
+      "article": 1714,
+      "sourceRecords": 7,
+      "admittedGames": 7
+    }
+  ],
+  "metadataCorrections": [
+    {
+      "sourceRecord": "1590-g13",
+      "kind": "players",
+      "note": "Both source player fields incorrectly repeat Japan Shoshi Kazuharu. The same official record title explicitly identifies Singapore Low Yi Hao as Red and Japan Shoshi Kazuharu as Black; the official program roster confirms the identities. Independently cross-checked against the official round pairing/result image."
+    },
+    {
+      "sourceRecord": "1636-g1",
+      "kind": "players",
+      "note": "Source player fields are blank. The same official record title explicitly identifies Singapore Wu Zonghan as Red and Hong Kong Wong Hok Him as Black; source result and moves retained. Independently cross-checked against the official round pairing/result image."
+    },
+    {
+      "sourceRecord": "1637-g7",
+      "kind": "players",
+      "note": "Both source player fields incorrectly repeat Japan Sone Toshihiko. The same official record title explicitly identifies USA Olivier Tessier as Red and Japan Sone Toshihiko as Black; official program roster confirms the identities. Independently cross-checked against the official round pairing/result image."
+    },
+    {
+      "sourceRecord": "1709-g8",
+      "kind": "players",
+      "note": "Both source player fields incorrectly repeat Chinese Taipei Hsieh Wenyu. The same official record title explicitly identifies USA Mian Wu as Red and Chinese Taipei Hsieh Wenyu as Black; official program roster confirms the identities. Independently cross-checked against the official round pairing/result image."
+    },
+    {
+      "sourceRecord": "1710-g6",
+      "kind": "result",
+      "note": "Source result tag is unknown. The same official record terminal comment at half-move74 says Black wins, and official Men Round9 Board5 result image independently confirms Cheng Yin Long (Red) lost to Shen Yi Hao (Black),0:2. Original sourceResult retained."
+    },
+    {
+      "sourceRecord": "1710-g12",
+      "kind": "result",
+      "note": "Source result tag is unknown. The same official record terminal comment at half-move69 says Red wins, and official Men Round9 Board11 result image independently confirms Gu Yi Qing (Red) defeated Radtai Lokutarapol (Black),2:0. Original sourceResult retained."
+    },
+    {
+      "sourceRecord": "1594-g1",
+      "kind": "date",
+      "note": "Source says2013/11/20. Official2023 program schedule places Women Round1 on20November2023; source year is a typographical error. Original sourceDate retained."
+    }
+  ],
+  "excludedRecords": [
+    {
+      "sourceRecord": "1590-g3",
+      "red": "孟辰",
+      "black": "葛振衣",
+      "sourceTitle": "男子组 第一轮 第三台 中国孟辰 中华台北葛振衣",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1590:2023-18th-world-xiangqi-championships-men-round-01-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.20",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1590-g14",
+      "red": "轮空",
+      "black": "曾根敏彦",
+      "sourceTitle": "男子组 第一轮 第十四台 轮空 日本曾根敏彦",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1590:2023-18th-world-xiangqi-championships-men-round-01-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.20",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)"
+      ]
+    },
+    {
+      "sourceRecord": "1603-g4",
+      "red": "郑彦隆",
+      "black": "孟辰",
+      "sourceTitle": "男子组 第二轮 第四台 中国香港郑彦隆 中国孟辰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1603:2023-18th-world-xiangqi-championships-men-round-02-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.20",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1603-g14",
+      "red": "",
+      "black": "",
+      "sourceTitle": "男子组 第二轮 第十四台 轮空 泰国郭宝荣",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1603:2023-18th-world-xiangqi-championships-men-round-02-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.20",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)",
+        "Unresolved player metadata"
+      ]
+    },
+    {
+      "sourceRecord": "1635-g2",
+      "red": "赖理兄",
+      "black": "孟辰",
+      "sourceTitle": "男子组 第三轮 第二台 越南赖理兄 中国孟辰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.21",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1635-g14",
+      "red": "",
+      "black": "",
+      "sourceTitle": "男子组 第三轮 第十四台 东马许鲁斌 轮空",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)",
+        "Unresolved player metadata"
+      ]
+    },
+    {
+      "sourceRecord": "1636-g2",
+      "red": "孟辰",
+      "black": "庄宏明",
+      "sourceTitle": "男子组 第四轮 第二台 中国孟辰 菲律宾庄宏明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.21",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1636-g14",
+      "red": "",
+      "black": "",
+      "sourceTitle": "男子组 第四轮 第十四台 加拿大郑德铭 轮空",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)",
+        "Unresolved player metadata"
+      ]
+    },
+    {
+      "sourceRecord": "1637-g1",
+      "red": "吴宗翰",
+      "black": "孟辰",
+      "sourceTitle": "男子组 第五轮 第一台 新加坡吴宗翰 中国孟辰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1637:2023-18th-world-xiangqi-championships-men-round-05-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.22",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1637-g14",
+      "red": "",
+      "black": "",
+      "sourceTitle": "男子组 第五轮 第十四台 日本麻生达郎 轮空",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1637:2023-18th-world-xiangqi-championships-men-round-05-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)",
+        "Unresolved player metadata"
+      ]
+    },
+    {
+      "sourceRecord": "1641-g1",
+      "red": "孟辰",
+      "black": "田荷",
+      "sourceTitle": "男子组 第六轮 第一台 中国孟辰 英国田荷",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1641:2023-18th-world-xiangqi-championships-men-round-06-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.22",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1641-g14",
+      "red": "",
+      "black": "",
+      "sourceTitle": "男子组 第六轮 第十四台 日本可儿宏晖 轮空",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1641:2023-18th-world-xiangqi-championships-men-round-06-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)",
+        "Unresolved player metadata"
+      ]
+    },
+    {
+      "sourceRecord": "1708-g1",
+      "red": "孟辰",
+      "black": "黄学谦",
+      "sourceTitle": "男子组 第七轮 第一台 中国孟辰 中国香港黄学谦",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1708:2023-18th-world-xiangqi-championships-men-round-07-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.23",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1708-g14",
+      "red": "",
+      "black": "",
+      "sourceTitle": "男子组 第七轮 第十四台 轮空 东马叶乃传",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1708:2023-18th-world-xiangqi-championships-men-round-07-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)",
+        "Unresolved player metadata"
+      ]
+    },
+    {
+      "sourceRecord": "1709-g1",
+      "red": "黎英豪",
+      "black": "孟辰",
+      "sourceTitle": "男子组 第八轮 第一台 美国黎英豪 中国孟辰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.23",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1709-g9",
+      "red": "梅俊海",
+      "black": "所司和晴",
+      "sourceTitle": "男子组 第八轮 第九台 美国梅俊海 日本所司和晴",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.23",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)"
+      ]
+    },
+    {
+      "sourceRecord": "1709-g14",
+      "red": "",
+      "black": "",
+      "sourceTitle": "男子组 第八轮 第十四台 轮空 加拿大顾亿庆",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)",
+        "Unresolved player metadata"
+      ]
+    },
+    {
+      "sourceRecord": "1710-g1",
+      "red": "赖理兄",
+      "black": "孟辰",
+      "sourceTitle": "男子组 第九轮 第一台 越南赖理兄 中国孟辰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.24",
+      "reasons": [
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1710-g2",
+      "red": "孟辰",
+      "black": "赖理兄",
+      "sourceTitle": "男子组 决赛 快棋 中国孟辰 越南赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "2023.11.24",
+      "reasons": [
+        "Explicit rapid/blitz marker",
+        "Participant matches current curation exclusion policy"
+      ],
+      "matchedNames": [
+        "孟辰"
+      ]
+    },
+    {
+      "sourceRecord": "1710-g15",
+      "red": "",
+      "black": "",
+      "sourceTitle": "男子组 第九轮 第十四台 轮空 菲律宾陈万威",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "sourceDate": "",
+      "reasons": [
+        "No recorded moves (bye/forfeit/unrecorded)",
+        "Unresolved player metadata"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "kind": "index",
+      "url": "https://www.wxf-xiangqi.org/index.php?Itemid=313&id=1592&lang=en&option=com_content&view=article",
+      "sha256": "c07ec733604a5c4fd84c2f69b2b17e72cbcea0151087d49cca7cf2483eecdbe4",
+      "bytes": 66639,
+      "previousCacheSha256": "ec08927e8e49aebfde51adbd5101d84df3f080c2617acd0df701c65da42a0939"
+    },
+    {
+      "kind": "regulations",
+      "url": "https://www.wxf-xiangqi.org/images/2023_news_upload/2023_Entry_form_for_18th_WXC_.pdf",
+      "sha256": "a98af556972cc933b1c42755bb33d99d7c651d96f1d43702c11c2f98cea48cd8",
+      "bytes": 675331,
+      "previousCacheSha256": "a98af556972cc933b1c42755bb33d99d7c651d96f1d43702c11c2f98cea48cd8"
+    },
+    {
+      "kind": "program",
+      "url": "https://www.wxf-xiangqi.org/images/2023_houston_wxc/Brochure_Content_11-231.pdf",
+      "sha256": "d231340601950eeb00bb67ef62d9da6d22b15493a451101bfda8ed86c31bd3d3",
+      "bytes": 7014333,
+      "previousCacheSha256": "d231340601950eeb00bb67ef62d9da6d22b15493a451101bfda8ed86c31bd3d3"
+    },
+    {
+      "kind": "metadata result image",
+      "url": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxcMen_DivisionR1_Results.jpg",
+      "sha256": "7649346c8e02fcd4f217c4f242100a9f0ab5b6f329398733093b1cc971b7fa25",
+      "bytes": 213676
+    },
+    {
+      "kind": "metadata result image",
+      "url": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxc01menr4result.jpg",
+      "sha256": "bc7dbea25d4a1ec24e6635693dfc5231ca4aa704e6478e095bc33b35c839e51b",
+      "bytes": 210343
+    },
+    {
+      "kind": "metadata result image",
+      "url": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxc01menr5result.jpg",
+      "sha256": "b6a5d881d9f9d9077418516cfcebedfdc9c0997b1e4505d7e33bdb5ee6b68223",
+      "bytes": 214358
+    },
+    {
+      "kind": "metadata result image",
+      "url": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxc01menr8result.jpg",
+      "sha256": "ebf21a3f9339efaa7bc19ed5b69081e96c4fd7854f53b43f512892550c997c48",
+      "bytes": 213125
+    },
+    {
+      "kind": "metadata result image",
+      "url": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxcwomen_division_R1_Results.jpg",
+      "sha256": "df8acf24a7931b56a9407689fe6e9cdd3734a433a263ee3a237fc67c30937183",
+      "bytes": 151278
+    },
+    {
+      "kind": "metadata result image",
+      "url": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxc02womenr7result.jpg",
+      "sha256": "78c5cce3c59ea642a9dedf8ae442e0a22eab9a61cadf2687a0a11e34f4ac3d18",
+      "bytes": 269254
+    },
+    {
+      "kind": "metadata result image",
+      "url": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxc01menr9result.jpg",
+      "sha256": "fceb8a30d9b6ec267eefc1c16c25497966eb6fdfca29fab5e258480100977fdb",
+      "bytes": 214424
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1590:2023-18th-world-xiangqi-championships-men-round-01-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "cdfdb96fb66289a3cc89c9f43183e8452401b5ae838b070d54377cdef5082425",
+      "bytes": 69272,
+      "previousCacheSha256": "2f154a316526eabff05f6d87c91a95e4e142471c84615dcc72391c82c3bad3fd",
+      "division": "Men",
+      "round": 1,
+      "records": 14
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1603:2023-18th-world-xiangqi-championships-men-round-02-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "54908a3d5e6e111235d39b086b88d2cb8f4e33bdf731b11c7b4e3d954c41cc37",
+      "bytes": 69024,
+      "previousCacheSha256": "1f0ca85dd2a8ad5d170381d8239b561ed33c89f948f1d03de0bdcc43798be7b5",
+      "division": "Men",
+      "round": 2,
+      "records": 14
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "ad38840bf7ad04019ba70c4f5c54c03b4796a3bb0ec977db7ffe805ec3d7b1bb",
+      "bytes": 68926,
+      "previousCacheSha256": "2c55da94b9051027d1fe80caae022fc777f90538de3f9a6761d858ae016aeaaf",
+      "division": "Men",
+      "round": 3,
+      "records": 14
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "82e068061a2d6c3c65b10f6980bdd6071c0b2a7e2d4b58a62d87fbd9d8131d0f",
+      "bytes": 70629,
+      "previousCacheSha256": "20de01737bc8da762dbabcc2f47498edfd178bb1b6cdc074aa8996d51a0ebe69",
+      "division": "Men",
+      "round": 4,
+      "records": 14
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1637:2023-18th-world-xiangqi-championships-men-round-05-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "b93c9b19e6aa5dd144ff8f4dc75af788fcae2f2a59f34bd9679f9ae7839c9d34",
+      "bytes": 69616,
+      "previousCacheSha256": "1b8f6189426aec166edb5a0a18fa153952e78c592e4f21f98805fba50e65106a",
+      "division": "Men",
+      "round": 5,
+      "records": 14
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1641:2023-18th-world-xiangqi-championships-men-round-06-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "537d4177570154cb6d7a81d6cf1fe07a3b05a71967d56cb2cc1fa0409447c6e6",
+      "bytes": 70053,
+      "previousCacheSha256": "cd85aa5f83110329c9e7bf57bee24f56f6c3e35f036d03a3285233fc4fc4a603",
+      "division": "Men",
+      "round": 6,
+      "records": 14
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1708:2023-18th-world-xiangqi-championships-men-round-07-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "863318ebe1ffba755f377c877a9564ab0050c3e36d9c5c939068db563417632d",
+      "bytes": 69874,
+      "previousCacheSha256": "9b39cb5b0ae325d5acdf5722478a26a051777e5fb38ad04a76a923d78e3cb0cb",
+      "division": "Men",
+      "round": 7,
+      "records": 14
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "73728a02b9830400f3174b7c7604dadae6ec2e0c16bf51691606e442c5f2069d",
+      "bytes": 69439,
+      "previousCacheSha256": "0971f57e4cb388e29d49491be3305b296ba7470931cdd0b7480d1939906781c8",
+      "division": "Men",
+      "round": 8,
+      "records": 14
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "sha256": "c71c6205cb5e4b9bdeffdf724246bbd2fafb57329d87762a91fa9d776f821f03",
+      "bytes": 72592,
+      "previousCacheSha256": "3ff9de8e98f66adda3d37300f23e245f2f8fccee867396fce9f9d236e64e5fe5",
+      "division": "Men",
+      "round": 9,
+      "records": 15
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "sha256": "c06aa9e191bd57a65749f39303da2cefc305427214f8049d89cda652f8fb8e4a",
+      "bytes": 56192,
+      "previousCacheSha256": "70174b4c9e24ab49fa36b4354a50f95e639cb7386057c08ec857661fd9d891ec",
+      "division": "Women",
+      "round": 1,
+      "records": 7
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "sha256": "f5fa66f55e879c94d8f2a064a1c02f3cb557d30a55fda3541342c98655122890",
+      "bytes": 56343,
+      "previousCacheSha256": "7a5fde69eafa50a63fdd62f6284ebd9558f4a1770a6682751560d096824fbcd5",
+      "division": "Women",
+      "round": 2,
+      "records": 7
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "sha256": "d7911966a80f17a44798a2bdaf39fd3e32673ff691bd4682e0e443599ba846a5",
+      "bytes": 56082,
+      "previousCacheSha256": "1f2e98a1b7446e6c364e5359877d940c1cf1fe40065b98ab4f18e65c615a6c59",
+      "division": "Women",
+      "round": 3,
+      "records": 7
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "sha256": "b5a05b857a3a3a932bbcada3deb4a3fe8e203026cb0c942ad2c8728cd019fe7b",
+      "bytes": 56700,
+      "previousCacheSha256": "3a7b3af37335028ff54943aa791a1f039c45541570a007bb9fbeef3ed761c986",
+      "division": "Women",
+      "round": 4,
+      "records": 7
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "sha256": "9cbd55024e7f1dbd701c60fe68e815479d585fb83a3fc14a75fef20201adc902",
+      "bytes": 57259,
+      "previousCacheSha256": "fdfc7ca21854617ea0ba53aa3d08d714e3a98ccfa9cc586b298af1e181e9485a",
+      "division": "Women",
+      "round": 5,
+      "records": 7
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "sha256": "ccac2592d6b5e8dd718eadf8b3a0807ce0f0e874fed2a0895bf745980a2940ee",
+      "bytes": 55793,
+      "previousCacheSha256": "cf853fb65479e11de297407a06c78ba4e1dd101bcb8a58548e7dbbe28ed2bb5c",
+      "division": "Women",
+      "round": 6,
+      "records": 7
+    },
+    {
+      "kind": "round",
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "sha256": "2b0da4362f2bcf929c8dd888e0df0620d5fa8e55bdf4c399a8e5c6b41a475751",
+      "bytes": 55925,
+      "previousCacheSha256": "505e9bd24cfe11808e1da09e4815d1433aa1d24e5cb1e5ac5d6adc66ac9bff60",
+      "division": "Women",
+      "round": 7,
+      "records": 7
+    }
+  ],
+  "resultCrossChecks": {},
+  "womenFinalCrossTableValidation": {
+    "games": 49,
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxc02womenr7result.jpg",
+    "pairingsAndResultsAgree": true,
+    "method": "Numeric opponents and cumulative points manually transcribed from the final official cross-table, then independently compared with every admitted Women game. Cumulative scores imply per-game results. All49 pairings and outcomes agree."
+  },
+  "policySha256": "1845cc9c3718eff0bb4849a501398047947928376447f3db23ce6bfd11abd7d7",
+  "curationPolicySha256": "6c3f714ff9989cdcdbd3153b9470d858e593bb0c18035b55dd7827d4d4e976a3",
+  "assetSha256": "c1e9acbfaf43585395284c1fd72ccd3026e01f07d21255862d5f75c3762e469e",
+  "notation": "ICCS; normal starting board, a0 at Red's lower-left",
+  "rights": "Attributed factual main-line moves and event metadata only. No annotations, board code, photographs or source PDFs bundled. WXF retains rights in its pages; no blanket redistribution license asserted."
+}

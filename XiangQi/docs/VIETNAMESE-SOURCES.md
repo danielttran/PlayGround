@@ -1,4 +1,17 @@
-# Vietnamese international classical preload, 2022–2023
+# Vietnamese international classical supplement, 2022–2023
+
+In version 0.7.3 this supplemental pack contains **31 games / 2,774 half-moves**:
+27 games from the 2022 World Championship and four Trenh A Sang games from the
+2023 Phuong Trang tournament. The thirty 2023 World Championship records moved
+to the [broader 156-game collection](WORLD-2023-SOURCES.md), retaining their game
+IDs and moves. The downloader deduplicates against that pack, so no game is lost
+or displayed twice. The current combined preload is **524 games / 44,587 half-moves**.
+
+## Original acquisition audit
+
+The following records the original 61-game supplement and its earlier asset
+hash. Those historical counts include the thirty records now held in the broader
+2023 pack. Its source evidence and the 2022/FUTA metadata checks remain applicable.
 
 The third collection adds **61 complete games / 5,452 half-moves** to the
 existing 337 games. The combined preload is **398 games / 33,629 half-moves**.

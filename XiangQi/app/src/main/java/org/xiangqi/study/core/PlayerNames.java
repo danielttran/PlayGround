@@ -105,6 +105,14 @@ public final class PlayerNames {
         add("陈慧盈","Tan Hui Ying","",PROGRAM_2023);
         add("田荷","Tian He","田菏",PROGRAM_2023);alias("田菏","田荷");
         add("谢汶谕","Hsieh Wenyu","Hsieh-Wenyu",PROGRAM_2023);
+        add("郭宝荣","Radtai Lokutarapol","",PROGRAM_2023);
+        add("武冕","Mian Wu","Wu Mian",PROGRAM_2023);
+        add("奥利维尔","Olivier Tessier","",PROGRAM_2023);
+        add("许鲁斌","Robin Hii Lu Bin","Hii Lu Bin",PROGRAM_2023);
+        add("素丽达","Suratsada Promsirinimit","",PROGRAM_2023);
+        // The 2023 program identifies the only corresponding Taiwanese and
+        // Japanese entrants; a few round records misspell their Chinese names.
+        alias("谢汶瀚","谢汶谕");alias("麻生太郎","麻生达郎");
         add("唐思楠","Tang Sinan","",PROGRAM_2023);
         add("余欣如","Jee Xin Ru","",TITLES);
         add("刘欢","Liu Huan","",TITLES);

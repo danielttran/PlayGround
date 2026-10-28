@@ -38,6 +38,13 @@ public final class PlayerNamesTest {
         check("Le Thi Kim Loan".equals(PlayerNames.readable("黎氏金銮")),"Championship source variant resolves to the verified Vietnamese spelling");
         check("Nguyen Minh Nhat Quang".equals(PlayerNames.readable("阮明日光")),"Recent Vietnamese championship participant uses the official program spelling");
         check("Brian George A/L A S Anthony Dass".equals(PlayerNames.readable("布莱恩乔")),"Truncated 2022 source name resolves through official ranking identity");
+        check("Radtai Lokutarapol".equals(PlayerNames.readable("郭宝荣")),"2023 Thai participant uses the official program spelling");
+        check("Mian Wu".equals(PlayerNames.readable("武冕")),"2023 United States participant preserves registered name order");
+        check("Olivier Tessier".equals(PlayerNames.readable("奥利维尔")),"2023 shortened source name resolves through the official United States roster");
+        check("Robin Hii Lu Bin".equals(PlayerNames.readable("许鲁斌")),"2023 East Malaysian participant uses the official program spelling");
+        check("Suratsada Promsirinimit".equals(PlayerNames.readable("素丽达")),"2023 Thai women's participant is not Mandarin transliterated");
+        check("Hsieh Wenyu".equals(PlayerNames.readable("谢汶瀚")),"2023 early-round source typo resolves to the official Taiwanese participant");
+        check("Aso Tatsuro".equals(PlayerNames.readable("麻生太郎")),"2023 last-round source typo resolves to the official Japanese participant");
         for(String arg:args)for(String original:Files.readAllLines(Path.of(arg),StandardCharsets.UTF_8)) {
             if(original.codePoints().noneMatch(c->Character.UnicodeScript.of(c)==Character.UnicodeScript.HAN))continue;
             check(PlayerNames.mapped(original),"Every bundled Chinese source name is mapped: "+original);

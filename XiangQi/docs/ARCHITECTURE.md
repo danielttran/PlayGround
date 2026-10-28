@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.2 (version code 11) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.3 (version code 12) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -19,9 +19,12 @@ move cancel playback. The top-right Game menu holds
 Flip board, Start/Stop analysis, Go to move…, Play against engine, Export game and Settings.
 Recorded replay has no standalone play-entry button below those controls. The
 contextual action is hidden during ordinary replay, becomes Stop playing during
-an engine game, and becomes Return to recorded game during a variation. Analysis
-suggestions and a stopped engine game remain entry points for free variation
-editing through the board and legal-move list.
+an engine game, and becomes Return to recorded game during a variation. The board
+accepts direct study moves during recorded replay, regardless of the analysis
+toggle. A committed move forks only the working history and reveals the return
+action; the full source history is retained. Touching the board cancels autoplay
+before source-piece selection. Analysis suggestions and a stopped engine game
+remain additional entry points for variation editing and the legal-move list.
 
 The library uses a recycling ListView containing every matching game, without
 page controls or a 40-game cutoff. Search and sorting use the entire selected collection;
@@ -147,7 +150,7 @@ newly generated self-play are not silently substituted. See [ENGINE-SOURCES.md](
 
 `Pgn` imports tagged ICCS-coordinate PGN main lines, retaining player/event metadata, starting FEN, result, source, time control and the optional `Collection` tag. Export preserves the collection and original source player names. Comments, numeric annotations, and balanced side variations are ignored. Unsupported notation and illegal moves produce errors identifying the game and half-move. The complete batch is rejected on an error. JSON imports use the same position/move validation. XQF, CBR, CBL, WXF move notation, and Chinese move notation are not supported yet.
 
-The three packs contain **398 games and 33,629 half-moves**: 285 adult 2025 World Championship records (23,340 plies), 52 selected 1991–2003 World Championship master games (4,837 plies), and 61 Vietnamese international classical games from 2022–2023 (5,452 plies). Recent games use `3600+30`; historical records explicitly mark slow/classical play and preserve exact clocks only when supplied. Partial dates are retained without fabricated components. Three new source-date errors are corrected against official schedules with originals and evidence retained. Requested players and the 2025 men's final are prioritized within collection order. Downloaders, source hashes, exclusions and participant screening are documented in [SOURCES.md](SOURCES.md), [HISTORICAL-SOURCES.md](HISTORICAL-SOURCES.md) and [VIETNAMESE-SOURCES.md](VIETNAMESE-SOURCES.md).
+The four packs contain **524 games and 44,587 half-moves**: 285 adult 2025 World Championship records (23,340 plies), 156 adult 2023 World Championship records (13,636 plies), 52 selected 1991–2003 World Championship master games (4,837 plies), and 31 additional Vietnamese international games (2,774 plies). Thirty previously bundled Vietnamese-focused 2023 records move into the broader 2023 pack with identical IDs and moves; the expansion adds 126 games. Recent games use `3600+30`; historical records explicitly mark slow/classical play and preserve exact clocks only when supplied. Source metadata corrections retain originals and evidence. Downloaders, hashes and exclusions are documented in [WORLD-2023-SOURCES.md](WORLD-2023-SOURCES.md), [SOURCES.md](SOURCES.md), [HISTORICAL-SOURCES.md](HISTORICAL-SOURCES.md) and [VIETNAMESE-SOURCES.md](VIETNAMESE-SOURCES.md).
 
 ## Position representation and rules
 
@@ -181,4 +184,4 @@ The Android manifest requests no `INTERNET` permission and disables automatic ap
 
 Pikafish's GPL-3.0 code and separately licensed NNUE weights retain their upstream notices and exact release source pointers under `third_party/pikafish`. WXF source material retains its own rights; app source licensing does not relicense game pages or engine assets.
 
-See [AUDIT-0.7.2.md](AUDIT-0.7.2.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover all three bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.7.1.md](AUDIT-0.7.1.md), [AUDIT-0.7.md](AUDIT-0.7.md), [AUDIT-0.6.md](AUDIT-0.6.md), [AUDIT-0.5.2.md](AUDIT-0.5.2.md), [AUDIT-0.5.1.md](AUDIT-0.5.1.md), [AUDIT-0.5.md](AUDIT-0.5.md), [AUDIT-0.4.md](AUDIT-0.4.md), [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.
+See [AUDIT-0.7.3.md](AUDIT-0.7.3.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover all four bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.7.2.md](AUDIT-0.7.2.md), [AUDIT-0.7.1.md](AUDIT-0.7.1.md), [AUDIT-0.7.md](AUDIT-0.7.md), [AUDIT-0.6.md](AUDIT-0.6.md), [AUDIT-0.5.2.md](AUDIT-0.5.2.md), [AUDIT-0.5.1.md](AUDIT-0.5.1.md), [AUDIT-0.5.md](AUDIT-0.5.md), [AUDIT-0.4.md](AUDIT-0.4.md), [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.

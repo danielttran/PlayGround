@@ -94,9 +94,11 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         main(()->assertEquals("Sort selection must survive recreation",2,((Spinner)findDescription(root(),"Game sort order")).getSelectedItemPosition()));
     }
     public void testLibrarySearchKeepsFocusDuringRealCharacterTyping()throws Exception{
+        int bundled=0;for(GameRepository.Game game:new GameRepository(getInstrumentation().getTargetContext()).load())if(!game.imported&&!game.engineGame)bundled++;
+        final int expectedBundled=bundled;
         launch();awaitLoadedLibrary();final EditText[] input={null};final Rect[] bounds={null};
         main(()->{
-            assertEquals("The regression uses the complete real preload",398,gameCount());
+            assertEquals("The regression uses the complete real preload",expectedBundled,gameCount());
             input[0]=(EditText)findType(root(),EditText.class);assertNotNull(input[0]);
             assertEquals("",input[0].getText().toString());
             input[0].requestRectangleOnScreen(new Rect(0,0,input[0].getWidth(),input[0].getHeight()),true);
@@ -120,7 +122,7 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         getInstrumentation().sendStringSync("h");awaitSearchLayout(input[0]);
         main(()->{assertEquals("Trenh",input[0].getText().toString());assertTrue(input[0].hasFocus());assertEquals(7,gameCount());});
         for(int index=0;index<query.length();index++){getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_DEL);awaitSearchLayout(input[0]);}
-        main(()->{assertEquals("",input[0].getText().toString());assertTrue("Clearing also retains input focus",input[0].hasFocus());assertEquals(398,gameCount());});
+        main(()->{assertEquals("",input[0].getText().toString());assertTrue("Clearing also retains input focus",input[0].hasFocus());assertEquals(expectedBundled,gameCount());});
     }
     public void testContinuousLibraryIncludesEveryGameAndLazilyRecyclesRows() throws Exception {
         launch();main(()->{try{int source=0;for(Object value:(List<?>)field("games").get(activity)){GameRepository.Game game=(GameRepository.Game)value;if(!game.imported&&!game.engineGame)source++;}assertTrue(source>=337);assertEquals("Every built-in human game is in the Human adapter",source,gameCount());}catch(Exception e){throw new RuntimeException(e);}});

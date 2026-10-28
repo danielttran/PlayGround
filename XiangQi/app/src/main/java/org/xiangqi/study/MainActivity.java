@@ -348,7 +348,8 @@ public final class MainActivity extends Activity {
     private void updateReplay() {
         if(library||board==null)return;
         if(replayProgress!=null){replayProgress.setMax(workingMoves.size());replayProgress.setKeyProgressIncrement(1);replayProgress.setProgress(ply);replayProgress.setEnabled(!workingMoves.isEmpty());}
-        Position p=positions.get(ply); board.setPosition(p,ply==0?"":workingMoves.get(ply-1),exploring&&(!vsEngine||p.redToMove==humanRed&&!engineThinking));
+        Position p=positions.get(ply); board.setPosition(p,ply==0?"":workingMoves.get(ply-1),!vsEngine||p.redToMove==humanRed&&!engineThinking);
+        if(!exploring&&!vsEngine)board.setContentDescription("Xiangqi board. "+(p.redToMove?"Red":"Black")+" to move. Recorded game. Tap a piece, then a legal destination to try a variation.");
         board.setAnalysisLines(analysisEnabled&&!vsEngine?lastResult:null,p.redToMove);
         evaluationBar.setEvaluation(analysisEnabled&&!vsEngine,lastResult==null?null:lastResult.score);
         board.setContentDescription(board.getContentDescription()+" Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+".");
@@ -688,6 +689,7 @@ public final class MainActivity extends Activity {
     @Override public boolean dispatchTouchEvent(MotionEvent event) {
         int action=event.getActionMasked();
         if(action==MotionEvent.ACTION_DOWN){
+            if(!library&&board!=null){Rect bounds=new Rect();if(board.getGlobalVisibleRect(bounds)&&bounds.contains((int)event.getRawX(),(int)event.getRawY()))stopAutoplay();}
             swipeStartX=event.getX();swipeStartY=event.getY();swipeConsumed=false;
             swipeBlocked=!loaded||horizontalControlAt(root,event.getRawX(),event.getRawY());swipeTracking=!swipeBlocked;
         } else if(event.getPointerCount()>1||action==MotionEvent.ACTION_POINTER_DOWN){
