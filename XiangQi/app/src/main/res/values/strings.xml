@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Xiangqi Study</string>
     <string name="hide_game_results">Hide game results (avoid spoilers)</string>
-    <string name="turn_player">%1$s to move%2$s · %3$s</string>
-    <string name="turn_no_moves">%1$s has no legal move · %2$s</string>
+    <string name="color_preview">帅  将  兵  卒</string>
+    <string name="color_channel">%1$s · %2$d</string>
+    <string name="color_swatches">Color swatches</string>
+    <string name="library_page_status">%1$s · Showing %2$d–%3$d</string>
+    <string name="move_record_window">Showing moves %1$d–%2$d of %3$d · use the position slider or controls for other moves.</string>
     <plurals name="library_count">
         <item quantity="one">%1$d of %2$d game · available offline</item>
         <item quantity="other">%1$d of %2$d games · available offline</item>

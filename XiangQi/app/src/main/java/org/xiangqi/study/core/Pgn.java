@@ -15,6 +15,7 @@ public final class Pgn {
     public static final class Game {
         public String id = "", event = "Imported game", round = "", date = "", red = "Red", black = "Black", result = "*", sourceUrl = "", timeControl = "", startFen = Position.START_FEN;
         public List<String> moves = new ArrayList<>();
+        public String collection = "";
     }
     // Possessive repetition keeps long quoted values iterative rather than
     // recursively backtracking into a StackOverflowError on imported text.
@@ -93,6 +94,7 @@ public final class Pgn {
         g.black = tags.getOrDefault("Black", "Black");
         g.sourceUrl = tags.getOrDefault("Source", tags.getOrDefault("Site", ""));
         g.timeControl = tags.getOrDefault("TimeControl", "");
+        g.collection = tags.getOrDefault("Collection", "");
         String variant = tags.getOrDefault("Variant", "Xiangqi");
         if (!variant.equalsIgnoreCase("Xiangqi") && !variant.equalsIgnoreCase("Chinese Chess"))
             throw new IllegalArgumentException("Game " + number + ": unsupported variant " + preview(variant));

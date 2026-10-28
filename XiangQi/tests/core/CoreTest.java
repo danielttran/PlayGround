@@ -77,6 +77,8 @@ public final class CoreTest {
         check(UciPosition.command(bare(), bare().toFen(), java.util.Collections.emptyList()).startsWith("position fen "), "UCI retains custom starting FEN");
         fails(() -> UciPosition.command(initial, Position.START_FEN, java.util.Collections.singletonList("b2e2")), "Mismatched analysis history rejected");
         fails(() -> UciPosition.command(child, Position.START_FEN, java.util.Collections.singletonList("a0i9")), "Illegal analysis history rejected");
+        Position largeClock=Position.fromFen(Position.START_FEN.replace("0 1","120 2147483647"));
+        check(UciPosition.command(largeClock,largeClock.toFen(),java.util.Collections.emptyList()).equals("position startpos"),"Unsupported imported FEN clocks cannot block board analysis");
         check(Pgn.parse(pgn + "\n[Event \"Second\"]\n1. b2e2 *").size() == 2, "Multiple games imported");
         check(Pgn.parse("[TimeControl \"60+30\"]\n1.b2e2 *").get(0).timeControl.equals("60+30"), "PGN time control retained");
         check(Pgn.parse("[Result \"*\"]\r1.b2e2 ; old-file comment\rb7e7 *").get(0).moves.size()==2, "CR-only line comments preserve following moves");
@@ -123,6 +125,9 @@ public final class CoreTest {
         check(uci.depth == 9, "UCI illegal first PV move rejected");
         UciInfo.update(uci, child, "info depth nope score cp 200 pv b7e7");
         check(uci.depth == 9, "UCI malformed numeric data ignored");
+        Engine.Result drawnRoot=new Engine.Result();
+        UciInfo.update(drawnRoot,initial,"info depth 1 score cp 0 nodes 0 pv");
+        check(drawnRoot.depth==1&&drawnRoot.score==0&&drawnRoot.pv.isEmpty(),"Exact root draw with empty PV preserves its completed score");
         Engine.Result mateZero=new Engine.Result();
         UciInfo.update(mateZero, initial, "info depth 0 score mate 0");
         check(mateZero.score==-30000, "UCI mate zero means the current Red side has lost");

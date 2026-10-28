@@ -21,7 +21,7 @@ public final class GameRepository {
     public GameRepository(Context context) { this.context = context.getApplicationContext(); }
 
     public static final class Game {
-        public String id, event, round, date, red, black, result, sourceUrl, startFen, timeControl="";
+        public String id, event, round, date, red, black, result, sourceUrl, startFen, timeControl="", collection="";
         public boolean imported;
         public final List<String> moves = new ArrayList<>();
         public String title() { return red + " · " + black; }
@@ -30,7 +30,7 @@ public final class GameRepository {
             JSONObject j = new JSONObject();
             j.put("id", id); j.put("event", event); j.put("round", round); j.put("date", date);
             j.put("red", red); j.put("black", black); j.put("result", result); j.put("sourceUrl", sourceUrl);
-            j.put("startFen", startFen); j.put("timeControl",timeControl); j.put("moves", new JSONArray(moves)); return j;
+            j.put("startFen", startFen); j.put("timeControl",timeControl); j.put("collection",collection); j.put("moves", new JSONArray(moves)); return j;
         }
     }
 
@@ -39,8 +39,21 @@ public final class GameRepository {
     }
 
     private List<Game> loadStored() throws Exception {
-        List<Game> bundled;
-        try (InputStream in = context.getAssets().open("games.json")) { bundled = jsonGames(read(in), false); }
+        List<Game> bundled = new ArrayList<>();
+        JSONArray packs;
+        try (InputStream in = context.getAssets().open("game-packs.json")) { packs = new JSONObject(read(in)).getJSONArray("packs"); }
+        Set<String> ids = new HashSet<>();
+        for (int i=0;i<packs.length();i++) {
+            JSONObject pack=packs.getJSONObject(i); String name=pack.getString("file");
+            if(!name.matches("[a-zA-Z0-9-]+\\.json"))throw new IOException("Invalid bundled pack name");
+            List<Game> entries;
+            try(InputStream in=context.getAssets().open(name)){entries=jsonGames(read(in),false);}
+            for(Game game:entries){
+                if(!ids.add(game.id))throw new IOException("Duplicate bundled game ID");
+                if(game.collection.isEmpty())game.collection=pack.optString("label","");
+            }
+            bundled.addAll(entries);
+        }
         File file = new File(context.getFilesDir(), "imported-games.json");
         List<Game> saved = new ArrayList<>();
         if (file.isFile() || new File(file.getPath()+".bak").isFile())
@@ -65,7 +78,7 @@ public final class GameRepository {
                 g.event = value(source.event, "Imported game"); g.round = value(source.round, "");
                 g.date = value(source.date, ""); g.red = value(source.red, "Red"); g.black = value(source.black, "Black");
                 g.result = value(source.result, "*"); g.sourceUrl = value(source.sourceUrl, "");
-                g.startFen = value(source.startFen, ""); g.timeControl=value(source.timeControl, ""); g.moves.addAll(source.moves); g.imported = true;
+                g.startFen = value(source.startFen, ""); g.timeControl=value(source.timeControl, ""); g.collection=value(source.collection, ""); g.moves.addAll(source.moves); g.imported = true;
                 validate(g); g.id = fingerprint(g); candidates.add(g);
             }
         }
@@ -111,7 +124,7 @@ public final class GameRepository {
             g.event = j.optString("event", "Imported game"); g.round = j.optString("round", "");
             g.date = j.optString("date", ""); g.red = j.optString("red", "Red"); g.black = j.optString("black", "Black");
             g.result = j.optString("result", "*"); g.sourceUrl = j.optString("sourceUrl", "");
-            g.startFen = j.optString("startFen", ""); g.timeControl=j.optString("timeControl", ""); g.imported = imported;
+            g.startFen = j.optString("startFen", ""); g.timeControl=j.optString("timeControl", ""); g.collection=j.optString("collection", ""); g.imported = imported;
             JSONArray moves = j.getJSONArray("moves");
             if (moves.length() > MAX_PLIES) throw new IllegalArgumentException("Game " + (i+1) + " exceeds 2,000 half-moves.");
             // Shipped records are canonical and exhaustively checked by the corpus audit.
@@ -151,7 +164,7 @@ public final class GameRepository {
     private static void validate(Game g) {
         metadata("Event",g.event,1024);metadata("Round",g.round,256);metadata("Date",g.date,128);
         metadata("Red player",g.red,256);metadata("Black player",g.black,256);metadata("Result",g.result,16);
-        metadata("Source URL",g.sourceUrl,4096);metadata("Time control",g.timeControl,128);metadata("FEN",g.startFen,512);
+        metadata("Source URL",g.sourceUrl,4096);metadata("Time control",g.timeControl,128);metadata("FEN",g.startFen,512);metadata("Collection",g.collection,1024);
         if (g.moves.isEmpty()) throw new IllegalArgumentException(g.title() + ": no moves found.");
         if (g.moves.size() > MAX_PLIES) throw new IllegalArgumentException(g.title() + ": exceeds 2,000 half-moves.");
         Position position = g.initial();
@@ -207,6 +220,7 @@ public final class GameRepository {
         tag(s,"Round",game.round); tag(s,"Red",game.red); tag(s,"Black",game.black);
         tag(s,"Result",variation ? "*" : game.result); tag(s,"Variant","Xiangqi"); tag(s,"Format","ICCS");
         if (!game.timeControl.isEmpty()) tag(s,"TimeControl",game.timeControl);
+        if (!game.collection.isEmpty()) tag(s,"Collection",game.collection);
         if (!game.sourceUrl.isEmpty()) tag(s,"Source",game.sourceUrl);
         if (!game.startFen.isEmpty()) { tag(s,"SetUp","1"); tag(s,"FEN",game.startFen); }
         s.append('\n');

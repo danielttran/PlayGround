@@ -15,3 +15,17 @@ $Tests = @(Get-ChildItem -LiteralPath (Join-Path $ProjectRoot 'tests\core') -Fil
 if ($LASTEXITCODE -ne 0) { throw 'Core Java compilation failed' }
 & $Java -Xmx512m -cp $Classes org.xiangqi.study.core.CoreTest
 if ($LASTEXITCODE -ne 0) { throw 'Core tests failed' }
+& $Java -Xmx512m -cp $Classes org.xiangqi.study.core.DateSortTest
+if ($LASTEXITCODE -ne 0) { throw 'Date sort tests failed' }
+$PackManifest=Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $ProjectRoot 'app\src\main\assets\game-packs.json') | ConvertFrom-Json
+$Names=@();$Corpus=@()
+foreach($Pack in $PackManifest.packs){
+    $Records=(Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $ProjectRoot ('app\src\main\assets\'+$Pack.file)) | ConvertFrom-Json).games
+    foreach($Record in $Records){$Names+=$Record.red;$Names+=$Record.black;$Corpus+=($Record.id+"`t"+($Record.moves -join ' '))}
+}
+$NameFile=Join-Path $Classes 'bundled-names.txt';$Names | Sort-Object -Unique | Set-Content -Encoding utf8 -LiteralPath $NameFile
+& $Java -Xmx512m -cp $Classes org.xiangqi.study.core.PlayerNamesTest $NameFile
+if ($LASTEXITCODE -ne 0) { throw 'Player name tests failed' }
+$CorpusFile=Join-Path $Classes 'bundled-games.tsv';$Corpus | Set-Content -Encoding utf8 -LiteralPath $CorpusFile
+& $Java -Xmx512m -cp $Classes org.xiangqi.study.core.ValidateGames $CorpusFile
+if ($LASTEXITCODE -ne 0) { throw 'Bundled game replay failed' }

@@ -1,50 +1,56 @@
 # Xiangqi Study
 
-A native Android app for replaying international Xiangqi games, exploring alternatives, and analyzing positions offline. The dark green board and library follow the supplied visual references.
+A native Android app for replaying Xiangqi games, exploring alternatives, and analyzing positions offline. Version **0.3.0** adds historical master games, date sorting, readable player names and customizable boards and pieces.
 
-The starter library contains **285 complete recorded games and 23,340 half-moves** from the adult 2025 World Xiangqi Championship. The official classical time control was **60 minutes plus 30 seconds per move**. These are championship records, rather than a claim that all participants are the world's highest-ranked players or hold grandmaster titles.
+The starter library contains **337 recorded classical games and 28,177 half-moves**: 285 adult 2025 World Championship games, plus 52 selected master games from the 1991–2003 World Championships. The 2025 time control was **60 minutes plus 30 seconds per move**. Every historical record explicitly marks slow/classical play; its exact clock is shown only when recorded. See [2025 source evidence](docs/SOURCES.md) and [historical source evidence](docs/HISTORICAL-SOURCES.md).
 
-The men's final, Yin Sheng–Lai Ly Huynh, comes first. Games by the requested players are prioritized: Lai Ly Huynh, Nguyen Thanh Bao, Wu Zonghan, Yin Sheng, Meng Fanrui, Tang Dan, and Chen Lichun. The remaining records stay available in the library. The source archive may not contain every game by these players. [Source and curation evidence](docs/SOURCES.md) explains provenance, time-control checks, excluded records, and the limits of matching notice names to participants.
+The 2025 collection prioritizes the Yin Sheng–Lai Ly Huynh final and the requested Vietnam/Singapore players. The historical collection includes Hu Ronghua, Li Laiqun, Zhao Guorong, Lü Qin, Xu Yinchuan and Wu Kui-lin. Both players are screened against the dated curation policy. These are archived championship records, not a ranking of the world's best 337 games or a certification of participants' histories.
 
 ## Use the app
 
-- Search the library by player, event, or round; tap a game to open it.
-- Red and Black have separate labelled player rows. Swipe right from the game to the library; swipe left to return to the current game, or use **Return to current game**. Your position and variation are restored.
+- Search by player, event, round or collection. All 110 bundled player names have readable romanized display names; search also accepts original Chinese names and aliases. Source names remain intact for export.
+- Choose **Newest first**, **Oldest first** or **Collection order**. Partial and unknown dates stay below complete dates in either date order; no missing month/day is invented.
+- The library uses 40-game pages; search and sorting cover every game. Long move
+  records show a window around the current position, with the slider and controls
+  available for the complete game.
+- Red and Black have separate labelled player rows in the library and game. A small dot on the board edge marks the side to move. Swipe right from the game to the library; swipe left to return to the current game, or use **Return to current game**. Your position and variation are restored.
 - Step through moves, drag the replay slider, autoplay, or flip the board. The app remembers replay and variation positions.
 - Tap **Analyze** for a Red-perspective evaluation, suggested move, depth, and continuation. Positive centipawns favor Red; negative values favor Black.
 - Analysis updates the evaluation and best-move arrow during search. **Stop analysis** retains the latest estimate; moving to another position clears it. Played moves use a separate arrow instead of highlighted squares.
 - Tap **Play from here** to explore a variation using the board or legal-move list. Return to the recorded game whenever needed.
 - Use **Import games** to choose a file or paste text. Use **Export** to save the recorded game or current variation as ICCS PGN.
-- **Settings** hides recorded results by default, including accessibility announcements. Engine evaluations stay visible, and PGN exports retain the actual result. Choose Moss/Wood/Ink boards, Traditional/Simplified Chinese characters, Cream/Wood/Jade discs, and Off/ICCS/Numeric coordinates. All piece styles use Chinese text.
+- **Settings** hides recorded results by default, including accessibility announcements. Engine evaluations stay visible, and PGN exports retain the actual result.
+- Choose six board presets (**Moss, Wood, Ink, Rosewood, Slate, Bamboo**), six piece-disc presets (**Cream, Wood, Jade, Porcelain, Rosewood, Obsidian**), and Traditional/Simplified Chinese characters. Every piece style uses Chinese text. A live preview and custom RGB colors let you set the board, Red piece backgrounds and Black piece backgrounds independently.
+- Toggle **Off**, **ICCS** or **Numeric** coordinates. Labels fit the existing board rim, so enabling coordinates does not shrink the grid or pieces.
 - **Engine settings** controls search depth, time, threads, and hash memory. Native defaults are depth 128, untimed until stopped, all available CPU cores, and RAM-aware hash allocation. Saving settings restarts an active search. The built-in engine is limited to depth 64 and is substantially weaker.
 
-The ARM64 build bundles **Pikafish 2026-09-06**, which runs locally. The portable emulator build uses the smaller built-in classical engine. The displayed engine name identifies the engine actually used. The built-in engine has limited search strength and does not adjudicate tournament repetition or perpetual-chase rules. Pikafish receives the complete position history and applies its engine rules; neither mode is a complete WXF match arbiter.
+The delivered ARM64 APK bundles **Pikafish 2026-09-06** and its matching NNUE, the latest official stable release verified for this version. Every native build checks the official release online and verifies the executable, network and upstream license files; failure stops the build. The app itself runs analysis offline. The internal portable emulator build uses the smaller built-in engine. The displayed engine name identifies the engine actually used. Pikafish receives the complete position history and applies its engine rules; neither engine mode is a complete WXF match arbiter.
 
 There is no `INTERNET` permission, analytics, account, or cloud analysis. Imports and saved study positions are stored in the app's private directory. Export records you want to keep before uninstalling; uninstalling removes private app data. Opening a source link deliberately hands that link to an external browser.
 
 ## Install on an Android 12 ARM64 phone
 
-The current debug APK is at **`dist/XiangqiStudy-latest.apk`**, with a versioned copy at `dist/XiangqiStudy-0.2.0-android12-arm64.apk`. Copy it to the phone, open it, and allow installation from the selected file manager when Android prompts. Install over the existing app to retain imported games and saved positions. Alternatively, with USB debugging and Android platform tools configured:
+The delivery file is **`dist/XiangqiStudy-latest.apk`**. Copy it to the phone, open it, and allow installation from the selected file manager when Android prompts. Install over the existing app to retain imported games and saved positions. Alternatively, with USB debugging and Android platform tools configured:
 
 ```powershell
 adb install -r dist/XiangqiStudy-latest.apk
 ```
 
-The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. `dist/XiangqiStudy-portable-latest.apk` uses the Java engine on other architectures. Native execution on the physical phone remains a device-specific check.
+The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. Each verified delivery atomically replaces the latest APK, then removes older Xiangqi Study APKs from `dist`. Portable audit APKs stay under `test-results/apk-audit` and are not delivered as phone builds. See [the 0.3 audit](docs/AUDIT-0.3.md) for the exact host, emulator and physical-device checks performed.
 
 ## Build and check
 
-Run commands from `C:\Dev\PlayGround\XiangQi`. Install a JDK 17 or newer, Android SDK platform 35, and Android build tools. Set `JAVA_HOME` to the JDK and configure the SDK with `ANDROID_HOME` or an untracked `local.properties` file containing `sdk.dir=...`. The checked-in wrapper uses **Gradle 8.11.1**, with **Android Gradle Plugin 8.9.3**. The first Gradle build downloads its dependencies.
+Run commands from `C:\Dev\PlayGround\XiangQi`. Install a JDK 17 or newer, Android SDK platform/build tools 35, Python 3.10+ and 7-Zip. Set `JAVA_HOME` to the JDK and configure the SDK with `ANDROID_HOME` or an untracked `local.properties` file containing `sdk.dir=...`. The wrapper uses **Gradle 8.11.1**, with **Android Gradle Plugin 8.9.3**. Native builds require network access for the official Pikafish release check; first builds also download Gradle dependencies.
 
 ```powershell
-.\gradlew.bat assembleDebug lintDebug
 .\scripts\test-core.ps1
+.\scripts\build.ps1 -Check
 ```
 
-The ordinary build produces `app/build/outputs/apk/debug/app-debug.apk`. The `dist` file is a convenient copy, rather than a separate build type. For an x86 emulator build with the built-in engine:
+The build script cleans, builds, verifies APK contents and signature, and publishes the single `dist/XiangqiStudy-latest.apk`. Raw Gradle output remains at `app/build/outputs/apk/debug/app-debug.apk`. Direct Gradle native builds also run the latest-release guard. To prepare an internal x86 emulator audit with the built-in engine:
 
 ```powershell
-.\gradlew.bat -PwithoutNative assembleDebug assembleDebugAndroidTest
+.\scripts\build.ps1 -Portable -Check
 ```
 
 Native ARM64 runtime testing requires a compatible phone or ARM64 Android environment. The Windows protocol smoke is a separate check:
@@ -55,7 +61,7 @@ python scripts/test-pikafish.py --engine C:\path\to\Pikafish-Windows-x86-64-univ
 
 Place the matching official `pikafish.nnue` beside that executable, or pass `--network`. This check sends the same UCI initialization/history commands and parses the actual engine output with the production Java parser; it does not execute Android code.
 
-The audit fixed the empty starting-FEN bug that prevented preloaded games from reaching Pikafish, along with import, persistence, parser, and terminal-score defects. See [the current audit](docs/AUDIT.md) for validation, known limits, and updated screenshots. [Initial 0.1.0 validation](docs/VALIDATION.md) is retained as historical evidence.
+See [the 0.3 audit](docs/AUDIT-0.3.md) for current validation, known limits and screenshots. The [0.2 audit](docs/AUDIT.md) and [initial 0.1 validation](docs/VALIDATION.md) remain historical evidence and do not describe the current APK.
 
 ## Import formats
 
@@ -65,15 +71,16 @@ Supported formats are **ICCS-coordinate Xiangqi PGN** and the normalized JSON fo
 [Event "Personal study"]
 [Red "Player"]
 [Black "Opponent"]
+[Collection "Personal games"]
 [Variant "Xiangqi"]
 [Result "*"]
 
 1. b2e2 b9c7 *
 ```
 
-PGN comments and side variations are skipped; the main line is imported. A `FEN` tag can supply a custom starting position. Every imported move is checked before anything is saved. An invalid record rejects the complete import; duplicate move records are skipped. The file and saved import library limits are 5 MB.
+PGN comments and side variations are skipped; the main line is imported. A `FEN` tag can supply a custom starting position. The optional `Collection` tag is retained on import and export. Every imported move is checked before anything is saved. An invalid record rejects the complete import; duplicate move records are skipped. The file and saved import library limits are 5 MB.
 
-A JSON pack is an array of game objects, or an object with a `games` array. Each game needs `moves`, a list of ICCS strings; supported metadata includes `event`, `round`, `date`, `red`, `black`, `result`, `sourceUrl`, `startFen`, and `timeControl`. Results are `1-0`, `0-1`, `1/2-1/2`, or `*`; `timeControl` uses seconds, such as `3600+30`.
+A JSON pack is an array of game objects, or an object with a `games` array. Each game needs `moves`, a list of ICCS strings; supported metadata includes `event`, `round`, `date`, `red`, `black`, `result`, `sourceUrl`, `startFen`, `timeControl` and `collection`. Results are `1-0`, `0-1`, `1/2-1/2` or `*`; a known numeric `timeControl` uses seconds, such as `3600+30`.
 
 Binary XQF/CBR/CBL files, WXF move notation, and Chinese move notation require conversion before import. They are not supported import formats in this version.
 
@@ -85,9 +92,11 @@ The downloader uses Python 3.10+ and the standard library:
 python scripts/download_wxf.py
 python scripts/download_wxf.py --offline
 python scripts/download_wxf.py --refresh
+python scripts/download_historical.py
+python scripts/download_historical.py --offline
 ```
 
-It fetches the official index and 16 adult round pages with caching, bounded retries, and request spacing. It excludes rapid/youth links and records without moves, checks the recorded time control, and applies `data/curation-policy.json`. See [SOURCES.md](docs/SOURCES.md) before changing the curation or adding another event. Revalidate every regenerated game sequence before shipping a replacement library.
+The 2025 downloader fetches the official index and 16 adult round pages. The historical downloader uses the bounded page selection and exclusions in `data/historical-policy.json`. Both cache requests, use bounded retries and request spacing, and apply the curation policy. `app/src/main/assets/game-packs.json` lists the separate bundled packs and their source manifests. Review [SOURCES.md](docs/SOURCES.md) and [HISTORICAL-SOURCES.md](docs/HISTORICAL-SOURCES.md), then revalidate every regenerated move sequence before shipping a replacement library.
 
 ## Credits and code layout
 

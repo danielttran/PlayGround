@@ -23,8 +23,15 @@ public final class NativeAdapterAuditTest {
         public ApplicationInfo getApplicationInfo(){ApplicationInfo info=new ApplicationInfo();info.nativeLibraryDir=binaries.toString();return info;}
         public File getFilesDir(){return files.toFile();}
         public AssetManager getAssets(){return new AssetManager(){public InputStream open(String name)throws IOException{assetOpens++;return badAsset==null?Files.newInputStream(network):new ByteArrayInputStream(badAsset);}};}
-        Path installed(){return files.resolve("pikafish-2026-09-06/pikafish.nnue");}
-        void mode(String mode)throws Exception{Path dir=installed().getParent();Files.createDirectories(dir);Files.writeString(dir.resolve("mode.txt"),mode);Files.deleteIfExists(dir.resolve("started.txt"));Files.deleteIfExists(dir.resolve("commands.txt"));}
+        Path installed(){return files.resolve("pikafish-"+PikafishRelease.VERSION+"/pikafish.nnue");}
+        void mode(String mode)throws Exception{
+            Path dir=installed().getParent();Files.createDirectories(dir);Files.writeString(dir.resolve("mode.txt"),mode);
+            for(String name:new String[]{"started.txt","commands.txt"}){
+                long until=System.nanoTime()+TimeUnit.SECONDS.toNanos(2);
+                while(true)try{Files.deleteIfExists(dir.resolve(name));break;}
+                catch(FileSystemException busy){if(System.nanoTime()>=until)throw busy;Thread.sleep(25);}
+            }
+        }
     }
     private static String hash(Path path)throws Exception{MessageDigest d=MessageDigest.getInstance("SHA-256");try(InputStream in=Files.newInputStream(path)){byte[] b=new byte[262144];int n;while((n=in.read(b))!=-1)d.update(b,0,n);}return HexFormat.of().formatHex(d.digest());}
     private static void expectFailure(TestContext context,String message)throws Exception{
@@ -49,6 +56,8 @@ public final class NativeAdapterAuditTest {
         TestContext fixture=new TestContext(actual.files,fakeDir,null);fixture.mode("valid");
         Engine.Result valid=PikafishEngine.analyze(fixture,Position.initial(),"",Collections.emptyList(),8,50);
         check(valid.bestMove.equals("b0c2")&&valid.score==20,"Valid deterministic protocol result");
+        fixture.mode("draw");Engine.Result drawn=PikafishEngine.analyze(fixture,Position.initial(),"",Collections.emptyList(),8,50);
+        check(drawn.depth==1&&drawn.score==0&&drawn.pv.equals(Collections.singletonList("b0c2")),"A root draw with an empty PV must still complete with a legal best move");
         fixture.mode("stream");List<Engine.Result> progress=new ArrayList<>();
         PikafishEngine.Options configured=new PikafishEngine.Options(40,0,2,128);
         PikafishEngine.analyze(fixture,Position.initial(),"",Collections.emptyList(),configured,progress::add);

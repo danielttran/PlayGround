@@ -19,28 +19,68 @@ public final class BoardView extends View {
     private List<String> legal = new ArrayList<>();
     private MoveListener listener;
     private float step, left, top, radius;
-    private int bronze=0xff9f9065, boardColor=0xff3f3b2a, discColor=0xffe8debb,
+    private int bronze=0xff9f9065, boardColor=0xff3f3b2a, redDiscColor=0xffe8debb, blackDiscColor=0xffe8debb,
         red=0xffb2392b, black=0xff274440, moveArrow=0xffd7ae5c, bestArrow=0xffb3dea5;
-    private boolean simplified, woodDiscs, jadeDiscs;
+    private int presetBoard=boardColor,presetRedDisc=redDiscColor,presetBlackDisc=blackDiscColor,
+        presetGrid=bronze,presetRed=red,presetBlack=black,presetMove=moveArrow,presetBest=bestArrow;
+    private Integer customBoard,customRedDisc,customBlackDisc;
+    private boolean simplified;
+    private String discStyle="cream";
+    private final Typeface pieceTypeface=Typeface.create("serif",Typeface.NORMAL);
     private String coordinateStyle="none";
     private static final String[] FILE_LABELS={"a","b","c","d","e","f","g","h","i"};
     private static final String[] NUMBER_LABELS={"0","1","2","3","4","5","6","7","8","9"};
     public BoardView(Context context) { super(context); setLayerType(View.LAYER_TYPE_SOFTWARE,null); setFocusable(true); setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES); }
     public void setMoveListener(MoveListener listener) { this.listener=listener; }
     public void setAppearance(String boardStyle,String glyphStyle,String discStyle) {
-        simplified="simplified".equals(glyphStyle);woodDiscs="wood".equals(discStyle);jadeDiscs="jade".equals(discStyle);
+        simplified="simplified".equals(glyphStyle);this.discStyle=discStyle==null?"cream":discStyle;
         if("wood".equals(boardStyle)) {
-            boardColor=0xffd4b580;bronze=0xff785b36;red=0xffa02b21;black=0xff28332d;
-            moveArrow=0xff9a541e;bestArrow=0xff1b784e;
+            palette(0xffd4b580,0xff785b36,0xffa02b21,0xff28332d,0xff9a541e,0xff1b784e);
         } else if("ink".equals(boardStyle)) {
-            boardColor=0xffe8e6dc;bronze=0xff817c6c;red=0xffb32725;black=0xff253942;
-            moveArrow=0xffb56a29;bestArrow=0xff266c8a;
+            palette(0xffe8e6dc,0xff817c6c,0xffb32725,0xff253942,0xffb56a29,0xff266c8a);
+        } else if("rosewood".equals(boardStyle)) {
+            palette(0xff582e2a,0xffc99871,0xffa02b21,0xff28332d,0xffffc476,0xffa6ebbe);
+        } else if("slate".equals(boardStyle)) {
+            palette(0xff263843,0xffa4b7bd,0xffa02b21,0xff28332d,0xffffc27e,0xffb6edca);
+        } else if("bamboo".equals(boardStyle)) {
+            palette(0xffc1d29e,0xff627244,0xffa02b21,0xff28332d,0xff9d4b25,0xff17634c);
         } else {
-            boardColor=0xff3f3b2a;bronze=0xff9f9065;red=0xffb2392b;black=0xff274440;
-            moveArrow=0xffd7ae5c;bestArrow=0xffb3dea5;
+            palette(0xff3f3b2a,0xff9f9065,0xffb2392b,0xff274440,0xffd7ae5c,0xffb3dea5);
         }
-        discColor=woodDiscs?0xffe1be80:jadeDiscs?0xffc2d9c4:0xffe8debb;
+        if("wood".equals(discStyle))presetRedDisc=presetBlackDisc=0xffe1be80;
+        else if("jade".equals(discStyle))presetRedDisc=presetBlackDisc=0xffc2d9c4;
+        else if("porcelain".equals(discStyle))presetRedDisc=presetBlackDisc=0xfff6f2e9;
+        else if("rosewood".equals(discStyle)){presetRedDisc=0xff6d2d29;presetBlackDisc=0xff382b27;}
+        else if("obsidian".equals(discStyle)){presetRedDisc=0xff323038;presetBlackDisc=0xff171e25;}
+        else presetRedDisc=presetBlackDisc=0xffe8debb;
+        applyColors();
+    }
+    private void palette(int board,int grid,int redInk,int blackInk,int played,int best){presetBoard=board;presetGrid=grid;presetRed=redInk;presetBlack=blackInk;presetMove=played;presetBest=best;}
+    /** Null resets only that surface to its selected preset; picker input is opaque RGB. */
+    public void setCustomColors(Integer board,Integer redBackground,Integer blackBackground){customBoard=board;customRedDisc=redBackground;customBlackDisc=blackBackground;applyColors();}
+    public int getBoardColor(){return boardColor;}
+    public int getPieceBackground(boolean redSide){return redSide?redDiscColor:blackDiscColor;}
+    private void applyColors(){
+        boardColor=opaque(customBoard==null?presetBoard:customBoard);
+        redDiscColor=opaque(customRedDisc==null?presetRedDisc:customRedDisc);
+        blackDiscColor=opaque(customBlackDisc==null?presetBlackDisc:customBlackDisc);
+        bronze=customBoard==null?presetGrid:readableMonochrome(boardColor);
+        red=readableInk(redDiscColor,presetRed,true);black=readableInk(blackDiscColor,presetBlack,false);
+        moveArrow=customBoard==null?presetMove:readableInk(boardColor,0xffa3521d,true);
+        bestArrow=customBoard==null?presetBest:readableInk(boardColor,0xff167249,false);
         invalidate();
+    }
+    private static int opaque(int color){return color|0xff000000;}
+    private static double channel(int value){double s=value/255.0;return s<=.04045?s/12.92:Math.pow((s+.055)/1.055,2.4);}
+    private static double luminance(int color){return .2126*channel(Color.red(color))+.7152*channel(Color.green(color))+.0722*channel(Color.blue(color));}
+    private static double contrast(int a,int b){double first=luminance(a),second=luminance(b);return (Math.max(first,second)+.05)/(Math.min(first,second)+.05);}
+    private static int readableMonochrome(int background){return contrast(background,Color.BLACK)>=contrast(background,Color.WHITE)?Color.BLACK:Color.WHITE;}
+    private static int readableInk(int background,int preferred,boolean redSide){
+        if(contrast(background,preferred)>=4.5)return preferred;
+        int light=redSide?0xffffb8aa:0xffedf5f2,dark=redSide?0xff460000:0xff10221c;
+        if(contrast(background,light)>=4.5)return light;
+        if(contrast(background,dark)>=4.5)return dark;
+        return readableMonochrome(background);
     }
     public void setPosition(Position p,String last,boolean editing) {
         this.position=p; this.lastMove=last==null?"":last; this.editing=editing; selected=-1; hintMove="";
@@ -55,7 +95,9 @@ public final class BoardView extends View {
     private float y(int index) { int rank=index/9; return top+(flipped?9-rank:rank)*step; }
     @Override protected void onDraw(Canvas c) {
         super.onDraw(c); float w=getWidth(), h=getHeight();
-        float density=getResources().getDisplayMetrics().density,margin=("none".equals(coordinateStyle)?8:22)*density;
+        // Coordinates share the existing rim. Turning them on never shrinks the
+        // grid or discs, and touch targets remain on the same intersections.
+        float density=getResources().getDisplayMetrics().density,margin=8*density;
         // The outer intersections need half a cell beyond the grid for the discs
         // and selection rings. Fixed pixel insets clipped them on dense displays.
         step=Math.min((w-2*margin)/9,(h-2*margin)/10);
@@ -70,17 +112,23 @@ public final class BoardView extends View {
         }
         c.drawLine(left+3*step,top,left+5*step,top+2*step,paint); c.drawLine(left+5*step,top,left+3*step,top+2*step,paint);
         c.drawLine(left+3*step,top+7*step,left+5*step,top+9*step,paint); c.drawLine(left+5*step,top+7*step,left+3*step,top+9*step,paint);
-        paint.setTextAlign(Paint.Align.CENTER); paint.setTypeface(Typeface.create("serif",Typeface.NORMAL)); paint.setTextSize(step*.34f);
+        paint.setTextAlign(Paint.Align.CENTER); paint.setTypeface(pieceTypeface); paint.setTextSize(step*.34f);
         c.drawText("楚 河",left+2*step,top+4.63f*step,paint); c.drawText("漢 界",left+6*step,top+4.63f*step,paint);
         if(!"none".equals(coordinateStyle))drawCoordinates(c,density);
         // The played move is a directional arrow, never source/destination tiles.
         drawArrow(c,lastMove,moveArrow,.075f,.27f,false);
         for(int i=0;i<90;i++) if(position.board[i]!=0 && position.board[i]!='.') {
-            paint.setColor(discColor); c.drawCircle(x(i),y(i),radius,paint);
+            int fill=Character.isUpperCase(position.board[i])?redDiscColor:blackDiscColor;
+            paint.setColor(fill); c.drawCircle(x(i),y(i),radius,paint);
             paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.026f); paint.setColor(Character.isUpperCase(position.board[i])?red:black);
             c.drawCircle(x(i),y(i),radius*.88f,paint); paint.setStyle(Paint.Style.FILL);
-            if(woodDiscs){paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.012f);c.drawCircle(x(i),y(i),radius*.76f,paint);paint.setStyle(Paint.Style.FILL);}
-            paint.setTextSize(step*.60f); paint.setTypeface(Typeface.create("serif",Typeface.NORMAL));
+            if("wood".equals(discStyle)||"rosewood".equals(discStyle)){paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.012f);c.drawCircle(x(i),y(i),radius*.76f,paint);paint.setStyle(Paint.Style.FILL);}
+            if("porcelain".equals(discStyle)||"obsidian".equals(discStyle)){
+                paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.018f);paint.setColor(readableMonochrome(fill));paint.setAlpha(70);
+                c.drawArc(x(i)-radius*.96f,y(i)-radius*.96f,x(i)+radius*.96f,y(i)+radius*.96f,205,105,false,paint);
+                paint.setStyle(Paint.Style.FILL);paint.setAlpha(255);paint.setColor(Character.isUpperCase(position.board[i])?red:black);
+            }
+            paint.setTextSize(step*.60f); paint.setTypeface(pieceTypeface);
             paint.getFontMetrics(fontMetrics); c.drawText(glyph(position.board[i]),x(i),y(i)-(fontMetrics.ascent+fontMetrics.descent)/2,paint);
             if(i==selected) { paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.075f); paint.setColor(Color.rgb(183,211,168)); c.drawCircle(x(i),y(i),radius*1.12f,paint); paint.setStyle(Paint.Style.FILL); }
         }
@@ -88,27 +136,35 @@ public final class BoardView extends View {
             int dest=Position.index(move.substring(2)); paint.setColor(Color.argb(175,182,213,170)); c.drawCircle(x(dest),y(dest),step*.12f,paint);
         }
         drawArrow(c,hintMove,bestArrow,.115f,.32f,true);
+        drawTurnIndicator(c,density);
     }
     private void drawCoordinates(Canvas canvas,float density) {
-        paint.setTypeface(Typeface.SANS_SERIF);paint.setTextSize(Math.min(11*density,step*.30f));
+        float horizontalRim=left-radius,verticalRim=top-radius;
+        paint.setTypeface(Typeface.SANS_SERIF);paint.setTextSize(Math.min(10*density,Math.min(horizontalRim,verticalRim)*.72f));
         paint.setTextAlign(Paint.Align.CENTER);paint.setColor(bronze);paint.getFontMetrics(fontMetrics);
         float baseline=-(fontMetrics.ascent+fontMetrics.descent)/2;
         for(int file=0;file<9;file++) {
             int logical=flipped?8-file:file;
             String label="numeric".equals(coordinateStyle)?NUMBER_LABELS[logical]:FILE_LABELS[logical];
             float xx=left+file*step;
-            canvas.drawText(label,xx,top-radius-9*density+baseline,paint);
-            canvas.drawText(label,xx,top+9*step+radius+9*density+baseline,paint);
+            canvas.drawText(label,xx,verticalRim*.48f+baseline,paint);
+            canvas.drawText(label,xx,getHeight()-verticalRim*.48f+baseline,paint);
         }
         for(int row=0;row<10;row++) {
             String label=NUMBER_LABELS[flipped?row:9-row];float yy=top+row*step+baseline;
-            canvas.drawText(label,left-radius-10*density,yy,paint);
-            canvas.drawText(label,left+8*step+radius+10*density,yy,paint);
+            canvas.drawText(label,horizontalRim*.48f,yy,paint);
+            canvas.drawText(label,getWidth()-horizontalRim*.48f,yy,paint);
         }
     }
+    private void drawTurnIndicator(Canvas canvas,float density){
+        boolean bottom=position.redToMove!=flipped;
+        float xx=getWidth()-8*density,yy=bottom?getHeight()-8*density:8*density;
+        paint.setColor(readableMonochrome(boardColor));canvas.drawCircle(xx,yy,4.4f*density,paint);
+        paint.setColor(position.redToMove?0xffd84d42:0xff162128);canvas.drawCircle(xx,yy,3.0f*density,paint);
+    }
     private void drawArrow(Canvas canvas,String move,int color,float width,float head,boolean best) {
-        if(move==null||!move.matches("[a-i][0-9][a-i][0-9]"))return;
-        int from=Position.index(move.substring(0,2)),to=Position.index(move.substring(2));
+        if(!validMove(move))return;
+        int from=squareIndex(move,0),to=squareIndex(move,2);
         float startX=x(from),startY=y(from),endX=x(to),endY=y(to);
         float dx=endX-startX,dy=endY-startY,length=(float)Math.hypot(dx,dy);if(length==0)return;
         float ux=dx/length,uy=dy/length;
@@ -124,6 +180,8 @@ public final class BoardView extends View {
         canvas.drawLine(endX,endY,endX-(float)Math.cos(angle+.55)*headLength,endY-(float)Math.sin(angle+.55)*headLength,paint);
         paint.setStrokeCap(Paint.Cap.BUTT);paint.setStyle(Paint.Style.FILL);paint.setAlpha(255);
     }
+    private static boolean validMove(String move){return move!=null&&move.length()==4&&move.charAt(0)>='a'&&move.charAt(0)<='i'&&move.charAt(2)>='a'&&move.charAt(2)<='i'&&move.charAt(1)>='0'&&move.charAt(1)<='9'&&move.charAt(3)>='0'&&move.charAt(3)<='9';}
+    private static int squareIndex(String move,int offset){return (9-(move.charAt(offset+1)-'0'))*9+move.charAt(offset)-'a';}
     @Override public boolean onTouchEvent(MotionEvent event) {
         if(!editing) return super.onTouchEvent(event);
         if(event.getAction()==MotionEvent.ACTION_DOWN) return true;

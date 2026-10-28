@@ -84,6 +84,7 @@ public final class AuditSettingsTest extends InstrumentationTestCase {
             for(Map.Entry<String,?> entry:previous.entrySet()){
                 Object value=entry.getValue();if(value instanceof Boolean)restore.putBoolean(entry.getKey(),(Boolean)value);
                 else if(value instanceof String)restore.putString(entry.getKey(),(String)value);
+                else if(value instanceof Integer)restore.putInt(entry.getKey(),(Integer)value);
             }
             restore.commit();
         }

@@ -38,7 +38,7 @@ public final class EngineSettings {
         LinearLayout content=new LinearLayout(activity); content.setOrientation(LinearLayout.VERTICAL);
         int pad=Math.round(20*activity.getResources().getDisplayMetrics().density); content.setPadding(pad,pad,pad,pad);
         TextView note=new TextView(activity);
-        note.setText("Pikafish 2026-09-06 · full strength\nMatching official NNUE network · offline\n\nLive arrows update after completed search depths. Untimed analysis continues until its depth limit or Stop. Changes restart any active analysis. The portable engine uses the same search limits, with a maximum depth of 64; threads and hash apply to Pikafish.");
+        note.setText(activity.getString(R.string.engine_settings_summary,PikafishRelease.VERSION));
         content.addView(note);
         Spinner depth=spinner(activity,content,"Maximum depth",strings(depths,""),index(depths,current.maxDepth));
         Spinner time=spinner(activity,content,"Time per position",new String[]{"Until stopped / depth limit","3 seconds","10 seconds","30 seconds","60 seconds"},index(times,current.millis));

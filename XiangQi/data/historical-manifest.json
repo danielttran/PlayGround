@@ -1,0 +1,1916 @@
+{
+  "schemaVersion": 1,
+  "collection": "World Championship masters 1991–2003",
+  "sourcePolicySha256": "0abac07d075b361ef0ff8b60f1a950c88bcca05695412797a09bff0f832e1251",
+  "curationPolicySha256": "6c3f714ff9989cdcdbd3153b9470d858e593bb0c18035b55dd7827d4d4e976a3",
+  "assetSha256": "3f88ee5ae280c219d09371983b717cef8bc43493ef88b051e9af37626786b958",
+  "games": 52,
+  "plies": 4837,
+  "byEvent": {
+    "World Championship 1991": 5,
+    "World Championship 1993": 3,
+    "World Championship 1995": 2,
+    "World Championship 1997": 20,
+    "World Championship 1999": 5,
+    "World Championship 2003": 17
+  },
+  "datePrecision": {
+    "year": 1,
+    "day": 40,
+    "month": 11
+  },
+  "sources": [
+    {
+      "article": 444,
+      "year": 1991,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=444&option=com_content&view=article&lang=en",
+      "sha256": "1663e4d27516899e2df65e017a86ab5a6a8b48fff24e55f7615c29cb646dc4c7",
+      "recordCount": 8
+    },
+    {
+      "article": 406,
+      "year": 1993,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=406&option=com_content&view=article&lang=en",
+      "sha256": "63d84ced3e30ce9ca491f536d8308955d2a876183443379f680fec0f7a106d65",
+      "recordCount": 4
+    },
+    {
+      "article": 407,
+      "year": 1995,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=407&option=com_content&view=article&lang=en",
+      "sha256": "219dd98041cb9f73c9176d61f2ade81055e8e500e997b2a153747fcec13f6700",
+      "recordCount": 7
+    },
+    {
+      "article": 259,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en",
+      "sha256": "a66340ff52b6d4e6c3ecc609bba8cf97d432fb6fb61bb498f9ba67bd60ca0dc9",
+      "recordCount": 9
+    },
+    {
+      "article": 409,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en",
+      "sha256": "fbccc489eed5b621327526164b3bc7d43aa4ce2f1e3cfbd32cb86a7dc58c352b",
+      "recordCount": 9
+    },
+    {
+      "article": 410,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en",
+      "sha256": "d1ea2f6a25a8cecc59aa3293144080ee5db808c0ab61497649ac8214d8c0cb2c",
+      "recordCount": 9
+    },
+    {
+      "article": 412,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en",
+      "sha256": "63254ecb571135790b593309f061279308d5c5ffdf4602a150165ab4a1de65eb",
+      "recordCount": 9
+    },
+    {
+      "article": 415,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en",
+      "sha256": "f749cf890ca4441d5ded556911f085a34249130f621579e992ec1496328e5eaf",
+      "recordCount": 9
+    },
+    {
+      "article": 416,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en",
+      "sha256": "e8f4c002e39cb7895cc603e3161795e8ff7bed5e97d62d889d647dc15146303f",
+      "recordCount": 9
+    },
+    {
+      "article": 417,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=417&option=com_content&view=article&lang=en",
+      "sha256": "672e37800e1fd35aeaa36dc4b5e3ab6f2be85d316475dbcaf9ffae30b9650ee3",
+      "recordCount": 9
+    },
+    {
+      "article": 422,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=422&option=com_content&view=article&lang=en",
+      "sha256": "9730df8bb978aad4b663fa4e539ec6a26f2c87184e3511d2167c6df5d207e1af",
+      "recordCount": 9
+    },
+    {
+      "article": 423,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en",
+      "sha256": "1b0f8dc59b88c234d0548451488ab23a9a40ae3f0c24c68f60ad11c900eeba02",
+      "recordCount": 9
+    },
+    {
+      "article": 425,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en",
+      "sha256": "491060620a6f28c33bd60df8d43ed87e96764dbdd53485eb199b1c4c7b0a6f16",
+      "recordCount": 9
+    },
+    {
+      "article": 430,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=430&option=com_content&view=article&lang=en",
+      "sha256": "177e6c855883859eec3c79f6a37625f101d830a52b3b358210cc972a14d63dfc",
+      "recordCount": 8
+    },
+    {
+      "article": 432,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en",
+      "sha256": "78e1e0b6e15844d4eaee218f5a6592dfae9f40bfda8efd4a1863523aeab2c45b",
+      "recordCount": 10
+    },
+    {
+      "article": 433,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=433&option=com_content&view=article&lang=en",
+      "sha256": "ffb8f07dece6753d8d79d9b0e4c0bad126eb3d616226c35edae44fad4f7fecff",
+      "recordCount": 8
+    },
+    {
+      "article": 434,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en",
+      "sha256": "2e2b79e497f6f75a2dbbf64fc93ca3cbab66a321b39f3dd39a46f61440bcd914",
+      "recordCount": 10
+    },
+    {
+      "article": 436,
+      "year": 1997,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=436&option=com_content&view=article&lang=en",
+      "sha256": "ca1dd556c96fa8adf4eaa99d808f4e898e78ac2160e188828a7023df4a85c34e",
+      "recordCount": 5
+    },
+    {
+      "article": 442,
+      "year": 1999,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=442&option=com_content&view=article&lang=en",
+      "sha256": "02ec7383b278528d19ee0e5a58cd4d9147e01bd0389c932c5b53bc758bb53a69",
+      "recordCount": 9
+    },
+    {
+      "article": 441,
+      "year": 1999,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=441&option=com_content&view=article&lang=en",
+      "sha256": "abd1b8e9b1e5ca9974cecdb0a182c39f056916dd285e0385ad30d4c6438d6545",
+      "recordCount": 8
+    },
+    {
+      "article": 1043,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en",
+      "sha256": "0626171bd6448430664fcb5ade69fc8d4d251d2fa7f71544dd532e252dff8b5c",
+      "recordCount": 14
+    },
+    {
+      "article": 1045,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en",
+      "sha256": "1bdaadc2558a2ecd49bf9d6e60b798030eda5fcfeb51c9b491b6964b9a605348",
+      "recordCount": 14
+    },
+    {
+      "article": 1047,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en",
+      "sha256": "36f7e24c13b615528ed833c3d1424e530f7e3c715e1bf20f6dbca8c4f7251a89",
+      "recordCount": 14
+    },
+    {
+      "article": 1049,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en",
+      "sha256": "58e341dfda29a55c0d1d3749af7a07b91e3b5d3f87d2d7e768d731e0c6108538",
+      "recordCount": 14
+    },
+    {
+      "article": 1051,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en",
+      "sha256": "83874c00387462303b0f0674bcc9dce4c6bb891fb3c744082fc7c4981f74e4ab",
+      "recordCount": 14
+    },
+    {
+      "article": 1053,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en",
+      "sha256": "b059bdf28118d80f75e569eabc71728a5ed877624f68847e25bc516c1ea26d2f",
+      "recordCount": 14
+    },
+    {
+      "article": 1055,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en",
+      "sha256": "21723aa99becbe636c7731ad2656f550aa8820030f268ff1d997b83645fc3d99",
+      "recordCount": 14
+    },
+    {
+      "article": 1057,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en",
+      "sha256": "f010b04ceebd4694579a27ffab8e4a75422bac6bafea1e50e35f91912ef8a202",
+      "recordCount": 14
+    },
+    {
+      "article": 1059,
+      "year": 2003,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en",
+      "sha256": "98d06a212f2f7220e6b27367a2a9fd7e1d0325d75a97934b6b82b9a790566cfb",
+      "recordCount": 14
+    }
+  ],
+  "excluded": [
+    {
+      "id": "historical-wxf-444-g5",
+      "reason": "Outside curated master selection",
+      "red": "张荣安",
+      "black": "徐宝坤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=444&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-444-g6",
+      "reason": "Outside curated master selection",
+      "red": "张心欢",
+      "black": "胡明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=444&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-444-g8",
+      "reason": "No explicit slow/classical game marker",
+      "red": "CHOI Pou Kuan",
+      "black": "Zhao Guorong",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=444&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-406-g4",
+      "reason": "Outside curated master selection",
+      "red": "胡明",
+      "black": "黄玉莹",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=406&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-407-g2",
+      "reason": "Outside curated master selection",
+      "red": "陶汉明 Tao Hanming",
+      "black": "陈捷裕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=407&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-407-g4",
+      "reason": "Outside curated master selection",
+      "red": "张心欢",
+      "black": "胡明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=407&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-407-g5",
+      "reason": "Outside curated master selection",
+      "red": "许信",
+      "black": "翁德强",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=407&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-407-g6",
+      "reason": "Outside curated master selection",
+      "red": "张亚明",
+      "black": "陶汉明 Tao Hanming",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=407&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-407-g7",
+      "reason": "Duplicate main line",
+      "duplicateOf": "historical-wxf-407-g3",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=407&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g1",
+      "reason": "Outside curated master selection",
+      "red": "梁永兴",
+      "black": "甄达新",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g2",
+      "reason": "Outside curated master selection",
+      "red": "赵汝权 Chiu Yukuen",
+      "black": "黎天位",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g3",
+      "reason": "Outside curated master selection",
+      "red": "赵汝权 Chiu Yukuen",
+      "black": "黄志强",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g4",
+      "reason": "Outside curated master selection",
+      "red": "康德荣",
+      "black": "蔡德怀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g5",
+      "reason": "Outside curated master selection",
+      "red": "康德荣",
+      "black": "颜种旺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g6",
+      "reason": "Ambiguous event attribution: two distinct main lines for the same colors/pairing in the 1997 archive, with different outcomes and no recorded round or day. Held pending independent confirmation.",
+      "red": "李锦欢",
+      "black": "吕钦 Lv Qin",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g7",
+      "reason": "Outside curated master selection",
+      "red": "刘国华",
+      "black": "杨春勉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g8",
+      "reason": "Outside curated master selection",
+      "red": "陈华钟",
+      "black": "杨重雍",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-259-g9",
+      "reason": "Outside curated master selection",
+      "red": "李镜华 Li Jinghua",
+      "black": "梅清明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=259&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g1",
+      "reason": "Outside curated master selection",
+      "red": "郑亚生",
+      "black": "詹国武",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g2",
+      "reason": "Outside curated master selection",
+      "red": "何荣耀",
+      "black": "胡伟长",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g3",
+      "reason": "Outside curated master selection",
+      "red": "康德荣",
+      "black": "张乃文",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g4",
+      "reason": "Outside curated master selection",
+      "red": "刘国华",
+      "black": "牟海勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g5",
+      "reason": "Outside curated master selection",
+      "red": "张亚明",
+      "black": "陈国良",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g6",
+      "reason": "Ambiguous event attribution: two distinct main lines for the same colors/pairing in the 1997 archive, with different outcomes and no recorded round or day. Held pending independent confirmation.",
+      "red": "李锦欢",
+      "black": "吕钦 Lv Qin",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g7",
+      "reason": "Outside curated master selection",
+      "red": "熊谷安弘",
+      "black": "伍绍进",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g8",
+      "reason": "Outside curated master selection",
+      "red": "熊谷安弘",
+      "black": "所司和晴",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-409-g9",
+      "reason": "Outside curated master selection",
+      "red": "陈国良",
+      "black": "胡伟长",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=409&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-410-g1",
+      "reason": "Outside curated master selection",
+      "red": "何荣耀",
+      "black": "陈鹏飞",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-410-g3",
+      "reason": "Outside curated master selection",
+      "red": "陈华钟",
+      "black": "所司和晴",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-410-g4",
+      "reason": "Outside curated master selection",
+      "red": "黄志强",
+      "black": "杨重雍",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-410-g5",
+      "reason": "Outside curated master selection",
+      "red": "张乃文",
+      "black": "陈天问",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-410-g6",
+      "reason": "Outside curated master selection",
+      "red": "陈特超",
+      "black": "梅清明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-410-g7",
+      "reason": "Outside curated master selection",
+      "red": "伍绍进",
+      "black": "余快",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-410-g8",
+      "reason": "Outside curated master selection",
+      "red": "梁永兴",
+      "black": "陈华钟",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-410-g9",
+      "reason": "Outside curated master selection",
+      "red": "罗卿华",
+      "black": "吴裕成",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=410&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-412-g1",
+      "reason": "Outside curated master selection",
+      "red": "谢盖洲",
+      "black": "高维铉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-412-g2",
+      "reason": "Outside curated master selection",
+      "red": "牟海勤",
+      "black": "梁永兴",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-412-g4",
+      "reason": "Outside curated master selection",
+      "red": "熊野和伸",
+      "black": "熊谷安弘",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-412-g5",
+      "reason": "Outside curated master selection",
+      "red": "颜种旺",
+      "black": "黄志强",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-412-g6",
+      "reason": "Outside curated master selection",
+      "red": "杨春勉",
+      "black": "李锦欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-412-g7",
+      "reason": "Outside curated master selection",
+      "red": "陈国良",
+      "black": "邓清忠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-412-g8",
+      "reason": "Outside curated master selection",
+      "red": "高维铉",
+      "black": "吴裕成",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-412-g9",
+      "reason": "Outside curated master selection",
+      "red": "熊野和伸",
+      "black": "宋德柔",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=412&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-415-g1",
+      "reason": "Outside curated master selection",
+      "red": "胡允锡",
+      "black": "李展伟",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-415-g2",
+      "reason": "Outside curated master selection",
+      "red": "黎池刚",
+      "black": "何志敏",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-415-g3",
+      "reason": "Outside curated master selection",
+      "red": "张荣安",
+      "black": "蒋庆民",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-415-g4",
+      "reason": "Outside curated master selection",
+      "red": "黎天位",
+      "black": "阮有福",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-415-g5",
+      "reason": "Outside curated master selection",
+      "red": "赵汝权 Chiu Yukuen",
+      "black": "阮有福",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-415-g7",
+      "reason": "Outside curated master selection",
+      "red": "陈捷裕",
+      "black": "赵汝权 Chiu Yukuen",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-415-g8",
+      "reason": "Outside curated master selection",
+      "red": "Hans J. (Siewert)",
+      "black": "酒井清隆",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-415-g9",
+      "reason": "Outside curated master selection",
+      "red": "陈捷裕",
+      "black": "鲁钟能",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=415&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-416-g1",
+      "reason": "Outside curated master selection",
+      "red": "李展伟",
+      "black": "赵汝权 Chiu Yukuen",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-416-g2",
+      "reason": "Outside curated master selection",
+      "red": "李展伟",
+      "black": "张乃文",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-416-g3",
+      "reason": "Outside curated master selection",
+      "red": "陈天问",
+      "black": "郑亚生",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-416-g4",
+      "reason": "Outside curated master selection",
+      "red": "李家庆",
+      "black": "谭少逸",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-416-g6",
+      "reason": "Outside curated master selection",
+      "red": "何成坚",
+      "black": "蒋庆民",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-416-g7",
+      "reason": "Outside curated master selection",
+      "red": "李展伟",
+      "black": "洪家川",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-416-g8",
+      "reason": "Outside curated master selection",
+      "red": "鲁钟能",
+      "black": "洪家川",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-416-g9",
+      "reason": "Outside curated master selection",
+      "red": "黄志强",
+      "black": "杨进贤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=416&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-417-g1",
+      "reason": "Outside curated master selection",
+      "red": "许刚明",
+      "black": "尤泽标",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=417&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-417-g3",
+      "reason": "Outside curated master selection",
+      "red": "尤泽标",
+      "black": "谢盖洲",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=417&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-417-g4",
+      "reason": "Outside curated master selection",
+      "red": "尤泽标",
+      "black": "郑亚生",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=417&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-417-g5",
+      "reason": "Outside curated master selection",
+      "red": "杨重雍",
+      "black": "高维铉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=417&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-417-g7",
+      "reason": "Outside curated master selection",
+      "red": "胡允锡",
+      "black": "鲁钟能",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=417&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-417-g8",
+      "reason": "Outside curated master selection",
+      "red": "郑玉廷",
+      "black": "郭英秀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=417&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-417-g9",
+      "reason": "Outside curated master selection",
+      "red": "邓清忠",
+      "black": "吴裕成",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=417&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-422-g2",
+      "reason": "Outside curated master selection",
+      "red": "陈天问",
+      "black": "何荣耀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=422&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-422-g3",
+      "reason": "Outside curated master selection",
+      "red": "陈天问",
+      "black": "张荣安",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=422&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-422-g6",
+      "reason": "Outside curated master selection",
+      "red": "梅清明",
+      "black": "洪家川",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=422&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-422-g7",
+      "reason": "Outside curated master selection",
+      "red": "张荣安",
+      "black": "陈特超",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=422&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-422-g8",
+      "reason": "Outside curated master selection",
+      "red": "林显荣",
+      "black": "郑亚生",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=422&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-423-g1",
+      "reason": "Outside curated master selection",
+      "red": "谢盖洲",
+      "black": "陈特超",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-423-g3",
+      "reason": "Outside curated master selection",
+      "red": "康德荣",
+      "black": "英国 YOUNG P Luckboon",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-423-g4",
+      "reason": "Outside curated master selection",
+      "red": "张乃文",
+      "black": "德国 TEMPELMANN Claus",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-423-g5",
+      "reason": "Outside curated master selection",
+      "red": "梁永兴",
+      "black": "德国 SCHAEFER Nobert",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-423-g6",
+      "reason": "Outside curated master selection",
+      "red": "熊谷安弘",
+      "black": "德国 NAEGLER Michael",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-423-g7",
+      "reason": "Outside curated master selection",
+      "red": "刘虹秀",
+      "black": "郭淑珑",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-423-g8",
+      "reason": "Outside curated master selection",
+      "red": "陈国良",
+      "black": "德国 NAEGLER Michael",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-423-g9",
+      "reason": "Outside curated master selection",
+      "red": "德国 NAEGLER Michael",
+      "black": "谢添顺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=423&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-425-g2",
+      "reason": "Outside curated master selection",
+      "red": "YOUNG P Luckboon",
+      "black": "颜种旺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-425-g3",
+      "reason": "Outside curated master selection",
+      "red": "毕炳鉴",
+      "black": "阮玉石",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-425-g4",
+      "reason": "Outside curated master selection",
+      "red": "阮玉石",
+      "black": "德国 SCHAEFER Nobert",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-425-g5",
+      "reason": "Outside curated master selection",
+      "red": "安华",
+      "black": "德国 Huber Siegfried",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-425-g6",
+      "reason": "Outside curated master selection",
+      "red": "德国 SCHOLZ Stefen",
+      "black": "郑玉廷",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-425-g7",
+      "reason": "Outside curated master selection",
+      "red": "杨进贤",
+      "black": "德国 SCHOLZ Stefen",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-425-g8",
+      "reason": "Outside curated master selection",
+      "red": "意大利 NASTASIO Davide",
+      "black": "所司和晴",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-425-g9",
+      "reason": "Outside curated master selection",
+      "red": "杨春勉",
+      "black": "张乃文",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=425&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-430-g1",
+      "reason": "Outside curated master selection",
+      "red": "郑玉廷",
+      "black": "梅清明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=430&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-430-g2",
+      "reason": "Outside curated master selection",
+      "red": "陈特超",
+      "black": "张乃文",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=430&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-430-g3",
+      "reason": "Outside curated master selection",
+      "red": "高懿屏",
+      "black": "郭淑珑",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=430&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-430-g5",
+      "reason": "Outside curated master selection",
+      "red": "许刚明",
+      "black": "意大利 Nasia Davide",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=430&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-430-g7",
+      "reason": "Outside curated master selection",
+      "red": "蒋庆民",
+      "black": "陈鹏飞",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=430&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-430-g8",
+      "reason": "Outside curated master selection",
+      "red": "李锦欢",
+      "black": "洪家川",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=430&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g1",
+      "reason": "Outside curated master selection",
+      "red": "伍绍进",
+      "black": "德国 Huber Siegfried",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g2",
+      "reason": "Outside curated master selection",
+      "red": "余快",
+      "black": "陈国良",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g4",
+      "reason": "Outside curated master selection",
+      "red": "颜种旺",
+      "black": "赵汝权 Chiu Yukuen",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g5",
+      "reason": "Outside curated master selection",
+      "red": "谢添顺",
+      "black": "吴裕成",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g6",
+      "reason": "Outside curated master selection",
+      "red": "牟海勤",
+      "black": "尤泽标",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g7",
+      "reason": "Outside curated master selection",
+      "red": "意大利 NASTASIO Davide",
+      "black": "熊野和伸",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g8",
+      "reason": "Outside curated master selection",
+      "red": "安华",
+      "black": "芬兰 LINDROOS Raimo",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g9",
+      "reason": "Outside curated master selection",
+      "red": "谢盖洲",
+      "black": "英国 YOUNG P Luckboon",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-432-g10",
+      "reason": "Outside curated master selection",
+      "red": "许刚明",
+      "black": "德国 SCHMIDT BRAUNS Joachim",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=432&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-433-g1",
+      "reason": "Outside curated master selection",
+      "red": "黎天位",
+      "black": "余超健",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=433&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-433-g2",
+      "reason": "Outside curated master selection",
+      "red": "詹国武",
+      "black": "蔡德怀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=433&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-433-g3",
+      "reason": "Outside curated master selection",
+      "red": "许刚明",
+      "black": "酒井清隆",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=433&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-433-g4",
+      "reason": "Outside curated master selection",
+      "red": "黄志强",
+      "black": "陈捷裕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=433&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-433-g5",
+      "reason": "Outside curated master selection",
+      "red": "杨春勉",
+      "black": "康德荣",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=433&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-433-g8",
+      "reason": "Outside curated master selection",
+      "red": "刘国华",
+      "black": "陈鹏飞",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=433&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g1",
+      "reason": "Outside curated master selection",
+      "red": "林野",
+      "black": "张心欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g2",
+      "reason": "Outside curated master selection",
+      "red": "陈华钟",
+      "black": "德国 SCHAEFER Nobert",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g4",
+      "reason": "Outside curated master selection",
+      "red": "李镜华 Li Jinghua",
+      "black": "许刚明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g5",
+      "reason": "Outside curated master selection",
+      "red": "林野",
+      "black": "郭淑珑",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g6",
+      "reason": "Outside curated master selection",
+      "red": "洪家川",
+      "black": "邓清忠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g7",
+      "reason": "Outside curated master selection",
+      "red": "吴裕成",
+      "black": "安华",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g8",
+      "reason": "Outside curated master selection",
+      "red": "林雷默",
+      "black": "谢添顺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g9",
+      "reason": "Outside curated master selection",
+      "red": "尤泽标",
+      "black": "梁永兴",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-434-g10",
+      "reason": "Outside curated master selection",
+      "red": "德国 Huber Siegfried",
+      "black": "张旺后",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=434&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-436-g1",
+      "reason": "Outside curated master selection",
+      "red": "刘虹秀",
+      "black": "高懿屏",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=436&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-436-g3",
+      "reason": "Outside curated master selection",
+      "red": "陈国良",
+      "black": "张荣安",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=436&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-436-g5",
+      "reason": "Outside curated master selection",
+      "red": "何荣耀",
+      "black": "李展伟",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=436&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-442-g1",
+      "reason": "Outside curated master selection",
+      "red": "宋德柔",
+      "black": "卢志锦",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=442&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-442-g2",
+      "reason": "Outside curated master selection",
+      "red": "金海英",
+      "black": "常虹",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=442&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-442-g3",
+      "reason": "Outside curated master selection",
+      "red": "叶荣光",
+      "black": "黄志强",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=442&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-442-g6",
+      "reason": "Outside curated master selection",
+      "red": "金海英",
+      "black": "周氏玉瑶",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=442&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-442-g9",
+      "reason": "Outside curated master selection",
+      "red": "黄志强",
+      "black": "何荣耀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=442&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-441-g1",
+      "reason": "Outside curated master selection",
+      "red": "许光明",
+      "black": "陶高科",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=441&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-441-g3",
+      "reason": "Outside curated master selection",
+      "red": "德国 TEMPELMANN Claus",
+      "black": "小俣光夫",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=441&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-441-g4",
+      "reason": "Outside curated master selection",
+      "red": "康德荣",
+      "black": "蔡文钩",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=441&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-441-g5",
+      "reason": "Outside curated master selection",
+      "red": "庄宏明",
+      "black": "高维铉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=441&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-441-g6",
+      "reason": "Outside curated master selection",
+      "red": "郑亚生",
+      "black": "杨重雍",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=441&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-441-g7",
+      "reason": "Outside curated master selection",
+      "red": "陶高科",
+      "black": "阎文清",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=441&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-441-g8",
+      "reason": "Outside curated master selection",
+      "red": "何荣耀",
+      "black": "山崎秀夫",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=441&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g1",
+      "reason": "Outside curated master selection",
+      "red": "何成坚",
+      "black": "蒋庆民",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g2",
+      "reason": "Outside curated master selection",
+      "red": "邓雄越",
+      "black": "李锦欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g3",
+      "reason": "Outside curated master selection",
+      "red": "李家庆",
+      "black": "谭少逸",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g4",
+      "reason": "Outside curated master selection",
+      "red": "彼德乌",
+      "black": "何志敏",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g5",
+      "reason": "Outside curated master selection",
+      "red": "北川幸彦",
+      "black": "山田宏秀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g6",
+      "reason": "Outside curated master selection",
+      "red": "赖汉顺",
+      "black": "田中笃",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g7",
+      "reason": "Outside curated master selection",
+      "red": "高维铉",
+      "black": "刘国华",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g9",
+      "reason": "Outside curated master selection",
+      "red": "郑熙明",
+      "black": "邵南扉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g10",
+      "reason": "Outside curated master selection",
+      "red": "邝伟德",
+      "black": "林利强",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g11",
+      "reason": "Outside curated master selection",
+      "red": "李俊平",
+      "black": "吴震熙",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g12",
+      "reason": "Outside curated master selection",
+      "red": "牟海勤",
+      "black": "德国 Claus TEMPELMANN",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1043-g13",
+      "reason": "Outside curated master selection",
+      "red": "颜种旺",
+      "black": "周．特森",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1043&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g1",
+      "reason": "Outside curated master selection",
+      "red": "梁达民",
+      "black": "牟海勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g2",
+      "reason": "Outside curated master selection",
+      "red": "吴震熙",
+      "black": "何荣耀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g3",
+      "reason": "Outside curated master selection",
+      "red": "林利强",
+      "black": "于幼华",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g4",
+      "reason": "Outside curated master selection",
+      "red": "陈庭水",
+      "black": "郑熙明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g6",
+      "reason": "Outside curated master selection",
+      "red": "胡伟长",
+      "black": "高维铉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g7",
+      "reason": "Outside curated master selection",
+      "red": "黄俊铭",
+      "black": "赖汉顺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g8",
+      "reason": "Outside curated master selection",
+      "red": "甄达新",
+      "black": "北川幸彦",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g9",
+      "reason": "Outside curated master selection",
+      "red": "何志敏",
+      "black": "庄宏明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g10",
+      "reason": "Outside curated master selection",
+      "red": "胡允锡",
+      "black": "德国个人 Siegfried HUBER",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g11",
+      "reason": "Outside curated master selection",
+      "red": "杨正双",
+      "black": "李家庆",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g13",
+      "reason": "Outside curated master selection",
+      "red": "颜种旺",
+      "black": "何成坚",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1045-g14",
+      "reason": "Outside curated master selection",
+      "red": "林进强",
+      "black": "郑德铭",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1045&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g1",
+      "reason": "Outside curated master selection",
+      "red": "李家庆",
+      "black": "胡允锡",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g3",
+      "reason": "Outside curated master selection",
+      "red": "郑熙明",
+      "black": "甄达新",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g4",
+      "reason": "Outside curated master selection",
+      "red": "于幼华",
+      "black": "吴震熙",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g6",
+      "reason": "Outside curated master selection",
+      "red": "何成坚",
+      "black": "黄俊铭",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g7",
+      "reason": "Outside curated master selection",
+      "red": "赖汉顺",
+      "black": "胡伟长",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g8",
+      "reason": "Outside curated master selection",
+      "red": "高维铉",
+      "black": "林进强",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g9",
+      "reason": "Outside curated master selection",
+      "red": "刘贵辉",
+      "black": "颜种旺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g10",
+      "reason": "Outside curated master selection",
+      "red": "邓雄越",
+      "black": "杨正双",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g11",
+      "reason": "Outside curated master selection",
+      "red": "刘勤",
+      "black": "谭少逸",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g12",
+      "reason": "Outside curated master selection",
+      "red": "德国个人 Siegfried HUBER",
+      "black": "陈庭水",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g13",
+      "reason": "Outside curated master selection",
+      "red": "陈培进",
+      "black": "何志敏",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1047-g14",
+      "reason": "Outside curated master selection",
+      "red": "北川幸彦",
+      "black": "赵汝权",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1047&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g3",
+      "reason": "Outside curated master selection",
+      "red": "甄达新",
+      "black": "刘贵辉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g4",
+      "reason": "Outside curated master selection",
+      "red": "胡伟长",
+      "black": "郑熙明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g5",
+      "reason": "Outside curated master selection",
+      "red": "黄俊铭",
+      "black": "高维铉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g6",
+      "reason": "Outside curated master selection",
+      "red": "刘国华",
+      "black": "何荣耀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g7",
+      "reason": "Outside curated master selection",
+      "red": "赵汝权",
+      "black": "胡允锡",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g8",
+      "reason": "Outside curated master selection",
+      "red": "吴震熙",
+      "black": "陈庭水",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g9",
+      "reason": "Outside curated master selection",
+      "red": "谭少逸",
+      "black": "许松浩",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g10",
+      "reason": "Outside curated master selection",
+      "red": "陈培进",
+      "black": "牟海勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g11",
+      "reason": "Outside curated master selection",
+      "red": "庄宏明",
+      "black": "邓雄越",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g12",
+      "reason": "Outside curated master selection",
+      "red": "德国 Claus TEMPELMANN",
+      "black": "梁达民",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g13",
+      "reason": "Outside curated master selection",
+      "red": "林进强",
+      "black": "颜种旺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1049-g14",
+      "reason": "Outside curated master selection",
+      "red": "李锦欢",
+      "black": "郑德铭",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1049&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g2",
+      "reason": "Outside curated master selection",
+      "red": "于幼华",
+      "black": "甄达新",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g3",
+      "reason": "Outside curated master selection",
+      "red": "李家庆",
+      "black": "胡伟长",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g4",
+      "reason": "Outside curated master selection",
+      "red": "高维铉",
+      "black": "赵汝权",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g5",
+      "reason": "Outside curated master selection",
+      "red": "郑熙明",
+      "black": "黄俊铭",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g6",
+      "reason": "Outside curated master selection",
+      "red": "梁达民",
+      "black": "陈培进",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g7",
+      "reason": "Outside curated master selection",
+      "red": "许松浩",
+      "black": "何成坚",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g8",
+      "reason": "Outside curated master selection",
+      "red": "颜种旺",
+      "black": "邓雄越",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g9",
+      "reason": "Outside curated master selection",
+      "red": "何荣耀",
+      "black": "李锦欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g10",
+      "reason": "Outside curated master selection",
+      "red": "赖汉顺",
+      "black": "庄宏明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g11",
+      "reason": "Outside curated master selection",
+      "red": "陈庭水",
+      "black": "刘国华",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g12",
+      "reason": "Outside curated master selection",
+      "red": "刘贵辉",
+      "black": "吴震熙",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g13",
+      "reason": "Outside curated master selection",
+      "red": "蒋庆民",
+      "black": "刘勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1051-g14",
+      "reason": "Outside curated master selection",
+      "red": "谭少逸",
+      "black": "吴裕成",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1051&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g3",
+      "reason": "Outside curated master selection",
+      "red": "许松浩",
+      "black": "高维铉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g4",
+      "reason": "Outside curated master selection",
+      "red": "刘国华",
+      "black": "胡伟长",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g5",
+      "reason": "Outside curated master selection",
+      "red": "黄俊铭",
+      "black": "李家庆",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g6",
+      "reason": "Outside curated master selection",
+      "red": "李锦欢",
+      "black": "甄达新",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g7",
+      "reason": "Outside curated master selection",
+      "red": "颜种旺",
+      "black": "郑熙明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g8",
+      "reason": "Outside curated master selection",
+      "red": "刘勤",
+      "black": "刘贵辉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g9",
+      "reason": "Outside curated master selection",
+      "red": "赵汝权",
+      "black": "赖汉顺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g10",
+      "reason": "Outside curated master selection",
+      "red": "德国个人 Simon HENKE",
+      "black": "胡允锡",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g11",
+      "reason": "Outside curated master selection",
+      "red": "陈培进",
+      "black": "谭少逸",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g12",
+      "reason": "Outside curated master selection",
+      "red": "吴震熙",
+      "black": "庄宏明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g13",
+      "reason": "Outside curated master selection",
+      "red": "邓雄越",
+      "black": "叶荣光",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1053-g14",
+      "reason": "Outside curated master selection",
+      "red": "林进强",
+      "black": "牟海勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1053&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g1",
+      "reason": "Outside curated master selection",
+      "red": "于幼华",
+      "black": "许松浩",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g4",
+      "reason": "Outside curated master selection",
+      "red": "李家庆",
+      "black": "陈培进",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g5",
+      "reason": "Outside curated master selection",
+      "red": "刘贵辉",
+      "black": "刘国华",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g6",
+      "reason": "Outside curated master selection",
+      "red": "郑熙明",
+      "black": "赵汝权",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g7",
+      "reason": "Outside curated master selection",
+      "red": "胡伟长",
+      "black": "颜种旺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g8",
+      "reason": "Outside curated master selection",
+      "red": "胡允锡",
+      "black": "黄俊铭",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g9",
+      "reason": "Outside curated master selection",
+      "red": "庄宏明",
+      "black": "梁达民",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g10",
+      "reason": "Outside curated master selection",
+      "red": "陈庭水",
+      "black": "邓雄越",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g11",
+      "reason": "Outside curated master selection",
+      "red": "甄达新",
+      "black": "吴震熙",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g12",
+      "reason": "Outside curated master selection",
+      "red": "牟海勤",
+      "black": "何荣耀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g13",
+      "reason": "Outside curated master selection",
+      "red": "蒋庆民",
+      "black": "邵南扉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1055-g14",
+      "reason": "Outside curated master selection",
+      "red": "谭少逸",
+      "black": "德国个人 Simon HENKE",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1055&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g3",
+      "reason": "Outside curated master selection",
+      "red": "刘国华",
+      "black": "于幼华",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g4",
+      "reason": "Outside curated master selection",
+      "red": "李锦欢",
+      "black": "胡伟长",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g5",
+      "reason": "Outside curated master selection",
+      "red": "吴震熙",
+      "black": "许松浩",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g6",
+      "reason": "Outside curated master selection",
+      "red": "梁达民",
+      "black": "胡允锡",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g7",
+      "reason": "Outside curated master selection",
+      "red": "邓雄越",
+      "black": "黄俊铭",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g8",
+      "reason": "Outside curated master selection",
+      "red": "叶荣光",
+      "black": "牟海勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g9",
+      "reason": "Outside curated master selection",
+      "red": "何荣耀",
+      "black": "郑熙明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g10",
+      "reason": "Outside curated master selection",
+      "red": "陈培进",
+      "black": "赖汉顺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g11",
+      "reason": "Outside curated master selection",
+      "red": "庄宏明",
+      "black": "高维铉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g12",
+      "reason": "Outside curated master selection",
+      "red": "杨正双",
+      "black": "谭少逸",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g13",
+      "reason": "Outside curated master selection",
+      "red": "颜种旺",
+      "black": "蒋庆民",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1057-g14",
+      "reason": "Outside curated master selection",
+      "red": "林利强",
+      "black": "刘贵辉",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1057&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g1",
+      "reason": "Outside curated master selection",
+      "red": "于幼华",
+      "black": "李锦欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g4",
+      "reason": "Outside curated master selection",
+      "red": "许松浩",
+      "black": "邓雄越",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g5",
+      "reason": "Outside curated master selection",
+      "red": "谭少逸",
+      "black": "梁达民",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g6",
+      "reason": "Outside curated master selection",
+      "red": "刘贵辉",
+      "black": "李家庆",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g7",
+      "reason": "Outside curated master selection",
+      "red": "赖汉顺",
+      "black": "何荣耀",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g8",
+      "reason": "Outside curated master selection",
+      "red": "胡伟长",
+      "black": "吴震熙",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g9",
+      "reason": "Outside curated master selection",
+      "red": "蒋庆民",
+      "black": "庄宏明",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g10",
+      "reason": "Outside curated master selection",
+      "red": "甄达新",
+      "black": "牟海勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g11",
+      "reason": "Outside curated master selection",
+      "red": "黄俊铭",
+      "black": "颜种旺",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g12",
+      "reason": "Outside curated master selection",
+      "red": "胡允锡",
+      "black": "叶荣光",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g13",
+      "reason": "Outside curated master selection",
+      "red": "陈庭水",
+      "black": "何志敏",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    },
+    {
+      "id": "historical-wxf-1059-g14",
+      "reason": "Outside curated master selection",
+      "red": "高维铉",
+      "black": "杨正双",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
+    }
+  ],
+  "scope": "Factual main lines and metadata only; no source annotations, photos or board implementation bundled. Classical status comes from each official record; precise clock is only asserted where recorded."
+}

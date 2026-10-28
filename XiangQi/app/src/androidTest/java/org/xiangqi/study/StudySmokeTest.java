@@ -88,7 +88,7 @@ public final class StudySmokeTest extends InstrumentationTestCase {
             getInstrumentation().runOnMainSync(()->findDescription(activity.getWindow().getDecorView(),"Next move").performClick());
             getInstrumentation().waitForIdleSync();
             getInstrumentation().runOnMainSync(()->{
-                assertNotNull(findText(activity.getWindow().getDecorView(),"Black to move"));
+                assertTrue(findBoard(activity.getWindow().getDecorView()).getContentDescription().toString().contains("Black to move."));
                 findText(activity.getWindow().getDecorView(),"Analyze").performClick();
                 findDescription(activity.getWindow().getDecorView(),"Next move").performClick();
             });
@@ -96,7 +96,7 @@ public final class StudySmokeTest extends InstrumentationTestCase {
             getInstrumentation().runOnMainSync(()->{
                 assertNotNull(findText(activity.getWindow().getDecorView(),"Analyze"));
                 assertNull(findText(activity.getWindow().getDecorView(),"Stop analysis"));
-                assertNotNull(findText(activity.getWindow().getDecorView(),"Red to move"));
+                assertTrue(findBoard(activity.getWindow().getDecorView()).getContentDescription().toString().contains("Red to move."));
             });
         } finally {getInstrumentation().runOnMainSync(activity::finish);}
     }
@@ -145,6 +145,7 @@ public final class StudySmokeTest extends InstrumentationTestCase {
     }
     private static View findText(View view,String text){if(view instanceof TextView&&((TextView)view).getText().toString().startsWith(text))return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findText(group.getChildAt(i),text);if(found!=null)return found;}}return null;}
     private static View findDescription(View view,String text){if(text.contentEquals(view.getContentDescription()==null?"":view.getContentDescription()))return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findDescription(group.getChildAt(i),text);if(found!=null)return found;}}return null;}
+    private static View findBoard(View view){if(view instanceof BoardView)return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findBoard(group.getChildAt(i));if(found!=null)return found;}}return null;}
     private static void collectText(View view,StringBuilder output){
         if(output.length()>=2000)return;
         if(view instanceof TextView){String value=((TextView)view).getText().toString();if(!value.isEmpty()){if(output.length()>0)output.append(" | ");int remaining=Math.max(0,2000-output.length());output.append(value,0,Math.min(value.length(),remaining));}}

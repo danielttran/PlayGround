@@ -13,7 +13,14 @@ public final class UciPosition {
         // preloaded game when the native engine is selected.
         Position cursor = Position.fromFen(startFen == null || startFen.trim().isEmpty() ? Position.START_FEN : startFen);
         StringBuilder command = new StringBuilder("position ");
-        command.append(cursor.toFen().equals(Position.START_FEN) ? "startpos" : "fen " + cursor.toFen());
+        String nativeFen=cursor.toFen();String[] fields=nativeFen.split(" ");
+        // Standalone imported study FENs may carry clocks outside the native
+        // engine's accepted range. Preserve the board/turn and reset only those
+        // unsupported counters. Recorded move histories are sent in full.
+        if(Integer.parseInt(fields[4])>119)fields[4]="0";
+        if(Integer.parseInt(fields[5])>100000)fields[5]="1";
+        nativeFen=String.join(" ",fields);
+        command.append(nativeFen.equals(Position.START_FEN) ? "startpos" : "fen " + nativeFen);
         if (!history.isEmpty()) command.append(" moves");
         for (int i = 0; i < history.size(); i++) {
             if (Thread.currentThread().isInterrupted()) throw new IllegalStateException("History validation cancelled");

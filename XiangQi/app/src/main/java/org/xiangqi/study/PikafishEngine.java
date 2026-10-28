@@ -30,8 +30,8 @@ import java.util.concurrent.TimeUnit;
 /** Runs the bundled standalone Android engine using UCI. Background use only. */
 public final class PikafishEngine {
     private static final String EOF = "\u0000EOF";
-    private static final long NETWORK_BYTES = 50706378L;
-    private static final String NETWORK_SHA256 = "7d13d73569a9b571ba0eb20cf1596247bc2a42738967e61afef6482b231e900e";
+    private static final long NETWORK_BYTES = PikafishRelease.NNUE_BYTES;
+    private static final String NETWORK_SHA256 = PikafishRelease.NNUE_SHA256;
     private static File verifiedNetwork;
     private static long verifiedModified;
     private PikafishEngine() {}
@@ -49,7 +49,7 @@ public final class PikafishEngine {
     }
 
     public static boolean available(Context context) {
-        return Build.VERSION.SDK_INT >= 29 && binary(context).isFile();
+        return Build.VERSION.SDK_INT >= PikafishRelease.MIN_ANDROID_API && binary(context).isFile();
     }
 
     private static File binary(Context context) {
@@ -58,7 +58,7 @@ public final class PikafishEngine {
 
     private static synchronized File prepareNetwork(Context context) throws Exception {
         if (Thread.currentThread().isInterrupted()) throw new InterruptedException("Pikafish initialization cancelled");
-        File directory = new File(context.getFilesDir(), "pikafish-2026-09-06");
+        File directory = new File(context.getFilesDir(), "pikafish-"+PikafishRelease.VERSION);
         if (!directory.isDirectory() && !directory.mkdirs()) throw new IllegalStateException("Cannot create Pikafish data directory");
         File network = new File(directory, "pikafish.nnue");
         if (network.isFile() && network.length() == NETWORK_BYTES) {
@@ -177,6 +177,12 @@ public final class PikafishEngine {
             output.println("stop"); output.println("quit"); output.close();
             process.destroy();
             if (process.isAlive()) process.destroyForcibly();
+            // Destruction is asynchronous on some platforms. Bound the reap so
+            // a following search cannot overlap an exiting worker or its files.
+            boolean interrupted=Thread.interrupted();
+            try { process.waitFor(500,TimeUnit.MILLISECONDS); }
+            catch(InterruptedException ignored) { interrupted=true; }
+            finally { if(interrupted)Thread.currentThread().interrupt(); }
             reader.interrupt();
         }
     }

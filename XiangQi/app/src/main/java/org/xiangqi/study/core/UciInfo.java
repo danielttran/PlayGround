@@ -37,7 +37,10 @@ public final class UciInfo {
                 try { String move = Position.normalizeMove(tokens[i]); cursor = cursor.play(move); pv.add(move); }
                 catch (IllegalArgumentException invalid) { break; }
             }
-            if (pv.isEmpty()) return;
+            // An adjudicated root draw can have an explicit empty PV followed
+            // by a legal bestmove. Keep its exact score/depth; reject nonempty
+            // but illegal move text. The adapter validates the final bestmove.
+            if (pv.isEmpty() && pvAt < tokens.length) return;
         }
         result.depth = depth; result.nodes = nodes;
         result.score = root.redToMove ? score : -score;

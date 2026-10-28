@@ -14,6 +14,8 @@ import android.widget.*;
 import org.json.JSONArray;
 import org.xiangqi.study.core.Engine;
 import org.xiangqi.study.core.Position;
+import org.xiangqi.study.core.GameDateSort;
+import org.xiangqi.study.core.PlayerNames;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -23,7 +25,7 @@ import java.util.concurrent.*;
 public final class MainActivity extends Activity {
     private static final int BG=0xff1e2520, SURFACE=0xff2d372f, LIGHT=0xffe7e7d5, MUTED=0xffb8c8b8,
         ACCENT=0xffb3cfa6, INK=0xff20342c, LINE=0xff465647;
-    private static final int IMPORT=101, EXPORT=102;
+    private static final int IMPORT=101, EXPORT=102, LIBRARY_PAGE_SIZE=40, MOVE_RECORD_ROWS=40;
     private final Handler handler=new Handler(Looper.getMainLooper());
     // File operations outlive configuration changes and stay ordered: a recreated
     // Activity loads after an import already queued by its predecessor.
@@ -34,25 +36,26 @@ public final class MainActivity extends Activity {
     private SharedPreferences prefs;
     private GameRepository repository;
     private List<GameRepository.Game> games=new ArrayList<>();
-    private LinearLayout root,content,cards,movesView,analysisBox;
-    private TextView status,positionLabel,turnLabel,analysisText,variationLabel,eventLabel;
+    private LinearLayout root,content,cards,libraryPager,movesView,analysisBox;
+    private TextView status,positionLabel,analysisText,variationLabel,eventLabel;
     private Button autoplayButton,analyzeButton,exploreButton;
     private SeekBar seek;
     private BoardView board;
     private GameRepository.Game game;
     private final List<Position> positions=new ArrayList<>();
     private List<String> workingMoves=new ArrayList<>();
-    private int ply;
+    private int ply,libraryPage;
     private boolean exploring,flipped,autoplay,destroyed,library=true,loaded;
-    private String search="",pendingExport;
+    private String search="",pendingExport,librarySort="newest";
     private Engine.Result lastResult;
-    private AlertDialog settingsDialog,engineSettingsDialog;
+    private AlertDialog settingsDialog,engineSettingsDialog,colorDialog;
     private float swipeStartX,swipeStartY;
     private boolean swipeTracking,swipeConsumed,swipeBlocked;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state); prefs=getSharedPreferences("study",MODE_PRIVATE); repository=new GameRepository(this);
-        if(state!=null)search=state.getString("search", "");
+        librarySort=GameDateSort.order(prefs.getString("librarySort","newest"));
+        if(state!=null){search=state.getString("search", "");libraryPage=state.getInt("libraryPage",0);}
         flipped=prefs.getBoolean("flipped",false);
         getWindow().setStatusBarColor(BG); getWindow().setNavigationBarColor(BG);
         getWindow().getDecorView().setSystemUiVisibility(0);
@@ -90,42 +93,66 @@ public final class MainActivity extends Activity {
         Button settings=button("Settings",this::settings,false);heading.addView(settings,new LinearLayout.LayoutParams(dp(94),dp(48)));content.addView(heading);
         TextView subtitle=text("A world of games. A board to understand them.",14,MUTED); pad(subtitle,0,4,0,18); content.addView(subtitle);
         GameRepository.Game current=currentGame();
-        if(current!=null)content.addView(button("Return to current game · swipe left\nRed: "+current.red+"\nBlack: "+current.black,this::returnToCurrentGame,true));
+        if(current!=null)content.addView(button("Return to current game · swipe left\nRed: "+PlayerNames.display(current.red)+"\nBlack: "+PlayerNames.display(current.black),this::returnToCurrentGame,true));
         LinearLayout tools=row(); tools.addView(weight(button("Import games",this::importMenu,true),1));
         tools.addView(weight(button("About & sources",this::about,false),1)); content.addView(tools);
         EditText field=new EditText(this); field.setSingleLine(true); field.setTextColor(LIGHT); field.setHintTextColor(MUTED);
-        field.setTextSize(15); field.setHint("Search player, event or round"); field.setBackground(shape(SURFACE,LINE,12)); pad(field,14,6,14,6);
+        field.setTextSize(15); field.setHint("Search player, event, round or collection"); field.setBackground(shape(SURFACE,LINE,12)); pad(field,14,6,14,6);
         LinearLayout.LayoutParams fp=new LinearLayout.LayoutParams(-1,dp(52)); fp.setMargins(0,dp(14),0,dp(10)); content.addView(field,fp);
+        LinearLayout sortRow=row();TextView sortLabel=text("Sort games",13,MUTED);sortRow.addView(sortLabel,new LinearLayout.LayoutParams(dp(88),-2));
+        Spinner sort=new Spinner(this);sort.setContentDescription("Game sort order");
+        ArrayAdapter<String> sortAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,new String[]{"Collection order","Newest first","Oldest first"}){
+            @Override public View getView(int position,View convert,ViewGroup parent){TextView view=(TextView)super.getView(position,convert,parent);view.setTextColor(LIGHT);return view;}
+        };
+        sort.setAdapter(sortAdapter);sort.setSelection(index(librarySort,"collection","newest","oldest"));
+        sortRow.addView(sort,new LinearLayout.LayoutParams(0,dp(48),1));content.addView(sortRow);
+        sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onItemSelected(AdapterView<?> parent,View view,int position,long id){String value=new String[]{"collection","newest","oldest"}[position];if(!value.equals(librarySort)){librarySort=value;libraryPage=0;prefs.edit().putString("librarySort",value).apply();renderCards();}}public void onNothingSelected(AdapterView<?> parent){}});
         status=text("",12,MUTED); pad(status,2,0,2,10); content.addView(status);
-        cards=column(); content.addView(cards); field.setText(search); field.setSelection(field.length());
-        field.addTextChangedListener(new TextWatcher(){ public void beforeTextChanged(CharSequence s,int st,int count,int after){} public void onTextChanged(CharSequence s,int st,int before,int count){ search=s.toString(); renderCards(); } public void afterTextChanged(Editable e){} });
+        cards=column(); content.addView(cards);libraryPager=row();content.addView(libraryPager);field.setText(search); field.setSelection(field.length());
+        field.addTextChangedListener(new TextWatcher(){ public void beforeTextChanged(CharSequence s,int st,int count,int after){} public void onTextChanged(CharSequence s,int st,int before,int count){ search=s.toString();libraryPage=0;renderCards(); } public void afterTextChanged(Editable e){} });
         renderCards();
     }
 
     private void renderCards() {
-        if(cards==null||!library)return; cards.removeAllViews(); int count=0;
+        if(cards==null||!library)return; cards.removeAllViews();
         boolean hideResults=StudySettings.load(this).hideResults;
-        String needle=search.toLowerCase(Locale.ROOT).trim();
-        for(GameRepository.Game item:games) {
-            if(!needle.isEmpty() && !(item.title()+" "+item.event+" "+item.round).toLowerCase(Locale.ROOT).contains(needle))continue;
-            count++;
+        String needle=PlayerNames.fold(search).trim();
+        List<GameRepository.Game> matches=new ArrayList<>();
+        for(GameRepository.Game item:GameDateSort.sorted(games,g->g.date,librarySort)) {
+            if(!needle.isEmpty() && !PlayerNames.fold(PlayerNames.searchText(item.red)+" "+PlayerNames.searchText(item.black)+" "+item.event+" "+item.round+" "+item.collection).contains(needle))continue;
+            matches.add(item);
+        }
+        int count=matches.size();libraryPage=Math.max(0,Math.min(libraryPage,Math.max(0,(count-1)/LIBRARY_PAGE_SIZE)));
+        int first=libraryPage*LIBRARY_PAGE_SIZE,last=Math.min(count,first+LIBRARY_PAGE_SIZE);
+        // Bound native view inflation on the UI thread even for large imports.
+        // Filtering and chronological sorting still cover the whole library.
+        for(GameRepository.Game item:matches.subList(first,last)) {
             LinearLayout card=column(); card.setBackground(shape(SURFACE,LINE,15)); pad(card,14,14,14,12);
             LinearLayout.LayoutParams cp=new LinearLayout.LayoutParams(-1,-2); cp.setMargins(0,0,0,dp(9)); cards.addView(card,cp);
             card.addView(playerRow("RED",item.red,16));card.addView(playerRow("BLACK",item.black,16));
             if(!hideResults){LinearLayout result=row();TextView caption=text("Result",12,MUTED);result.addView(caption,new LinearLayout.LayoutParams(0,-2,1));TextView score=text(displayResult(item.result),14,MUTED);result.addView(score);card.addView(result);}
             TextView event=text(item.event,14,MUTED); pad(event,0,10,0,0); card.addView(event);
             if(!item.round.isEmpty()) card.addView(text(item.round,13,MUTED));
+            if(!item.collection.isEmpty())card.addView(text(item.collection,12,ACCENT));
             if(!item.timeControl.isEmpty())card.addView(text(timeControl(item.timeControl),12,ACCENT));
             TextView details=text((item.date.isEmpty()?"Undated":item.date)+" · "+item.moves.size()+" half-moves"+(item.imported?" · Imported":""),12,MUTED); pad(details,0,14,0,6); card.addView(details);
             boolean hasVariation=prefs.getBoolean("exploring:"+item.id,false);
             int resume=hasVariation?prefs.getInt("variationPly:"+item.id,0):Math.min(item.moves.size(),prefs.getInt("ply:"+item.id,0));
             TextView action=text(hasVariation?"Resume variation · move "+((resume+1)/2)+"  →":resume>0?"Resume at move "+((resume+1)/2)+"  →":"Open game  →",13,ACCENT); action.setGravity(Gravity.END); card.addView(action);
             card.setOnClickListener(v->openGame(item,true)); card.setFocusable(true);
-            card.setContentDescription("Red: "+item.red+". Black: "+item.black+". "+item.event+", "+item.round+(hideResults?"":", result "+displayResult(item.result))+". Open game.");
+            card.setContentDescription("Red: "+PlayerNames.display(item.red)+". Black: "+PlayerNames.display(item.black)+". "+item.event+", "+item.round+(hideResults?"":", result "+displayResult(item.result))+". Open game.");
         }
-        status.setText(getResources().getQuantityString(R.plurals.library_count,games.size(),count,games.size()));
+        String total=getResources().getQuantityString(R.plurals.library_count,games.size(),count,games.size());
+        status.setText(count==0?total:getString(R.string.library_page_status,total,first+1,last));
+        libraryPager.removeAllViews();
+        if(count>LIBRARY_PAGE_SIZE){
+            Button previous=button("Previous 40 games",()->changeLibraryPage(-1),false);previous.setEnabled(libraryPage>0);
+            Button next=button("Next 40 games",()->changeLibraryPage(1),true);next.setEnabled(last<count);
+            libraryPager.addView(weight(previous,1));libraryPager.addView(weight(next,1));
+        }
         if(count==0) { TextView empty=text("No matching games. Try a player’s surname, or import a game pack.",16,MUTED); pad(empty,4,24,4,24); cards.addView(empty); }
     }
+    private void changeLibraryPage(int direction){libraryPage+=direction;renderCards();if(content.getParent() instanceof ScrollView)((ScrollView)content.getParent()).scrollTo(0,0);}
 
     private void openGame(GameRepository.Game selected,boolean restore) {
         stopAutoplay(); cancelAnalysis(); saveState(); game=selected; library=false;
@@ -154,9 +181,11 @@ public final class MainActivity extends Activity {
         eventLabel=text(replayEvent(),13,MUTED);pad(eventLabel,2,0,2,12);content.addView(eventLabel);
         board=new BoardView(this);StudySettings appearance=StudySettings.load(this);board.setAppearance(appearance.boardStyle,appearance.glyphStyle,appearance.discStyle);
         board.setCoordinates(appearance.coordinateStyle);
+        board.setCustomColors(appearance.boardColor,appearance.redBackground,appearance.blackBackground);
         board.setFlipped(flipped); board.setMoveListener(this::makeMove); content.addView(board,new LinearLayout.LayoutParams(-1,-2));
-        LinearLayout labels=row(); positionLabel=text("",13,LIGHT); turnLabel=text("",13,ACCENT); turnLabel.setGravity(Gravity.END);
-        labels.addView(positionLabel,new LinearLayout.LayoutParams(0,-2,1)); labels.addView(turnLabel,new LinearLayout.LayoutParams(0,-2,1)); pad(labels,3,14,3,2); content.addView(labels);
+        LinearLayout labels=row();positionLabel=text("",13,LIGHT);positionLabel.setSingleLine(true);positionLabel.setEllipsize(TextUtils.TruncateAt.END);
+        int labelHeight=Math.max(dp(26),Math.round(positionLabel.getPaint().getFontSpacing())+dp(4));
+        labels.addView(positionLabel,new LinearLayout.LayoutParams(-1,labelHeight));pad(labels,3,14,3,2);content.addView(labels);
         seek=new SeekBar(this); seek.setProgressTintList(android.content.res.ColorStateList.valueOf(ACCENT)); seek.setThumbTintList(android.content.res.ColorStateList.valueOf(ACCENT)); seek.setContentDescription("Game position, in half-moves");
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){public void onProgressChanged(SeekBar b,int p,boolean user){if(user)navigate(p);} public void onStartTrackingTouch(SeekBar b){stopAutoplay();} public void onStopTrackingTouch(SeekBar b){} }); content.addView(seek,new LinearLayout.LayoutParams(-1,dp(42)));
         LinearLayout controls=row(); controls.addView(weight(button("|‹",()->navigate(0),false),1)); controls.addView(weight(button("‹",()->navigate(ply-1),false),1));
@@ -172,18 +201,15 @@ public final class MainActivity extends Activity {
         analysisBox.addView(analysisText); content.addView(analysisBox);
         TextView movesTitle=text("MOVE RECORD",12,MUTED); pad(movesTitle,3,20,3,8); content.addView(movesTitle);
         movesView=column(); content.addView(movesView);
-        Button source=button(game.imported?"Game source / information":"View official game source",()->openSource(game.sourceUrl),false); content.addView(source);
+        Button source=button(game.imported?"Game source / information":"View game source",()->openSource(game.sourceUrl),false); content.addView(source);
         TextView note=text("ICCS coordinates · a0 is Red’s lower-left corner. Source results are recorded results; analysis variations do not change them.",12,MUTED); pad(note,3,8,3,18); content.addView(note);
     }
 
     private void updateReplay() {
         if(library||board==null)return;
         Position p=positions.get(ply); board.setPosition(p,ply==0?"":workingMoves.get(ply-1),exploring);
-        board.setContentDescription(board.getContentDescription()+" Red: "+game.red+". Black: "+game.black+".");
+        board.setContentDescription(board.getContentDescription()+" Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+".");
         positionLabel.setText(ply==0?"Starting position":"After "+((ply+1)/2)+" · "+(positions.get(ply-1).redToMove?"Red":"Black"));
-        boolean check=p.isInCheck(p.redToMove); boolean terminal=p.legalMoves().isEmpty();
-        turnLabel.setText(terminal?getString(R.string.turn_no_moves,p.redToMove?"Red":"Black",p.redToMove?game.red:game.black)
-            :getString(R.string.turn_player,p.redToMove?"Red":"Black",check?" · check":"",p.redToMove?game.red:game.black));
         seek.setMax(workingMoves.size()); seek.setProgress(ply);
         exploreButton.setText(exploring?"Return to recorded game":"Play from here");
         variationLabel.setText(exploring?"Exploring a variation · tap a piece, then a highlighted square.\nUse Legal moves for accessible move entry.":"Recorded game · "+ply+" / "+workingMoves.size()+" half-moves");
@@ -196,7 +222,12 @@ public final class MainActivity extends Activity {
         movesView.removeAllViews(); boolean startsRed=game.initial().redToMove;
         if(exploring) movesView.addView(button("Legal moves…",this::legalMoves,false));
         int slots=workingMoves.size()+(startsRed?0:1);
-        for(int i=0;i<slots;i+=2) {
+        int totalRows=(slots+1)/2,currentRow=ply==0?0:(ply-1+(startsRed?0:1))/2;
+        int firstRow=Math.max(0,Math.min(currentRow-MOVE_RECORD_ROWS/2,Math.max(0,totalRows-MOVE_RECORD_ROWS)));
+        int lastRow=Math.min(totalRows,firstRow+MOVE_RECORD_ROWS);
+        if(totalRows>MOVE_RECORD_ROWS){TextView window=text(getString(R.string.move_record_window,firstRow+1,lastRow,totalRows),12,MUTED);pad(window,3,0,3,8);movesView.addView(window);}
+        for(int rowIndex=firstRow;rowIndex<lastRow;rowIndex++) {
+            int i=rowIndex*2;
             LinearLayout moveRow=row(); TextView number=text((i/2+1)+".",12,MUTED); number.setGravity(Gravity.CENTER_VERTICAL); moveRow.addView(number,new LinearLayout.LayoutParams(dp(30),dp(46)));
             for(int k=0;k<2;k++) {
                 final int index=i+k-(startsRed?0:1);
@@ -306,7 +337,7 @@ public final class MainActivity extends Activity {
     }
     private void applyAppearance() {
         StudySettings s=StudySettings.load(this);
-        if(board!=null){board.setAppearance(s.boardStyle,s.glyphStyle,s.discStyle);board.setCoordinates(s.coordinateStyle);}
+        if(board!=null){board.setAppearance(s.boardStyle,s.glyphStyle,s.discStyle);board.setCoordinates(s.coordinateStyle);board.setCustomColors(s.boardColor,s.redBackground,s.blackBackground);}
         if(library)renderCards();else if(eventLabel!=null)eventLabel.setText(replayEvent());
     }
     private void settings() {
@@ -315,19 +346,25 @@ public final class MainActivity extends Activity {
         CheckBox hide=new CheckBox(this);hide.setText(R.string.hide_game_results);hide.setTextColor(LIGHT);hide.setChecked(saved.hideResults);
         hide.setContentDescription("Hide game results, including accessibility announcements");body.addView(hide);
         TextView spoilerNote=text("Only recorded game results are hidden. Engine evaluations stay visible; exported PGN preserves the original result.",12,MUTED);pad(spoilerNote,0,0,0,10);body.addView(spoilerNote);
-        Spinner boards=settingChoice(body,"Board style",new String[]{"Moss","Wood","Ink"},index(saved.boardStyle,"moss","wood","ink"));
+        Spinner boards=settingChoice(body,"Board style",new String[]{"Moss","Wood","Ink","Rosewood","Slate","Bamboo"},index(saved.boardStyle,"moss","wood","ink","rosewood","slate","bamboo"));
         Spinner glyphs=settingChoice(body,"Chinese piece characters",new String[]{"Traditional Chinese","Simplified Chinese"},index(saved.glyphStyle,"traditional","simplified"));
-        Spinner discs=settingChoice(body,"Piece finish",new String[]{"Cream","Wood","Jade"},index(saved.discStyle,"cream","wood","jade"));
+        Spinner discs=settingChoice(body,"Piece finish",new String[]{"Cream","Wood","Jade","Porcelain","Rosewood","Obsidian"},index(saved.discStyle,"cream","wood","jade","porcelain","rosewood","obsidian"));
         Spinner coordinates=settingChoice(body,"Board coordinates",new String[]{"Off","ICCS · a–i / 0–9","Numeric · 0–8 / 0–9"},index(saved.coordinateStyle,"none","iccs","numeric"));
         TextView previewLabel=text("Live board preview",13,ACCENT);pad(previewLabel,0,12,0,5);body.addView(previewLabel);
         BoardView preview=new BoardView(this);preview.setPosition(library||positions.isEmpty()?Position.initial():positions.get(ply).copy(),"",false);
-        preview.setAppearance(saved.boardStyle,saved.glyphStyle,saved.discStyle);preview.setCoordinates(saved.coordinateStyle);body.addView(preview,new LinearLayout.LayoutParams(-1,-2));
+        preview.setAppearance(saved.boardStyle,saved.glyphStyle,saved.discStyle);preview.setCoordinates(saved.coordinateStyle);preview.setCustomColors(saved.boardColor,saved.redBackground,saved.blackBackground);body.addView(preview,new LinearLayout.LayoutParams(-1,-2));
+        Runnable refreshColors=()->{StudySettings s=StudySettings.load(this);preview.setCustomColors(s.boardColor,s.redBackground,s.blackBackground);if(!library)applyAppearance();};
+        LinearLayout colors=column();body.addView(colors,body.indexOfChild(previewLabel));
+        colors.addView(button("Board color",()->customColor("Board color","boardColor",preview.getBoardColor(),refreshColors),false));
+        colors.addView(button("Red piece background",()->customColor("Red piece background","redBackground",preview.getPieceBackground(true),refreshColors),false));
+        colors.addView(button("Black piece background",()->customColor("Black piece background","blackBackground",preview.getPieceBackground(false),refreshColors),false));
+        colors.addView(button("Reset custom colors",()->{StudySettings.resetCustomColors(this);refreshColors.run();},false));
         Runnable changed=()->{
             boolean wasHidden=StudySettings.load(this).hideResults;
-            StudySettings.save(this,new String[]{"moss","wood","ink"}[boards.getSelectedItemPosition()],
+            StudySettings.save(this,new String[]{"moss","wood","ink","rosewood","slate","bamboo"}[boards.getSelectedItemPosition()],
                 new String[]{"traditional","simplified"}[glyphs.getSelectedItemPosition()],
-                new String[]{"cream","wood","jade"}[discs.getSelectedItemPosition()],new String[]{"none","iccs","numeric"}[coordinates.getSelectedItemPosition()],hide.isChecked());
-            StudySettings s=StudySettings.load(this);preview.setAppearance(s.boardStyle,s.glyphStyle,s.discStyle);preview.setCoordinates(s.coordinateStyle);
+                new String[]{"cream","wood","jade","porcelain","rosewood","obsidian"}[discs.getSelectedItemPosition()],new String[]{"none","iccs","numeric"}[coordinates.getSelectedItemPosition()],hide.isChecked());
+            StudySettings s=StudySettings.load(this);preview.setAppearance(s.boardStyle,s.glyphStyle,s.discStyle);preview.setCoordinates(s.coordinateStyle);preview.setCustomColors(s.boardColor,s.redBackground,s.blackBackground);
             if(!library||wasHidden!=s.hideResults)applyAppearance();
         };
         AdapterView.OnItemSelectedListener listener=new AdapterView.OnItemSelectedListener(){public void onItemSelected(AdapterView<?> parent,View view,int position,long id){changed.run();}public void onNothingSelected(AdapterView<?> parent){}};
@@ -340,6 +377,10 @@ public final class MainActivity extends Activity {
                 });engineSettingsDialog.setOnDismissListener(closed->engineSettingsDialog=null);
             }).create();
         settingsDialog.setOnDismissListener(d->settingsDialog=null);settingsDialog.show();
+    }
+    private void customColor(String title,String surface,int initial,Runnable changed) {
+        colorDialog=ColorPickerDialog.show(this,title,initial,color->{StudySettings.setCustomColor(this,surface,color);changed.run();});
+        colorDialog.setOnDismissListener(dialog->colorDialog=null);
     }
     private Spinner settingChoice(LinearLayout body,String label,String[] choices,int selected) {
         TextView title=text(label,13,ACCENT);pad(title,0,8,0,0);body.addView(title);
@@ -431,13 +472,13 @@ public final class MainActivity extends Activity {
     }
 
     private void about() {
-        dialog("Xiangqi Study").setMessage("An offline game library, replay board and analysis workspace. Your imported games and study positions stay on this device.\n\nThe starter games are downloaded from the World Xiangqi Federation’s official 2025 World Championship game records. Each game links back to its source. The downloader and attribution notes are included in the project.\n\n"+(PikafishEngine.available(this)?"Pikafish is bundled for this device and runs offline. See the project’s engine provenance and GPL-3.0 source notices.":"This device uses the lightweight built-in classical engine. It is useful for exploring moves but cannot promise expert accuracy.")+" The replay board does not adjudicate repetition / perpetual-chase tournament rules.\n\nImport ICCS PGN or JSON. Use Export to back up a game or your current variation; uninstalling the app removes private imports and saved positions.")
+        dialog("Xiangqi Study").setMessage("An offline game library, replay board and analysis workspace. Your imported games and study positions stay on this device.\n\nThe library includes the World Xiangqi Federation’s official 2025 World Championship records and selected historical master collections. Each game links back to its source. Collection labels identify the added packs; source and time-control evidence are documented in the project.\n\n"+(PikafishEngine.available(this)?"Pikafish is bundled for this device and runs offline. See the project’s engine provenance and GPL-3.0 source notices.":"This device uses the lightweight built-in classical engine. It is useful for exploring moves but cannot promise expert accuracy.")+" The replay board does not adjudicate repetition / perpetual-chase tournament rules.\n\nImport ICCS PGN or JSON. Use Export to back up a game or your current variation; uninstalling the app removes private imports and saved positions.")
             .setPositiveButton("Official WXF archive",(d,w)->openSource("https://www.wxf-xiangqi.org/index.php?Itemid=313&id=218&lang=en&option=com_content&view=article"))
             .setNegativeButton("Close",null).setNeutralButton("Engine notices",(d,w)->engineNotices()).show();
     }
-    private void engineNotices(){dialog("Pikafish notices").setMessage("Pikafish 2026-09-06\nA free UCI Xiangqi engine derived from Stockfish. Copyright the Pikafish and Stockfish contributors.\n\nEngine code: GNU General Public License version 3. The exact upstream release source and license are available from the links below and documented with this project.\n\nThe bundled pikafish.nnue weights have a separate upstream NNUE license. Commercial use requires the upstream rights holder’s permission. This build is intended for personal study.\n\nThe built-in fallback engine and replay board are part of Xiangqi Study; the engine name shown on the board identifies the engine actually used.")
-        .setPositiveButton("Upstream source",(d,w)->openSource("https://github.com/official-pikafish/Pikafish/tree/Pikafish-2026-09-06"))
-        .setNeutralButton("GPL license",(d,w)->openSource("https://github.com/official-pikafish/Pikafish/blob/Pikafish-2026-09-06/Copying.txt"))
+    private void engineNotices(){dialog("Pikafish notices").setMessage("Pikafish "+PikafishRelease.VERSION+"\nA free UCI Xiangqi engine derived from Stockfish. Copyright the Pikafish and Stockfish contributors.\n\nEngine code: GNU General Public License version 3. The exact upstream release source and license are available from the links below and documented with this project.\n\nThe bundled pikafish.nnue weights have a separate upstream NNUE license. Commercial use requires the upstream rights holder’s permission. This build is intended for personal study.\n\nThe built-in fallback engine and replay board are part of Xiangqi Study; the engine name shown on the board identifies the engine actually used.")
+        .setPositiveButton("Upstream source",(d,w)->openSource(PikafishRelease.SOURCE_URL))
+        .setNeutralButton("GPL license",(d,w)->openSource(PikafishRelease.LICENSE_URL))
         .setNegativeButton("Close",null).show();}
     private void openSource(String url) {
         if(url==null||url.isEmpty()){toast("No source link is recorded for this imported game.");return;}
@@ -456,10 +497,10 @@ public final class MainActivity extends Activity {
         if(game!=null){edit.putString("lastGame",game.id);if(!exploring)edit.putInt("ply:"+game.id,ply);edit.putBoolean("exploring:"+game.id,exploring);if(exploring){edit.putString("variationMoves:"+game.id,new JSONArray(workingMoves).toString()).putInt("variationPly:"+game.id,ply);}}
         edit.apply();
     }
-    @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();out.putString("pendingExport",pendingExport);out.putString("search",search);}
+    @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();out.putString("pendingExport",pendingExport);out.putString("search",search);out.putInt("libraryPage",libraryPage);}
     @Override protected void onRestoreInstanceState(Bundle in){super.onRestoreInstanceState(in);pendingExport=in.getString("pendingExport");}
     @Override protected void onStop(){super.onStop();stopAutoplay();cancelAnalysis();saveState();}
-    @Override protected void onDestroy(){destroyed=true;handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
+    @Override protected void onDestroy(){destroyed=true;handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(colorDialog!=null)colorDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
     @Override public void onBackPressed(){if(!library)showLibrary();else super.onBackPressed();}
 
     private AlertDialog.Builder dialog(String title){return new AlertDialog.Builder(this,android.R.style.Theme_Material_Dialog_Alert).setTitle(title);}
@@ -475,7 +516,7 @@ public final class MainActivity extends Activity {
     private LinearLayout playerRow(String side,String name,int size){
         LinearLayout line=row();pad(line,0,2,0,2);TextView label=text(side,11,"RED".equals(side)?0xfff1a294:0xffbfd5cf);
         label.setTypeface(null,Typeface.BOLD);line.addView(label,new LinearLayout.LayoutParams(dp(49),-2));
-        TextView player=text(name,size,LIGHT);player.setTypeface(null,Typeface.BOLD);line.addView(player,new LinearLayout.LayoutParams(0,-2,1));
+        TextView player=text(PlayerNames.display(name),size,LIGHT);player.setTypeface(null,Typeface.BOLD);line.addView(player,new LinearLayout.LayoutParams(0,-2,1));
         return line;
     }
     private GradientDrawable shape(int fill,int stroke,int radius){GradientDrawable d=new GradientDrawable();d.setColor(fill);d.setCornerRadius(dp(radius));if(stroke!=0)d.setStroke(dp(1),stroke);return d;}

@@ -1,0 +1,46 @@
+{
+  "name": "World Championship masters 1991–2003",
+  "scope": "Curated historical championship main lines featuring former national/world champions and the requested Vietnam/Singapore players. Only records explicitly marked 慢棋 are admitted.",
+  "masters": ["胡荣华", "Hu Ronghua", "杨官璘", "Yang Guanlin", "吕钦", "Lv Qin", "许银川", "Xu Yinchuan", "赵国荣", "Zhao Guorong", "李来群", "Li Laiqun", "吴贵临", "Wu Guilin", "Wu Kui-lin", "吴宗翰", "Wu Zonghan", "阮成保", "Nguyen Thanh Bao", "赖理兄", "Lai Ly Huynh"],
+  "sources": [
+    {"article": 444, "year": 1991},
+    {"article": 406, "year": 1993},
+    {"article": 407, "year": 1995},
+    {"article": 259, "year": 1997},
+    {"article": 409, "year": 1997},
+    {"article": 410, "year": 1997},
+    {"article": 412, "year": 1997},
+    {"article": 415, "year": 1997},
+    {"article": 416, "year": 1997},
+    {"article": 417, "year": 1997},
+    {"article": 422, "year": 1997},
+    {"article": 423, "year": 1997},
+    {"article": 425, "year": 1997},
+    {"article": 430, "year": 1997},
+    {"article": 432, "year": 1997},
+    {"article": 433, "year": 1997},
+    {"article": 434, "year": 1997},
+    {"article": 436, "year": 1997},
+    {"article": 442, "year": 1999},
+    {"article": 441, "year": 1999},
+    {"article": 1043, "year": 2003},
+    {"article": 1045, "year": 2003},
+    {"article": 1047, "year": 2003},
+    {"article": 1049, "year": 2003},
+    {"article": 1051, "year": 2003},
+    {"article": 1053, "year": 2003},
+    {"article": 1055, "year": 2003},
+    {"article": 1057, "year": 2003},
+    {"article": 1059, "year": 2003}
+  ],
+  "dateOverrides": {
+    "historical-wxf-444-g7": {"date": "1991", "note": "Source gives August 1 while the championship archive records the event in September; retain only verified event year."},
+    "historical-wxf-407-g3": {"date": "1995-09", "note": "Duplicate archive scores disagree between September 5 and September 7; retain month precision."},
+    "historical-wxf-407-g7": {"date": "1995-09", "note": "Duplicate archive scores disagree between September 5 and September 7; retain month precision."},
+    "historical-wxf-1049-g1": {"date": "2003-12", "note": "Source date December 3 predates the December 6 championship opening; retain verified month only."}
+  },
+  "excludedRecords": {
+    "historical-wxf-259-g6": "Ambiguous event attribution: two distinct main lines for the same colors/pairing in the 1997 archive, with different outcomes and no recorded round or day. Held pending independent confirmation.",
+    "historical-wxf-409-g6": "Ambiguous event attribution: two distinct main lines for the same colors/pairing in the 1997 archive, with different outcomes and no recorded round or day. Held pending independent confirmation."
+  }
+}

@@ -1,0 +1,3 @@
+<resources>
+    <string name="engine_settings_summary">Pikafish %1$s · full strength\nMatching official NNUE network · offline\n\nLive arrows update as search deepens. Untimed analysis continues until its depth limit or Stop. Changes restart active analysis. The audit fallback has a maximum depth of 64; threads and hash apply to Pikafish.</string>
+</resources>

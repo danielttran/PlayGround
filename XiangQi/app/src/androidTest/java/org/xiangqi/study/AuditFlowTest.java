@@ -83,7 +83,7 @@ public final class AuditFlowTest extends InstrumentationTestCase {
     public void testVariationSurvivesSwitchingGamesAndRecreation() throws Exception {
         search("Yin Sheng");open("Yin Sheng");clickDescription("First position");
         click("Play from here");click("Legal moves…");clickDialog("b2–e2");
-        await("Black to move",3000);await("Exploring a variation",3000);
+        assertBoardTurn("Black");await("Exploring a variation",3000);
         assertEquals(1,progress());
         recreate();await("Exploring a variation",8000);assertEquals(1,progress());
         click("‹  Library");search("Nguyen Thanh Bao");open("Nguyen Thanh Bao");
@@ -99,7 +99,7 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         search("Yin Sheng");open("Yin Sheng");clickDescription("First position");
         click("Analyze");awaitContains("Depth ",12000);
         assertNotNull("Completed analysis must expose a legal suggestion",findPrefix(root(),"Explore suggested move"));
-        click("Explore suggested move");await("Black to move",3000);await("Exploring a variation",3000);
+        click("Explore suggested move");assertBoardTurn("Black");await("Exploring a variation",3000);
         click("Return to recorded game");click("Analyze");
         recreate();await("Recorded game",8000);
         assertNull("Recreation must cancel the obsolete search",findPrefix(root(),"Stop analysis"));
@@ -186,6 +186,7 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         while(SystemClock.uptimeMillis()<until){main(()->found[0]=(contains?findContains(root(),text):findPrefix(root(),text))!=null);if(found[0])return;Thread.sleep(100);}fail("UI timed out waiting for "+text);
     }
     private void main(Runnable work){getInstrumentation().runOnMainSync(work);}
+    private void assertBoardTurn(String side){main(()->assertTrue(findType(root(),BoardView.class).getContentDescription().toString().contains(side+" to move.")));}
     private void reveal(Class<?> type)throws Exception{main(()->{View view=findType(root(),type);assertNotNull(view);view.requestRectangleOnScreen(new android.graphics.Rect(0,0,view.getWidth(),view.getHeight()),true);});getInstrumentation().waitForIdleSync();}
     private void swipe(boolean right)throws Exception{
         final int[] dimensions=new int[2];main(()->{dimensions[0]=root().getWidth();dimensions[1]=root().getHeight();});
