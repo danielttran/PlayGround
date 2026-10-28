@@ -28,7 +28,7 @@ public final class EngineSettings {
         SharedPreferences p = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
         int cores = Math.max(1, Runtime.getRuntime().availableProcessors());
         return new PikafishEngine.Options(p.getInt("depth",128), p.getLong("millis",0),
-            p.getInt("threads",cores), p.getInt("hashMb",defaultHash(context)));
+            p.getInt("threads",cores), p.getInt("hashMb",defaultHash(context)),p.getInt("lines",1));
     }
     /** Caller retains the dialog and dismisses it when the activity is destroyed. */
     public static AlertDialog show(Activity activity, Runnable changed) {
@@ -42,6 +42,8 @@ public final class EngineSettings {
         content.addView(note);
         Spinner depth=spinner(activity,content,"Maximum depth",strings(depths,""),index(depths,current.maxDepth));
         Spinner time=spinner(activity,content,"Time per position",new String[]{"Until stopped / depth limit","3 seconds","10 seconds","30 seconds","60 seconds"},index(times,current.millis));
+        Spinner lines=spinner(activity,content,"Analysis lines",new String[]{"1 line per side","2 lines per side","3 lines per side","4 lines per side","5 lines per side"},current.lines-1);
+        TextView arrows=new TextView(activity);arrows.setText(R.string.analysis_arrows_help);content.addView(arrows);
         List<Integer> coreValues=new ArrayList<>();int cores=Math.max(1,Runtime.getRuntime().availableProcessors());
         for(int i=1;i<=cores;i++)coreValues.add(i);
         String[] coreLabels=new String[coreValues.size()];for(int i=0;i<coreLabels.length;i++)coreLabels[i]=coreValues.get(i)+(i+1==cores?" (all available cores)":"");
@@ -52,7 +54,8 @@ public final class EngineSettings {
             .setNegativeButton("Cancel",null).setPositiveButton("Save",(dialog,which)->{
                 activity.getSharedPreferences(PREFS,Context.MODE_PRIVATE).edit()
                     .putInt("depth",depths[depth.getSelectedItemPosition()]).putLong("millis",times[time.getSelectedItemPosition()])
-                    .putInt("threads",coreValues.get(threads.getSelectedItemPosition())).putInt("hashMb",hashes[hash.getSelectedItemPosition()]).apply();
+                    .putInt("threads",coreValues.get(threads.getSelectedItemPosition())).putInt("hashMb",hashes[hash.getSelectedItemPosition()])
+                    .putInt("lines",lines.getSelectedItemPosition()+1).apply();
                 if(changed!=null)changed.run();
             }).show();
     }

@@ -1,21 +1,27 @@
 package org.xiangqi.study.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-/** Parses standard single-PV UCI info without trusting an engine's move text. */
+/** Parses exact ranked UCI root lines without trusting an engine's move text. */
 public final class UciInfo {
     private UciInfo() {}
 
     public static void update(Engine.Result result, Position root, String line) {
+        update(result, root, line, 1);
+    }
+
+    public static void update(Engine.Result result, Position root, String line, int maxLines) {
         if (line == null || !line.startsWith("info ") || line.startsWith("info string ")) return;
         String[] tokens = line.trim().split("\\s+");
         int depth = result.depth, score = result.score; long nodes = result.nodes;
-        boolean scored = false, bound = false; int pvAt = -1;
+        boolean scored = false, bound = false; int pvAt = -1, rank = 1;
         for (int i = 1; i < tokens.length; i++) {
             try {
-                if (tokens[i].equals("multipv") && i + 1 < tokens.length && !tokens[++i].equals("1")) return;
-                if (tokens[i].equals("depth") && i + 1 < tokens.length) depth = Math.max(0, Integer.parseInt(tokens[++i]));
+                if (tokens[i].equals("multipv") && i + 1 < tokens.length) rank = Integer.parseInt(tokens[++i]);
+                else if (tokens[i].equals("depth") && i + 1 < tokens.length) depth = Math.max(0, Integer.parseInt(tokens[++i]));
                 else if (tokens[i].equals("nodes") && i + 1 < tokens.length) nodes = Math.max(0, Long.parseLong(tokens[++i]));
                 else if (tokens[i].equals("score") && i + 2 < tokens.length) {
                     String type = tokens[++i]; int value = Integer.parseInt(tokens[++i]);
@@ -29,7 +35,7 @@ public final class UciInfo {
             } catch (NumberFormatException ignored) { return; }
         }
         // Bound-only scores do not describe a completed root iteration.
-        if (!scored || bound) return;
+        if (!scored || bound || rank < 1 || rank > Math.max(1, Math.min(maxLines, 5))) return;
         List<String> pv = new ArrayList<>();
         Position cursor = root.copy();
         if (pvAt >= 0) {
@@ -42,8 +48,33 @@ public final class UciInfo {
             // but illegal move text. The adapter validates the final bestmove.
             if (pv.isEmpty() && pvAt < tokens.length) return;
         }
-        result.depth = depth; result.nodes = nodes;
-        result.score = root.redToMove ? score : -score;
-        if (!pv.isEmpty()) { result.pv = pv; result.bestMove = pv.get(0); }
+        // Only the principal root adjudication may omit its move. An unnamed
+        // secondary score cannot define a distinct legal alternative.
+        if (rank > 1 && pv.isEmpty()) return;
+        String rootKey = root.toFen();
+        boolean sameRoot = rootKey.equals(result.uciRoot);
+        if (sameRoot && depth < result.uciIterationDepth) return;
+        List<Engine.Line> alternatives = new ArrayList<>();
+        if (sameRoot && depth == result.uciIterationDepth) {
+            for (Engine.Line existing : result.lines) {
+                if (existing.rank == rank) continue;
+                if (!pv.isEmpty() && pv.get(0).equals(existing.bestMove)) {
+                    if (existing.rank < rank) return;
+                    continue;
+                }
+                alternatives.add(existing);
+            }
+        }
+        int redScore = root.redToMove ? score : -score;
+        alternatives.add(new Engine.Line(rank, redScore, depth, pv));
+        alternatives.sort(Comparator.comparingInt(existing -> existing.rank));
+        result.lines = Collections.unmodifiableList(alternatives);
+        result.uciIterationDepth = depth; result.uciRoot = rootKey;
+        result.nodes = Math.max(result.nodes, nodes);
+        if (rank == 1) {
+            result.depth = depth; result.score = redScore;
+            result.pv = Collections.unmodifiableList(new ArrayList<>(pv));
+            result.bestMove = pv.isEmpty() ? null : pv.get(0);
+        }
     }
 }

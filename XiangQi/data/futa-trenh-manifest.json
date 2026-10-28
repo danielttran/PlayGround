@@ -1,0 +1,115 @@
+{
+  "sourceBulletinUrl": "https://vietnamchess.vn/document/2023/futa6-bulletin-full.pdf",
+  "sourceBulletinSha256": "032f4ea57351c29c48dcbe9a9b0c78178a16fa2e0e6fff47df24e6a6db564b7f",
+  "sourceRegulationsUrl": "https://vietnamchess.vn/index.php/regulations-futa6",
+  "sourceRegulationsSha256": "decffad57e0afd2cbf9744fed98160f4b842ec37f90b088b82ef942f07a533c3",
+  "screeningPolicySha256": "6c3f714ff9989cdcdbd3153b9470d858e593bb0c18035b55dd7827d4d4e976a3",
+  "excluded": {
+    "id": 1476,
+    "opponent": "蒋川",
+    "reason": "Exact excludedNames policy match"
+  },
+  "records": [
+    {
+      "id": "vietnam-futa-2023-1463",
+      "viewerUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?id=1463&view=game",
+      "viewerSha256": "19f9644fd225390b06736c36e9767857d261cae9cccbbc3568f43e8d81e99087",
+      "bulletinUrl": "https://vietnamchess.vn/document/2023/futa6-bulletin-full.pdf#page=25",
+      "bulletinPage": 25,
+      "bulletinGameNumber": 2,
+      "sourceRound": "1.2",
+      "sourceDatePlayed": "2023-07-16",
+      "sourceResult": "1-0",
+      "sourceNotation": "Vietnamese",
+      "halfMoves": 53,
+      "finalFen": "1n3ab2/1N1kaR3/9/p3C3p/3C2p2/2P4r1/P3P3P/4K1c2/9/2cA5 b - - 1 27",
+      "bulletinDatabaseAgreement": "Exact names, recorded date, round/board, result, and every converted main-line move agree. PDF pages visually inspected.",
+      "sourcePgnMetadata": {
+        "Event": "bang A",
+        "Site": "Da Nang City",
+        "Date": "2023.07.16",
+        "Round": "1.2",
+        "White": "Nguyễn Hoàng Lâm",
+        "Black": "Trềnh A Sáng",
+        "Result": "1-0",
+        "Variant": "Xiangqi"
+      }
+    },
+    {
+      "id": "vietnam-futa-2023-1466",
+      "viewerUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?id=1466&view=game",
+      "viewerSha256": "3421952b87b5a1f3e3db0f3ee3904f952f03cf8f222b5771072f726acc7ceb83",
+      "bulletinUrl": "https://vietnamchess.vn/document/2023/futa6-bulletin-full.pdf#page=25",
+      "bulletinPage": 25,
+      "bulletinGameNumber": 5,
+      "sourceRound": "2.2",
+      "sourceDatePlayed": "2023-07-16",
+      "sourceResult": "0-1",
+      "sourceNotation": "Vietnamese",
+      "halfMoves": 44,
+      "finalFen": "2b1ka3/4a4/2P1b4/5R2p/6c2/6p2/P3P3P/1rN1B4/1c2Nr3/1R1AKAB2 w - - 0 23",
+      "bulletinDatabaseAgreement": "Exact names, recorded date, round/board, result, and every converted main-line move agree. PDF pages visually inspected.",
+      "sourcePgnMetadata": {
+        "Event": "bang A",
+        "Site": "Da Nang City",
+        "Date": "2023.07.16",
+        "Round": "2.2",
+        "White": "Trềnh A Sáng",
+        "Black": "Hà Văn Tiến",
+        "Result": "0-1",
+        "Variant": "Xiangqi"
+      }
+    },
+    {
+      "id": "vietnam-futa-2023-1470",
+      "viewerUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?id=1470&view=game",
+      "viewerSha256": "3935f25f92e4adc506f26af0f9e1750d5fdaa3b0e2d7e100ce8e850116b840ff",
+      "bulletinUrl": "https://vietnamchess.vn/document/2023/futa6-bulletin-full.pdf#page=26",
+      "bulletinPage": 26,
+      "bulletinGameNumber": 9,
+      "sourceRound": "3.3",
+      "sourceDatePlayed": "2023-07-17",
+      "sourceResult": "1-0",
+      "sourceNotation": "Vietnamese",
+      "halfMoves": 56,
+      "finalFen": "2b1kar2/4a4/n3b4/p1P5p/4c4/P1C2R3/4P1c1P/2C1B1N2/4A4/2BA1K3 w - - 1 29",
+      "bulletinDatabaseAgreement": "Exact names, recorded date, round/board, result, and every converted main-line move agree. PDF pages visually inspected.",
+      "sourcePgnMetadata": {
+        "Event": "bang A",
+        "Site": "Da Nang City",
+        "Date": "2023.07.17",
+        "Round": "3.3",
+        "White": "Tôn Thất Nhật Tân",
+        "Black": "Trềnh A Sáng",
+        "Result": "1-0",
+        "Variant": "Xiangqi"
+      }
+    },
+    {
+      "id": "vietnam-futa-2023-1471",
+      "viewerUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?id=1471&view=game",
+      "viewerSha256": "b11ef16913334b3adb377e1bc01042719b3b9f93096eadd9d0f0dbe3c6b9f85e",
+      "bulletinUrl": "https://vietnamchess.vn/document/2023/futa6-bulletin-full.pdf#page=26",
+      "bulletinPage": 26,
+      "bulletinGameNumber": 10,
+      "sourceRound": "4.1",
+      "sourceDatePlayed": "2023-07-17",
+      "sourceResult": "1-0",
+      "sourceNotation": "WXF",
+      "halfMoves": 71,
+      "finalFen": "4ka1n1/4a4/4b3b/7PC/2R2N3/pr7/c3C4/9/4A4/4KAB1c b - - 5 36",
+      "bulletinDatabaseAgreement": "Exact names, recorded date, round/board, result, and every converted main-line move agree. PDF pages visually inspected.",
+      "sourcePgnMetadata": {
+        "Event": "?",
+        "Site": "?",
+        "Date": "????.??.??",
+        "Round": "?",
+        "White": "?",
+        "Black": "?",
+        "Result": "*"
+      }
+    }
+  ],
+  "validation": "Both independent official bulletin and database notation main lines uniquely match production Position.legalMoves() and agree move for move; Position.play() validates every complete sequence.",
+  "candidateSha256": "197c893bce4dc43ce02c7fddbd87dad6613b07276ed5be02c7e0f910efeba252"
+}

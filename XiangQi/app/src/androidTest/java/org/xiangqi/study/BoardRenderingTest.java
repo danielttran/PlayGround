@@ -50,7 +50,7 @@ public final class BoardRenderingTest extends InstrumentationTestCase {
         int[] colors={0xff000000,0xffffffff,0xff808080,0xffff0000,0xff00ff00,0xff0000ff};
         for(int fill:colors){
             final double[] contrast={21};final int[] glyphs={0};final Bitmap[] image={null};
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 BoardView board=new BoardView(getInstrumentation().getTargetContext());board.setAppearance("slate","simplified","obsidian");
                 board.setCustomColors(0xff454545,fill,fill);board.setPosition(Position.initial(),"",false);
                 board.measure(View.MeasureSpec.makeMeasureSpec(dp(320),View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));
@@ -101,7 +101,7 @@ public final class BoardRenderingTest extends InstrumentationTestCase {
     }
 
     private Bitmap render(int widthDp,Position position,boolean flipped,String coordinates,Consumer<BoardView> setup) {
-        final Bitmap[] image={null};getInstrumentation().runOnMainSync(()->{
+        final Bitmap[] image={null};UiTestActions.runOnMain(getInstrumentation(),()->{
             BoardView board=new BoardView(getInstrumentation().getTargetContext());setup.accept(board);
             board.setPosition(position,"",false);board.setFlipped(flipped);board.setCoordinates(coordinates);
             board.measure(View.MeasureSpec.makeMeasureSpec(dp(widthDp),View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));

@@ -4,17 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.test.InstrumentationTestCase;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.SeekBar;
 import android.view.accessibility.AccessibilityNodeInfo;
 import org.xiangqi.study.core.Pgn;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** Exercises real assets and storage plus essential replay interactions on an Android device. */
 public final class StudySmokeTest extends InstrumentationTestCase {
@@ -62,51 +64,62 @@ public final class StudySmokeTest extends InstrumentationTestCase {
         assertEquals("*",Pgn.parse(GameRepository.export(imported,imported.moves,true)).get(0).result);
     }
 
-    public void testReplayNavigationAndAnalysisCancellation() throws Exception {
+    public void testReplayNavigationAndPersistentAnalysis() throws Exception {
+        Context context=getInstrumentation().getTargetContext();
+        SharedPreferences study=context.getSharedPreferences("study",0),engine=context.getSharedPreferences("engine-settings",0);
+        Map<String,?> oldStudy=study.getAll(),oldEngine=engine.getAll();study.edit().clear().commit();
+        engine.edit().putInt("depth",3).putLong("millis",1500).putInt("threads",1).putInt("hashMb",32).putInt("lines",1).commit();
         Intent intent=new Intent(getInstrumentation().getTargetContext(),MainActivity.class); intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Activity activity=getInstrumentation().startActivitySync(intent);
         try {
             long readyStarted=android.os.SystemClock.uptimeMillis(),readyUntil=readyStarted+8000;final boolean[] ready={false};
-            while(!ready[0]&&android.os.SystemClock.uptimeMillis()<readyUntil){getInstrumentation().runOnMainSync(()->ready[0]=findText(activity.getWindow().getDecorView(),"Xiangqi Study")!=null||findText(activity.getWindow().getDecorView(),"‹  Library")!=null);if(!ready[0])Thread.sleep(100);}
+            while(!ready[0]&&android.os.SystemClock.uptimeMillis()<readyUntil){UiTestActions.runOnMain(getInstrumentation(),()->ready[0]=findText(activity.getWindow().getDecorView(),"Xiangqi Study")!=null||findText(activity.getWindow().getDecorView(),"‹  Library")!=null);if(!ready[0])Thread.sleep(100);}
             long startupMillis=android.os.SystemClock.uptimeMillis()-readyStarted;
             if(!ready[0]){
                 final String[] diagnostic={""};
-                getInstrumentation().runOnMainSync(()->{StringBuilder visible=new StringBuilder();collectText(activity.getWindow().getDecorView(),visible);diagnostic[0]="Finishing="+activity.isFinishing()+", destroyed="+activity.isDestroyed()+"; text: "+visible;});
+                UiTestActions.runOnMain(getInstrumentation(),()->{StringBuilder visible=new StringBuilder();collectText(activity.getWindow().getDecorView(),visible);diagnostic[0]="Finishing="+activity.isFinishing()+", destroyed="+activity.isDestroyed()+"; text: "+visible;});
                 fail("Activity must load the library or saved replay; elapsed "+startupMillis+" ms. "+diagnostic[0]);
             }
             android.util.Log.i("XiangqiSmoke","Replay activity ready after "+startupMillis+" ms");
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 View library=findText(activity.getWindow().getDecorView(),"‹  Library");
                 if(library!=null)library.performClick();
             });
             waitFor(activity,"Yin Sheng",8000);
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 View player=findText(activity.getWindow().getDecorView(),"Yin Sheng");assertNotNull(player);
                 ((View)player.getParent().getParent()).performClick();
             });
             waitFor(activity,"MOVE RECORD",8000);
-            getInstrumentation().runOnMainSync(()->{
-                SeekBar slider=findSlider(activity.getWindow().getDecorView());android.os.Bundle args=new android.os.Bundle();args.putFloat(AccessibilityNodeInfo.ACTION_ARGUMENT_PROGRESS_VALUE,0);
-                slider.performAccessibilityAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS.getId(),args);
-            });
+            UiTestActions.goToMove(getInstrumentation(),activity,0);
             getInstrumentation().waitForIdleSync();
-            getInstrumentation().runOnMainSync(()->findDescription(activity.getWindow().getDecorView(),"Next move").performClick());
+            UiTestActions.runOnMain(getInstrumentation(),()->findDescription(activity.getWindow().getDecorView(),"Next move").performClick());
             getInstrumentation().waitForIdleSync();
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 assertTrue(findBoard(activity.getWindow().getDecorView()).getContentDescription().toString().contains("Black to move."));
             });
-            getInstrumentation().runOnMainSync(()->findDescription(activity.getWindow().getDecorView(),"Game menu").performClick());
+            UiTestActions.openGameMenu(getInstrumentation(),activity);
             clickPopup("Start analysis");
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 findDescription(activity.getWindow().getDecorView(),"Next move").performClick();
             });
             getInstrumentation().waitForIdleSync();
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 assertNotNull(findDescription(activity.getWindow().getDecorView(),"Game menu"));
-                try{java.lang.reflect.Field field=MainActivity.class.getDeclaredField("analysisFuture");field.setAccessible(true);assertNull(field.get(activity));}catch(Exception e){throw new RuntimeException(e);}
+                try{java.lang.reflect.Field field=MainActivity.class.getDeclaredField("analysisEnabled");field.setAccessible(true);assertTrue("Analysis follows the selected position",field.getBoolean(activity));}catch(Exception e){throw new RuntimeException(e);}
                 assertTrue(findBoard(activity.getWindow().getDecorView()).getContentDescription().toString().contains("Red to move."));
             });
-        } finally {getInstrumentation().runOnMainSync(activity::finish);}
+            UiTestActions.openGameMenu(getInstrumentation(),activity);
+            clickPopup("Stop analysis");
+            UiTestActions.runOnMain(getInstrumentation(),()->{
+                try{java.lang.reflect.Field field=MainActivity.class.getDeclaredField("analysisFuture");field.setAccessible(true);assertNull("Explicit stop cancels the current search",field.get(activity));}catch(Exception e){throw new RuntimeException(e);}
+            });
+        } finally {
+            UiTestActions.runOnMain(getInstrumentation(),activity::finish);getInstrumentation().waitForIdleSync();
+            long deadline=android.os.SystemClock.uptimeMillis()+5000;
+            while(!activity.isDestroyed()&&android.os.SystemClock.uptimeMillis()<deadline)Thread.sleep(25);
+            restore(study,oldStudy);restore(engine,oldEngine);
+        }
     }
 
     public void testJsonMoveNormalizationAndInvalidPositionRejection() throws Exception {
@@ -148,13 +161,13 @@ public final class StudySmokeTest extends InstrumentationTestCase {
     private void waitFor(Activity a,String text,long timeout)throws Exception{waitFor(a,text,timeout,false);}
     private void waitFor(Activity a,String text,long timeout,boolean optional)throws Exception {
         long until=System.currentTimeMillis()+timeout; final boolean[] found={false};
-        while(System.currentTimeMillis()<until){getInstrumentation().runOnMainSync(()->found[0]=findText(a.getWindow().getDecorView(),text)!=null);if(found[0])return;Thread.sleep(100);}
+        while(System.currentTimeMillis()<until){UiTestActions.runOnMain(getInstrumentation(),()->found[0]=findText(a.getWindow().getDecorView(),text)!=null);if(found[0])return;Thread.sleep(100);}
         if(!optional)fail("UI did not display: "+text);
     }
     private static View findText(View view,String text){if(view instanceof TextView&&((TextView)view).getText().toString().startsWith(text))return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findText(group.getChildAt(i),text);if(found!=null)return found;}}return null;}
     private static View findDescription(View view,String text){if(text.contentEquals(view.getContentDescription()==null?"":view.getContentDescription()))return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findDescription(group.getChildAt(i),text);if(found!=null)return found;}}return null;}
     private static View findBoard(View view){if(view instanceof BoardView)return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findBoard(group.getChildAt(i));if(found!=null)return found;}}return null;}
-    private static SeekBar findSlider(View view){if(view instanceof SeekBar)return (SeekBar)view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){SeekBar found=findSlider(group.getChildAt(i));if(found!=null)return found;}}return null;}
+    private static void restore(SharedPreferences preferences,Map<String,?> values){SharedPreferences.Editor edit=preferences.edit().clear();for(Map.Entry<String,?> entry:values.entrySet()){Object value=entry.getValue();String key=entry.getKey();if(value instanceof String)edit.putString(key,(String)value);else if(value instanceof Boolean)edit.putBoolean(key,(Boolean)value);else if(value instanceof Integer)edit.putInt(key,(Integer)value);else if(value instanceof Long)edit.putLong(key,(Long)value);else if(value instanceof Float)edit.putFloat(key,(Float)value);else if(value instanceof Set){@SuppressWarnings("unchecked") Set<String> set=(Set<String>)value;edit.putStringSet(key,set);}}edit.commit();}
     private void clickPopup(String text)throws Exception{assertTrue("Missing game menu item "+text,UiTestActions.clickPopup(getInstrumentation(),text));}
     private static AccessibilityNodeInfo popupNode(AccessibilityNodeInfo node,String text){if(node==null)return null;if(text.equalsIgnoreCase(String.valueOf(node.getText())))return node;for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo found=popupNode(node.getChild(i),text);if(found!=null)return found;}return null;}
     private static void collectText(View view,StringBuilder output){

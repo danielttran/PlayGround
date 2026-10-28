@@ -26,7 +26,7 @@ public final class ExpandedPresetsTest extends InstrumentationTestCase {
         for(int i=0;i<Math.max(boards.length,discs.length);i++){
             String boardStyle=boards[i%boards.length],discStyle=discs[i%discs.length];boolean flipped=i%2==1;
             final int[] glyphs={0};final double[] lowest={21};final Bitmap[] image={null};
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 BoardView board=new BoardView(getInstrumentation().getTargetContext());board.setAppearance(boardStyle,"traditional",discStyle);
                 board.setPosition(Position.initial(),"",false);board.setFlipped(flipped);board.setCoordinates("numeric");
                 int width=Math.round(320*getInstrumentation().getTargetContext().getResources().getDisplayMetrics().density);
@@ -56,7 +56,7 @@ public final class ExpandedPresetsTest extends InstrumentationTestCase {
     }
     public void testCustomColorsRemainExactAcrossNewMaterials()throws Exception{
         for(String id:AppearancePresets.boardIds()){
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 BoardView board=new BoardView(getInstrumentation().getTargetContext());board.setAppearance(id,"simplified","xiangqi-com");
                 board.setCustomColors(0xff123456,0xffeee0ce,0xff081522);
                 assertEquals(0xff123456,board.getBoardColor());assertEquals(0xffeee0ce,board.getPieceBackground(true));assertEquals(0xff081522,board.getPieceBackground(false));

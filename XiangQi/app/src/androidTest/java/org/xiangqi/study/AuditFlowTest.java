@@ -54,7 +54,7 @@ public final class AuditFlowTest extends InstrumentationTestCase {
 
     public void testSearchNavigationAndAutoplay() throws Exception {
         for(String player:new String[]{"Lai Ly Huynh","Nguyen Thanh Bao","Andy Wo","吴宗翰"}) {
-            search(player); await("9 of ",8000);
+            search(player);main(()->{try{Field field=MainActivity.class.getDeclaredField("libraryMatches");field.setAccessible(true);assertFalse("Requested player must be searchable: "+player,((java.util.List<?>)field.get(activity)).isEmpty());}catch(Exception error){throw new RuntimeException(error);}});
         }
         search("no such player audit 982374"); await("No matching games",8000);
         search("Yin Sheng");open("Yin Sheng");
@@ -67,22 +67,16 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         assertTrue("Autoplay must advance",progress()>0);
         clickDescription("Pause replay"); int paused=progress(); Thread.sleep(1300);
         assertEquals("Pause must remove scheduled advancement",paused,progress());
-        reveal(SeekBar.class);
-        AccessibilityNodeInfo slider=null;long accessibilityBy=SystemClock.uptimeMillis()+5000;
-        while(slider==null&&SystemClock.uptimeMillis()<accessibilityBy){
-            slider=nodeDescription(getInstrumentation().getUiAutomation().getRootInActiveWindow(),"Game position, in half-moves");
-            if(slider==null)Thread.sleep(100);
-        }
-        assertNotNull(slider);android.os.Bundle arguments=new android.os.Bundle();
-        arguments.putFloat(AccessibilityNodeInfo.ACTION_ARGUMENT_PROGRESS_VALUE,54);
-        assertTrue("Accessible seek must navigate",slider.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS.getId(),arguments));
+        main(()->assertNull("Replay no longer contains a move progress slider",findType(root(),SeekBar.class)));
+        UiTestActions.goToMove(getInstrumentation(),activity,54);
         await("Recorded game · 54 / 108",3000);
         clickDescription("First position");await("Recorded game · 0 / 108",3000);
     }
 
     public void testVariationSurvivesSwitchingGamesAndRecreation() throws Exception {
         search("Yin Sheng");open("Yin Sheng");clickDescription("First position");
-        click("Play from here");click("Legal moves…");clickDialog("b2–e2");
+        clickDescription("Game menu");clickDialog("Play against engine");clickDialog("Play as Red");click("Stop playing");
+        click("Legal moves…");clickDialog("b2–e2");
         assertBoardTurn("Black");await("Exploring a variation",3000);
         assertEquals(1,progress());
         recreate();await("Exploring a variation",8000);assertEquals(1,progress());
@@ -102,25 +96,23 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         click("Explore suggested move");assertBoardTurn("Black");await("Exploring a variation",3000);
         click("Return to recorded game");click("Analyze");
         recreate();await("Recorded game",8000);
-        main(()->{try{Field field=MainActivity.class.getDeclaredField("analysisFuture");field.setAccessible(true);assertNull("Recreation must cancel the obsolete search",field.get(activity));}catch(Exception e){throw new RuntimeException(e);}});
+        main(()->{try{Field field=MainActivity.class.getDeclaredField("analysisEnabled");field.setAccessible(true);assertTrue("Recreation retains the analysis toggle",field.getBoolean(activity));}catch(Exception e){throw new RuntimeException(e);}});
+        awaitContains("Depth ",12000);
         click("Analyze");click("‹  Library");await("Xiangqi Study",8000);
         Thread.sleep(3500);
         assertNotNull("Old engine callback must not replace library UI",findPrefix(root(),"Xiangqi Study"));
     }
 
-    public void testSwipeReturnAndSliderGestureDoNotConflict() throws Exception {
+    public void testSwipeReturnAndNumericPositionJumpKeepCurrentGame() throws Exception {
         search("Yin Sheng");open("Yin Sheng");clickDescription("First position");
         clickDescription("Next move");clickDescription("Next move");assertEquals(2,progress());
         click("‹  Library");await("Return to current game",3000);
         swipe(false);await("MOVE RECORD",8000);assertEquals("Swipe must restore the current position",2,progress());
         swipe(true);await("Xiangqi Study",8000);
         click("Return to current game");await("MOVE RECORD",8000);assertEquals(2,progress());
-        reveal(SeekBar.class);
-        final int[] location=new int[2],size=new int[2];
-        main(()->{View slider=findType(root(),SeekBar.class);slider.getLocationOnScreen(location);size[0]=slider.getWidth();size[1]=slider.getHeight();});
-        gesture(location[0]+size[0]*.15f,location[1]+size[1]*.5f,location[0]+size[0]*.85f,location[1]+size[1]*.5f);
-        assertNotNull("Scrubbing the slider must keep the replay open",findPrefix(root(),"MOVE RECORD"));
-        assertTrue("The slider must still navigate",progress()>2);
+        UiTestActions.goToMove(getInstrumentation(),activity,54);
+        main(()->assertNotNull("Numeric navigation must keep the current replay open",findPrefix(root(),"MOVE RECORD")));
+        assertEquals("The numeric dialog selects the requested half-move",54,progress());
     }
 
     public void testQueuedImportSurvivesActivityRecreation() throws Exception {
@@ -171,18 +163,22 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         main(()->{EditText text=(EditText)findType(root(),EditText.class);assertNotNull(text);text.setText(player);});
         getInstrumentation().waitForIdleSync();
     }
-    private int progress() throws Exception {final int[] value={-1};main(()->value[0]=((SeekBar)findType(root(),SeekBar.class)).getProgress());return value[0];}
+    private int progress() throws Exception {final int[] value={-1};main(()->{try{Field field=MainActivity.class.getDeclaredField("ply");field.setAccessible(true);value[0]=field.getInt(activity);}catch(Exception error){throw new RuntimeException(error);}});return value[0];}
     private void click(String text) throws Exception {
-        if(text.equals("Analyze")){clickDescription("Game menu");clickDialog("Start analysis");return;}
+        if(text.equals("Analyze")){
+            final boolean[] enabled={false};main(()->{try{Field field=MainActivity.class.getDeclaredField("analysisEnabled");field.setAccessible(true);enabled[0]=field.getBoolean(activity);}catch(Exception error){throw new RuntimeException(error);}});
+            if(!enabled[0]){clickDescription("Game menu");clickDialog("Start analysis");}return;
+        }
         main(()->{View view=findPrefix(root(),text);assertNotNull("Missing control "+text,view);view.performClick();});getInstrumentation().waitForIdleSync();
     }
     private void clickDescription(String text)throws Exception{
+        if(text.equals("Game menu")){UiTestActions.openGameMenu(getInstrumentation(),activity);return;}
+        if(text.equals("First position")||text.equals("Last position")){
+            final int[] target={0};
+            if(text.equals("Last position"))main(()->{try{Field field=MainActivity.class.getDeclaredField("workingMoves");field.setAccessible(true);target[0]=((java.util.List<?>)field.get(activity)).size();}catch(Exception error){throw new RuntimeException(error);}});
+            UiTestActions.goToMove(getInstrumentation(),activity,target[0]);return;
+        }
         main(()->{
-            if(text.equals("First position")||text.equals("Last position")){
-                SeekBar slider=(SeekBar)findType(root(),SeekBar.class);android.os.Bundle args=new android.os.Bundle();
-                args.putFloat(AccessibilityNodeInfo.ACTION_ARGUMENT_PROGRESS_VALUE,text.equals("First position")?0:slider.getMax());
-                slider.performAccessibilityAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS.getId(),args);return;
-            }
             View view=findDescription(root(),text);assertNotNull("Missing control "+text,view);view.performClick();
         });getInstrumentation().waitForIdleSync();
     }
@@ -195,7 +191,7 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         long until=SystemClock.uptimeMillis()+timeout;final boolean[] found={false};
         while(SystemClock.uptimeMillis()<until){main(()->found[0]=(contains?findContains(root(),text):findPrefix(root(),text))!=null);if(found[0])return;Thread.sleep(100);}fail("UI timed out waiting for "+text);
     }
-    private void main(Runnable work){getInstrumentation().runOnMainSync(work);}
+    private void main(Runnable work){UiTestActions.runOnMain(getInstrumentation(),work);}
     private void assertBoardTurn(String side){main(()->assertTrue(findType(root(),BoardView.class).getContentDescription().toString().contains(side+" to move.")));}
     private void reveal(Class<?> type)throws Exception{main(()->{View view=findType(root(),type);assertNotNull(view);view.requestRectangleOnScreen(new android.graphics.Rect(0,0,view.getWidth(),view.getHeight()),true);});getInstrumentation().waitForIdleSync();}
     private void swipe(boolean right)throws Exception{

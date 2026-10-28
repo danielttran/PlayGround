@@ -2,6 +2,7 @@
   "schema": 1,
   "packs": [
     {"file":"games.json","label":"World Championship 2025","sourceManifest":"data/wxf-manifest.json"},
-    {"file":"historical-games.json","label":"World Championship masters 1991–2003","sourceManifest":"data/historical-manifest.json"}
+    {"file":"historical-games.json","label":"World Championship masters 1991–2003","sourceManifest":"data/historical-manifest.json"},
+    {"file":"vietnamese-games.json","label":"Vietnamese international classical 2022–2023","sourceManifest":"data/vietnamese-manifest.json"}
   ]
 }

@@ -52,6 +52,18 @@ public final class NativeAdapterAuditTest {
             check(position.legalMoves().contains(result.bestMove),"Actual native returned illegal move");check(result.depth>0&&!result.pv.isEmpty(),"Actual native analysis missing");
         }
         check(actual.assetOpens==1,"Verified NNUE must be reused without reopening asset");
+        for(Position multiRoot:new Position[]{Position.initial(),position}){
+            List<Engine.Result> realProgress=new ArrayList<>();
+            Engine.Result multi=PikafishEngine.analyze(actual,multiRoot,multiRoot.toFen(),Collections.emptyList(),new PikafishEngine.Options(4,0,1,32,3),realProgress::add);
+            check(multi.lines.size()==3&&multi.depth==4,"Real native MultiPV did not return three depth-four alternatives");
+            Set<String> alternatives=new HashSet<>();
+            for(Engine.Line line:multi.lines){
+                check(line.depth==multi.depth&&line.pv.size()>=2&&alternatives.add(line.bestMove),"Real native alternatives lack a distinct root/reply");
+                Position cursor=multiRoot;for(String move:line.pv)cursor=cursor.play(move);
+            }
+            check(multi.score==multi.lines.get(0).score&&multi.pv.equals(multi.lines.get(0).pv),"Real native principal line compatibility changed");
+            check(realProgress.stream().anyMatch(value->value.lines.size()==3),"Real native secondary lines were not streamed");
+        }
         check(hash(actual.installed()).equals(hash(network)),"Initial NNUE copy changed");
         TestContext fixture=new TestContext(actual.files,fakeDir,null);fixture.mode("valid");
         Engine.Result valid=PikafishEngine.analyze(fixture,Position.initial(),"",Collections.emptyList(),8,50);
@@ -67,6 +79,17 @@ public final class NativeAdapterAuditTest {
         List<String> commands=Files.readAllLines(fixture.installed().resolveSibling("commands.txt"));
         check(commands.contains("setoption name Threads value "+configured.threads)&&commands.contains("setoption name Hash value 128"),"Configured engine resources were ignored");
         check(commands.contains("go depth 40")&&commands.stream().noneMatch(s->s.startsWith("go ")&&s.contains("movetime")),"Untimed depth search was given an arbitrary time limit");
+        check(configured.lines==1,"Existing Options constructor must keep one analysis line");
+        fixture.mode("multi");List<Engine.Result> rankedProgress=new ArrayList<>();
+        Engine.Result ranked=PikafishEngine.analyze(fixture,Position.initial(),"",Collections.emptyList(),new PikafishEngine.Options(8,0,1,32,3),rankedProgress::add);
+        check(rankedProgress.size()==6,"Every exact secondary update must stream; bounds and stale depths must not");
+        check(rankedProgress.get(2).lines.size()==3&&rankedProgress.get(3).lines.size()==1,"A newer iteration must replace secondary arrows from its prior depth");
+        check(ranked.lines.size()==3&&ranked.lines.get(0).score==70&&ranked.lines.get(1).score==30&&ranked.lines.get(2).score==10,"Final ranked exact scores changed");
+        check(rankedProgress.get(0).lines.get(0).score==60&&rankedProgress.get(2).lines.get(1).score==40,"Ranked snapshots were later mutated");
+        check(rankedProgress.get(0).lines.get(0)!=ranked.lines.get(0),"Ranked snapshots share mutable line objects");
+        commands=Files.readAllLines(fixture.installed().resolveSibling("commands.txt"));
+        check(commands.contains("setoption name MultiPV value 3"),"Requested native MultiPV option was not sent");
+        check(new PikafishEngine.Options(8,0,1,32,0).lines==1&&new PikafishEngine.Options(8,0,1,32,999).lines==5,"Analysis line count must be bounded to one through five");
         PikafishEngine.Options clamp=new PikafishEngine.Options(999,Long.MAX_VALUE,999,Integer.MAX_VALUE);
         check(clamp.maxDepth==128&&clamp.millis==3600000&&clamp.threads<=Runtime.getRuntime().availableProcessors()&&clamp.hashMb==512,"Unsafe settings not bounded");
         try(RandomAccessFile file=new RandomAccessFile(fixture.installed().toFile(),"rw")){file.setLength(3);}
@@ -89,6 +112,13 @@ public final class NativeAdapterAuditTest {
         long childUntil=System.nanoTime()+TimeUnit.SECONDS.toNanos(3);boolean child;
         do{child=ProcessHandle.allProcesses().anyMatch(p->p.info().command().orElse("").equalsIgnoreCase(fakeDir.resolve("libpikafish.so").toString()));if(child)Thread.sleep(20);}while(child&&System.nanoTime()<childUntil);
         check(!child,"Cancelled native process leaked");
-        System.out.println("PASS: "+checks+" production native-adapter assertions; real Windows Pikafish blank/null/explicit histories, verified network reuse/repair, exact-depth streaming snapshots, changed best-move updates, configured Threads/Hash/depth/untimed options, EOF, critical/illegal/incomplete output, bounded finite timeout and continuous-search process cancellation. Android ABI execution is not exercised.");
+        for(int attempt=0;attempt<3;attempt++){
+            fixture.mode("hang");AtomicReference<Throwable> cancelled=new AtomicReference<>();
+            Thread worker=new Thread(()->{try{PikafishEngine.analyze(fixture,Position.initial(),"",Collections.emptyList(),new PikafishEngine.Options(128,0,1,32,5),null);}catch(Throwable failure){cancelled.set(failure);}},"multipv-repeated-cancel");
+            worker.start();long readyUntil=System.nanoTime()+TimeUnit.SECONDS.toNanos(5);while(!Files.exists(fixture.installed().resolveSibling("started.txt"))&&System.nanoTime()<readyUntil)Thread.sleep(5);
+            worker.interrupt();worker.join(3000);
+            check(!worker.isAlive()&&cancelled.get() instanceof InterruptedException,"Repeated MultiPV cancellation failed to unwind its worker");
+        }
+        System.out.println("PASS: "+checks+" production native-adapter assertions; real Windows Pikafish blank/null/explicit histories and three-line MultiPV for both turns, verified network reuse/repair, ranked exact-depth snapshots and legal replies, configured Threads/Hash/MultiPV/depth/untimed options, EOF, critical/illegal/incomplete output, bounded finite timeout and repeated continuous-search process cancellation. Android ABI execution is not exercised.");
     }
 }

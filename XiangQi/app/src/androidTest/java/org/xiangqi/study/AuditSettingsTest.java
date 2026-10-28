@@ -44,18 +44,18 @@ public final class AuditSettingsTest extends InstrumentationTestCase {
         Activity activity=getInstrumentation().startActivitySync(intent);
         try {
             long ready=SystemClock.uptimeMillis()+15000;final boolean[] shown={false};
-            while(!shown[0]&&SystemClock.uptimeMillis()<ready){getInstrumentation().runOnMainSync(()->shown[0]=findText(activity.getWindow().getDecorView(),"Settings")!=null||findText(activity.getWindow().getDecorView(),"‹  Library")!=null);if(!shown[0])Thread.sleep(50);}assertTrue(shown[0]);
-            getInstrumentation().runOnMainSync(()->{View back=findText(activity.getWindow().getDecorView(),"‹  Library");if(back!=null)back.performClick();});
+            while(!shown[0]&&SystemClock.uptimeMillis()<ready){UiTestActions.runOnMain(getInstrumentation(),()->shown[0]=findText(activity.getWindow().getDecorView(),"Settings")!=null||findText(activity.getWindow().getDecorView(),"‹  Library")!=null);if(!shown[0])Thread.sleep(50);}assertTrue(shown[0]);
+            UiTestActions.runOnMain(getInstrumentation(),()->{View back=findText(activity.getWindow().getDecorView(),"‹  Library");if(back!=null)back.performClick();});
             waitFor(activity,"Xiangqi Study");
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 assertNull("Hidden results must not appear on library cards",findText(activity.getWindow().getDecorView(),"0–1"));
                 assertFalse("Card accessibility must not reveal results",hasResultDescription(activity.getWindow().getDecorView()));
                 findText(activity.getWindow().getDecorView(),"Settings").performClick();
             });
             final AlertDialog[] dialog={null};Field field=MainActivity.class.getDeclaredField("settingsDialog");field.setAccessible(true);
-            getInstrumentation().runOnMainSync(()->{try{dialog[0]=(AlertDialog)field.get(activity);}catch(Exception e){throw new RuntimeException(e);}});
+            UiTestActions.runOnMain(getInstrumentation(),()->{try{dialog[0]=(AlertDialog)field.get(activity);}catch(Exception e){throw new RuntimeException(e);}});
             assertNotNull(dialog[0]);
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 CheckBox hide=(CheckBox)findText(dialog[0].getWindow().getDecorView(),"Hide game results");assertTrue(hide.isChecked());hide.performClick();
                 assertFalse(StudySettings.load(target).hideResults);
                 assertNotNull("Results are shown only after user disables spoiler hiding",findText(activity.getWindow().getDecorView(),"0–1"));
@@ -69,7 +69,7 @@ public final class AuditSettingsTest extends InstrumentationTestCase {
             StudySettings saved=StudySettings.load(target);assertTrue(saved.hideResults);assertEquals("ink",saved.boardStyle);
             assertEquals("simplified",saved.glyphStyle);assertEquals("jade",saved.discStyle);
             assertEquals("numeric",saved.coordinateStyle);
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 dialog[0].dismiss();
                 assertNull(findText(activity.getWindow().getDecorView(),"0–1"));assertFalse(hasResultDescription(activity.getWindow().getDecorView()));
                 View player=findText(activity.getWindow().getDecorView(),"Yin Sheng");assertNotNull(player);((View)player.getParent().getParent()).performClick();
@@ -80,7 +80,7 @@ public final class AuditSettingsTest extends InstrumentationTestCase {
             GameRepository.Game game=new GameRepository(target).load().get(0);assertEquals("0-1",game.result);
             assertTrue(GameRepository.export(game,game.moves,false).contains("[Result \"0-1\"]"));
         } finally {
-            getInstrumentation().runOnMainSync(activity::finish);getInstrumentation().waitForIdleSync();
+            UiTestActions.runOnMain(getInstrumentation(),activity::finish);getInstrumentation().waitForIdleSync();
             SharedPreferences.Editor restore=preferences.edit().clear();
             for(Map.Entry<String,?> entry:previous.entrySet()){
                 Object value=entry.getValue();if(value instanceof Boolean)restore.putBoolean(entry.getKey(),(Boolean)value);
@@ -92,7 +92,7 @@ public final class AuditSettingsTest extends InstrumentationTestCase {
     }
     private void waitFor(Activity activity,String prefix) throws Exception {
         long deadline=SystemClock.uptimeMillis()+10000;boolean[] found={false};
-        while(SystemClock.uptimeMillis()<deadline){getInstrumentation().runOnMainSync(()->found[0]=findText(activity.getWindow().getDecorView(),prefix)!=null);if(found[0])return;Thread.sleep(50);}
+        while(SystemClock.uptimeMillis()<deadline){UiTestActions.runOnMain(getInstrumentation(),()->found[0]=findText(activity.getWindow().getDecorView(),prefix)!=null);if(found[0])return;Thread.sleep(50);}
         fail("UI did not display "+prefix);
     }
     private static View findText(View view,String prefix){if(view instanceof TextView&&((TextView)view).getText().toString().startsWith(prefix))return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View found=findText(group.getChildAt(i),prefix);if(found!=null)return found;}}return null;}

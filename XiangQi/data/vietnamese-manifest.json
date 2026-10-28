@@ -1,0 +1,1276 @@
+{
+  "collection": "Vietnamese international classical 2022–2023",
+  "screeningDate": "2026-10-28",
+  "scope": "2022–2023 international adult classical games with a Vietnamese player; rapid/blitz/youth excluded. Earlier inspected archives without explicit clock evidence are held out.",
+  "games": 61,
+  "halfMoves": 5452,
+  "yearCounts": {
+    "2023": 34,
+    "2022": 27
+  },
+  "vietnamesePlayerCounts": {
+    "何文进": 1,
+    "宗室日新": 1,
+    "汪洋北": 1,
+    "赖理兄": 14,
+    "郑亚生": 4,
+    "阮成保": 8,
+    "阮明日光": 9,
+    "阮黄林": 1,
+    "阮黄燕": 14,
+    "高芳青": 0,
+    "黎氏金鸾": 14
+  },
+  "assetSha256": "accaccb5dcaf91e5b14208417b4a6b5008fd9b361584108d787c5ac981a20e51",
+  "policySha256": "a03fed7880443a15fd88aecbc9b43a63adc7be9f3a6432f2ee34f1d8cd6d99da",
+  "curationPolicySha256": "6c3f714ff9989cdcdbd3153b9470d858e593bb0c18035b55dd7827d4d4e976a3",
+  "deduplicatedAgainst": [
+    "games.json",
+    "historical-games.json"
+  ],
+  "excludedRecords": [
+    {
+      "id": "vietnam-wxf-2023-1635-g2",
+      "red": "赖理兄",
+      "black": "孟辰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377",
+      "matchedNames": [
+        "孟辰"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2023-1710-g1",
+      "red": "赖理兄",
+      "black": "孟辰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "matchedNames": [
+        "孟辰"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2023-1710-g2",
+      "red": "孟辰",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "matchedNames": [
+        "孟辰"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2022-1193-g1",
+      "red": "赖理兄",
+      "black": "王廓",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1193:2022-世界象棋锦标赛赛谱-男子组-第四轮第一页&catid=298&lang=cn&Itemid=378",
+      "matchedNames": [
+        "王廓"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2022-1199-g2",
+      "red": "王廓",
+      "black": "阮成保",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1199:2022-世界象棋锦标赛赛谱-男子组-第五轮第一页&catid=298&lang=cn&Itemid=378",
+      "matchedNames": [
+        "王廓"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2022-1206-g1",
+      "red": "赖理兄",
+      "black": "王天一",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1206:2022-世界象棋锦标赛赛谱-男子组-第八轮第一页&catid=298&lang=cn&Itemid=378",
+      "matchedNames": [
+        "王天一"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2019-261-g6",
+      "red": "吴宗翰",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=261:2019-wxc-men-round-01a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-263-g1",
+      "red": "酒井清隆*",
+      "black": "汪洋北",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=263:2019-wxc-men-round-01b&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-264-g4",
+      "red": "汪洋北",
+      "black": "汪洋",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=264:2019-wxc-men-round-02a&catid=158&lang=cn&Itemid=378",
+      "matchedNames": [
+        "汪洋"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2019-264-g6",
+      "red": "赖理兄",
+      "black": "海彼德*",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=264:2019-wxc-men-round-02a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-266-g1",
+      "red": "蔡安爵",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=266:2019-wxc-men-round-03a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-266-g4",
+      "red": "李锦欢",
+      "black": "汪洋北越南",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=266:2019-wxc-men-round-03a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-268-g2",
+      "red": "庄宏明",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=268:2019-wxc-men-round-04a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-268-g4",
+      "red": "汪洋北",
+      "black": "吴宗翰",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=268:2019-wxc-men-round-04a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-363-g1",
+      "red": "赖理兄",
+      "black": "徐超",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=363:2019-wxc-men-round-05a&catid=158&lang=cn&Itemid=378",
+      "matchedNames": [
+        "徐超"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2019-363-g6",
+      "red": "刘子健",
+      "black": "汪洋北",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=363:2019-wxc-men-round-05a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-383-g2",
+      "red": "汪洋",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=383:2019-wxc-men-round-07a&catid=158&lang=cn&Itemid=378",
+      "matchedNames": [
+        "汪洋"
+      ],
+      "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2019-383-g5",
+      "red": "杨宗谕",
+      "black": "汪洋北",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=383:2019-wxc-men-round-07a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-385-g3",
+      "red": "汪洋北",
+      "black": "赖理兄",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=385:2019-wxc-men-round-08a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-387-g1",
+      "red": "赖理兄",
+      "black": "刘子健",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=387:2019-wxc-men-round-09a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-387-g2",
+      "red": "陈泓盛",
+      "black": "汪洋北",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=387:2019-wxc-men-round-09a&catid=158&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-390-g5",
+      "red": "高芳青",
+      "black": "贾丹",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=390:2019-wxc-women-round-01&catid=159&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-392-g4",
+      "red": "彭柔安",
+      "black": "高芳青",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=392:2019-wxc-women-round-02&catid=159&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-394-g5",
+      "red": "张颖茵",
+      "black": "高芳青",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=394:2019-wxc-women-round-04&catid=159&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-395-g4",
+      "red": "高芳青",
+      "black": "陈茗芳",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=395:2019-wxc-women-round-05&catid=159&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-396-g6",
+      "red": "高芳青",
+      "black": "唐丹",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=396:2019-wxc-women-round-06&catid=159&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    },
+    {
+      "id": "vietnam-wxf-2019-397-g2",
+      "red": "高芳青",
+      "black": "余欣如",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=397:2019-wxc-women-round-07&catid=159&lang=cn&Itemid=378",
+      "reason": "No explicit slow/classical marker"
+    }
+  ],
+  "sources": [
+    {
+      "kind": "index",
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?Itemid=313&id=1592&lang=en&option=com_content&view=article",
+      "sha256": "ec08927e8e49aebfde51adbd5101d84df3f080c2617acd0df701c65da42a0939",
+      "bytes": 66639
+    },
+    {
+      "kind": "round",
+      "article": 1590,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1590:2023-18th-world-xiangqi-championships-men-round-01-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 01 Game Records",
+      "sha256": "2f154a316526eabff05f6d87c91a95e4e142471c84615dcc72391c82c3bad3fd",
+      "bytes": 69272,
+      "recordCount": 14
+    },
+    {
+      "kind": "round",
+      "article": 1594,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Women Round 01 Game Records",
+      "sha256": "70174b4c9e24ab49fa36b4354a50f95e639cb7386057c08ec857661fd9d891ec",
+      "bytes": 56192,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 1603,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1603:2023-18th-world-xiangqi-championships-men-round-02-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 02 Game Records",
+      "sha256": "1f0ca85dd2a8ad5d170381d8239b561ed33c89f948f1d03de0bdcc43798be7b5",
+      "bytes": 69024,
+      "recordCount": 14
+    },
+    {
+      "kind": "round",
+      "article": 1604,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Women Round 02 Game Records",
+      "sha256": "7a5fde69eafa50a63fdd62f6284ebd9558f4a1770a6682751560d096824fbcd5",
+      "bytes": 56343,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 1635,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 03 Game Records",
+      "sha256": "2c55da94b9051027d1fe80caae022fc777f90538de3f9a6761d858ae016aeaaf",
+      "bytes": 68926,
+      "recordCount": 14
+    },
+    {
+      "kind": "round",
+      "article": 1636,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 04 Game Records",
+      "sha256": "20de01737bc8da762dbabcc2f47498edfd178bb1b6cdc074aa8996d51a0ebe69",
+      "bytes": 70629,
+      "recordCount": 14
+    },
+    {
+      "kind": "round",
+      "article": 1637,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1637:2023-18th-world-xiangqi-championships-men-round-05-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 05 Game Records",
+      "sha256": "1b8f6189426aec166edb5a0a18fa153952e78c592e4f21f98805fba50e65106a",
+      "bytes": 69616,
+      "recordCount": 14
+    },
+    {
+      "kind": "round",
+      "article": 1641,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1641:2023-18th-world-xiangqi-championships-men-round-06-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 06 Game Records",
+      "sha256": "cd85aa5f83110329c9e7bf57bee24f56f6c3e35f036d03a3285233fc4fc4a603",
+      "bytes": 70053,
+      "recordCount": 14
+    },
+    {
+      "kind": "round",
+      "article": 1647,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Women Round 03 Game Records",
+      "sha256": "1f2e98a1b7446e6c364e5359877d940c1cf1fe40065b98ab4f18e65c615a6c59",
+      "bytes": 56082,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 1648,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Women Round 04 Game Records",
+      "sha256": "3a7b3af37335028ff54943aa791a1f039c45541570a007bb9fbeef3ed761c986",
+      "bytes": 56700,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 1649,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Women Round 05 Game Records",
+      "sha256": "fdfc7ca21854617ea0ba53aa3d08d714e3a98ccfa9cc586b298af1e181e9485a",
+      "bytes": 57259,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 1650,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Women Round 06 Game Records",
+      "sha256": "cf853fb65479e11de297407a06c78ba4e1dd101bcb8a58548e7dbbe28ed2bb5c",
+      "bytes": 55793,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 1708,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1708:2023-18th-world-xiangqi-championships-men-round-07-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 07 Game Records",
+      "sha256": "9b39cb5b0ae325d5acdf5722478a26a051777e5fb38ad04a76a923d78e3cb0cb",
+      "bytes": 69874,
+      "recordCount": 14
+    },
+    {
+      "kind": "round",
+      "article": 1709,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 08 Game Records",
+      "sha256": "0971f57e4cb388e29d49491be3305b296ba7470931cdd0b7480d1939906781c8",
+      "bytes": 69439,
+      "recordCount": 14
+    },
+    {
+      "kind": "round",
+      "article": 1710,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Men Round 09 Game Records",
+      "sha256": "3ff9de8e98f66adda3d37300f23e245f2f8fccee867396fce9f9d236e64e5fe5",
+      "bytes": 72592,
+      "recordCount": 15
+    },
+    {
+      "kind": "round",
+      "article": 1714,
+      "year": 2023,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "label": "2023 18th World Xiangqi Championships Women Round 07 Game Records",
+      "sha256": "505e9bd24cfe11808e1da09e4815d1433aa1d24e5cb1e5ac5d6adc66ac9bff60",
+      "bytes": 55925,
+      "recordCount": 7
+    },
+    {
+      "kind": "index",
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=1147&option=com_content&view=article&lang=cn",
+      "sha256": "c5b69bbcef71ddccd5eb81288ec620e08e3802056c943959a87e42fe12698478",
+      "bytes": 78186
+    },
+    {
+      "kind": "round",
+      "article": 1182,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1182:2022-世界象棋锦标赛赛谱-男子组-第一轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第一轮第一页",
+      "sha256": "62034da59fa2316b4a18c8af5e3568072bfa1ef76cd9ee45cf08e08934dfdf4c",
+      "bytes": 62777,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1188,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1188:2022-世界象棋锦标赛赛谱-男子组-第一轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第一轮第二页",
+      "sha256": "de5f1698cf22b9477a0a9499c70702f407081bd2738276d4dd59b973cfcec2fb",
+      "bytes": 63258,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1189,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1189:2022-世界象棋锦标赛赛谱-男子组-第二轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第二轮第一页",
+      "sha256": "70afc1a2b335f04c916032d869308b0944f3374106d4f9345aa37c97afc6ad82",
+      "bytes": 63678,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1190,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1190:2022-世界象棋锦标赛赛谱-男子组-第二轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第二轮第二页",
+      "sha256": "050fd08862e9fd72fbd6e7c21c6c933d5fe1ed74e5f931a2d8f717d38dbd94e6",
+      "bytes": 61338,
+      "recordCount": 8
+    },
+    {
+      "kind": "round",
+      "article": 1191,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1191:2022-世界象棋锦标赛赛谱-男子组-第三轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第三轮第一页",
+      "sha256": "974720047cea4d0b849b63e22d088bdad7aef52d30b563e75c60be2c7b450a7d",
+      "bytes": 63124,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1192,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1192:2022-世界象棋锦标赛赛谱-男子组-第三轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第三轮第二页",
+      "sha256": "91c6c51e2fd1eed1841f15ee6176e8f11c129b0a6a9b4b92f4a67e23eb5dbc1a",
+      "bytes": 63196,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1193,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1193:2022-世界象棋锦标赛赛谱-男子组-第四轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第四轮第一页",
+      "sha256": "af8105fd32841b98622a6d660b6fc5cf6e1ea9aeea2d5c448610a288406e7204",
+      "bytes": 63677,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1194,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1194:2022-世界象棋锦标赛赛谱-男子组-第四轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第四轮第二页",
+      "sha256": "ed93b33c2af18f80184040d416ee064082094a15bc6ad3abea27253f1adcb477",
+      "bytes": 63848,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1199,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1199:2022-世界象棋锦标赛赛谱-男子组-第五轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第五轮第一页",
+      "sha256": "f5d2e2be623128dc1f01150a37218d80f7c88a1e185848c05aaa56e9f168edd6",
+      "bytes": 63862,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1200,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1200:2022-世界象棋锦标赛赛谱-男子组-第五轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第五轮第二页",
+      "sha256": "3b77ec8f1a90f0c83fd3703d401a63ad5617f338c8b1b23744a8ec5a80878909",
+      "bytes": 63303,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1201,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1201:2022-世界象棋锦标赛赛谱-男子组-第六轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第六轮第一页",
+      "sha256": "2f5d717022467c56e10300f94b8508ae32ab3fa5ebfc942ad8aecd91536a1c4e",
+      "bytes": 63974,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1203,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1203:2022-世界象棋锦标赛赛谱-男子组-第六轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第六轮第二页",
+      "sha256": "b273ed2bfdbd4ca296578b75ff9946079f4a9372669f3bf64a786aa5b57da2bf",
+      "bytes": 63044,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1204,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1204:2022-世界象棋锦标赛赛谱-男子组-第七轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第七轮第一页",
+      "sha256": "f89fc90410ddc5aa3314a410c53978110c4e61f2cfff6720b5a6e91ffde546de",
+      "bytes": 63693,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1205,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1205:2022-世界象棋锦标赛赛谱-男子组-第七轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第七轮第二页",
+      "sha256": "e4448d9e70d3b83d652333fcf256453d905e172c59480a2afd4835efa60310c4",
+      "bytes": 63621,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1206,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1206:2022-世界象棋锦标赛赛谱-男子组-第八轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第八轮第一页",
+      "sha256": "12fc09325a5fb586bfdcfafd0201dc46693001a760424447e27561f396ff84d2",
+      "bytes": 63269,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1207,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1207:2022-世界象棋锦标赛赛谱-男子组-第八轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第八轮第二页",
+      "sha256": "d4d02cb5bed2db3a2600ca06c84c35fe4cddb25e736e72319050e713915d9908",
+      "bytes": 63169,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1208,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1208:2022-世界象棋锦标赛赛谱-男子组-第九轮第一页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第九轮第一页",
+      "sha256": "ae7840e180edd4fdb54701f0cbb29b066057ca974541983136ddadec4bfb8355",
+      "bytes": 63723,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1216,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1216:2022-世界象棋锦标赛赛谱-女子组-第一轮&catid=301&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 女子组 第一轮",
+      "sha256": "ccc55ece9ba1cbe94c8ef153abedbf41a8c12b8e26155c6e1b4492e4fca2a624",
+      "bytes": 65033,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 1217,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1217:2022-世界象棋锦标赛赛谱-女子组-第二轮&catid=301&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 女子组 第二轮",
+      "sha256": "f3f024eba1d2d2dd3335cadf68af201c8d0f76b4012978786d6e673f6934e98e",
+      "bytes": 63123,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 1218,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1218:2022-世界象棋锦标赛赛谱-女子组-第三轮&catid=301&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 女子组 第三轮",
+      "sha256": "8fa8907bd84d4f88fcf389bc9366b5e43e6268acfc9124a981a32cca277df03f",
+      "bytes": 64950,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 1219,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1219:2022-世界象棋锦标赛赛谱-女子组-第四轮&catid=301&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 女子组 第四轮",
+      "sha256": "3ccd636d814df2453c47c3955ac39e4ca29d076824a70ce9c9dd4ab9787ccd96",
+      "bytes": 64423,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 1220,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1220:2022-世界象棋锦标赛赛谱-女子组-第五轮&catid=301&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 女子组 第五轮",
+      "sha256": "9b1c795bb5a80a88da64b326751d0f61825018fb90233eacd9db1abd3ff5f1a4",
+      "bytes": 65045,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 1221,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1221:2022-世界象棋锦标赛赛谱-女子组-第六轮&catid=301&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 女子组 第六轮",
+      "sha256": "94fe452f80065d31fef73730050694dbcbce903c7e355cee747d36fee060b5d2",
+      "bytes": 64905,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 1362,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1362:2022-世界象棋锦标赛赛谱-女子组-第七轮&catid=301&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 女子组 第七轮",
+      "sha256": "092273edc5b6b85656e9e1af12bc598dcff526e2e0282c41fa16921447566f68",
+      "bytes": 63762,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 1421,
+      "year": 2022,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1421:2022-世界象棋锦标赛赛谱-男子组-第九轮第二页&catid=298&lang=cn&Itemid=378",
+      "label": "2022 世界象棋锦标赛赛谱 男子组 第九轮第二页",
+      "sha256": "0ade9f06246fe83e89d767ea7a5be831f1e0b9d7f2bb3db840c18e6eaadfcab6",
+      "bytes": 62735,
+      "recordCount": 9
+    },
+    {
+      "kind": "index",
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=215&lang=cn&option=com_content&view=article",
+      "sha256": "edbc0c35d082f6176ec5cb6113ffe63a291b8e6531248cffb1bac53da7926cec",
+      "bytes": 49823
+    },
+    {
+      "kind": "round",
+      "article": 261,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=261:2019-wxc-men-round-01a&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 01a",
+      "sha256": "37e680fac0c32a31ae1f9e9cdc00c459a13b67052d9aabcb66e51421277e4442",
+      "bytes": 63776,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 263,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=263:2019-wxc-men-round-01b&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 01b",
+      "sha256": "dad44619e3db58901553ee3601ccc46dc0cf10f0099bccd785fe7fd8958ec0d9",
+      "bytes": 61518,
+      "recordCount": 8
+    },
+    {
+      "kind": "round",
+      "article": 264,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=264:2019-wxc-men-round-02a&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 02a",
+      "sha256": "99272d1de982f62b4af3a675657e61231ee364558a9221631d1f4ccc2b60711c",
+      "bytes": 55305,
+      "recordCount": 6
+    },
+    {
+      "kind": "round",
+      "article": 265,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=265:2019-wxc-men-round-02b&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 02b",
+      "sha256": "1e440a8462d353a570966c1b0b36f50489376a8399237c810884211c210e9fe5",
+      "bytes": 58322,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 266,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=266:2019-wxc-men-round-03a&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 03a",
+      "sha256": "6a24e2e28aadbc76b9341d1d03595005fd23511061a697d44eb6853bb43ed9ff",
+      "bytes": 65289,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 267,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=267:2019-wxc-men-round-03b&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 03b",
+      "sha256": "7a55cb75c06be1ee963737775b2cd567472bb4f9b34f57a25c975540b62311b9",
+      "bytes": 59143,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 268,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=268:2019-wxc-men-round-04a&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 04a",
+      "sha256": "9053566a7e44c83d688122f7d4b660082b3696a02d4af76c9cd526a107893d27",
+      "bytes": 63058,
+      "recordCount": 8
+    },
+    {
+      "kind": "round",
+      "article": 361,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=361:2019-wxc-men-round-04b&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 04b",
+      "sha256": "dbbe43d3e3d96e516f214bd94c679d26e7ccfd7d385062c0ccc03b1b738aa313",
+      "bytes": 62212,
+      "recordCount": 8
+    },
+    {
+      "kind": "round",
+      "article": 363,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=363:2019-wxc-men-round-05a&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 05a",
+      "sha256": "0aaa9ebd7e48a58c69840781c32067bee807cdeb9008e901e7e6a57827bde9ed",
+      "bytes": 65892,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 382,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=382:2019-wxc-men-round-05b&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 05b",
+      "sha256": "68deebf1158b895e687af48b504931e7975cc875460931a23a01a52047e5e71d",
+      "bytes": 59081,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 383,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=383:2019-wxc-men-round-07a&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 07a",
+      "sha256": "d050aee33ffbd916aed3f7256b2d6875928d6c58909a1d9944de324e8174ad51",
+      "bytes": 66051,
+      "recordCount": 9
+    },
+    {
+      "kind": "round",
+      "article": 384,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=384:2019-wxc-men-round-07b&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 07b",
+      "sha256": "d48ca977ca05bc9cb06f0341a0785b2ec2925329f60234323cca2ace6c03f0b2",
+      "bytes": 59955,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 385,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=385:2019-wxc-men-round-08a&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 08a",
+      "sha256": "f63f701d444f13e8a139bdf0e30e17998d586edd864fe7b72b25ecf6aae2d132",
+      "bytes": 63752,
+      "recordCount": 8
+    },
+    {
+      "kind": "round",
+      "article": 386,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=386:2019-wxc-men-round-08b&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 08b",
+      "sha256": "618344db333116ea33e82b5199edfbf967d85f6e9d19463418e691f1fe8df0b5",
+      "bytes": 62516,
+      "recordCount": 8
+    },
+    {
+      "kind": "round",
+      "article": 387,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=387:2019-wxc-men-round-09a&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 09a",
+      "sha256": "1fe3938cf744c66c1af1225edc36501d09dac87c1ce6c7cf50cb52101d53c350",
+      "bytes": 63143,
+      "recordCount": 8
+    },
+    {
+      "kind": "round",
+      "article": 388,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=388:2019-wxc-men-round-09b&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Round 09b",
+      "sha256": "5dd583bb298f55b09d3aa879b1096316f9c3d1c4d472c26aea21165aabf31fd8",
+      "bytes": 63288,
+      "recordCount": 8
+    },
+    {
+      "kind": "round",
+      "article": 389,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=389:2019-wxc-men-championship-match&catid=158&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Men Championship Match",
+      "sha256": "798c27a16ca97427164a79e05d374bee019a6046d35e8d67f42d795c2a53de92",
+      "bytes": 40532,
+      "recordCount": 1
+    },
+    {
+      "kind": "round",
+      "article": 390,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=390:2019-wxc-women-round-01&catid=159&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Women Round 01",
+      "sha256": "5bf28288a13a350dc5e901b0a6c2ad35945e283fa444a3ed5aa0aa00ca8a6d56",
+      "bytes": 51797,
+      "recordCount": 5
+    },
+    {
+      "kind": "round",
+      "article": 392,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=392:2019-wxc-women-round-02&catid=159&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Women Round 02",
+      "sha256": "cd7ce3b5e7d50a2020e73f4d90139caedede5b2952ab284b3d4549e9055a1c88",
+      "bytes": 52178,
+      "recordCount": 5
+    },
+    {
+      "kind": "round",
+      "article": 393,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=393:2019-wxc-women-round-03&catid=159&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Women Round 03",
+      "sha256": "3047bc99a23161c1a82b54f93305ba69cbc0d06730e657ea0216ce0cf93eeba5",
+      "bytes": 45007,
+      "recordCount": 6
+    },
+    {
+      "kind": "round",
+      "article": 394,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=394:2019-wxc-women-round-04&catid=159&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Women Round 04",
+      "sha256": "a5243b6a58dd0743f20290a91acb59370fc3b0e6c02c106a57e6fdc00819d76b",
+      "bytes": 51978,
+      "recordCount": 5
+    },
+    {
+      "kind": "round",
+      "article": 395,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=395:2019-wxc-women-round-05&catid=159&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Women Round 05",
+      "sha256": "383098e2a0a1255e402078002e713314acdda2526846ffff1a4b7a6670652fb0",
+      "bytes": 51726,
+      "recordCount": 5
+    },
+    {
+      "kind": "round",
+      "article": 396,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=396:2019-wxc-women-round-06&catid=159&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Women Round 06 Semi-Final",
+      "sha256": "659c95073d92b0294555a0d33e7106154c0463539efd70614c03828eeb288e4c",
+      "bytes": 55003,
+      "recordCount": 6
+    },
+    {
+      "kind": "round",
+      "article": 397,
+      "year": 2019,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=397:2019-wxc-women-round-07&catid=159&lang=cn&Itemid=378",
+      "label": "2019 World Xiangqi Championship Women Round 07 Final",
+      "sha256": "b11442b3f8d6816cd730aa8e074e548dc365bca14838799b144a6531e0faab30",
+      "bytes": 49992,
+      "recordCount": 5
+    },
+    {
+      "kind": "index",
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?id=501&lang=cn&option=com_content&view=article",
+      "sha256": "ca8499a74257a403f7bc14e304e1100216f04252bed421738f1bf90af249066e",
+      "bytes": 54282
+    },
+    {
+      "kind": "round",
+      "article": 646,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=646:2017-wxc-women-round-01&catid=193&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Women Round 01",
+      "sha256": "c12a03127ff7c8c6405c7bdc9d2750263180ae91f7f0192088fb88fb2922285b",
+      "bytes": 50041,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 647,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=647:2017-wxc-women-round-02&catid=193&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Women Round 02",
+      "sha256": "74ab91bee6d1a90b4726f65887987db5db5c1588a905a42e20a6535077c01a7c",
+      "bytes": 49956,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 648,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=648:2017-wxc-women-round-03&catid=193&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Women Round 03",
+      "sha256": "b2767843c25612d407c9d1187161274af4a8a6a22d92cc608bbccebc386f2361",
+      "bytes": 49948,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 649,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=649:2017-wxc-women-round-04&catid=193&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Women Round 04",
+      "sha256": "3c3573ee36915b2745e1c87978488ff795c98841ac29a76c9d56dc82fe4b0b63",
+      "bytes": 50309,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 650,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=650:2017-wxc-women-round-05&catid=193&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Women Round 05",
+      "sha256": "ceee154d8858afb11aedc38e58c32ae5b0162beb1d031418f5ebf01c10ec5381",
+      "bytes": 51015,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 651,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=651:2017-wxc-women-round-06&catid=193&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Women Round 06",
+      "sha256": "d4c9dc002640b65db82cf66cc36d3794b3f4e50128425aa31c836f9e2fc904ef",
+      "bytes": 48089,
+      "recordCount": 6
+    },
+    {
+      "kind": "round",
+      "article": 652,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=652:2017-wxc-women-round-07&catid=193&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Women Round 07",
+      "sha256": "fc115d02d3ee798401e461c1723aef3f588faff5d32b18ae0461cc57112603cc",
+      "bytes": 49921,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 653,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=653:2017-wxc-men-round-1a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 1a",
+      "sha256": "d08cefea35ed12ac4e6898c353b4a1c1113a862fcf802a59aa14fdc6ddbbd8d7",
+      "bytes": 56165,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 654,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=654:2017-wxc-men-round-1b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 1b",
+      "sha256": "2aedc08aeecd4f08ebe0e90bde6a3c50dad07e61dfc0a1ec4f2f94bfe2f22464",
+      "bytes": 55270,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 655,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=655:2017-wxc-men-round-1c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 1c",
+      "sha256": "0ee4d427a44302f94f8a2eff2c532e255cfe6ffd3cb902254bee010d1c478aa2",
+      "bytes": 42640,
+      "recordCount": 3
+    },
+    {
+      "kind": "round",
+      "article": 656,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=656:2017-wxc-men-round-2a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 2a",
+      "sha256": "83b8b6a14413572e08bf11560c9885c8299a348cdb68ed60116bd5de954a64fd",
+      "bytes": 56639,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 657,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=657:2017-wxc-men-round-2b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 2b",
+      "sha256": "54ae418ae24d66b40c7fd237accb19adbc82cec1b43a5278c15c8eb74a7efac0",
+      "bytes": 55358,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 658,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=658:2017-wxc-men-round-2c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 2c",
+      "sha256": "603d01d36070dff0fdbaa0e703251011a5e4ba858c215f6ed35f4e88a8c8e42c",
+      "bytes": 48238,
+      "recordCount": 6
+    },
+    {
+      "kind": "round",
+      "article": 659,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=659:2017-wxc-men-round-3a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 3a",
+      "sha256": "40e580c8272e7aa242095913276c0dd9d5b87de5996be999deafd778fe623002",
+      "bytes": 55473,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 660,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=660:2017-wxc-men-round-3b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 3b",
+      "sha256": "795df68e812a6bb1f8efdee066cb659cc8ac6ba4d96993c33baa46e6bc7d1ed9",
+      "bytes": 54972,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 661,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=661:2017-wxc-men-round-3c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 3c",
+      "sha256": "9e302a88eb4509e8a247b250e9d860f44f953fe1a50175e4a1a0be1670b1a18a",
+      "bytes": 42614,
+      "recordCount": 3
+    },
+    {
+      "kind": "round",
+      "article": 662,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=662:2017-wxc-men-round-4a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 4a",
+      "sha256": "0e238cd99ad640ac3c0e3c3aa2d49b59f1ac6748cbf496f57c1bb7b56e19a7fa",
+      "bytes": 55903,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 663,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=663:2017-wxc-men-round-4b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 4b",
+      "sha256": "4d23ac913185f227d1a1f40da58bb7f51340c7a8a666464787ff52bc48f99fde",
+      "bytes": 55794,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 664,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=664:2017-wxc-men-round-4c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 4c",
+      "sha256": "bb98d75a40d81cb6093f0c754cbb95097cc1a44b744ced97a84f547cc826e434",
+      "bytes": 48349,
+      "recordCount": 6
+    },
+    {
+      "kind": "round",
+      "article": 665,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=665:2017-wxc-men-round-5a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 5a",
+      "sha256": "e08dbd54d3ac34a36026edb84d85bd7b8d55cbc10a007556ee2261f28bdd539d",
+      "bytes": 55442,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 666,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=666:2017-wxc-men-round-5b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 5b",
+      "sha256": "bfab1d9cd94fc23e9f07e27af397fe5c8e6de0bbdbb496ce47c2c083a837577e",
+      "bytes": 55900,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 667,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=667:2017-wxc-men-round-5c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 5c",
+      "sha256": "c46e11f2aed77a62cf8c9a57832299526aabc54a029bc371ef47eb946f078baa",
+      "bytes": 46489,
+      "recordCount": 5
+    },
+    {
+      "kind": "round",
+      "article": 668,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=668:2017-wxc-men-round-6a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 6a",
+      "sha256": "fb0a07c88af79da77fd8d70a9cc36b97e04fac9ee4a43d05ecc9937190b682ac",
+      "bytes": 56017,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 669,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=669:2017-wxc-men-round-6b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 6b",
+      "sha256": "d056603e13d80915541d323b741f02641bba93c007122071fdcb4b4d663b89c0",
+      "bytes": 55263,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 670,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=670:2017-wxc-men-round-6c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 6c",
+      "sha256": "73be5da24ba7e800a0f72b53c5dd6610ab35cf187a0b99f99f299f13c7e30765",
+      "bytes": 50180,
+      "recordCount": 7
+    },
+    {
+      "kind": "round",
+      "article": 671,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=671:2017-wxc-men-round-7a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 7a",
+      "sha256": "83ef70a3a3d8e7b2799a41957ffbe56349fa488ee78a10c010a440172d4b6938",
+      "bytes": 56472,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 672,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=672:2017-wxc-men-round-7b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 7b",
+      "sha256": "8fa0062436213597c59de355aab3c352ca64e88c9c6797f5c9556d16a940329b",
+      "bytes": 55994,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 673,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=673:2017-wxc-men-round-7c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 7c",
+      "sha256": "8b8ae1680aefd0eda6a85de2046f17ffcc0307cb70cef4a90468bfd98b003b49",
+      "bytes": 46734,
+      "recordCount": 5
+    },
+    {
+      "kind": "round",
+      "article": 674,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=674:2017-wxc-men-round-8a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 8a",
+      "sha256": "2c53574081942d4d827dc5a143dcecfb1c02fb669b96120ca0c34da0cff80e5c",
+      "bytes": 55699,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 675,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=675:2017-wxc-men-round-8b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 8b",
+      "sha256": "27cfecf75f39b201cb6290706a34ee1c2d76f8d4a2bf24971a0ce115b2eb45a5",
+      "bytes": 56160,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 676,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=676:2017-wxc-men-round-8c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 8c",
+      "sha256": "c00a77daccecde8907f7f2f8c0a8a1cb2a94a2dbbac2bbd6e827b809f4a20ab4",
+      "bytes": 44307,
+      "recordCount": 4
+    },
+    {
+      "kind": "round",
+      "article": 677,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=677:2017-wxc-men-round-9a&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 9a",
+      "sha256": "9dd5a3360de8206ff41e032a253779be74a0b9c195effb9cc0c0a679d850c7cd",
+      "bytes": 55536,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 678,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=678:2017-wxc-men-round-9b&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 9b",
+      "sha256": "dfb7841979acc937724226b49c6a307d9cfea5dba858885a363ae582439e9fdf",
+      "bytes": 55100,
+      "recordCount": 10
+    },
+    {
+      "kind": "round",
+      "article": 679,
+      "year": 2017,
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=679:2017-wxc-men-round-9c&catid=192&lang=cn&Itemid=378",
+      "label": "2017 World Xiangqi Championship Men Round 9c",
+      "sha256": "916d27244bd65ff88b90fae88d95db43897591fc8a048ef53d4a5d693027a2eb",
+      "bytes": 43996,
+      "recordCount": 4
+    },
+    {
+      "kind": "audited factual supplement",
+      "path": "data\\futa-trenh-2023.json",
+      "sha256": "197c893bce4dc43ce02c7fddbd87dad6613b07276ed5be02c7e0f910efeba252",
+      "sourceManifest": "data\\futa-trenh-manifest.json"
+    }
+  ],
+  "rights": "Attributed factual moves and event metadata only. WXF retains rights in its pages; no annotations, page design or board code copied and no general redistribution license asserted."
+}

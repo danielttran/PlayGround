@@ -38,13 +38,17 @@ public final class PikafishEngine {
 
     /** A zero time limit searches until the requested depth or explicit cancellation. */
     public static final class Options {
-        public final int maxDepth, threads, hashMb;
+        public final int maxDepth, threads, hashMb, lines;
         public final long millis;
         public Options(int maxDepth, long millis, int threads, int hashMb) {
+            this(maxDepth, millis, threads, hashMb, 1);
+        }
+        public Options(int maxDepth, long millis, int threads, int hashMb, int lines) {
             this.maxDepth = Math.max(1, Math.min(maxDepth, 128));
             this.millis = millis <= 0 ? 0 : Math.max(50, Math.min(millis, 3600000));
             this.threads = Math.max(1, Math.min(threads, Math.max(1, Runtime.getRuntime().availableProcessors())));
             this.hashMb = Math.max(16, Math.min(hashMb, 512));
+            this.lines = Math.max(1, Math.min(lines, 5));
         }
     }
 
@@ -144,7 +148,7 @@ public final class PikafishEngine {
             await(lines, "uciok", 15000);
             command(output, "setoption name Threads value " + options.threads);
             command(output, "setoption name Hash value " + options.hashMb);
-            command(output, "setoption name MultiPV value 1");
+            command(output, "setoption name MultiPV value " + options.lines);
             command(output, "setoption name EvalFile value " + network.getAbsolutePath());
             command(output, "isready"); await(lines, "readyok", 20000);
             command(output, "ucinewgame");
@@ -156,10 +160,11 @@ public final class PikafishEngine {
             while (true) {
                 String line = next(lines, deadline);
                 if (line.startsWith("info ")) {
-                    List<String> previousPv = result.pv;
-                    UciInfo.update(result, root, line);
-                    // UciInfo replaces the PV only after accepting an exact score and legal continuation.
-                    if (listener != null && result.pv != previousPv && result.depth >= publishedDepth) {
+                    List<Engine.Line> previousLines = result.lines;
+                    UciInfo.update(result, root, line, options.lines);
+                    // Publish secondary-line updates too; each accepted line has
+                    // its own exact score and legally replayed continuation.
+                    if (listener != null && result.lines != previousLines && result.depth >= publishedDepth) {
                         listener.onProgress(result.copy()); publishedDepth = result.depth;
                     }
                 }
@@ -169,6 +174,14 @@ public final class PikafishEngine {
                     result.bestMove = parts[1];
                     if (result.pv.isEmpty() || !result.pv.get(0).equals(result.bestMove)) result.pv = Collections.singletonList(result.bestMove);
                     if (result.depth == 0) throw new IllegalStateException("Pikafish returned no completed analysis");
+                    // Empty-PV root adjudications acquire their validated move
+                    // only at bestmove; keep the first-line compatibility API
+                    // and the ranked result consistent at completion.
+                    List<Engine.Line> completed = new java.util.ArrayList<>();
+                    completed.add(new Engine.Line(1, result.score, result.depth, result.pv));
+                    for (Engine.Line alternative : result.lines)
+                        if (alternative.rank > 1 && !result.bestMove.equals(alternative.bestMove)) completed.add(alternative);
+                    result.lines = Collections.unmodifiableList(completed);
                     return result;
                 }
             }

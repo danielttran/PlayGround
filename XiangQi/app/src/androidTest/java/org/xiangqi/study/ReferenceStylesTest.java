@@ -20,7 +20,7 @@ public final class ReferenceStylesTest extends InstrumentationTestCase {
         try{
             for(int n=0;n<IDS.length;n++){
                 String id=IDS[n];final Bitmap[] bitmap={null};final int[] glyphs={0};final double[] lowest={21};
-                getInstrumentation().runOnMainSync(()->{
+                UiTestActions.runOnMain(getInstrumentation(),()->{
                     BoardView board=board(id,false,"numeric");bitmap[0]=Bitmap.createBitmap(board.getWidth(),board.getHeight(),Bitmap.Config.ARGB_8888);
                     board.draw(new Canvas(bitmap[0]){
                         @Override public void drawText(String text,float x,float y,Paint paint){
@@ -44,7 +44,7 @@ public final class ReferenceStylesTest extends InstrumentationTestCase {
     }
     public void testReferenceCoordinatesKeepGeometryAndCustomColorsStayExact()throws Exception{
         for(String id:IDS)for(boolean flipped:new boolean[]{false,true}){
-            getInstrumentation().runOnMainSync(()->{
+            UiTestActions.runOnMain(getInstrumentation(),()->{
                 BoardView off=board(id,flipped,"none"),coordinates=board(id,flipped,"numeric");
                 Bitmap a=Bitmap.createBitmap(off.getWidth(),off.getHeight(),Bitmap.Config.ARGB_8888),b=Bitmap.createBitmap(coordinates.getWidth(),coordinates.getHeight(),Bitmap.Config.ARGB_8888);
                 try{

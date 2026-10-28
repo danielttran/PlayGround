@@ -12,6 +12,10 @@ public final class PlayerNames {
     private static final String TITLES="https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf";
     private static final String HISTORICAL="https://www.wxf-xiangqi.org/images/past_wxc_champions/2022_2-Mens_Individual.pdf";
     private static final String NON_CHNVIE="https://www.wxf-xiangqi.org/images/past_wxc_champions/2022_3-Non_CHNVIE_Individual.pdf";
+    private static final String PROGRAM_2023="https://www.wxf-xiangqi.org/images/2023_houston_wxc/Brochure_Content_11-231.pdf";
+    private static final String MEN_2022="https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result_1028/2022_17wxf__m_ranking2.pdf";
+    private static final String WOMEN_2022="https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result_1028/2022_17wxf__w_ranking.pdf";
+    private static final String FUTA_2023="https://vietnamchess.vn/document/2023/futa6-bulletin-full.pdf";
     private static final Map<String,Name> NAMES=new HashMap<>(),EXACT=new HashMap<>();
     private static final class Name {
         final String chinese,readable,aliases,source;final boolean pinyin;
@@ -89,6 +93,36 @@ public final class PlayerNames {
         add("谭氏垂容","Dam Thi Thuy Dung","Đàm Thị Thùy Dung",ENTRY);
         add("乔碧水","Kieu Bich Thuy","Kiều Bích Thủy",ENTRY);alias("乔碧","乔碧水");
         add("阮日光","Quang Nhat Nguyen","阮光日",RESULTS);alias("阮光日","阮日光");
+        // Additional adult 2022/2023 championships: official bilingual program,
+        // results and federation bulletin preserve association-specific names.
+        add("阮明日光","Nguyen Minh Nhat Quang","Nguyễn Minh Nhật Quang",PROGRAM_2023);
+        add("阮黄燕","Nguyen Hoang Yen","Nguyễn Hoàng Yến 阮黃燕",PROGRAM_2023);alias("阮黃燕","阮黄燕");
+        add("黎氏金鸾","Le Thi Kim Loan","Lê Thị Kim Loan 黎氏金銮",PROGRAM_2023);alias("黎氏金銮","黎氏金鸾");
+        add("刘亿豪","Low Yi Hao","Liu Yihao",PROGRAM_2023);
+        add("叶乃传","Yek Nai Tuong","",PROGRAM_2023);
+        add("梅俊海","Matthew Boey","",PROGRAM_2023);
+        add("洪千惠","Vespera Ang Cheng Wuey","",PROGRAM_2023);
+        add("陈慧盈","Tan Hui Ying","",PROGRAM_2023);
+        add("田荷","Tian He","田菏",PROGRAM_2023);alias("田菏","田荷");
+        add("谢汶谕","Hsieh Wenyu","Hsieh-Wenyu",PROGRAM_2023);
+        add("唐思楠","Tang Sinan","",PROGRAM_2023);
+        add("余欣如","Jee Xin Ru","",TITLES);
+        add("刘欢","Liu Huan","",TITLES);
+        add("左文静","Zuo Wenjing","",TITLES);
+        add("彭柔安","Peng Jou An","",TITLES);
+        add("沈毅豪","Sim Yip How","",TITLES);
+        add("郑彦隆","Cheng Yin Lung","",TITLES);
+        add("郑德铭","Cheng Tak Ming Clement","",TITLES);
+        add("陈幸琳","Chen Xinglin","",TITLES);
+        add("黎英豪","Le Anh Hao","Lê Anh Hào",TITLES);
+        add("郭泽辉","Tawee Danwirunhawanich","",MEN_2022);
+        add("布莱恩乔治","Brian George A/L A S Anthony Dass","布莱恩乔",MEN_2022);alias("布莱恩乔","布莱恩乔治");
+        add("李雯宜","Lee Mun Yee","",WOMEN_2022);
+        add("詹敏珠","Chieng Ming Choo","Cheng Ming Chuo",WOMEN_2022);
+        add("阮黄林","Nguyen Hoang Lam","Nguyễn Hoàng Lâm",FUTA_2023);
+        add("何文进","Ha Van Tien","Hà Văn Tiến",FUTA_2023);
+        add("宗室日新","Ton That Nhat Tan","Tôn Thất Nhật Tân 孙室日新",FUTA_2023);alias("孙室日新","宗室日新");
+        add("汪洋北","Uong Duong Bac","Uông Dương Bắc",FUTA_2023);
         // Historical names verified against WXF title and bilingual winners tables.
         add("胡荣华","Hu Ronghua","",TITLES);
         add("李来群","Li Laiqun","",TITLES);
@@ -104,7 +138,7 @@ public final class PlayerNames {
         add("许松浩","Hua Say Ty","Xu Songhao",TITLES);
         add("梁达民","Leung Tat Man","Liang Damin",TITLES);
         add("李家庆","Lee Kah Kheng","Li Jiaqing",TITLES);
-        add("郑亚生","Trenh A Sang","Truong A Sang Trương Á Sáng",TITLES);
+        add("郑亚生","Trenh A Sang","Truong A Sang Trương Á Sáng Trềnh A Sáng Trình A Sáng",TITLES);
         add("张亚明","Truong A Minh","Trương Á Minh",TITLES);
         add("陈捷裕","Tan Cheak Joo","Chen Jieyu",TITLES);
         add("刘国华","Liu Kuo Hua","Liu Guohua",TITLES);

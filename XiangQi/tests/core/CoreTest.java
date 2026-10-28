@@ -156,6 +156,7 @@ public final class CoreTest {
         Engine.Result stopped=Engine.analyze(initial,64,0,snapshot->{stoppedProgress.add(snapshot);Thread.currentThread().interrupt();});
         check(stopped.depth==1&&stoppedProgress.size()==1, "Untimed deep search stops promptly when interrupted after live progress");
         Thread.interrupted();
+        MultiPvTest.run();
         System.out.println("PASS: " + assertions + " assertions; start perft 44 / 1920 / 79666; rules, PGN import, engine and cancellation");
     }
 }

@@ -33,6 +33,11 @@ public final class PlayerNamesTest {
         check(!PlayerNames.pinyinFallback("余建国"),"Contemporary ranking confirms the established Italian participant spelling");
         check(!PlayerNames.pinyinFallback("邓雄越"),"Verified Vietnamese form is not a fallback");
         check(PlayerNames.source("胡荣华").startsWith("https://www.wxf-xiangqi.org/"),"Curated spelling carries its primary source");
+        check("Trenh A Sang".equals(PlayerNames.readable("郑亚生"))&&PlayerNames.searchText("郑亚生").contains(PlayerNames.fold("Trềnh A Sáng")),"Named former champion has official spelling and accented search alias");
+        check("Uong Duong Bac".equals(PlayerNames.readable("汪洋北")),"Vietnamese master is distinct from the different Chinese player Wang Yang");
+        check("Le Thi Kim Loan".equals(PlayerNames.readable("黎氏金銮")),"Championship source variant resolves to the verified Vietnamese spelling");
+        check("Nguyen Minh Nhat Quang".equals(PlayerNames.readable("阮明日光")),"Recent Vietnamese championship participant uses the official program spelling");
+        check("Brian George A/L A S Anthony Dass".equals(PlayerNames.readable("布莱恩乔")),"Truncated 2022 source name resolves through official ranking identity");
         for(String arg:args)for(String original:Files.readAllLines(Path.of(arg),StandardCharsets.UTF_8)) {
             if(original.codePoints().noneMatch(c->Character.UnicodeScript.of(c)==Character.UnicodeScript.HAN))continue;
             check(PlayerNames.mapped(original),"Every bundled Chinese source name is mapped: "+original);

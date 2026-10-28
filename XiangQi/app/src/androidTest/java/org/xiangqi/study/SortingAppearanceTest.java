@@ -12,8 +12,11 @@ import android.os.SystemClock;
 import android.test.InstrumentationTestCase;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.MotionEvent;
+import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -28,6 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /** Real date-sort, color-entry and appearance persistence controls. */
 public final class SortingAppearanceTest extends InstrumentationTestCase {
@@ -74,13 +79,13 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
                 field("games").set(activity,Arrays.asList(game("Unknown","1982.??.??","Archive A"),game("Latest","2025-09-27","Archive B"),
                     game("Earliest","1982.10.04","Historical Audit Collection"),game("Latest tie","2025.09.27","Archive B")));
                 Method render=MainActivity.class.getDeclaredMethod("renderCards");render.setAccessible(true);render.invoke(activity);
-                assertEquals("Latest",firstRed());
-                Spinner sort=(Spinner)findDescription(root(),"Game sort order");assertEquals(1,sort.getSelectedItemPosition());sort.setSelection(2);
+                Spinner sort=(Spinner)findDescription(root(),"Game sort order");assertEquals(1,sort.getSelectedItemPosition());
             }catch(Exception e){throw new RuntimeException(e);}
         });
+        getInstrumentation().waitForIdleSync();main(()->{assertEquals("Latest",firstRed());((Spinner)findDescription(root(),"Game sort order")).setSelection(2);});
         getInstrumentation().waitForIdleSync();main(()->assertEquals("Earliest",firstRed()));assertEquals("oldest",study.getString("librarySort",""));
         main(()->((EditText)findType(root(),EditText.class)).setText("Historical Audit Collection"));getInstrumentation().waitForIdleSync();
-        main(()->{assertEquals(1,cards().getChildCount());assertEquals("Earliest",firstRed());((EditText)findType(root(),EditText.class)).setText("");});
+        main(()->{assertEquals(1,gameCount());assertEquals("Earliest",firstRed());((EditText)findType(root(),EditText.class)).setText("");});
         getInstrumentation().waitForIdleSync();
         main(()->((Spinner)findDescription(root(),"Game sort order")).setSelection(0));getInstrumentation().waitForIdleSync();main(()->assertEquals("Unknown",firstRed()));
         main(()->((Spinner)findDescription(root(),"Game sort order")).setSelection(2));getInstrumentation().waitForIdleSync();
@@ -88,17 +93,72 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         main(activity::recreate);Activity recreated=monitor.waitForActivityWithTimeout(10000);getInstrumentation().removeMonitor(monitor);assertNotNull(recreated);activity=recreated;awaitLibrary();
         main(()->assertEquals("Sort selection must survive recreation",2,((Spinner)findDescription(root(),"Game sort order")).getSelectedItemPosition()));
     }
-    public void testLibraryPaginationStaysBoundedAndSearchAndSortResetIt() throws Exception {
-        launch();List<GameRepository.Game> fixtures=new ArrayList<>();for(int i=0;i<85;i++)fixtures.add(game("Page fixture "+i,"2025-09-27","Pagination audit"));
-        main(()->{try{field("games").set(activity,fixtures);Method render=MainActivity.class.getDeclaredMethod("renderCards");render.setAccessible(true);render.invoke(activity);}catch(Exception e){throw new RuntimeException(e);}});
-        getInstrumentation().waitForIdleSync();main(()->{assertEquals(40,cards().getChildCount());assertEquals("Page fixture 0",firstRed());assertFalse(findText(root(),"Previous 40 games").isEnabled());findText(root(),"Next 40 games").performClick();});
-        getInstrumentation().waitForIdleSync();main(()->{assertEquals(40,cards().getChildCount());assertEquals("Page fixture 40",firstRed());findText(root(),"Next 40 games").performClick();});
-        getInstrumentation().waitForIdleSync();main(()->{assertEquals("Final page contains only remaining matches",5,cards().getChildCount());assertEquals("Page fixture 80",firstRed());assertFalse(findText(root(),"Next 40 games").isEnabled());findText(root(),"Previous 40 games").performClick();});
-        getInstrumentation().waitForIdleSync();main(()->{assertEquals(40,cards().getChildCount());assertEquals("Page fixture 40",firstRed());((EditText)findType(root(),EditText.class)).setText("Page fixture 82");});
-        getInstrumentation().waitForIdleSync();main(()->{assertEquals("Search scans records outside the visible page",1,cards().getChildCount());assertEquals("Page fixture 82",firstRed());assertNull(findText(root(),"Next 40 games"));((EditText)findType(root(),EditText.class)).setText("");});
-        getInstrumentation().waitForIdleSync();main(()->{assertEquals("Clearing search returns to the first page","Page fixture 0",firstRed());findText(root(),"Next 40 games").performClick();});
-        getInstrumentation().waitForIdleSync();main(()->{assertEquals("Page fixture 40",firstRed());((Spinner)findDescription(root(),"Game sort order")).setSelection(2);});
-        getInstrumentation().waitForIdleSync();main(()->{assertEquals("Sorting returns to the first page","Page fixture 0",firstRed());assertEquals(40,cards().getChildCount());});
+    public void testLibrarySearchKeepsFocusDuringRealCharacterTyping()throws Exception{
+        launch();awaitLoadedLibrary();final EditText[] input={null};final Rect[] bounds={null};
+        main(()->{
+            assertEquals("The regression uses the complete real preload",398,gameCount());
+            input[0]=(EditText)findType(root(),EditText.class);assertNotNull(input[0]);
+            assertEquals("",input[0].getText().toString());
+            input[0].requestRectangleOnScreen(new Rect(0,0,input[0].getWidth(),input[0].getHeight()),true);
+        });
+        getInstrumentation().waitForIdleSync();main(()->bounds[0]=screenBounds(input[0]));
+        assertTrue("The search field must have a real visible touch target",bounds[0].width()>0&&bounds[0].height()>0);
+        long down=SystemClock.uptimeMillis();sendPointer(down,MotionEvent.ACTION_DOWN,bounds[0].exactCenterX(),bounds[0].exactCenterY());
+        sendPointer(down,MotionEvent.ACTION_UP,bounds[0].exactCenterX(),bounds[0].exactCenterY());awaitSearchLayout(input[0]);
+        main(()->assertTrue("A real tap must focus the visible search field",input[0].hasFocus()));
+        String query="Trenh";
+        for(int index=0;index<query.length();index++){
+            getInstrumentation().sendStringSync(query.substring(index,index+1));awaitSearchLayout(input[0]);final String expected=query.substring(0,index+1);
+            main(()->{
+                assertEquals("Each real key must remain after filtering and layout",expected,input[0].getText().toString());
+                assertTrue("Filtering must not take focus away from the search field",input[0].hasFocus());
+            });
+        }
+        main(()->assertEquals("All seven Trenh A Sang records are found",7,gameCount()));
+        getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_DEL);awaitSearchLayout(input[0]);
+        main(()->{assertEquals("Tren",input[0].getText().toString());assertTrue(input[0].hasFocus());assertEquals(7,gameCount());});
+        getInstrumentation().sendStringSync("h");awaitSearchLayout(input[0]);
+        main(()->{assertEquals("Trenh",input[0].getText().toString());assertTrue(input[0].hasFocus());assertEquals(7,gameCount());});
+        for(int index=0;index<query.length();index++){getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_DEL);awaitSearchLayout(input[0]);}
+        main(()->{assertEquals("",input[0].getText().toString());assertTrue("Clearing also retains input focus",input[0].hasFocus());assertEquals(398,gameCount());});
+    }
+    public void testContinuousLibraryIncludesEveryGameAndLazilyRecyclesRows() throws Exception {
+        launch();main(()->{try{int source=((List<?>)field("games").get(activity)).size();assertTrue(source>=337);assertEquals("Every preloaded/imported game is in the continuous adapter",source,gameCount());}catch(Exception e){throw new RuntimeException(e);}});
+        List<GameRepository.Game> fixtures=new ArrayList<>();for(int i=0;i<85;i++)fixtures.add(game("Continuous fixture "+i,"2025-09-27","Continuous scroll audit"));
+        replaceLibrary(fixtures);getInstrumentation().waitForIdleSync();
+        main(()->{assertEquals(85,gameCount());assertEquals("Continuous fixture 0",firstRed());assertNull(findText(root(),"Previous 40 games"));assertNull(findText(root(),"Next 40 games"));assertTrue("Only on-screen rows are materialized",libraryList().getChildCount()<20);libraryList().setSelection(libraryList().getHeaderViewsCount()+84);});
+        getInstrumentation().waitForIdleSync();main(()->{assertNotNull("Scrolling reaches a game beyond the old page limit",findText(root(),"Continuous fixture 84"));assertTrue(libraryList().getChildCount()<20);libraryList().setSelection(0);});
+        getInstrumentation().waitForIdleSync();main(()->((EditText)findType(root(),EditText.class)).setText("Continuous fixture 82"));getInstrumentation().waitForIdleSync();
+        main(()->{assertEquals("Search covers rows that were never bound",1,gameCount());assertEquals("Continuous fixture 82",firstRed());((EditText)findType(root(),EditText.class)).setText("");});
+        getInstrumentation().waitForIdleSync();main(()->{assertEquals("Clearing search returns to the beginning","Continuous fixture 0",firstRed());assertEquals(85,gameCount());((Spinner)findDescription(root(),"Game sort order")).setSelection(2);});
+        getInstrumentation().waitForIdleSync();main(()->assertEquals("Continuous fixture 0",firstRed()));
+        List<GameRepository.Game> large=new ArrayList<>();for(int i=0;i<3000;i++)large.add(game("Large fixture "+i,"2025-09-27","Large imported-library audit"));
+        long began=SystemClock.uptimeMillis();replaceLibrary(large);getInstrumentation().waitForIdleSync();
+        assertTrue("A large library must bind promptly without inflating all its cards",SystemClock.uptimeMillis()-began<5000);
+        main(()->{assertEquals(3000,gameCount());assertTrue("Large libraries still materialize only visible rows",libraryList().getChildCount()<20);libraryList().setSelection(libraryList().getHeaderViewsCount()+2999);});
+        getInstrumentation().waitForIdleSync();main(()->assertNotNull("The last of 3,000 games remains scrollable",findText(root(),"Large fixture 2999")));
+    }
+    public void testDeepLibraryScrollSurvivesGameReturnSwipeAndRecreation() throws Exception {
+        launch();
+        final int[] scroll=new int[2];final String[] current=new String[2];
+        main(()->{assertTrue("A deep library must extend beyond the old page boundary",gameCount()>=337);ListView list=libraryList();list.setSelectionFromTop(list.getHeaderViewsCount()+64,-Math.round(23*activity.getResources().getDisplayMetrics().density));});
+        getInstrumentation().waitForIdleSync();
+        main(()->{
+            ListView list=libraryList();scroll[0]=list.getFirstVisiblePosition();scroll[1]=list.getChildAt(0).getTop();current[0]=firstRed();
+            assertTrue(scroll[0]>40);assertTrue("Restore must preserve a partly scrolled row",scroll[1]<0);
+            assertNull("The header is detached deep in the virtual list",findText(root(),"Xiangqi Study"));
+            View card=list.getChildAt(1);assertTrue(card.getContentDescription().toString().startsWith("Red: "));assertTrue(card.performClick());
+            try{current[1]=((GameRepository.Game)field("game").get(activity)).id;}catch(Exception e){throw new RuntimeException(e);}
+        });
+        getInstrumentation().waitForIdleSync();main(()->{assertNotNull(findType(root(),BoardView.class));assertTrue(findText(root(),"‹  Library").performClick());});
+        awaitLoadedLibrary();assertLibraryScroll(scroll,current[0]);
+        // A real pointer swipe starts on a deep, recycled card with no header.
+        swipeLeftFromLibrary();
+        main(()->{try{assertFalse(field("library").getBoolean(activity));assertEquals("Swipe returns to the exact current game",current[1],((GameRepository.Game)field("game").get(activity)).id);assertNotNull(findType(root(),BoardView.class));assertTrue(findText(root(),"‹  Library").performClick());}catch(Exception e){throw new RuntimeException(e);}});
+        awaitLoadedLibrary();assertLibraryScroll(scroll,current[0]);
+        Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(MainActivity.class.getName(),null,false);
+        main(activity::recreate);Activity recreated=monitor.waitForActivityWithTimeout(10000);getInstrumentation().removeMonitor(monitor);assertNotNull(recreated);activity=recreated;
+        awaitLoadedLibrary();assertLibraryScroll(scroll,current[0]);
     }
     public void testSettingsColorPickerCommitsAndResetsIndependently() throws Exception {
         launch();main(()->findText(root(),"Settings").performClick());getInstrumentation().waitForIdleSync();
@@ -186,18 +246,18 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         StudySettings.setCustomColor(context,"boardColor",0xff112233);
         StudySettings.selectDiscPreset(context,"jade");assertColors(0xff112233,null,null);
     }
-    public void testLongPlayerNamesDoNotMoveBoardOrPositionSliderBetweenTurns() throws Exception {
+    public void testLongPlayerNamesDoNotMoveBoardOrPositionLabelBetweenTurns() throws Exception {
         launch();GameRepository.Game game=game("Nguyễn Thành Bảo · Vietnamese master — international classical championship record","2025-09-27","");
         game.black="Andy Wo";game.moves.addAll(Arrays.asList("b2e2","b9c7","a0a1","a9a8","h2g2","h9g7"));
         main(()->{try{field("games").set(activity,Arrays.asList(game));Method open=MainActivity.class.getDeclaredMethod("openGame",GameRepository.Game.class,boolean.class);open.setAccessible(true);open.invoke(activity,game,false);}catch(Exception e){throw new RuntimeException(e);}});
         getInstrumentation().waitForIdleSync();
-        main(()->{View seek=findType(root(),SeekBar.class);assertNotNull(seek);seek.requestRectangleOnScreen(new Rect(0,0,seek.getWidth(),seek.getHeight()),true);});getInstrumentation().waitForIdleSync();
-        Rect[] bounds={null,null};main(()->{bounds[0]=screenBounds(findType(root(),BoardView.class));bounds[1]=screenBounds(findType(root(),SeekBar.class));assertTrue(bounds[0].width()>0);assertTrue(bounds[1].height()>0);});
+        main(()->{try{View label=(View)field("positionLabel").get(activity);label.requestRectangleOnScreen(new Rect(0,0,label.getWidth(),label.getHeight()),true);}catch(Exception error){throw new RuntimeException(error);}});getInstrumentation().waitForIdleSync();
+        Rect[] bounds={null,null};main(()->{try{bounds[0]=screenBounds(findType(root(),BoardView.class));bounds[1]=screenBounds((View)field("positionLabel").get(activity));assertTrue(bounds[0].width()>0);assertTrue(bounds[1].height()>0);assertNull(findType(root(),SeekBar.class));}catch(Exception error){throw new RuntimeException(error);}});
         for(int ply:new int[]{0,1,2,3,6,5,4,1,0}) {
             main(()->{try{Method navigate=MainActivity.class.getDeclaredMethod("navigate",int.class);navigate.setAccessible(true);navigate.invoke(activity,ply);}catch(Exception e){throw new RuntimeException(e);}});getInstrumentation().waitForIdleSync();
             main(()->{
                 assertEquals("Board bounds must remain fixed at half-move "+ply,bounds[0],screenBounds(findType(root(),BoardView.class)));
-                assertEquals("Position slider bounds must remain fixed at half-move "+ply,bounds[1],screenBounds(findType(root(),SeekBar.class)));
+                try{assertEquals("Position label bounds must remain fixed at half-move "+ply,bounds[1],screenBounds((View)field("positionLabel").get(activity)));}catch(Exception error){throw new RuntimeException(error);}
                 assertFalse("Side to move is a board dot, without a wrapping turn label",containsTurnText(root()));
                 String description=findType(root(),BoardView.class).getContentDescription().toString();assertTrue(description.contains((ply%2==0?"Red":"Black")+" to move."));
                 assertTrue(description.contains("Red: "+game.red));assertTrue(description.contains("Black: "+game.black));
@@ -209,8 +269,8 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         for(int cycle=0;cycle<500;cycle++)game.moves.addAll(Arrays.asList("b0c2","b9c7","c2b0","c7b9"));
         main(()->{try{field("games").set(activity,Arrays.asList(game));Method open=MainActivity.class.getDeclaredMethod("openGame",GameRepository.Game.class,boolean.class);open.setAccessible(true);open.invoke(activity,game,false);}catch(Exception e){throw new RuntimeException(e);}});
         getInstrumentation().waitForIdleSync();
-        main(()->{View seek=findType(root(),SeekBar.class);assertNotNull(seek);seek.requestRectangleOnScreen(new Rect(0,0,seek.getWidth(),seek.getHeight()),true);});getInstrumentation().waitForIdleSync();
-        Rect[] bounds={null,null};main(()->{bounds[0]=screenBounds(findType(root(),BoardView.class));bounds[1]=screenBounds(findType(root(),SeekBar.class));});
+        main(()->{try{View label=(View)field("positionLabel").get(activity);label.requestRectangleOnScreen(new Rect(0,0,label.getWidth(),label.getHeight()),true);}catch(Exception error){throw new RuntimeException(error);}});getInstrumentation().waitForIdleSync();
+        Rect[] bounds={null,null};main(()->{try{bounds[0]=screenBounds(findType(root(),BoardView.class));bounds[1]=screenBounds((View)field("positionLabel").get(activity));}catch(Exception error){throw new RuntimeException(error);}});
         for(int ply:new int[]{0,1,1000,2000,999}) {
             main(()->{
                 try {
@@ -218,14 +278,16 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
                     ViewGroup records=(ViewGroup)field("movesView").get(activity);int rows=0;
                     for(int i=0;i<records.getChildCount();i++)if(records.getChildAt(i) instanceof LinearLayout)rows++;
                     assertEquals("Move record renders a fixed40-row window",40,rows);assertTrue(records.getChildCount()<=41);
-                    assertEquals("Full navigation range is retained",2000,((SeekBar)findType(root(),SeekBar.class)).getMax());
-                    assertEquals(ply,((SeekBar)findType(root(),SeekBar.class)).getProgress());
+                    assertEquals("Full position range is retained",2001,((List<?>)field("positions").get(activity)).size());
+                    assertEquals(ply,field("ply").getInt(activity));
                     assertEquals("Working history is never truncated",2000,((List<?>)field("workingMoves").get(activity)).size());
                     if(ply>0)assertNotNull("Selected move must remain in the current window",findDescription(root(),"After half-move "+ply+", "+game.moves.get(ply-1)));
                 }catch(Exception e){throw new RuntimeException(e);}
             });getInstrumentation().waitForIdleSync();
-            main(()->{assertEquals(bounds[0],screenBounds(findType(root(),BoardView.class)));assertEquals(bounds[1],screenBounds(findType(root(),SeekBar.class)));});
+            main(()->{try{assertEquals(bounds[0],screenBounds(findType(root(),BoardView.class)));assertEquals(bounds[1],screenBounds((View)field("positionLabel").get(activity)));}catch(Exception error){throw new RuntimeException(error);}});
         }
+        UiTestActions.goToMove(getInstrumentation(),activity,2000);
+        main(()->{try{assertEquals("Numeric navigation reaches the complete record's last half-move",2000,field("ply").getInt(activity));}catch(Exception error){throw new RuntimeException(error);}});
         assertEquals("Source history is unchanged",2000,game.moves.size());
         assertEquals("Export keeps every original half-move",2000,Pgn.parse(GameRepository.export(game,game.moves,false)).get(0).moves.size());
     }
@@ -249,9 +311,9 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         assertEquals("谭氏垂容",source.red);assertEquals("吴宗翰",source.black);
         launch();int[] count={0};
         main(()->((EditText)findType(root(),EditText.class)).setText("Wong Hok Him"));getInstrumentation().waitForIdleSync();
-        main(()->{assertNotNull(findText(root(),"Wong Hok Him · 黄学谦"));count[0]=cards().getChildCount();assertTrue(count[0]>0);});
-        main(()->((EditText)findType(root(),EditText.class)).setText("黄学谦"));getInstrumentation().waitForIdleSync();main(()->assertEquals(count[0],cards().getChildCount()));
-        main(()->((EditText)findType(root(),EditText.class)).setText("Huang Xueqian"));getInstrumentation().waitForIdleSync();main(()->assertEquals(count[0],cards().getChildCount()));
+        main(()->{assertNotNull(findText(root(),"Wong Hok Him · 黄学谦"));count[0]=gameCount();assertTrue(count[0]>0);});
+        main(()->((EditText)findType(root(),EditText.class)).setText("黄学谦"));getInstrumentation().waitForIdleSync();main(()->assertEquals(count[0],gameCount()));
+        main(()->((EditText)findType(root(),EditText.class)).setText("Huang Xueqian"));getInstrumentation().waitForIdleSync();main(()->assertEquals(count[0],gameCount()));
         main(()->((EditText)findType(root(),EditText.class)).setText("Đàm Thị Thùy Dung"));getInstrumentation().waitForIdleSync();
         main(()->assertNotNull("Native accent spelling must find the readable player",findText(root(),"Dam Thi Thuy Dung · 谭氏垂容")));
     }
@@ -264,13 +326,20 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
     private void assertColors(Integer board,Integer red,Integer black){StudySettings current=StudySettings.load(getInstrumentation().getTargetContext());assertEquals("Board override",board,current.boardColor);assertEquals("Red background override",red,current.redBackground);assertEquals("Black background override",black,current.blackBackground);}
     private void openColor(AlertDialog settings,String text){main(()->{View view=findText(settings.getWindow().getDecorView(),text);assertNotNull(view);view.performClick();});getInstrumentation().waitForIdleSync();}
     private void launch()throws Exception{activity=getInstrumentation().startActivitySync(new Intent(getInstrumentation().getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));awaitLibrary();}
+    private void awaitSearchLayout(View input)throws Exception{CountDownLatch frame=new CountDownLatch(1);main(()->input.postOnAnimation(()->input.postOnAnimation(frame::countDown)));assertTrue("Search layout must settle",frame.await(5,TimeUnit.SECONDS));getInstrumentation().waitForIdleSync();}
     private void awaitLibrary()throws Exception{long until=SystemClock.uptimeMillis()+15000;boolean[] ready={false};while(SystemClock.uptimeMillis()<until){main(()->ready[0]=findDescription(root(),"Game sort order")!=null);if(ready[0])return;Thread.sleep(50);}fail("Library did not load");}
+    private void awaitLoadedLibrary()throws Exception{long until=SystemClock.uptimeMillis()+15000;boolean[] ready={false};while(SystemClock.uptimeMillis()<until){getInstrumentation().waitForIdleSync();main(()->{try{ready[0]=field("loaded").getBoolean(activity)&&field("library").getBoolean(activity)&&libraryList()!=null&&libraryList().getChildCount()>0;}catch(Exception e){throw new RuntimeException(e);}});if(ready[0])return;Thread.sleep(50);}fail("Scrolled library did not load");}
+    private void assertLibraryScroll(int[] expected,String red){main(()->{assertEquals("First visible library position must survive",expected[0],libraryList().getFirstVisiblePosition());assertEquals("Partial-row pixel offset must survive",expected[1],libraryList().getChildAt(0).getTop());assertEquals("The same game remains at the top",red,firstRed());assertNull(findText(root(),"Xiangqi Study"));});}
+    private void swipeLeftFromLibrary(){final int[] size=new int[2];main(()->{size[0]=root().getWidth();size[1]=root().getHeight();});long down=SystemClock.uptimeMillis();float y=size[1]*.65f;sendPointer(down,MotionEvent.ACTION_DOWN,size[0]*.85f,y);for(int step=1;step<=10;step++){SystemClock.sleep(20);sendPointer(down,MotionEvent.ACTION_MOVE,size[0]*(.85f-.7f*step/10f),y);}sendPointer(down,MotionEvent.ACTION_UP,size[0]*.15f,y);getInstrumentation().waitForIdleSync();}
+    private void sendPointer(long down,int action,float x,float y){MotionEvent event=MotionEvent.obtain(down,SystemClock.uptimeMillis(),action,x,y,0);try{getInstrumentation().sendPointerSync(event);}finally{event.recycle();}}
     private AlertDialog dialog(String name){AlertDialog[] result={null};main(()->{try{result[0]=(AlertDialog)field(name).get(activity);}catch(Exception e){throw new RuntimeException(e);}});return result[0];}
     private static Field field(String name)throws Exception{Field field=MainActivity.class.getDeclaredField(name);field.setAccessible(true);return field;}
-    private LinearLayout cards(){try{return (LinearLayout)field("cards").get(activity);}catch(Exception e){throw new RuntimeException(e);}}
-    private String firstRed(){return ((TextView)((ViewGroup)((ViewGroup)cards().getChildAt(0)).getChildAt(0)).getChildAt(1)).getText().toString();}
+    private ListView libraryList(){try{return (ListView)field("libraryList").get(activity);}catch(Exception e){throw new RuntimeException(e);}}
+    private int gameCount(){return libraryList().getAdapter().getCount()-libraryList().getHeaderViewsCount();}
+    private String firstRed(){ListView list=libraryList();for(int i=0;i<list.getChildCount();i++){View card=list.getChildAt(i);if(card.getContentDescription()!=null&&card.getContentDescription().toString().startsWith("Red: "))return ((TextView)((ViewGroup)((ViewGroup)card).getChildAt(0)).getChildAt(1)).getText().toString();}fail("No visible game card");return "";}
+    private void replaceLibrary(List<GameRepository.Game> games){main(()->{try{field("games").set(activity,games);Method reset=MainActivity.class.getDeclaredMethod("resetLibraryScroll");reset.setAccessible(true);reset.invoke(activity);Method render=MainActivity.class.getDeclaredMethod("renderCards");render.setAccessible(true);render.invoke(activity);}catch(Exception e){throw new RuntimeException(e);}});}
     private static GameRepository.Game game(String red,String date,String collection){GameRepository.Game game=new GameRepository.Game();game.id="sort-"+red;game.red=red;game.black="Black player";game.date=date;game.collection=collection;game.event="Date sorting audit";game.round="";game.result="*";game.startFen="";game.sourceUrl="";return game;}
-    private void main(Runnable work){getInstrumentation().runOnMainSync(work);}
+    private void main(Runnable work){UiTestActions.runOnMain(getInstrumentation(),work);}
     private View root(){return activity.getWindow().getDecorView();}
     private static View findText(View view,String text){if(view instanceof TextView&&text.contentEquals(((TextView)view).getText()))return view;return findChildren(view,child->findText(child,text));}
     private static View findDescription(View view,String text){if(text.contentEquals(view.getContentDescription()==null?"":view.getContentDescription()))return view;return findChildren(view,child->findDescription(child,text));}

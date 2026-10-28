@@ -15,6 +15,19 @@ public final class Engine {
 
     public interface ProgressListener { void onProgress(Result snapshot); }
 
+    /** One ranked root alternative. Scores always favor Red when positive. */
+    public static final class Line {
+        public final int rank, score, depth;
+        public final String bestMove;
+        public final List<String> pv;
+        public Line(int rank, int score, int depth, List<String> pv) {
+            this.rank = rank; this.score = score; this.depth = depth;
+            this.pv = Collections.unmodifiableList(new ArrayList<>(pv));
+            this.bestMove = this.pv.isEmpty() ? null : this.pv.get(0);
+        }
+        public Line copy() { return new Line(rank, score, depth, pv); }
+    }
+
     public static final class Result {
         /** Centipawns from Red's perspective, including terminal scores +/-30000. */
         public int score;
@@ -22,12 +35,21 @@ public final class Engine {
         public long nodes;
         public String bestMove;
         public List<String> pv = Collections.emptyList();
+        /** Immutable ranked alternatives from the current exact root iteration. */
+        public List<Line> lines = Collections.emptyList();
+        // Parser bookkeeping belongs to this search, never global/shared state.
+        int uciIterationDepth = -1;
+        String uciRoot;
 
         /** An independent progress snapshot; later search updates cannot change its PV. */
         public Result copy() {
             Result copy = new Result(); copy.score = score; copy.depth = depth;
             copy.nodes = nodes; copy.bestMove = bestMove;
             copy.pv = Collections.unmodifiableList(new ArrayList<>(pv));
+            List<Line> alternatives = new ArrayList<>();
+            for (Line line : lines) alternatives.add(line.copy());
+            copy.lines = Collections.unmodifiableList(alternatives);
+            copy.uciIterationDepth = uciIterationDepth; copy.uciRoot = uciRoot;
             return copy;
         }
     }
@@ -38,7 +60,17 @@ public final class Engine {
 
     /** millis <= 0 searches to the requested depth, or until interrupted. */
     public static Result analyze(Position position, int maxDepth, long millis, ProgressListener listener) {
+        return analyze(position, maxDepth, millis, 1, listener);
+    }
+
+    public static Result analyze(Position position, int maxDepth, long millis, int lines) {
+        return analyze(position, maxDepth, millis, lines, null);
+    }
+
+    /** MultiPV searches actual distinct root moves and their legal continuations. */
+    public static Result analyze(Position position, int maxDepth, long millis, int lines, ProgressListener listener) {
         Engine search = new Engine(millis);
+        int requestedLines = Math.max(1, Math.min(lines, 5));
         Position root = position.copy();
         List<String> moves = root.legalMoves();
         Result result = new Result();
@@ -47,18 +79,40 @@ public final class Engine {
         search.order(root, moves, null);
         result.bestMove = moves.get(0);
         result.pv = Collections.singletonList(result.bestMove);
+        result.lines = Collections.singletonList(new Line(1, result.score, 0, result.pv));
         for (int depth = 1; depth <= Math.max(1, Math.min(maxDepth, 64)); depth++) {
             try {
                 search.checkTime();
-                List<String> pv = new ArrayList<>();
-                int score = search.negamax(root, depth, -MATE - 1, MATE + 1, 0, pv, result.bestMove);
+                List<Line> completed = new ArrayList<>();
+                if (requestedLines == 1) {
+                    List<String> pv = new ArrayList<>();
+                    int score = search.negamax(root, depth, -MATE - 1, MATE + 1, 0, pv, result.bestMove);
+                    completed.add(new Line(1, root.redToMove ? score : -score, depth, pv));
+                } else {
+                    search.order(root, moves, result.bestMove);
+                    for (String move : moves) {
+                        search.checkTime();
+                        List<String> continuation = new ArrayList<>();
+                        // Each alternative receives a full window, so its score
+                        // is exact rather than a root alpha-beta bound.
+                        int score = -search.negamax(root.playUnchecked(move), depth - 1, -MATE - 1, MATE + 1, 1, continuation, null);
+                        List<String> pv = new ArrayList<>(); pv.add(move); pv.addAll(continuation);
+                        completed.add(new Line(0, root.redToMove ? score : -score, depth, pv));
+                    }
+                    completed.sort(Comparator.comparingInt((Line line) -> root.redToMove ? -line.score : line.score));
+                    List<Line> ranked = new ArrayList<>();
+                    for (int i = 0; i < Math.min(requestedLines, completed.size()); i++) {
+                        Line line = completed.get(i); ranked.add(new Line(i + 1, line.score, depth, line.pv));
+                    }
+                    completed = ranked;
+                }
+                Line first = completed.get(0);
                 result.depth = depth;
-                result.score = root.redToMove ? score : -score;
-                result.pv = Collections.unmodifiableList(new ArrayList<>(pv));
-                result.bestMove = pv.isEmpty() ? null : pv.get(0);
+                result.score = first.score; result.pv = first.pv; result.bestMove = first.bestMove;
+                result.lines = Collections.unmodifiableList(completed);
                 result.nodes = search.nodes;
                 if (listener != null) listener.onProgress(result.copy());
-                if (Math.abs(score) >= MATE - 100) break;
+                if (Math.abs(first.score) >= MATE - 100) break;
             } catch (TimeUp e) { break; }
         }
         result.nodes = search.nodes;

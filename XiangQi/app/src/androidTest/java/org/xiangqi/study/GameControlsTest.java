@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import org.xiangqi.study.core.Engine;
 import org.xiangqi.study.core.Position;
@@ -33,7 +32,7 @@ public final class GameControlsTest extends InstrumentationTestCase {
         study=context.getSharedPreferences("study",0);enginePreferences=context.getSharedPreferences("engine-settings",0);
         oldStudy=study.getAll();oldEngine=enginePreferences.getAll();study.edit().clear().commit();
         // The production settings loader also accepts finite, low-cost test limits.
-        enginePreferences.edit().putInt("depth",3).putLong("millis",1500).putInt("threads",1).putInt("hashMb",32).commit();
+        enginePreferences.edit().putInt("depth",3).putLong("millis",1500).putInt("threads",1).putInt("hashMb",32).putInt("lines",1).commit();
         activity=getInstrumentation().startActivitySync(new Intent(context,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
         await(()->findText(root(),"Xiangqi Study")!=null,15000,"Initial library did not load");
         first=fixture("a","Controls A","2020-01-01");middle=fixture("c","Controls C","2021-01-01");last=fixture("b","Controls B","2022-01-01");
@@ -74,7 +73,36 @@ public final class GameControlsTest extends InstrumentationTestCase {
             Engine.Result result=(Engine.Result)get("lastResult");assertTrue(first.initial().legalMoves().contains(result.bestMove));
             assertTrue("Completed analysis is displayed",((TextView)get("analysisText")).getText().toString().contains("Depth "));
         });
-        clickDescription("Next move");main(()->{assertNull("Position navigation clears the previous analysis",get("lastResult"));assertNull(get("analysisFuture"));});
+        clickDescription("Next move");main(()->assertEquals("Analysis remains toggled on after navigation",Boolean.TRUE,get("analysisEnabled")));
+        await(()->get("lastResult")!=null&&((Engine.Result)get("lastResult")).depth>0,15000,"Analysis did not follow the next position");
+        main(()->assertTrue(first.initial().play(first.moves.get(0)).legalMoves().contains(((Engine.Result)get("lastResult")).bestMove)));
+        clickDescription("Game menu");clickExternalText("Stop analysis");clickDescription("Next move");
+        main(()->{assertEquals(Boolean.FALSE,get("analysisEnabled"));assertNull(get("lastResult"));assertNull(get("analysisFuture"));});
+    }
+
+    public void testReplayHasNoStandalonePlayEntryAndContextActionsAreConditional()throws Exception{
+        main(()->{
+            assertNull("The duplicate play entry must be removed",findText(root(),"Play from here"));
+            assertEquals("Recorded replay has no contextual action",View.GONE,((View)get("exploreButton")).getVisibility());
+        });
+        clickDescription("Next move");clickDescription("Previous move");
+        main(()->assertEquals("Moving through the record must not expose the contextual action",View.GONE,((View)get("exploreButton")).getVisibility()));
+        startMatch("Play as Red");
+        main(()->{
+            assertEquals(View.VISIBLE,((View)get("exploreButton")).getVisibility());
+            assertNotNull(findText(root(),"Stop playing"));
+        });
+        clickText("Stop playing");
+        main(()->{
+            assertEquals(Boolean.FALSE,get("vsEngine"));assertEquals(Boolean.TRUE,get("exploring"));
+            assertEquals(View.VISIBLE,((View)get("exploreButton")).getVisibility());
+            assertNotNull(findText(root(),"Return to recorded game"));
+        });
+        clickText("Return to recorded game");
+        main(()->{
+            assertEquals(Boolean.FALSE,get("exploring"));assertEquals(first.moves,get("workingMoves"));
+            assertEquals("Returning to the record removes the contextual action",View.GONE,((View)get("exploreButton")).getVisibility());
+        });
     }
 
     public void testPlayingRedGetsLegalComputerReplyAndCanReturnToRecord()throws Exception{
@@ -131,7 +159,7 @@ public final class GameControlsTest extends InstrumentationTestCase {
     }
 
     private void startMatch(String side)throws Exception{clickDescription("Game menu");clickExternalText("Play against engine");clickExternalText(side);getInstrumentation().waitForIdleSync();}
-    private void clickDescription(String value)throws Exception{main(()->{View control=findDescription(root(),value);assertNotNull("Missing control "+value,control);assertTrue("Control is enabled: "+value,control.isEnabled());control.performClick();});getInstrumentation().waitForIdleSync();}
+    private void clickDescription(String value)throws Exception{if(value.equals("Game menu")){UiTestActions.openGameMenu(getInstrumentation(),activity);return;}main(()->{View control=findDescription(root(),value);assertNotNull("Missing control "+value,control);assertTrue("Control is enabled: "+value,control.isEnabled());control.performClick();});getInstrumentation().waitForIdleSync();}
     private void clickText(String value)throws Exception{main(()->{View control=findText(root(),value);assertNotNull("Missing control "+value,control);control.performClick();});getInstrumentation().waitForIdleSync();}
     private void assertExternalText(String value)throws Exception{long deadline=SystemClock.uptimeMillis()+5000;while(SystemClock.uptimeMillis()<deadline){if(nodeText(getInstrumentation().getUiAutomation().getRootInActiveWindow(),value)!=null)return;Thread.sleep(50);}fail("Menu did not show "+value);}
     private void clickExternalText(String value)throws Exception{assertTrue("Menu action must activate: "+value,UiTestActions.clickPopup(getInstrumentation(),value));}
@@ -143,7 +171,7 @@ public final class GameControlsTest extends InstrumentationTestCase {
     private Object get(String name){try{Field field=MainActivity.class.getDeclaredField(name);field.setAccessible(true);return field.get(activity);}catch(Exception error){throw new RuntimeException(error);}}
     private void set(String name,Object value){try{Field field=MainActivity.class.getDeclaredField(name);field.setAccessible(true);field.set(activity,value);}catch(Exception error){throw new RuntimeException(error);}}
     private void invoke(String name,Class<?>[] types,Object... args){try{Method method=MainActivity.class.getDeclaredMethod(name,types);method.setAccessible(true);method.invoke(activity,args);}catch(Exception error){throw new RuntimeException(error);}}
-    private void main(Runnable work){getInstrumentation().runOnMainSync(work);}
+    private void main(Runnable work){UiTestActions.runOnMain(getInstrumentation(),work);}
     private View root(){return activity.getWindow().getDecorView();}
     private static GameRepository.Game fixture(String id,String red,String date){GameRepository.Game game=new GameRepository.Game();game.id=id;game.red=red;game.black="Opponent";game.date=date;game.event="Navigation audit";game.round="";game.sourceUrl="";game.startFen="";game.result="*";game.moves.addAll(Arrays.asList("b2e2","b9c7","a0a1","a9a8","h2g2","h9g7"));return game;}
     private static View findText(View view,String text){if(view instanceof TextView&&!(view instanceof EditText)&&((TextView)view).getText().toString().startsWith(text))return view;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++){View hit=findText(group.getChildAt(i),text);if(hit!=null)return hit;}}return null;}
