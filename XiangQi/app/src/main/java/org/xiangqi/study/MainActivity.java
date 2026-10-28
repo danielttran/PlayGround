@@ -72,9 +72,9 @@ public final class MainActivity extends Activity {
     private Uri importDialogUri;
     private EditText importNameInput,pasteInput;
     private RadioButton importEngineInput;
-    private String pasteDraftToken="";
+    private String pasteDraftToken="",pasteSessionId="";
     private Engine.Result lastResult;
-    private AlertDialog settingsDialog,engineSettingsDialog,colorDialog,presetDialog,playSideDialog,goToDialog,importCollectionDialog,pasteDialog,replaySpeedDialog,gameInformationDialog;
+    private AlertDialog settingsDialog,engineSettingsDialog,colorDialog,presetDialog,playSideDialog,goToDialog,importCollectionDialog,pasteDialog,replaySpeedDialog,gameInformationDialog,errorDialog;
     private float swipeStartX,swipeStartY;
     private boolean swipeTracking,swipeConsumed,swipeBlocked;
 
@@ -513,7 +513,7 @@ public final class MainActivity extends Activity {
                     playFuture=null;engineThinking=false;Position next=positions.get(ply).play(result.bestMove);workingMoves.add(result.bestMove);positions.add(next);ply++;
                     updateReplay();analysisText.setText(getString(R.string.engine_play_reply,nativeEngine?"Pikafish":"Built-in engine",pretty(result.bestMove),next.legalMoves().isEmpty()?getString(R.string.engine_play_terminal,next.redToMove?"Red":"Black",next.redToMove?"Black":"Red"):getString(R.string.engine_play_your_move)));
                 });
-            }catch(Exception error){runOnUiThread(()->{if(!destroyed&&!library&&vsEngine&&generation==playGeneration){playFuture=null;engineThinking=false;vsEngine=false;updateReplay();analysisText.setText(getString(R.string.engine_play_error,message(error)));resumeAnalysis();}});}
+            }catch(Exception failure){runOnUiThread(()->{if(!destroyed&&!library&&vsEngine&&generation==playGeneration){playFuture=null;engineThinking=false;vsEngine=false;updateReplay();error("Engine could not reply",getString(R.string.engine_play_error,message(failure)));resumeAnalysis();}});}
         });
     }
 
@@ -739,21 +739,23 @@ public final class MainActivity extends Activity {
     }
     private void chooseFile() { Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT); intent.setType("*/*"); intent.addCategory(Intent.CATEGORY_OPENABLE); try{startActivityForResult(intent,IMPORT);}catch(ActivityNotFoundException e){error("File picker unavailable","Use Paste to import a game on this device.");} }
     private void paste() {
+        pasteSessionId=ImportDraftStore.newToken();
         EditText input=new EditText(this); input.setTextColor(LIGHT); input.setHintTextColor(MUTED); input.setHint("[Red \"Player\"]\n[Black \"Opponent\"]\n\n1. b2e2 b9c7 *"); input.setMinLines(7); input.setMaxLines(12); input.setGravity(Gravity.TOP); input.setTextSize(14); input.setTypeface(Typeface.MONOSPACE); pad(input,18,12,18,12);
         input.setContentDescription("Game record text");
         pasteInput=input;
-        AlertDialog d=dialog("Paste into "+pendingImportName).setView(input).setNegativeButton("Cancel",null).setPositiveButton("Import",null).create();pasteDialog=d;d.setOnDismissListener(v->{if(pasteDialog==d){pasteDialog=null;pasteInput=null;if(!destroyed)clearPasteDraft();}});
+        AlertDialog d=dialog("Paste into "+pendingImportName).setView(input).setNegativeButton("Cancel",null).setPositiveButton("Import",null).create();pasteDialog=d;d.setOnDismissListener(v->{if(pasteDialog==d){pasteDialog=null;pasteInput=null;if(!destroyed){clearPasteDraft();pasteSessionId="";}}});
         d.setOnShowListener(v->d.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(b->{String value=input.getText().toString();if(value.getBytes(StandardCharsets.UTF_8).length>GameRepository.MAX_BYTES){input.setError("Text exceeds 5 MB");return;}importText(value,d);}));d.show();
     }
     private void importText(String text) { importText(text,null); }
     private void importText(String text,AlertDialog editing) {
         final String name=pendingImportName;final boolean engineGames=pendingImportEngine;
+        final String session=editing!=null&&editing==pasteDialog?pasteSessionId:"";
         if(editing!=null){editing.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);editing.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);editing.setCancelable(false);if(pasteInput!=null)pasteInput.setEnabled(false);}
         toast("Checking all imported moves…");io.execute(()->{
             try{
                 int added=repository.importText(text,name,engineGames);
                 if(editing!=null)runOnUiThread(()->{if(!destroyed&&pasteDialog==editing)editing.dismiss();});
-                completeImport(added);
+                completeImport(added,session);
             }catch(Exception e){runOnUiThread(()->{
                 if(destroyed)return;
                 if(editing!=null&&pasteDialog==editing&&editing.isShowing()){
@@ -770,13 +772,16 @@ public final class MainActivity extends Activity {
             int added=repository.importText(GameRepository.read(in),name,engineGames);completeImport(added);
         }catch(Exception e){runOnUiThread(()->{if(!destroyed)error("Import was not saved",message(e));});}});
     }
-    @android.annotation.SuppressLint("ApplySharedPref") // FILE_IO only: persist the destination before a replacement Activity's queued load, including after process death.
-    private void completeImport(int added){
+    private void completeImport(int added){completeImport(added,"");}
+    @android.annotation.SuppressLint("ApplySharedPref") // FILE_IO only: persist completion before a replacement Activity's queued load, including after process death.
+    private void completeImport(int added,String pasteSession){
         List<GameRepository.Game> updated=repository.all();List<GameRepository.ImportedCollection> collections=repository.importedCollections();
         String importedId=collections.get(collections.size()-1).id;
         // A replacement Activity queues its load after this task and reads the
         // destination even when the originating Activity has been destroyed.
-        prefs.edit().putString("libraryTab","imports").putString("selectedImportId",importedId).putString("newImportId",importedId).putBoolean("library",true).commit();
+        SharedPreferences.Editor completed=prefs.edit().putString("libraryTab","imports").putString("selectedImportId",importedId).putString("newImportId",importedId).putBoolean("library",true);
+        if(!pasteSession.isEmpty())completed.putString("completedPasteSession",pasteSession);
+        completed.commit();
         runOnUiThread(()->{if(destroyed)return;games=updated;selectLibrary("imports",importedId);prefs.edit().remove("newImportId").apply();toast("Imported "+added+" game"+(added==1?"":"s")+" into a separate collection. Saved on this device.");});
     }
     private void importHelp() { dialog("Supported imports").setMessage("Name your collection and choose Human games or Engine games. Each import appears separately under My imports and never changes the built-in Human or Engine collections.\n\nImport .pgn text using ICCS coordinates (a0–i9), or a normalized JSON pack. Example:\n\n[Red \"Player\"]\n[Black \"Opponent\"]\n[Result \"*\"]\n\n1. b2e2 b9c7 *\n\nComments and side variations in PGN are ignored; the main line is imported. Custom positions use a FEN tag. Every move must be legal, or the whole import is rejected. Duplicate move records within this import are skipped. The same game can be kept in different collections.\n\nFile limit: 5 MB. Binary XQF / CBR / CBL, Chinese move notation and WXF move notation need conversion to ICCS PGN before importing.").setPositiveButton("Got it",null).show(); }
@@ -807,11 +812,13 @@ public final class MainActivity extends Activity {
 
     private void restoreImportDraft(Bundle draft,String text,String error){
         if(draft==null||restoredImportDraft!=draft)return;restoredImportDraft=null;
+        String session=draft.getString("sessionId","");
+        if(!session.isEmpty()&&session.equals(prefs.getString("completedPasteSession",""))){discardImportDraft(draft);return;}
         if("setup".equals(draft.getString("kind"))){
             Uri uri=draft.getParcelable("uri");importCollection(draft.getInt("route",1),uri);
             importNameInput.setText(draft.getString("name",""));importEngineInput.setChecked(draft.getBoolean("engine",false));
         }else if("paste".equals(draft.getString("kind"))){
-            pasteDraftToken=draft.getString("token","");paste();pasteInput.setText(text);
+            pasteDraftToken=draft.getString("token","");paste();if(!session.isEmpty())pasteSessionId=session;pasteInput.setText(text);
             pasteInput.setSelection(Math.max(0,Math.min(text.length(),draft.getInt("cursor",text.length()))));
             if(!error.isEmpty())pasteInput.setError(error);
         }
@@ -825,7 +832,7 @@ public final class MainActivity extends Activity {
             final String previousToken=pasteDraftToken;
             pasteDraftToken=ImportDraftStore.newToken();
             final String token=pasteDraftToken,text=pasteInput.getText().toString();
-            draft.putString("kind","paste");draft.putString("token",token);draft.putInt("cursor",pasteInput.getSelectionStart());
+            draft.putString("kind","paste");draft.putString("token",token);draft.putString("sessionId",pasteSessionId);draft.putInt("cursor",pasteInput.getSelectionStart());
             // FILE_IO writes before a replacement Activity's queued load. Keep
             // multi-megabyte game text out of Android's saved-state transaction.
             io.execute(()->{try{ImportDraftStore.write(this,token,text);if(!previousToken.isEmpty())ImportDraftStore.delete(this,previousToken);}catch(Exception ignored){/* A failed snapshot has its own token, so restoration reports the failure instead of silently showing older text. */}});
@@ -865,11 +872,11 @@ public final class MainActivity extends Activity {
     @Override protected void onRestoreInstanceState(Bundle in){super.onRestoreInstanceState(in);pendingExport=in.getString("pendingExport");}
     @Override protected void onStart(){super.onStart();foreground=true;resumeAnalysis();}
     @Override protected void onStop(){super.onStop();foreground=false;seeking=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
-    @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
+    @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(errorDialog!=null)errorDialog.dismiss();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
     @Override public void onBackPressed(){if(!library)showLibrary();else super.onBackPressed();}
 
     private AlertDialog.Builder dialog(String title){return new AlertDialog.Builder(this,android.R.style.Theme_Material_Dialog_Alert).setTitle(title);}
-    private void error(String title,String message){dialog(title).setMessage(message).setPositiveButton("OK",null).show();}
+    private void error(String title,String message){if(errorDialog!=null)errorDialog.dismiss();AlertDialog shown=dialog(title).setMessage(message).setPositiveButton("OK",null).create();errorDialog=shown;shown.setOnDismissListener(d->{if(errorDialog==shown)errorDialog=null;});shown.show();}
     private void toast(String message){Toast.makeText(this,message,Toast.LENGTH_LONG).show();}
     private static String message(Exception e){String value=e.getMessage()==null?e.getClass().getSimpleName():e.getMessage();return value.length()>2000?value.substring(0,2000)+"…":value;}
     private static String displayResult(String result){return "1/2-1/2".equals(result)?"½–½":result.replace('-','–');}

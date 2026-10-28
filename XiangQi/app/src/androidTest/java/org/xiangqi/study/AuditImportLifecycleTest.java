@@ -2,6 +2,7 @@ package org.xiangqi.study;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -193,6 +194,41 @@ public final class AuditImportLifecycleTest extends InstrumentationTestCase {
             main(()->{assertNull("A successfully committed paste must not reopen as an obsolete editable draft",get("pasteDialog"));assertEquals("Queued engine archive",repository.importedCollections().get(0).name);assertTrue(repository.importedCollections().get(0).engineGame);});
             worker.submit(()->{}).get(15,TimeUnit.SECONDS);assertEquals(1,repository.importedCollections().size());
         }finally{release.countDown();worker.submit(()->{}).get(15,TimeUnit.SECONDS);}
+    }
+
+    public void testCompletedPasteDoesNotReturnFromOlderBackgroundSnapshot()throws Exception {
+        openPaste("Saved background completion",true);main(()->text(dialog("pasteDialog")).setText(DRAFT));
+        Field fileIo=MainActivity.class.getDeclaredField("FILE_IO");fileIo.setAccessible(true);ExecutorService worker=(ExecutorService)fileIo.get(null);
+        CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1),loadEntered=new CountDownLatch(1),loadRelease=new CountDownLatch(1);
+        worker.submit(()->{entered.countDown();try{release.await(20,TimeUnit.SECONDS);}catch(InterruptedException error){Thread.currentThread().interrupt();}});assertTrue(entered.await(3,TimeUnit.SECONDS));
+        Bundle olderState=new Bundle();final Bundle[] olderDraft={null};Activity completedActivity=activity;
+        Application application=(Application)getInstrumentation().getTargetContext().getApplicationContext();
+        Application.ActivityLifecycleCallbacks restoreOlderSnapshot=new Application.ActivityLifecycleCallbacks(){
+            @Override public void onActivityPostSaveInstanceState(Activity target,Bundle state){if(target==completedActivity)state.putBundle("importDraft",new Bundle(olderDraft[0]));}
+            @Override public void onActivityCreated(Activity target,Bundle state){}
+            @Override public void onActivityStarted(Activity target){}
+            @Override public void onActivityResumed(Activity target){}
+            @Override public void onActivityPaused(Activity target){}
+            @Override public void onActivityStopped(Activity target){}
+            @Override public void onActivitySaveInstanceState(Activity target,Bundle state){}
+            @Override public void onActivityDestroyed(Activity target){}
+        };
+        boolean registered=false;
+        try{
+            // Android can retain this stopped-Activity state while its queued
+            // import finishes. Restore exactly that older draft after success.
+            main(()->{dialog("pasteDialog").getButton(AlertDialog.BUTTON_POSITIVE).performClick();call("onSaveInstanceState",new Class<?>[]{Bundle.class},olderState);olderDraft[0]=new Bundle(olderState.getBundle("importDraft"));});
+            draftTokens.add(olderDraft[0].getString("token",""));release.countDown();
+            await(()->repository.importedCollections().size()==1&&get("pasteDialog")==null&&"imports".equals(get("libraryTab")),15000,"The original pasted import did not finish while its Activity remained alive");awaitFileIo();
+            assertEquals("The completed UI consumed its temporary routing marker","",preferences.getString("newImportId",""));
+            worker.submit(()->{loadEntered.countDown();try{loadRelease.await(20,TimeUnit.SECONDS);}catch(InterruptedException error){Thread.currentThread().interrupt();}});assertTrue(loadEntered.await(3,TimeUnit.SECONDS));
+            application.registerActivityLifecycleCallbacks(restoreOlderSnapshot);registered=true;recreateWithoutWaiting();main(()->set("repository",repository));loadRelease.countDown();
+            await(()->Boolean.TRUE.equals(get("loaded")),15000,"The replacement did not load the committed collection");getInstrumentation().waitForIdleSync();
+            main(()->{assertNull("An already committed paste must not reopen from an older background snapshot",get("pasteDialog"));assertEquals("imports",get("libraryTab"));});
+            assertEquals("Restoring older state must not duplicate the successful import",1,repository.importedCollections().size());
+        }finally{
+            if(registered)application.unregisterActivityLifecycleCallbacks(restoreOlderSnapshot);release.countDown();loadRelease.countDown();worker.submit(()->{}).get(15,TimeUnit.SECONDS);
+        }
     }
 
     public void testDraftStoreRoundTripByteLimitAndTokenBoundary()throws Exception {

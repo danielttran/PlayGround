@@ -166,6 +166,7 @@ public final class AuditFlowTest extends InstrumentationTestCase {
     }
     private int progress() throws Exception {final int[] value={-1};main(()->{try{Field field=MainActivity.class.getDeclaredField("ply");field.setAccessible(true);value[0]=field.getInt(activity);}catch(Exception error){throw new RuntimeException(error);}});return value[0];}
     private void click(String text) throws Exception {
+        if(text.equals("Legal moves…")){main(()->{View entry=findDescription(root(),"Explore mode. Open legal moves list.");assertNotNull("Variation mode must offer accessible move entry",entry);entry.performClick();});getInstrumentation().waitForIdleSync();return;}
         if(text.equals("Analyze")){
             final boolean[] enabled={false};main(()->{try{Field field=MainActivity.class.getDeclaredField("analysisEnabled");field.setAccessible(true);enabled[0]=field.getBoolean(activity);}catch(Exception error){throw new RuntimeException(error);}});
             if(!enabled[0]){clickDescription("Game menu");clickDialog("Start analysis");}return;

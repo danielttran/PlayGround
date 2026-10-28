@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.1 (version code 10) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.2 (version code 11) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -102,6 +102,9 @@ depth/thread/hash settings otherwise remain unchanged. Stop playing preserves
 the variation and resumes free editing. Position/game navigation, starting
 analysis, backgrounding and destruction cancel the pending opponent search and
 invalidate late replies. The original record and source result are unchanged.
+Failed replies show an independent error dialog, preserving the variation and
+resuming study analysis if enabled. The dialog is dismissed on Activity destruction;
+it remains visible even when the analysis panel is hidden.
 
 ## Records and import boundary
 
@@ -127,6 +130,10 @@ snapshot; Cancel or successful import removes the current one. An unavailable
 snapshot restores an empty editor with an explicit error. Invalid pasted moves
 stay in the editor for correction. During validation the editor and action
 buttons are disabled; completion across recreation suppresses stale draft UI.
+Each paste editor also has a stable session UUID carried across its snapshots.
+Successful completion persists that UUID alongside the import destination before
+UI routing. Restoration ignores an already completed session, including an older
+background snapshot whose temporary routing marker was already consumed.
 
 Format detection prioritizes a valid JSON root before testing leading PGN
 comments, so braces in quoted JSON metadata are not confused with comments.
@@ -174,4 +181,4 @@ The Android manifest requests no `INTERNET` permission and disables automatic ap
 
 Pikafish's GPL-3.0 code and separately licensed NNUE weights retain their upstream notices and exact release source pointers under `third_party/pikafish`. WXF source material retains its own rights; app source licensing does not relicense game pages or engine assets.
 
-See [AUDIT-0.7.1.md](AUDIT-0.7.1.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover all three bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.7.md](AUDIT-0.7.md), [AUDIT-0.6.md](AUDIT-0.6.md), [AUDIT-0.5.2.md](AUDIT-0.5.2.md), [AUDIT-0.5.1.md](AUDIT-0.5.1.md), [AUDIT-0.5.md](AUDIT-0.5.md), [AUDIT-0.4.md](AUDIT-0.4.md), [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.
+See [AUDIT-0.7.2.md](AUDIT-0.7.2.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover all three bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.7.1.md](AUDIT-0.7.1.md), [AUDIT-0.7.md](AUDIT-0.7.md), [AUDIT-0.6.md](AUDIT-0.6.md), [AUDIT-0.5.2.md](AUDIT-0.5.2.md), [AUDIT-0.5.1.md](AUDIT-0.5.1.md), [AUDIT-0.5.md](AUDIT-0.5.md), [AUDIT-0.4.md](AUDIT-0.4.md), [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.

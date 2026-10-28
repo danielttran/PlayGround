@@ -1,6 +1,6 @@
 # Xiangqi Study
 
-A native Android app for replaying Xiangqi games, exploring alternatives, and analyzing positions offline. Version **0.7.1** adds a compact replay header, an independently scrolling move record and a progression slider below the board. It also preserves import drafts across rotation, keeps invalid pasted records editable, and correctly handles comment-prefixed PGN and decimal replay speeds. The library has **Human**, **Engine** and **My imports** tabs. Each import becomes a named, private collection with its own Human/Engine classification, search and sorting. Replay speed is adjustable, and the board fills the available width while analysis is off. The app includes 398 human classical games, 24 board styles and 22 Chinese-text piece finishes.
+A native Android app for replaying Xiangqi games, exploring alternatives, and analyzing positions offline. Version **0.7.2** makes failed engine replies visible independently of the analysis panel and prevents completed paste imports reopening from an older Android background snapshot. Replay has a compact header, an independently scrolling move record and a progression slider below the board. Import drafts survive rotation, invalid pasted records stay editable, and comment-prefixed PGN and decimal replay speeds are supported. The library has **Human**, **Engine** and **My imports** tabs. Each import becomes a named, private collection with its own Human/Engine classification, search and sorting. Replay speed is adjustable, and the board fills the available width while analysis is off. The app includes 398 human classical games, 24 board styles and 22 Chinese-text piece finishes.
 
 The Engine tab is ready for verified tournament packs and imported engine games. **No built-in engine games ship yet:** a qualifying 2026 tournament with top engines and accessible complete records has not been verified. The inspected ranking-test thread is not established as a tournament archive. See [engine source research](docs/ENGINE-SOURCES.md).
 
@@ -46,7 +46,7 @@ The delivery file is **`dist/XiangqiStudy-latest.apk`**. Copy it to the phone, o
 adb install -r dist/XiangqiStudy-latest.apk
 ```
 
-The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. Each verified delivery atomically replaces the latest APK, then removes older Xiangqi Study APKs from `dist`. Portable audit APKs stay under `test-results/apk-audit` and are not delivered as phone builds. See [the 0.7.1 audit](docs/AUDIT-0.7.1.md) for the exact checks performed and their device coverage.
+The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. Each verified delivery atomically replaces the latest APK, then removes older Xiangqi Study APKs from `dist`. Portable audit APKs stay under `test-results/apk-audit` and are not delivered as phone builds. See [the 0.7.2 audit](docs/AUDIT-0.7.2.md) for the exact checks performed and their device coverage.
 
 ## Build and check
 
@@ -71,7 +71,7 @@ python scripts/test-pikafish.py --engine C:\path\to\Pikafish-Windows-x86-64-univ
 
 Place the matching official `pikafish.nnue` beside that executable, or pass `--network`. This check sends the same UCI initialization/history commands and parses the actual engine output with the production Java parser; it does not execute Android code.
 
-See [the 0.7.1 audit](docs/AUDIT-0.7.1.md) for current validation, [screenshots](docs/AUDIT-0.7.1.md#screenshots) and known limits. The [0.7 audit](docs/AUDIT-0.7.md), [0.6 audit](docs/AUDIT-0.6.md), [0.5.2 audit](docs/AUDIT-0.5.2.md), [0.5.1 audit](docs/AUDIT-0.5.1.md), [0.5 audit](docs/AUDIT-0.5.md), [0.4 audit](docs/AUDIT-0.4.md), [0.3 audit](docs/AUDIT-0.3.md), [0.2 audit](docs/AUDIT.md) and [initial 0.1 validation](docs/VALIDATION.md) remain historical evidence and do not describe the current APK.
+See [the 0.7.2 audit](docs/AUDIT-0.7.2.md) for current validation and known limits. The [0.7.1 screenshots](docs/AUDIT-0.7.1.md#screenshots) show the retained replay layout. The [0.7.1 audit](docs/AUDIT-0.7.1.md), [0.7 audit](docs/AUDIT-0.7.md), [0.6 audit](docs/AUDIT-0.6.md), [0.5.2 audit](docs/AUDIT-0.5.2.md), [0.5.1 audit](docs/AUDIT-0.5.1.md), [0.5 audit](docs/AUDIT-0.5.md), [0.4 audit](docs/AUDIT-0.4.md), [0.3 audit](docs/AUDIT-0.3.md), [0.2 audit](docs/AUDIT.md) and [initial 0.1 validation](docs/VALIDATION.md) remain historical evidence and do not describe the current APK.
 
 ## Import formats
 
