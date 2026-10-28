@@ -1,0 +1,753 @@
+{
+  "陈孝坤": {
+    "readable": "Chen Xiaokun",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "陈孝坤",
+    "nameWithoutAffiliation": "陈孝坤"
+  },
+  "胡荣华": {
+    "readable": "Hu Ronghua",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "胡荣华",
+    "nameWithoutAffiliation": "胡荣华"
+  },
+  "杨官磷": {
+    "readable": "Yang Guanlin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "杨官磷",
+    "nameWithoutAffiliation": "杨官磷"
+  },
+  "李义庭": {
+    "readable": "Li Yiting",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "李义庭",
+    "nameWithoutAffiliation": "李义庭"
+  },
+  "藏如意": {
+    "readable": "Zang Ruyi",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "藏如意",
+    "nameWithoutAffiliation": "藏如意",
+    "nameNote": "Same collection entry heading identifies 臧如意; source player tag spells 藏如意."
+  },
+  "朱剑秋": {
+    "readable": "Zhu Jianqiu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "朱剑秋",
+    "nameWithoutAffiliation": "朱剑秋"
+  },
+  "杨官璘": {
+    "readable": "Yang Guanlin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "杨官璘",
+    "nameWithoutAffiliation": "杨官璘"
+  },
+  "钱洪发": {
+    "readable": "Qian Hongfa",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "钱洪发",
+    "nameWithoutAffiliation": "钱洪发"
+  },
+  "窦国柱": {
+    "readable": "Dou Guozhu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "窦国柱",
+    "nameWithoutAffiliation": "窦国柱"
+  },
+  "甘肃钱洪发": {
+    "readable": "Qian Hongfa",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "甘肃钱洪发",
+    "nameWithoutAffiliation": "钱洪发"
+  },
+  "黑龙江孟昭忠": {
+    "readable": "Meng Zhaozhong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "黑龙江孟昭忠",
+    "nameWithoutAffiliation": "孟昭忠"
+  },
+  "大连陶汉民": {
+    "readable": "Tao Hanmin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "大连陶汉民",
+    "nameWithoutAffiliation": "陶汉民"
+  },
+  "青岛刘风君": {
+    "readable": "Liu Fengjun",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "青岛刘风君",
+    "nameWithoutAffiliation": "刘风君"
+  },
+  "林业甘奕佑": {
+    "readable": "Gan Yiyou",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "林业甘奕佑",
+    "nameWithoutAffiliation": "甘奕佑"
+  },
+  "煤矿孙树成": {
+    "readable": "Sun Shucheng",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "煤矿孙树成",
+    "nameWithoutAffiliation": "孙树成"
+  },
+  "湖南罗忠才": {
+    "readable": "Luo Zhongcai",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "湖南罗忠才",
+    "nameWithoutAffiliation": "罗忠才"
+  },
+  "辽宁卜风波": {
+    "readable": "Bu Fengbo",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "辽宁卜风波",
+    "nameWithoutAffiliation": "卜风波"
+  },
+  "天津薛占金": {
+    "readable": "Xue Zhanjin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "天津薛占金",
+    "nameWithoutAffiliation": "薛占金"
+  },
+  "广东杨官璘": {
+    "readable": "Yang Guanlin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "广东杨官璘",
+    "nameWithoutAffiliation": "杨官璘"
+  },
+  "广东关志良": {
+    "readable": "Guan Zhiliang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "广东关志良",
+    "nameWithoutAffiliation": "关志良"
+  },
+  "河南李忠雨": {
+    "readable": "Li Zhongyu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "河南李忠雨",
+    "nameWithoutAffiliation": "李忠雨"
+  },
+  "广州黄宝琼": {
+    "readable": "Huang Baoqiong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "广州黄宝琼",
+    "nameWithoutAffiliation": "黄宝琼"
+  },
+  "山东赵文山": {
+    "readable": "Zhao Wenshan",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "山东赵文山",
+    "nameWithoutAffiliation": "赵文山"
+  },
+  "广东李广流": {
+    "readable": "Li Guangliu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "广东李广流",
+    "nameWithoutAffiliation": "李广流"
+  },
+  "河北刘殿中": {
+    "readable": "Liu Dianzhong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "河北刘殿中",
+    "nameWithoutAffiliation": "刘殿中"
+  },
+  "江苏戴荣光": {
+    "readable": "Dai Rongguang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "江苏戴荣光",
+    "nameWithoutAffiliation": "戴荣光"
+  },
+  "上海朱剑秋": {
+    "readable": "Zhu Jianqiu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "上海朱剑秋",
+    "nameWithoutAffiliation": "朱剑秋"
+  },
+  "宁夏王贵福": {
+    "readable": "Wang Guifu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "宁夏王贵福",
+    "nameWithoutAffiliation": "王贵福"
+  },
+  "吉林陶汉民": {
+    "readable": "Tao Hanming",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "吉林陶汉民",
+    "nameWithoutAffiliation": "陶汉民",
+    "nameNote": "Same collection entry heading identifies 陶汉明; source player tag spells 陶汉民."
+  },
+  "广东蔡福如": {
+    "readable": "Cai Furu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "广东蔡福如",
+    "nameWithoutAffiliation": "蔡福如"
+  },
+  "湖北柳大华": {
+    "readable": "Liu Dahua",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "湖北柳大华",
+    "nameWithoutAffiliation": "柳大华"
+  },
+  "河北李来群": {
+    "readable": "Li Laiqun",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "河北李来群",
+    "nameWithoutAffiliation": "李来群"
+  },
+  "四川甘小晋": {
+    "readable": "Gan Xiaojin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "四川甘小晋",
+    "nameWithoutAffiliation": "甘小晋"
+  },
+  "浙江于幼华": {
+    "readable": "Yu Youhua",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "浙江于幼华",
+    "nameWithoutAffiliation": "于幼华"
+  },
+  "广东吕钦": {
+    "readable": "Lv Qin",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "广东吕钦",
+    "nameWithoutAffiliation": "吕钦"
+  },
+  "北京臧如意": {
+    "readable": "Zang Ruyi",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "北京臧如意",
+    "nameWithoutAffiliation": "臧如意"
+  },
+  "上海胡荣华": {
+    "readable": "Hu Ronghua",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "上海胡荣华",
+    "nameWithoutAffiliation": "胡荣华"
+  },
+  "河南郑鑫海": {
+    "readable": "Zheng Xinhai",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "河南郑鑫海",
+    "nameWithoutAffiliation": "郑鑫海"
+  },
+  "湖南马有共": {
+    "readable": "Ma Yougong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "湖南马有共",
+    "nameWithoutAffiliation": "马有共"
+  },
+  "黑龙江王嘉良": {
+    "readable": "Wang Jialiang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "黑龙江王嘉良",
+    "nameWithoutAffiliation": "王嘉良"
+  },
+  "上海朱永康": {
+    "readable": "Zhu Yongkang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "上海朱永康",
+    "nameWithoutAffiliation": "朱永康"
+  },
+  "湖北胡远茂": {
+    "readable": "Hu Yuanmao",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "湖北胡远茂",
+    "nameWithoutAffiliation": "胡远茂"
+  },
+  "上海徐天利": {
+    "readable": "Xu Tianli",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "上海徐天利",
+    "nameWithoutAffiliation": "徐天利"
+  },
+  "天津王家元": {
+    "readable": "Wang Jiayuan",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "天津王家元",
+    "nameWithoutAffiliation": "王家元"
+  },
+  "北京洪磊鑫": {
+    "readable": "Hong Leixin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "北京洪磊鑫",
+    "nameWithoutAffiliation": "洪磊鑫"
+  },
+  "上海于红木": {
+    "readable": "Yu Hongmu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "上海于红木",
+    "nameWithoutAffiliation": "于红木"
+  },
+  "台北吴贵临": {
+    "readable": "Wu Guilin",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=444&option=com_content&view=article&lang=en",
+    "sourceName": "台北吴贵临",
+    "nameWithoutAffiliation": "吴贵临"
+  },
+  "厦门蔡忠诚": {
+    "readable": "Cai Zhongcheng",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "厦门蔡忠诚",
+    "nameWithoutAffiliation": "蔡忠诚"
+  },
+  "江苏徐天红": {
+    "readable": "Xu Tianhong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "江苏徐天红",
+    "nameWithoutAffiliation": "徐天红"
+  },
+  "哈尔滨张东禄": {
+    "readable": "Zhang Donglu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "哈尔滨张东禄",
+    "nameWithoutAffiliation": "张东禄"
+  },
+  "北京侯玉山": {
+    "readable": "Hou Yushan",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "北京侯玉山",
+    "nameWithoutAffiliation": "侯玉山"
+  },
+  "北京孙跃先": {
+    "readable": "Sun Yuexian",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "北京孙跃先",
+    "nameWithoutAffiliation": "孙跃先"
+  },
+  "河北黄勇": {
+    "readable": "Huang Yong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "河北黄勇",
+    "nameWithoutAffiliation": "黄勇"
+  },
+  "江苏季本涵": {
+    "readable": "Ji Benhan",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "江苏季本涵",
+    "nameWithoutAffiliation": "季本涵"
+  },
+  "贵州高明海": {
+    "readable": "Gao Minghai",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "贵州高明海",
+    "nameWithoutAffiliation": "高明海"
+  },
+  "石油周俊来": {
+    "readable": "Zhou Junlai",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "石油周俊来",
+    "nameWithoutAffiliation": "周俊来"
+  },
+  "福建郑伙添": {
+    "readable": "Zheng Huotian",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "福建郑伙添",
+    "nameWithoutAffiliation": "郑伙添"
+  },
+  "河北閻文清": {
+    "readable": "Yan Wenqing",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "河北閻文清",
+    "nameWithoutAffiliation": "閻文清"
+  },
+  "湖北柳大華": {
+    "readable": "Liu Dahua",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "湖北柳大華",
+    "nameWithoutAffiliation": "柳大華"
+  },
+  "江蘇徐乃基": {
+    "readable": "Xu Naiji",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "江蘇徐乃基",
+    "nameWithoutAffiliation": "徐乃基"
+  },
+  "廣東李廣流": {
+    "readable": "Li Guangliu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "廣東李廣流",
+    "nameWithoutAffiliation": "李廣流"
+  },
+  "江蘇戴榮光": {
+    "readable": "Dai Rongguang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "江蘇戴榮光",
+    "nameWithoutAffiliation": "戴榮光"
+  },
+  "上海胡榮華": {
+    "readable": "Hu Ronghua",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "上海胡榮華",
+    "nameWithoutAffiliation": "胡榮華"
+  },
+  "河北閻玉鎖": {
+    "readable": "Yan Yusuo",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "河北閻玉鎖",
+    "nameWithoutAffiliation": "閻玉鎖"
+  },
+  "安徽蔣志梁": {
+    "readable": "Jiang Zhiliang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "安徽蔣志梁",
+    "nameWithoutAffiliation": "蔣志梁"
+  },
+  "前衛李洪濱": {
+    "readable": "Li Hongbin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "前衛李洪濱",
+    "nameWithoutAffiliation": "李洪濱"
+  },
+  "安徽鄒立武山": {
+    "readable": "Zou Liwushan",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "安徽鄒立武山",
+    "nameWithoutAffiliation": "鄒立武山"
+  },
+  "四川蔣全勝": {
+    "readable": "Jiang Quansheng",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "四川蔣全勝",
+    "nameWithoutAffiliation": "蔣全勝"
+  },
+  "上海鄔正偉": {
+    "readable": "Wu Zhengwei",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "上海鄔正偉",
+    "nameWithoutAffiliation": "鄔正偉"
+  },
+  "北京喻之青": {
+    "readable": "Yu Zhiqing",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "北京喻之青",
+    "nameWithoutAffiliation": "喻之青"
+  },
+  "廣東呂欽": {
+    "readable": "Lv Qin",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "廣東呂欽",
+    "nameWithoutAffiliation": "呂欽"
+  },
+  "上海林宏敏": {
+    "readable": "Lin Hongmin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "上海林宏敏",
+    "nameWithoutAffiliation": "林宏敏"
+  },
+  "江蘇王先強": {
+    "readable": "Wang Xianqiang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "江蘇王先強",
+    "nameWithoutAffiliation": "王先強"
+  },
+  "湖南馬有共": {
+    "readable": "Ma Yougong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "湖南馬有共",
+    "nameWithoutAffiliation": "馬有共"
+  },
+  "雲南何連生": {
+    "readable": "He Liansheng",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "雲南何連生",
+    "nameWithoutAffiliation": "何連生"
+  },
+  "吉林胡慶陽": {
+    "readable": "Hu Qingyang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "吉林胡慶陽",
+    "nameWithoutAffiliation": "胡慶陽"
+  },
+  "廈門郭福人": {
+    "readable": "Guo Furen",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "廈門郭福人",
+    "nameWithoutAffiliation": "郭福人"
+  },
+  "黑龍江趙國榮": {
+    "readable": "Zhao Guorong",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "黑龍江趙國榮",
+    "nameWithoutAffiliation": "趙國榮"
+  },
+  "廣東蔡福如": {
+    "readable": "Cai Furu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "廣東蔡福如",
+    "nameWithoutAffiliation": "蔡福如"
+  },
+  "黑龍江王嘉良": {
+    "readable": "Wang Jialiang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "黑龍江王嘉良",
+    "nameWithoutAffiliation": "王嘉良"
+  },
+  "雲南陳信安": {
+    "readable": "Chen Xinan",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "雲南陳信安",
+    "nameWithoutAffiliation": "陳信安"
+  },
+  "河北劉殿中": {
+    "readable": "Liu Dianzhong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "河北劉殿中",
+    "nameWithoutAffiliation": "劉殿中"
+  },
+  "廣東楊官璘": {
+    "readable": "Yang Guanlin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "廣東楊官璘",
+    "nameWithoutAffiliation": "楊官璘"
+  },
+  "廣東鄧頌宏": {
+    "readable": "Deng Songhong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "廣東鄧頌宏",
+    "nameWithoutAffiliation": "鄧頌宏"
+  },
+  "甘肅錢洪發": {
+    "readable": "Qian Hongfa",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "甘肅錢洪發",
+    "nameWithoutAffiliation": "錢洪發"
+  },
+  "浙江蔡偉林": {
+    "readable": "Cai Weilin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "浙江蔡偉林",
+    "nameWithoutAffiliation": "蔡偉林"
+  },
+  "江蘇徐天紅": {
+    "readable": "Xu Tianhong",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "江蘇徐天紅",
+    "nameWithoutAffiliation": "徐天紅"
+  },
+  "廣東許銀川": {
+    "readable": "Xu Yinchuan",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "廣東許銀川",
+    "nameWithoutAffiliation": "許銀川"
+  },
+  "山西牛保明": {
+    "readable": "Niu Baoming",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "山西牛保明",
+    "nameWithoutAffiliation": "牛保明"
+  },
+  "深圳宗永生": {
+    "readable": "Zong Yongsheng",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "深圳宗永生",
+    "nameWithoutAffiliation": "宗永生"
+  },
+  "浙江劉憶慈": {
+    "readable": "Liu Yici",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "浙江劉憶慈",
+    "nameWithoutAffiliation": "劉憶慈"
+  },
+  "河北李來群": {
+    "readable": "Li Laiqun",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "河北李來群",
+    "nameWithoutAffiliation": "李來群"
+  },
+  "于幼華": {
+    "readable": "Yu Youhua",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "于幼華",
+    "nameWithoutAffiliation": "于幼華"
+  },
+  "趙國榮": {
+    "readable": "Zhao Guorong",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "趙國榮",
+    "nameWithoutAffiliation": "趙國榮"
+  },
+  "黃國棣": {
+    "readable": "Huang Guodi",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "黃國棣",
+    "nameWithoutAffiliation": "黃國棣"
+  },
+  "蔡福如": {
+    "readable": "Cai Furu",
+    "kind": "Pinyin transliteration",
+    "sourceName": "蔡福如",
+    "nameWithoutAffiliation": "蔡福如",
+    "sourceUrl": ""
+  },
+  "王嘉良": {
+    "readable": "Wang Jialiang",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "王嘉良",
+    "nameWithoutAffiliation": "王嘉良"
+  },
+  "孟立國": {
+    "readable": "Meng Liguo",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "孟立國",
+    "nameWithoutAffiliation": "孟立國"
+  },
+  "呂欽": {
+    "readable": "Lv Qin",
+    "kind": "existing sourced player alias",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf",
+    "sourceName": "呂欽",
+    "nameWithoutAffiliation": "呂欽"
+  },
+  "閻玉鎖": {
+    "readable": "Yan Yusuo",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "閻玉鎖",
+    "nameWithoutAffiliation": "閻玉鎖"
+  },
+  "許波": {
+    "readable": "Xu Bo",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "許波",
+    "nameWithoutAffiliation": "許波"
+  },
+  "楊官璘": {
+    "readable": "Yang Guanlin",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "楊官璘",
+    "nameWithoutAffiliation": "楊官璘"
+  },
+  "王洪祿": {
+    "readable": "Wang Honglu",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "王洪祿",
+    "nameWithoutAffiliation": "王洪祿"
+  },
+  "殷廣順": {
+    "readable": "Yin Guangshun",
+    "kind": "Pinyin transliteration",
+    "sourceUrl": "",
+    "sourceName": "殷廣順",
+    "nameWithoutAffiliation": "殷廣順"
+  },
+  "孟立国": {
+    "readable": "Meng Liguo",
+    "kind": "Pinyin transliteration",
+    "sourceName": "孟立国",
+    "nameWithoutAffiliation": "孟立国",
+    "sourceUrl": ""
+  },
+  "Li Laiqun": {
+    "readable": "Li Laiqun",
+    "kind": "existing sourced player alias",
+    "sourceName": "河北李來群",
+    "nameWithoutAffiliation": "李來群",
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/Player_Titled_List/20221209_WXF_Official_list_of_titles20221209-.pdf"
+  },
+  "Wan Chunlin": {
+    "readable": "Wan Chunlin",
+    "kind": "Pinyin transliteration",
+    "sourceName": "上海万春林",
+    "nameWithoutAffiliation": "万春林",
+    "sourceUrl": ""
+  }
+}

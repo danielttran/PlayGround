@@ -33,6 +33,14 @@ public final class AuditRepositoryTest extends InstrumentationTestCase {
     private static String pgn(String name,String moves) {
         return "[Event \""+name+"\"]\n[Red \"Audit Red\"]\n[Black \"Audit Black\"]\n[Result \"*\"]\n\n"+moves+" *\n";
     }
+    public void testQuotedClosingBracesRemainJsonAndSchemaErrorsDoNotFallback()throws Exception {
+        Context context=storage();GameRepository repo=new GameRepository(context);int initial=repo.load().size();
+        JSONObject game=new JSONObject().put("event","}and notes").put("moves",new JSONArray().put("b2e2").put("b9c7")).put("result","*");
+        String json=new JSONObject().put("games",new JSONArray().put(game)).toString();
+        assertEquals(1,repo.importText(json,"Quoted JSON",false));assertEquals("}and notes",repo.all().get(initial).event);
+        try{repo.importText(new JSONObject().put("notes","}and notes").toString(),"Invalid JSON schema",false);fail("Valid JSON with no games must not become PGN");}catch(org.json.JSONException expected){}
+        assertEquals(1,repo.importedCollections().size());
+    }
     public void testStaleRepositoryCannotOverwriteNewerImportedGames() throws Exception {
         Context context=storage(); GameRepository first=new GameRepository(context),second=new GameRepository(context);
         int initial=first.load().size();second.load();

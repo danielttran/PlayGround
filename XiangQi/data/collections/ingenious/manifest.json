@@ -1,0 +1,769 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-28",
+  "requestedTitle": "100 Ingenious Xiangqi Games",
+  "chineseTitle": "象棋鬼手百局",
+  "author": "Zhu Jianqiu / 朱剑秋",
+  "identitySource": "https://apps.microsoft.com/detail/9nrkdm5tjhkl?gl=US&hl=en-US",
+  "collectionIndex": "https://www.xiangqiqipu.com/Category/list-58.html",
+  "games": 68,
+  "halfMoves": 5552,
+  "sourceChapters": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    7,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    37,
+    38,
+    39,
+    40,
+    42,
+    43,
+    45,
+    46,
+    49,
+    50,
+    51,
+    52,
+    55,
+    57,
+    59,
+    60,
+    63,
+    68,
+    69,
+    72,
+    73,
+    75,
+    76,
+    78,
+    79,
+    80,
+    83,
+    84,
+    88,
+    89,
+    90,
+    91,
+    92,
+    94,
+    95,
+    96,
+    97,
+    99
+  ],
+  "scope": "Separate optional import collection. Not registered as a preloaded/classical game pack. All delivered main lines begin at the normal starting position.",
+  "completenessScope": "Source-reported final recorded moves/resignation/end statements, with two separately recovered full records. Legal replay alone is not treated as proof of completeness.",
+  "displayMetadata": "Round values Book game N identify the original collection chapter, not tournament rounds. Original sourceRound and sourceEvent values are retained. Where the source event was only the Chinese book title, its display Event is the English collection title.",
+  "timeControl": "Unknown for every delivered game. No classical clock inferred.",
+  "sourceSnapshotAudit": {
+    "records": 100,
+    "legalAfterCorrection": 100,
+    "halfMoves": 7528,
+    "standardStarts": 80,
+    "noninitialExcerpts": 20
+  },
+  "recoveredFullGames": [
+    {
+      "chapter": 57,
+      "originalSourceUrl": "https://www.xiangqiqipu.com/Category/View-7113.html",
+      "originalStartFen": "3akab2/rc7/1Cn1b1nrc/p1p1p1R1p/5Np2/2P1P4/P5P1P/4C1N2/9/R1BAKAB2 b - - 0 1",
+      "fullSourceUrl": "https://www.xiangqiqipu.com/Category/View-8142.html",
+      "fullSourceSha256": "231e85f02348c5d6b170596becc16f7a238800b390591ad19620eddf088c0d0c",
+      "fullPlies": 53,
+      "excerptStartAfterPly": 21,
+      "excerptPlies": 32,
+      "exactPositionAndTurnMatch": true,
+      "exactRemainingMainlineMatch": true,
+      "independentJavaReplay": "PASS",
+      "finalState": {
+        "sideToMove": "Black",
+        "legalMoves": 0,
+        "inCheck": true
+      },
+      "sourceResult": "Red win",
+      "completeness": "The public full-game main line starts from the standard board and ends in actual checkmate.",
+      "metadataNote": "Date1960-12 is retained from the collection record; independent viewer has no structureddate field. Do not invent a day or round."
+    },
+    {
+      "number": 95,
+      "url": "https://sports.sina.com.cn/s/2003-07-20/09593467s.shtml",
+      "sourceSha256": "63ce211eae7a5787d6068de5fa37d9257a7a9be6725656a9875e4c8b405a4344",
+      "fullPlies": 87,
+      "excerptAtPly": 62,
+      "excerptPlies": 25,
+      "match": "Exact canonical board and side to move, followed by exact full excerpt suffix. Converted Chinese mainline with unique legal moves.",
+      "dateConflict": "Newspaper game column says 1988-09-15; a public Dpxq catalog says 1988-09-12; original book month retained.",
+      "completion": "Source ends 44.Red with Red wins, no further-moves omission statement."
+    }
+  ],
+  "sourceMoveCorrections": [
+    {
+      "number": 89,
+      "description": "Source main line reverses its third and fourth half-moves; independent full-game record corroborates swapping only those two plies.",
+      "originalEncodedPrefix": "7747102270627967",
+      "correctedEncodedPrefix": "7747102279677062",
+      "corroboratingUrl": "https://www.xqdao.com/qipu/show/53187/",
+      "corroboratingSha256": "7b670c8388eda6c7d0fd4d32b35816d08993a19afa4aa055300f2c50d01c2d33",
+      "metadataConflict": "Collection source labels 1988 individual final, independent source labels 1988 team championship. Original metadata retained; event not resolved."
+    }
+  ],
+  "completionEvidence": {
+    "1": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7344.html",
+      "sourceSha256": "644f79ca2c520151adda3bcaf874d56e4c99b00f075da494174d6b2ab455aede",
+      "plies": 116
+    },
+    "2": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7343.html",
+      "sourceSha256": "b1df6a73ecd5fe579102dfe94b5711076747e2ff6e8190d671326bebbb14d2ec",
+      "plies": 73
+    },
+    "3": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7342.html",
+      "sourceSha256": "f128fb9b9d3a11a799ba7258fb285b4e4c1fb3bebed553bab9de383ae1cf397d",
+      "plies": 92
+    },
+    "4": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7341.html",
+      "sourceSha256": "e1c873a7ba39d3eb3563e86ea5620b993eed10bca60fe105f6c7ec79dd7483cb",
+      "plies": 126
+    },
+    "6": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7339.html",
+      "sourceSha256": "6f844c09d2e86517ab8c873acb43f4f7b615f3cd0c62612ab7ad6a6cdf735244",
+      "plies": 178
+    },
+    "7": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7338.html",
+      "sourceSha256": "72857aba57c4a9bd809a9812103da22fbd63e6b68ac744ca41d24731f19ec8d2",
+      "plies": 78
+    },
+    "10": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7335.html",
+      "sourceSha256": "7321f02bf88f1e878fd4e2dd63485bed59923e625fef18e4311ab73416a14a37",
+      "plies": 48
+    },
+    "11": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7301.html",
+      "sourceSha256": "74021340724aa8c0a2fa46d3199b04494e1824919b91ac6dce0c81e5eec24089",
+      "plies": 77
+    },
+    "13": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7299.html",
+      "sourceSha256": "405b80caa9601d10823e40222783bf37e543704252dbf9a40326a650f7c7e564",
+      "plies": 75
+    },
+    "14": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7298.html",
+      "sourceSha256": "37373a57767985659ad3e0bd9b7027792276ab8a1badfe544093971956473850",
+      "plies": 65
+    },
+    "15": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7297.html",
+      "sourceSha256": "1fd05902d8f78b293bd200abbe47531357e1e373ea52db98b84b01e1d4ce7997",
+      "plies": 80
+    },
+    "16": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7296.html",
+      "sourceSha256": "a414615b38d6d9f136f29e5616673745d7a9915c7af2b4b3c0d86a548f23885e",
+      "plies": 82
+    },
+    "17": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7295.html",
+      "sourceSha256": "878304bd15575f6d7365d5d2e5bc969f73d82ee6fc021c6feb9374a9ff3c15d9",
+      "plies": 80
+    },
+    "18": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7294.html",
+      "sourceSha256": "801932a97bde2abb0e815ad6d9a56f260dca9c872119ae524cf046b01bdfb354",
+      "plies": 75
+    },
+    "19": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7293.html",
+      "sourceSha256": "8b80eee84db2f019c1e7ba846c2f82bb5670a3989970d867f4e3549b445ca879",
+      "plies": 64
+    },
+    "20": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7271.html",
+      "sourceSha256": "7a14ffecee44a546e721003363007126a9a38e9b98070ed23ab5bb5f2ebfd53f",
+      "plies": 44
+    },
+    "22": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7269.html",
+      "sourceSha256": "ca5896ec1337f45dd9045d60b9ca86f1da7be3415d21df5bae13a6bdfe7949ff",
+      "plies": 123
+    },
+    "23": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7268.html",
+      "sourceSha256": "baf672150ccd21a7d89bc3229226b981d902b99df6f51d0a0ab6e8a8a294efff",
+      "plies": 63
+    },
+    "24": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7267.html",
+      "sourceSha256": "86d05bc0579ec6a5c6b50bfbe112315d53f4adcccab544f64b4fc70ca23eb6ba",
+      "plies": 116
+    },
+    "25": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7266.html",
+      "sourceSha256": "c11ada3e8e6a8fa2c35eec134e8f45ceb2f19503314d2faeb1ec281228af3226",
+      "plies": 56
+    },
+    "26": {
+      "basis": "actual checkmate",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7265.html",
+      "sourceSha256": "b80410dd88a111cb3284c7ba396d18df3af3cc4e53610439aa60cfeca388f23c",
+      "plies": 91
+    },
+    "27": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7264.html",
+      "sourceSha256": "695321c856fa171380e8c96b4677377f49ffe731f447aa5efd7e4a88f9fb7f61",
+      "plies": 79
+    },
+    "28": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7263.html",
+      "sourceSha256": "da47b48d5d2610112fcf60ab25292d59ab06179022fe896f8b151857b3f61296",
+      "plies": 108
+    },
+    "29": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7262.html",
+      "sourceSha256": "a21f794e6a97d8cc4b0144ae7dbc165a21cde37073e490e13cfd772db2e37de1",
+      "plies": 64
+    },
+    "30": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7232.html",
+      "sourceSha256": "ec9f88c9807981132a7eebfe8416dc6557cf6df3c33657d861082286d4a52bb4",
+      "plies": 63
+    },
+    "31": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7231.html",
+      "sourceSha256": "9a4070fee512883dc36142c6c0f02d817f9cdbc32c5a1f72dec57e63097f90b7",
+      "plies": 84
+    },
+    "32": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7230.html",
+      "sourceSha256": "25effae54ad7e63d3070faca5aa2801c018ac5104f57b39217df4ddea687c732",
+      "plies": 62
+    },
+    "33": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7229.html",
+      "sourceSha256": "64738cd6c229e8d6e644928dcf6e84ad50f3ae3565f1d65a349ae290a00229f6",
+      "plies": 138
+    },
+    "34": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7228.html",
+      "sourceSha256": "c1214d307dd81f7b105b78cae16b2e66a0aa40bf01f5f1a4b3e4128ca46eb6ea",
+      "plies": 102
+    },
+    "35": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7227.html",
+      "sourceSha256": "4a91491a34341f04538614058d269cc9b5144ef891749107b174ff8898901375",
+      "plies": 43
+    },
+    "37": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7225.html",
+      "sourceSha256": "cd1c74f42374b76593ed0602f7d890c4844cd4e4709fe3642d3f55f7da9e9abb",
+      "plies": 84
+    },
+    "38": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7224.html",
+      "sourceSha256": "d7f6a53dc21dd87e988d0193d52fa7ae2d76e42fb40ce6d09b9b15eb8277bf1f",
+      "plies": 101
+    },
+    "39": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7223.html",
+      "sourceSha256": "b5c7b6d38209606d7b9267438962a9d2d83b4c5c189bc3d338348103ff1af88d",
+      "plies": 60
+    },
+    "40": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7201.html",
+      "sourceSha256": "23415b63d13ebda27b6d9f6a008e8723db53376aa828e990215b4dd80a6677d6",
+      "plies": 127
+    },
+    "42": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7199.html",
+      "sourceSha256": "901e263d23d429fe580a411f7b02453c2ba1225390ad67191762d98a032e6629",
+      "plies": 139
+    },
+    "43": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7198.html",
+      "sourceSha256": "fabca6e86d4b3412d184033bfa62ae1c9db63901730ed2caebc88aedb661021d",
+      "plies": 45
+    },
+    "45": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7164.html",
+      "sourceSha256": "ea80148649d7b66fdada6c70ed3909b099070f8d4365a4d004ce56c73f9badce",
+      "plies": 83
+    },
+    "46": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7163.html",
+      "sourceSha256": "5635cd37505d7398c05040701be04c006031ffc7b8da394a02274573e0b907c4",
+      "plies": 104
+    },
+    "49": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7143.html",
+      "sourceSha256": "723a6f1459a7a3fc7f5a008e92332f1e903f0393473d302b884e131bc8ff22c2",
+      "plies": 116
+    },
+    "50": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7142.html",
+      "sourceSha256": "be2322b6168b9ab3d3eab1e096653e8b121680a82b1fdf8ec690df9f44344156",
+      "plies": 72
+    },
+    "51": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7141.html",
+      "sourceSha256": "d371c1de9377c4299af655146bd3e1c133b60faacced81c9b0a6bf634820e270",
+      "plies": 53
+    },
+    "52": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7140.html",
+      "sourceSha256": "2e30a6edee2b4689918983b27d11f6c9ccc815518ad7ee3290806d1e8db1f822",
+      "plies": 62
+    },
+    "55": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7116.html",
+      "sourceSha256": "08d79b6abc5b973e12a340ea46f972f291870f98e4256c039f82fa89c8a3c705",
+      "plies": 65
+    },
+    "57": {
+      "basis": "independently recovered complete game",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-8142.html",
+      "sourceSha256": "231e85f02348c5d6b170596becc16f7a238800b390591ad19620eddf088c0d0c",
+      "plies": 53
+    },
+    "59": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7111.html",
+      "sourceSha256": "45e97bfda9b92162163a157e36f04a2f5f2bf2ce476ed8ab378a65dba3a17631",
+      "plies": 69
+    },
+    "60": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7110.html",
+      "sourceSha256": "6a3f04a94248799772e014e9e5f42fb42e4ca306d84dd02409c92f04f75d5ff1",
+      "plies": 88
+    },
+    "63": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7085.html",
+      "sourceSha256": "de1513c5b8344759483374f8f38f185e6646fb32ac50d32050ba4f9cd6af5903",
+      "plies": 88
+    },
+    "68": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7080.html",
+      "sourceSha256": "1e52b91e70bfcbd469db7e5b9e8d48d0680f2738f984d2c97013bd9d2c8bdaf5",
+      "plies": 74
+    },
+    "69": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7079.html",
+      "sourceSha256": "fdf7bf214edb3d2fbe788e45f57bb37abd9e7a32b32e829943c03a2d6f1748e0",
+      "plies": 75
+    },
+    "72": {
+      "basis": "actual checkmate",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7076.html",
+      "sourceSha256": "68fa18448d0da533eb1d7b6a3ffab6b9e74d5b26bb9dc225dd1e2aeec4b32adc",
+      "plies": 81
+    },
+    "73": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7075.html",
+      "sourceSha256": "c311db958c2ab2472941111587fafc3c72d2997b39bfe7386cc594a975049367",
+      "plies": 66
+    },
+    "75": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7073.html",
+      "sourceSha256": "d4e10c023dd38a21acc37613d5ffbac2bdaa393ead19d526a27668a15635d053",
+      "plies": 52
+    },
+    "76": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-5244.html",
+      "sourceSha256": "7d87e6f9aafbfb8e13261426cf92c71d9f7060d0c38fa59b7481bfe704c44c59",
+      "plies": 54
+    },
+    "78": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-5242.html",
+      "sourceSha256": "7704efd0fbe2866eaed77aa4f4ba69c6fb82a8288bbd4f845df00ef3e60c47dd",
+      "plies": 49
+    },
+    "79": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-5220.html",
+      "sourceSha256": "7068fe96a80d5fa9bf2fc81172bb7f81f9798b52d08506837aae711019f6f13a",
+      "plies": 74
+    },
+    "80": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-5219.html",
+      "sourceSha256": "a177cd1325d51878d35b8620bf61a45088c02dab81d74780338818c5bd34d403",
+      "plies": 55
+    },
+    "83": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-5207.html",
+      "sourceSha256": "df4ebbffc20d422681c2df082e3c02e1634f03c022fae115bbcfa46a0d12a330",
+      "plies": 115
+    },
+    "84": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3959.html",
+      "sourceSha256": "98a40404adcea6d12a0c87f84001558c90ee6c49273662f5372c96145cf0267a",
+      "plies": 57
+    },
+    "88": {
+      "basis": "actual checkmate",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3955.html",
+      "sourceSha256": "ace5b62cffd5ec6744cbf5b92fdcba68aa062f2b806fdfd05c2de0b7471f8968",
+      "plies": 97
+    },
+    "89": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3954.html",
+      "sourceSha256": "101f1dc500524323e497c1235041805b13aec140ba4f24bf4d3470794cebe48a",
+      "plies": 90
+    },
+    "90": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3953.html",
+      "sourceSha256": "08107ff418063eabca2f4a96d2380aa6f244b83eb3bf82bdcf3f3604f1c3ac81",
+      "plies": 89
+    },
+    "91": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3952.html",
+      "sourceSha256": "e4a00357a6eac229b70603b25ea2aded0bc46ab771c9f94a831c6f22430c57ea",
+      "plies": 119
+    },
+    "92": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3944.html",
+      "sourceSha256": "f01a18f5ee4f3b3570b29d3d74c86f1fc50daef04bd4edcc3f97073742893b0d",
+      "plies": 53
+    },
+    "94": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3942.html",
+      "sourceSha256": "9d21b8c56ea2722eaea6871853ac1c5fb3df4c33cf6cf882de0699db090d98d5",
+      "plies": 90
+    },
+    "95": {
+      "basis": "independently recovered complete game",
+      "sourceUrl": "https://sports.sina.com.cn/s/2003-07-20/09593467s.shtml",
+      "sourceSha256": "63ce211eae7a5787d6068de5fa37d9257a7a9be6725656a9875e4c8b405a4344",
+      "plies": 87
+    },
+    "96": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3388.html",
+      "sourceSha256": "ae60f5208094ae8ae523bc44b497ef32f416f9ee4268693184aef4944dedb9fa",
+      "plies": 107
+    },
+    "97": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3387.html",
+      "sourceSha256": "76bb7fa9e1fa9158878afa98b6c30b4bbe4712eb34fea06a4f1e13a6c6240874",
+      "plies": 61
+    },
+    "99": {
+      "basis": "source explicitly reports resignation or game end at the final recorded ply",
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3384.html",
+      "sourceSha256": "18c1f0eb00dfb5c7c66ef2256215ce17409ef8bb31db192d7937e87f813e31e4",
+      "plies": 53
+    }
+  },
+  "excluded": [
+    {
+      "number": 5,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7340.html",
+      "sourceSha256": "f3be44c9f4f2b030b320736b7db3caecbdd639ffb15fc986db8f86e48ef4b11c",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 8,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7337.html",
+      "sourceSha256": "5745f301be9111685c27bc6e60825c58383cc9e6749eeb845240bd5bbec51315",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 9,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7336.html",
+      "sourceSha256": "aaa15375d64e752f7420fdd06bee3853809ae5b92cfa6ddbbc43a0ecea834339",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 12,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7300.html",
+      "sourceSha256": "1c013e3d004209db53183648846adb7e89da9f1cd73540c66f6a4603d5cbc698",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 21,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7270.html",
+      "sourceSha256": "9b9e9011ac68cb659765c8adbfcca0b1a7d2a957428402aff4c08b6ee1f4efd3",
+      "reason": "Source result tag says Red won, while its final annotation says Black won; result unresolved."
+    },
+    {
+      "number": 36,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7226.html",
+      "sourceSha256": "703d4ddcc2f26f64d48d8bb804838255e501c33c29ba2d1329fb9a5873aacfb4",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 41,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7200.html",
+      "sourceSha256": "e33497cd30fc91fb8982342dda03f7d3c13262e189b82c1fd8c392b600ad6ad2",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 44,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7197.html",
+      "sourceSha256": "b0c481a3f175a6630f31a4d9d4d7f839ec06392516895bf4bc04abe4884208ef",
+      "reason": "Source explicitly says later actual moves were omitted."
+    },
+    {
+      "number": 47,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7162.html",
+      "sourceSha256": "65fa805a755d010e042da6cccde4e09cc5c20baacebd98e78ad2ac4b82867392",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 48,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7144.html",
+      "sourceSha256": "136295a764722ee165d7799a6d862807565486af3793aee98c05257db58806b5",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 53,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7118.html",
+      "sourceSha256": "7d4dcb030f07a85f1b52be33d26333206ef3e95f6d3d9aad58a93728f65da24c",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 54,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7117.html",
+      "sourceSha256": "f69d8fdb399c4a5c0714d3bc4ca27ad8f91947aa55b75b8b332e1b7458a62adf",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 56,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7115.html",
+      "sourceSha256": "8b41eda9624ff0cfd11d6e355ff34b57a116f32e8e32c57dc717ee634195310e",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 58,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7112.html",
+      "sourceSha256": "ead1e10445c00b02d4d6230cb48193b0dc484c2e836d2222d73abb2ea9ba030b",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 61,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7109.html",
+      "sourceSha256": "6407f6e82af9c0712d17262457f258e14846c5c1ab688f20e8d77587723ffa0b",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 62,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7086.html",
+      "sourceSha256": "a006dff85872f6b04209830819965bc465cc29fa1dcf88f2ec3cc918cc2e088c",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 64,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7084.html",
+      "sourceSha256": "0fa45fd954e818c3591af2a36536f5412c0f8d0ef550b5eac162892108d323a1",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 65,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7083.html",
+      "sourceSha256": "178451911b907b61db8e34e92059e2ba4e37492823509ae7d68f114ef3d1f739",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 66,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7082.html",
+      "sourceSha256": "9a399189bcaa400b079611984b4a31645a98c96ea03303b0ff09424bf4d0f38d",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 67,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7081.html",
+      "sourceSha256": "28203107eda426b715509a9b7f7ee9a744321c866820dc4e20478ca0701b86c6",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 70,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7078.html",
+      "sourceSha256": "8e50bda753c7e3f55c184631e3a6b4cf433b3f862f3d608aa33f266e2038b8b2",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 71,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7077.html",
+      "sourceSha256": "674e6e76b76ea57bbad4d9e768345d499e46371e086ff4bb07d74ede537dc250",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 74,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-7074.html",
+      "sourceSha256": "6009e741d18dbc1f14963e9411a1de657b5306dda5b247d507e4519179f0b785",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 77,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-5243.html",
+      "sourceSha256": "fa34ff76507c579dc0e7982364430345e4a9fcc317dcc4d2da5b1f00e4cdc784",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 81,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-5218.html",
+      "sourceSha256": "f3a9a10f4058a62ba008e2ce34d3dd59dcd03083a3f057b4531738fd08fd6328",
+      "reason": "Collection index says Red won, but the record/result and final annotation say Black won; chapter identity unresolved."
+    },
+    {
+      "number": 82,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-5216.html",
+      "sourceSha256": "8d24a7f7033d767d31a6bd371e416f992f29d5ae6e6c9e0554d6803688ef8aa6",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 85,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3958.html",
+      "sourceSha256": "95dfa0f8ca7f6a951f7d51131a4a1986d3d341e97b2b000229e759a804f2e8bb",
+      "reason": "Main line starts from the initial board but ends at a winning assessment without confirmed actual game completion."
+    },
+    {
+      "number": 86,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3957.html",
+      "sourceSha256": "2a5e0660d98217f638d3710c1cb623217efcb8d900e184243f23faea66265147",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 87,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3956.html",
+      "sourceSha256": "3080eafeeb64f55a4c8bc81208561990580f8f3148291ead143e9be9b86694d2",
+      "reason": "Participant matches the existing dated exclusion policy: 李艾东 (source 李艾東)."
+    },
+    {
+      "number": 93,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3943.html",
+      "sourceSha256": "34ddc7760ba15194fcc4c8e25c26096efd0fae0428f394f17d099265fcd3dee0",
+      "reason": "Source explicitly says later actual moves were omitted."
+    },
+    {
+      "number": 98,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3386.html",
+      "sourceSha256": "7e6aba8ba91ff88cafeb53f2187e6dcd322ceb2627f817c767f0d4156d1fe78a",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    },
+    {
+      "number": 100,
+      "sourceUrl": "https://www.xiangqiqipu.com/Category/View-3383.html",
+      "sourceSha256": "f8d87f332a32c0ae5e69a5710e11c135be31533fe217f74f27ab5dabeb8fc89a",
+      "reason": "Only a noninitial study excerpt is available; no independently verified complete game recovered."
+    }
+  ],
+  "duplicateAudit": {
+    "againstBundledGames": 398,
+    "comparison": "Canonical board plus side to move and ICCS main lines, independent of player labels and notation. Exact full-record, complete excerpt/truncation suffix, later-position continuation and within-collection continuation comparisons.",
+    "original100AgainstBundled": {
+      "exactRecords": 0,
+      "fullLineExcerptMatches": 0,
+      "longSharedOpenings24Plies": 0,
+      "laterSharedContinuations12Plies": 0
+    },
+    "original100WithinCollectionMatches": 0,
+    "deliveredSetAudit": "Run verify.py for canonical replay and comparisons after full-game recovery."
+  },
+  "nameLabels": {
+    "distinctSourceLabels": 107,
+    "existingSourcedAliases": 16,
+    "pinyinReadings": 91,
+    "note": "Pinyin is a reading aid, not a claim about a player preferred or official Latin spelling. Original Chinese labels and supported source-name notes are retained."
+  },
+  "files": {
+    "Ingenious-Xiangqi-full-games.json": {
+      "bytes": 161805,
+      "sha256": "7d0f9a9e6016a682f7d36475c146c38b7fdf58b5488784742c5a6ac4e0715305"
+    },
+    "Ingenious-Xiangqi-full-games.pgn": {
+      "bytes": 65486,
+      "sha256": "b53e28632375f4bac391d26fec1184cf55e58deba74af45b7d5026d72a97b420"
+    }
+  }
+}

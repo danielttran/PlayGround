@@ -246,18 +246,17 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         StudySettings.setCustomColor(context,"boardColor",0xff112233);
         StudySettings.selectDiscPreset(context,"jade");assertColors(0xff112233,null,null);
     }
-    public void testLongPlayerNamesDoNotMoveBoardOrPositionLabelBetweenTurns() throws Exception {
+    public void testLongPlayerNamesDoNotMoveBoardOrSliderBetweenTurns() throws Exception {
         launch();GameRepository.Game game=game("Nguyễn Thành Bảo · Vietnamese master — international classical championship record","2025-09-27","");
         game.black="Andy Wo";game.moves.addAll(Arrays.asList("b2e2","b9c7","a0a1","a9a8","h2g2","h9g7"));
         main(()->{try{field("games").set(activity,Arrays.asList(game));Method open=MainActivity.class.getDeclaredMethod("openGame",GameRepository.Game.class,boolean.class);open.setAccessible(true);open.invoke(activity,game,false);}catch(Exception e){throw new RuntimeException(e);}});
         getInstrumentation().waitForIdleSync();
-        main(()->{try{View label=(View)field("positionLabel").get(activity);label.requestRectangleOnScreen(new Rect(0,0,label.getWidth(),label.getHeight()),true);}catch(Exception error){throw new RuntimeException(error);}});getInstrumentation().waitForIdleSync();
-        Rect[] bounds={null,null};main(()->{try{bounds[0]=screenBounds(findType(root(),BoardView.class));bounds[1]=screenBounds((View)field("positionLabel").get(activity));assertTrue(bounds[0].width()>0);assertTrue(bounds[1].height()>0);assertNull(findType(root(),SeekBar.class));}catch(Exception error){throw new RuntimeException(error);}});
+        Rect[] bounds={null,null};main(()->{bounds[0]=screenBounds(findType(root(),BoardView.class));bounds[1]=screenBounds(findType(root(),SeekBar.class));assertTrue(bounds[0].width()>0);assertTrue(bounds[1].height()>0);});
         for(int ply:new int[]{0,1,2,3,6,5,4,1,0}) {
             main(()->{try{Method navigate=MainActivity.class.getDeclaredMethod("navigate",int.class);navigate.setAccessible(true);navigate.invoke(activity,ply);}catch(Exception e){throw new RuntimeException(e);}});getInstrumentation().waitForIdleSync();
             main(()->{
                 assertEquals("Board bounds must remain fixed at half-move "+ply,bounds[0],screenBounds(findType(root(),BoardView.class)));
-                try{assertEquals("Position label bounds must remain fixed at half-move "+ply,bounds[1],screenBounds((View)field("positionLabel").get(activity)));}catch(Exception error){throw new RuntimeException(error);}
+                assertEquals("Slider bounds must remain fixed at half-move "+ply,bounds[1],screenBounds(findType(root(),SeekBar.class)));
                 assertFalse("Side to move is a board dot, without a wrapping turn label",containsTurnText(root()));
                 String description=findType(root(),BoardView.class).getContentDescription().toString();assertTrue(description.contains((ply%2==0?"Red":"Black")+" to move."));
                 assertTrue(description.contains("Red: "+game.red));assertTrue(description.contains("Black: "+game.black));
@@ -269,22 +268,20 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         for(int cycle=0;cycle<500;cycle++)game.moves.addAll(Arrays.asList("b0c2","b9c7","c2b0","c7b9"));
         main(()->{try{field("games").set(activity,Arrays.asList(game));Method open=MainActivity.class.getDeclaredMethod("openGame",GameRepository.Game.class,boolean.class);open.setAccessible(true);open.invoke(activity,game,false);}catch(Exception e){throw new RuntimeException(e);}});
         getInstrumentation().waitForIdleSync();
-        main(()->{try{View label=(View)field("positionLabel").get(activity);label.requestRectangleOnScreen(new Rect(0,0,label.getWidth(),label.getHeight()),true);}catch(Exception error){throw new RuntimeException(error);}});getInstrumentation().waitForIdleSync();
-        Rect[] bounds={null,null};main(()->{try{bounds[0]=screenBounds(findType(root(),BoardView.class));bounds[1]=screenBounds((View)field("positionLabel").get(activity));}catch(Exception error){throw new RuntimeException(error);}});
+        Rect[] bounds={null,null};main(()->{bounds[0]=screenBounds(findType(root(),BoardView.class));bounds[1]=screenBounds(findType(root(),SeekBar.class));});
         for(int ply:new int[]{0,1,1000,2000,999}) {
             main(()->{
                 try {
                     Method navigate=MainActivity.class.getDeclaredMethod("navigate",int.class);navigate.setAccessible(true);navigate.invoke(activity,ply);
-                    ViewGroup records=(ViewGroup)field("movesView").get(activity);int rows=0;
-                    for(int i=0;i<records.getChildCount();i++)if(records.getChildAt(i) instanceof LinearLayout)rows++;
-                    assertEquals("Move record renders a fixed40-row window",40,rows);assertTrue(records.getChildCount()<=41);
+                    ListView records=(ListView)field("movesView").get(activity);
+                    assertEquals("The lazy move list exposes every full-move row",1000,records.getCount());
+                    assertTrue("Only visible move rows are inflated",records.getChildCount()<50);
                     assertEquals("Full position range is retained",2001,((List<?>)field("positions").get(activity)).size());
                     assertEquals(ply,field("ply").getInt(activity));
                     assertEquals("Working history is never truncated",2000,((List<?>)field("workingMoves").get(activity)).size());
-                    if(ply>0)assertNotNull("Selected move must remain in the current window",findDescription(root(),"After half-move "+ply+", "+game.moves.get(ply-1)));
                 }catch(Exception e){throw new RuntimeException(e);}
             });getInstrumentation().waitForIdleSync();
-            main(()->{try{assertEquals(bounds[0],screenBounds(findType(root(),BoardView.class)));assertEquals(bounds[1],screenBounds((View)field("positionLabel").get(activity)));}catch(Exception error){throw new RuntimeException(error);}});
+            main(()->{assertEquals(bounds[0],screenBounds(findType(root(),BoardView.class)));assertEquals(bounds[1],screenBounds(findType(root(),SeekBar.class)));if(ply>0)assertNotNull("Navigation brings its selected move into the list",findDescription(root(),"After half-move "+ply+", "+game.moves.get(ply-1)));});
         }
         UiTestActions.goToMove(getInstrumentation(),activity,2000);
         main(()->{try{assertEquals("Numeric navigation reaches the complete record's last half-move",2000,field("ply").getInt(activity));}catch(Exception error){throw new RuntimeException(error);}});

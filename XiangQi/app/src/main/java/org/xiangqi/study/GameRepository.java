@@ -127,10 +127,18 @@ public final class GameRepository {
         if (text == null || text.trim().isEmpty()) throw new IllegalArgumentException("The file is empty.");
         if (text.length() > MAX_BYTES || text.getBytes(StandardCharsets.UTF_8).length > MAX_BYTES)
             throw new IllegalArgumentException("File exceeds the 5 MB import limit.");
-        List<Game> candidates;
+        List<Game> candidates=null;
         String clean = text.replaceFirst("^\\uFEFF", "").trim();
-        if (clean.startsWith("{") || clean.startsWith("[{") || clean.matches("(?s)^\\[\\s*\\{.*")) candidates = jsonGames(clean, true);
-        else {
+        if(clean.startsWith("{")) {
+            Object root;
+            try{root=jsonRoot(clean);}
+            catch(org.json.JSONException|IllegalArgumentException invalidJson){if(!hasLeadingPgnComments(clean))throw invalidJson;root=null;}
+            // A valid JSON root always wins, even when quoted metadata contains
+            // braces that resemble the end of a PGN comment. Schema errors do
+            // not fall back to another format.
+            if(root!=null)candidates=jsonGames(((JSONObject)root).getJSONArray("games"),true,false);
+        } else if (clean.startsWith("[{") || clean.matches("(?s)^\\[\\s*\\{.*")) candidates = jsonGames(clean, true);
+        if(candidates==null) {
             candidates = new ArrayList<>();
             for (Pgn.Game source : Pgn.parse(clean)) {
                 Game g = new Game();
@@ -144,6 +152,21 @@ public final class GameRepository {
         if (candidates.isEmpty()) throw new IllegalArgumentException("No games found. Import ICCS PGN or a JSON game pack.");
         if (candidates.size() > 2000) throw new IllegalArgumentException("Import no more than 2,000 games at once.");
         synchronized (FILE_LOCK) { return commit(candidates,name,engineGame); }
+    }
+
+    /** Recognize PGN's leading comments before choosing JSON versus PGN. */
+    private static boolean hasLeadingPgnComments(String text) {
+        int i=0;boolean comment=false;
+        while(i<text.length()) {
+            char c=text.charAt(i);
+            if(Character.isWhitespace(c)){i++;continue;}
+            if(c=='{'){int end=text.indexOf('}',i+1);if(end<0)return false;i=end+1;comment=true;continue;}
+            if(c==';'||c=='%'){while(i<text.length()&&text.charAt(i)!='\n'&&text.charAt(i)!='\r')i++;continue;}
+            // A JSON object/array cannot continue with a PGN tag or move token.
+            return comment&&(c=='['&&i+1<text.length()&&Character.isLetter(text.charAt(i+1))
+                ||Character.isDigit(c)||c>='a'&&c<='i'||c>='A'&&c<='I');
+        }
+        return false;
     }
 
     private int commit(List<Game> candidates,String name,boolean engineGame) throws Exception {

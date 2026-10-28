@@ -1,10 +1,10 @@
 # Architecture
 
-Xiangqi Study 0.7.0 (version code 9) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.1 (version code 10) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
-`MainActivity` builds the searchable library and replay screen. Both screens have separate labelled Red/Black player rows. `PlayerNames` provides sourced romanized display/search aliases for every bundled Chinese source-name variant; original player metadata and exports remain unchanged. Search folds case/diacritics and includes Chinese names, aliases, event, round and collection.
+`MainActivity` builds the searchable library and replay screen. Library cards label Red/Black separately; replay puts both labelled player names in the compact header between Library and the game menu. The board follows immediately below. `PlayerNames` provides sourced romanized display/search aliases for every bundled Chinese source-name variant; original player metadata and exports remain unchanged. Search folds case/diacritics and includes Chinese names, aliases, event, round and collection.
 
 `GameDateSort` implements newest, oldest and original collection order. Only complete valid calendar dates participate in date ordering. Partial, invalid and unknown dates stay at the bottom in either direction; stable sorting preserves collection order for equal or incomplete dates. Human and Engine tabs select bundled games of that type; My imports selects one named user collection. Search, sort and scroll are persisted per collection ID. Returning to a current game restores its own collection and navigation order.
 
@@ -25,10 +25,12 @@ editing through the board and legal-move list.
 
 The library uses a recycling ListView containing every matching game, without
 page controls or a 40-game cutoff. Search and sorting use the entire selected collection;
-only visible cards need native view inflation. Move records show at most 40
-full-move rows around the current position. The complete source and variation
-histories remain available through the move controls, numeric Go to move…
-dialog and export. The horizontal position slider is removed. The dialog accepts
+only visible cards need native view inflation. The complete move record also uses
+a recycling ListView, filling the replay screen's remaining height below the fixed
+header, board and controls. Scrolling the record does not move the board. Short
+screens cap and center the board to retain usable controls and a record row;
+normal portrait uses the full available width. A compact horizontal slider below
+the board covers every half-move, including zero and the final position. The numeric Go to move… dialog also accepts
 the current history's complete half-move range, including zero and its final ply.
 
 `BoardView` draws the nine-file, ten-rank board, Chinese-text pieces, selection and legal targets. A small board-edge dot shows the side to move without a wrapping turn label. Played moves use a separate arrow. `AnalysisVisuals` validates the first two moves of each ranked continuation before drawing the candidate and its reply, with the appropriate side color and rank labels. One to five continuations can therefore show up to two arrows per line; a missing reply is not invented. New search snapshots replace the displayed continuations. Replay positions are reconstructed from a game's starting FEN and move sequence. Exploring a variation works on a separate sequence so the recorded game and its source result remain intact. Exporting a variation gives it the unfinished result `*`.
@@ -41,8 +43,8 @@ split. Navigation clears the old position's score before searching the new one.
 
 Discs use a radius of 0.420 cell. Chinese glyph outlines are fitted inside each
 finish's inner rim; measurements are cached by glyph and finish at the current
-cell size. Glyphs and rank badges remain opaque. Analysis shafts are 0.13 cell
-and composite in one shared 50% layer; the played arrow is 0.095 cell at 50%.
+cell size. Glyphs and rank badges remain opaque. Analysis shafts are 0.15 cell
+and composite in one shared 40% opacity layer; the played arrow is 0.11 cell at 40%.
 
 `AppearancePresets` is an Android-free catalog shared by settings and the renderer:
 24 boards and 22 Chinese-character disc finishes. The existing 20 board and 18
@@ -83,8 +85,10 @@ the same restart path. Library view, backgrounding and opponent play pause
 search without disabling the toggle; returning to foreground study resumes it.
 Activity recreation reloads the choice. Generation identifiers reject obsolete
 progress and final results. Only explicit Stop analysis disables the toggle;
-it clears continuation arrows and deactivates the evaluation rail, while retaining
-the text estimate explicitly marked as analysis off until a position change. Engine-setting
+it clears continuation arrows and deactivates the evaluation rail. The analysis
+panel is GONE unless analysis is enabled outside opponent play. Its fixed 92 dp
+height keeps engine updates from moving the board; continuation text scrolls
+within that panel so all configured lines remain available. Engine-setting
 changes restart enabled analysis even if its previous finite search completed.
 Backgrounding cancels autoplay.
 
@@ -112,6 +116,23 @@ of user names. Legacy flat arrays load into Imported games, preserving original
 game IDs and saved study positions; the next successful import atomically writes
 the upgraded schema. Imported content cannot supply a trusted collection ID.
 Completed import routing survives Activity recreation through a durable marker.
+
+Import setup keeps its route, URI, collection name and type in small saved state.
+`ImportDraftStore` writes paste text to atomic, bounded private cache snapshots;
+only a UUID token and cursor offset enter the Activity's saved-state parcel.
+The shared file executor orders snapshot writes before replacement loads.
+Each saved edit gets a fresh token, preventing an unsuccessful write from
+masquerading as a restored latest draft. Successful replacement removes the old
+snapshot; Cancel or successful import removes the current one. An unavailable
+snapshot restores an empty editor with an explicit error. Invalid pasted moves
+stay in the editor for correction. During validation the editor and action
+buttons are disabled; completion across recreation suppresses stale draft UI.
+
+Format detection prioritizes a valid JSON root before testing leading PGN
+comments, so braces in quoted JSON metadata are not confused with comments.
+JSON schema errors do not fall back to PGN. The replay delay editor preserves
+locale separators and digits before explicit numeric normalization rather than
+allowing the Android numeric key listener to strip them silently.
 
 No built-in engine pack is shipped until a qualifying 2026 top-engine tournament
 and its complete game files are verified. Ranking tests, older championships and
@@ -153,4 +174,4 @@ The Android manifest requests no `INTERNET` permission and disables automatic ap
 
 Pikafish's GPL-3.0 code and separately licensed NNUE weights retain their upstream notices and exact release source pointers under `third_party/pikafish`. WXF source material retains its own rights; app source licensing does not relicense game pages or engine assets.
 
-See [AUDIT-0.6.md](AUDIT-0.6.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover all three bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.5.2.md](AUDIT-0.5.2.md), [AUDIT-0.5.1.md](AUDIT-0.5.1.md), [AUDIT-0.5.md](AUDIT-0.5.md), [AUDIT-0.4.md](AUDIT-0.4.md), [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.
+See [AUDIT-0.7.1.md](AUDIT-0.7.1.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover all three bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.7.md](AUDIT-0.7.md), [AUDIT-0.6.md](AUDIT-0.6.md), [AUDIT-0.5.2.md](AUDIT-0.5.2.md), [AUDIT-0.5.1.md](AUDIT-0.5.1.md), [AUDIT-0.5.md](AUDIT-0.5.md), [AUDIT-0.4.md](AUDIT-0.4.md), [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.

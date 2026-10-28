@@ -115,14 +115,16 @@ public final class AnalysisRenderingTest extends InstrumentationTestCase {
             }
         });
     }
-    public void testThickerArrowsCompositeAtHalfOpacityAndTextStaysOpaque(){
+    public void testThickerArrowsCompositeAtFortyPercentOpacityAndTextStaysOpaque(){
         onMain(()->{
             BoardView board=board(false,false);board.setPosition(Position.initial().play("g3g4"),"g3g4",false);board.setAnalysisLines(result(false,3),false);RecordingCanvas canvas=draw(board);
             try{
                 float step=boardFloat(board,"step");assertEquals(18,canvas.arrows.size());
-                for(Stroke arrow:canvas.arrows){assertEquals("Analysis arrows composite at50%",128,arrow.alpha);assertEquals("The shaft is thicker than shipped0.5.2",step*.13f,arrow.width,.01f);}
+                for(Stroke arrow:canvas.arrows){assertEquals("Analysis arrows composite at40% opacity",102,arrow.alpha);assertEquals("Analysis shafts use the slightly thicker width",step*.15f,arrow.width,.01f);}
+                int outlines=0;for(Stroke stroke:canvas.allStrokes)if(Math.abs(stroke.width-step*.205f)<.01f){outlines++;assertEquals("The contrast outline has the same40% opacity",102,stroke.alpha);}
+                assertEquals("Every analysis segment retains its contrast outline",canvas.arrows.size(),outlines);
                 int played=boardInt(board,"moveArrow"),playedSegments=0;
-                for(Stroke stroke:canvas.allStrokes)if(stroke.color==played){playedSegments++;assertEquals("Played arrow also uses50% opacity",128,stroke.alpha);assertEquals(step*.095f,stroke.width,.01f);}
+                for(Stroke stroke:canvas.allStrokes)if(stroke.color==played){playedSegments++;assertEquals("Played arrow also uses40% opacity",102,stroke.alpha);assertEquals(step*.11f,stroke.width,.01f);}
                 assertEquals(3,playedSegments);assertEquals("Only one shared offscreen arrow layer is allocated",1,canvas.arrowLayers);
                 for(int alpha:canvas.textAlphas)assertEquals("Transparency must never leak into Chinese text, river or rank badges",255,alpha);
             }finally{canvas.bitmap.recycle();}

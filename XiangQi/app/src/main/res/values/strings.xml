@@ -13,7 +13,7 @@
     <string name="color_preview">帅  将  兵  卒</string>
     <string name="color_channel">%1$s · %2$d</string>
     <string name="color_swatches">Color swatches</string>
-    <string name="move_record_window">Showing moves %1$d–%2$d of %3$d · use Go to move… or the move controls for other positions.</string>
+    <string name="move_record_number">%1$d.</string>
     <plurals name="library_count">
         <item quantity="one">%1$d of %2$d game · available offline</item>
         <item quantity="other">%1$d of %2$d games · available offline</item>
@@ -33,13 +33,10 @@
     <string name="analysis_line">Line %1$d (%2$s):</string>
     <string name="analysis_off_estimate">Analysis off · last estimate\n%1$s</string>
     <string name="analysis_arrows_help">Each line shows a candidate move and its reply, with one arrow for each side when both moves are available.</string>
-    <string name="analysis_searching">%1$s · searching locally…\n+ favors Red · − favors Black. The evaluation and arrows update after completed search depths. Analysis follows each move until you toggle it off. Search limits are in Settings.</string>
-    <string name="analysis_result">%1$s · Red perspective %2$s\n+ favors Red · − favors Black\nDepth %3$d · %4$s nodes\n%5$s\n%6$s\n\n%7$s</string>
-    <string name="analysis_suggested">Suggested: %1$s</string>
-    <string name="analysis_no_move">No suggested move.</string>
-    <string name="analysis_native_limit">On-device analysis · limited search can miss tactics.</string>
-    <string name="analysis_builtin_limit">Lightweight classical engine. Limited search can miss tactics.</string>
+    <string name="analysis_searching">%1$s · searching…\n+ favors Red · − favors Black</string>
+    <string name="analysis_result">%1$s · Red perspective %2$s\nDepth %3$d · %4$s nodes\n%5$s\n+ favors Red · − favors Black</string>
     <string name="analysis_error">%1$s could not complete analysis: %2$s</string>
     <string name="analysis_winning">%1$s winning (forced-win score)</string>
     <string name="analysis_terminal">%1$s · final position\n%2$s has no legal move. %3$s wins.\n%4$s</string>
+    <string name="import_draft_restore_error">The draft could not be restored. Paste the game text again (up to 5 MB).</string>
 </resources>

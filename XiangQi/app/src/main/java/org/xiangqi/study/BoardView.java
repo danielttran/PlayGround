@@ -118,7 +118,7 @@ public final class BoardView extends View {
         c.drawText("楚 河",left+2*step,top+4.63f*step,paint); c.drawText("漢 界",left+6*step,top+4.63f*step,paint);
         if(!"none".equals(coordinateStyle))drawCoordinates(c,density);
         // The played move is a directional arrow, never source/destination tiles.
-        drawArrow(c,lastMove,moveArrow,.095f,.29f,false);
+        drawArrow(c,lastMove,moveArrow,.11f,.29f,false);
         // Paint every shadow/halo before any opaque face, so adjacent glowing
         // pieces never wash out a character that has already been drawn.
         if(discFinish>=AppearancePresets.BEVELED)for(int i=0;i<90;i++)if(position.board[i]!=0&&position.board[i]!='.')
@@ -154,9 +154,9 @@ public final class BoardView extends View {
         }
         if(analysisArrows.isEmpty())drawArrow(c,hintMove,bestArrow,.14f,.34f,true);
         else {
-            // Composite each shaft and its contrast outline together at50%,
+            // Composite each shaft and its contrast outline together at40%,
             // rather than stacking two translucent strokes into75% opacity.
-            int arrowsLayer=c.saveLayerAlpha(0,0,w,h,128);
+            int arrowsLayer=c.saveLayerAlpha(0,0,w,h,102);
             for(AnalysisVisuals.Arrow arrow:analysisArrows)drawAnalysisArrow(c,arrow,false);
             c.restoreToCount(arrowsLayer);
             for(AnalysisVisuals.Arrow arrow:analysisArrows)drawAnalysisArrow(c,arrow,true);
@@ -355,7 +355,7 @@ public final class BoardView extends View {
         float sourceInset=best?radius*.82f:0,destInset=best&&position.board[to]!=0?radius*.94f:radius*.15f;
         if(!best)destInset=radius*1.04f;
         startX+=ux*sourceInset;startY+=uy*sourceInset;endX-=ux*destInset;endY-=uy*destInset;
-        paint.setStyle(Paint.Style.STROKE);paint.setColor(color);paint.setAlpha(128);
+        paint.setStyle(Paint.Style.STROKE);paint.setColor(color);paint.setAlpha(102);
         paint.setStrokeWidth(step*width);paint.setStrokeCap(Paint.Cap.ROUND);
         canvas.drawLine(startX,startY,endX,endY,paint);
         float headLength=Math.min(step*head,length*.32f);double angle=Math.atan2(dy,dx);
@@ -377,9 +377,9 @@ public final class BoardView extends View {
         int color=arrow.red?RED_ANALYSIS:BLACK_ANALYSIS;
         if(!badgeOnly){
             paint.setStyle(Paint.Style.STROKE);paint.setStrokeCap(Paint.Cap.ROUND);paint.setAlpha(255);
-            paint.setColor(readableMonochrome(boardColor));paint.setStrokeWidth(step*.185f);
+            paint.setColor(readableMonochrome(boardColor));paint.setStrokeWidth(step*.205f);
             canvas.drawLine(sx,sy,ex,ey,paint);canvas.drawLine(ex,ey,hx1,hy1,paint);canvas.drawLine(ex,ey,hx2,hy2,paint);
-            paint.setColor(color);paint.setStrokeWidth(step*.13f);
+            paint.setColor(color);paint.setStrokeWidth(step*.15f);
             canvas.drawLine(sx,sy,ex,ey,paint);canvas.drawLine(ex,ey,hx1,hy1,paint);canvas.drawLine(ex,ey,hx2,hy2,paint);
             paint.setStrokeCap(Paint.Cap.BUTT);paint.setStyle(Paint.Style.FILL);return;
         }

@@ -58,19 +58,19 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         }
         search("no such player audit 982374"); await("No matching games",8000);
         search("Yin Sheng");open("Yin Sheng");
-        clickDescription("First position"); await("Starting position",3000);
-        clickDescription("Last position"); await("Recorded game · 108 / 108",3000);
-        clickDescription("Previous move"); await("Recorded game · 107 / 108",3000);
+        clickDescription("First position"); awaitProgress(0,3000);
+        clickDescription("Last position"); awaitProgress(108,3000);
+        clickDescription("Previous move"); awaitProgress(107,3000);
         clickDescription("First position"); clickDescription("Play replay");
         long until=SystemClock.uptimeMillis()+4500;
         while(progress()==0&&SystemClock.uptimeMillis()<until)Thread.sleep(100);
         assertTrue("Autoplay must advance",progress()>0);
         clickDescription("Pause replay"); int paused=progress(); Thread.sleep(1300);
         assertEquals("Pause must remove scheduled advancement",paused,progress());
-        main(()->assertNull("Replay no longer contains a move progress slider",findType(root(),SeekBar.class)));
+        main(()->{SeekBar slider=(SeekBar)findType(root(),SeekBar.class);assertNotNull("Replay includes its move progression slider",slider);assertEquals(108,slider.getMax());assertEquals(paused,slider.getProgress());});
         UiTestActions.goToMove(getInstrumentation(),activity,54);
-        await("Recorded game · 54 / 108",3000);
-        clickDescription("First position");await("Recorded game · 0 / 108",3000);
+        awaitProgress(54,3000);
+        clickDescription("First position");awaitProgress(0,3000);
     }
 
     public void testVariationSurvivesSwitchingGamesAndRecreation() throws Exception {
@@ -84,9 +84,9 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         clickDescription("First position");clickDescription("Next move");
         click("‹  Library");search("Yin Sheng");open("Yin Sheng");
         await("Exploring a variation",3000);assertEquals(1,progress());
-        click("Return to recorded game");await("Recorded game · 1 / 108",3000);
+        click("Return to recorded game");awaitProgress(1,3000);
         assertNull("Original mode must remove legal-move entry",findPrefix(root(),"Legal moves…"));
-        recreate();await("Recorded game · 1 / 108",8000);
+        recreate();awaitProgress(1,8000);
     }
 
     public void testCompletedAnalysisAndLifecycleCancellation() throws Exception {
@@ -95,7 +95,7 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         assertNotNull("Completed analysis must expose a legal suggestion",findPrefix(root(),"Explore suggested move"));
         click("Explore suggested move");assertBoardTurn("Black");await("Exploring a variation",3000);
         click("Return to recorded game");click("Analyze");
-        recreate();await("Recorded game",8000);
+        recreate();awaitProgress(1,8000);
         main(()->{try{Field field=MainActivity.class.getDeclaredField("analysisEnabled");field.setAccessible(true);assertTrue("Recreation retains the analysis toggle",field.getBoolean(activity));}catch(Exception e){throw new RuntimeException(e);}});
         awaitContains("Depth ",12000);
         click("Analyze");click("‹  Library");await("Xiangqi Study",8000);
@@ -187,6 +187,11 @@ public final class AuditFlowTest extends InstrumentationTestCase {
         assertTrue("Missing dialog option "+text,UiTestActions.clickPopup(getInstrumentation(),text));
     }
     private void await(String prefix,long timeout)throws Exception{awaitText(prefix,timeout,false);}
+    private void awaitProgress(int expected,long timeout)throws Exception{
+        long until=SystemClock.uptimeMillis()+timeout;final boolean[] ready={false};
+        while(SystemClock.uptimeMillis()<until){main(()->{View found=findType(root(),SeekBar.class);ready[0]=found instanceof SeekBar&&((SeekBar)found).getProgress()==expected;});if(ready[0])return;Thread.sleep(50);}
+        fail("Replay timed out waiting for half-move "+expected);
+    }
     private void awaitContains(String text,long timeout)throws Exception{awaitText(text,timeout,true);}
     private void awaitText(String text,long timeout,boolean contains)throws Exception{
         long until=SystemClock.uptimeMillis()+timeout;final boolean[] found={false};
