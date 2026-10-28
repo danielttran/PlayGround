@@ -6,9 +6,13 @@ import android.test.InstrumentationTestCase;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /** Regression checks for persistence/import defects discovered by the full audit. */
 public final class AuditRepositoryTest extends InstrumentationTestCase {
@@ -38,6 +42,80 @@ public final class AuditRepositoryTest extends InstrumentationTestCase {
         assertEquals(initial+2,new GameRepository(context).load().size());
         assertEquals("Duplicate imports must see another instance's committed data",0,second.importText(a));
         assertEquals(initial+2,new GameRepository(context).load().size());
+    }
+    public void testNamedImportsStaySeparateFromBundledGamesAndEachOther() throws Exception {
+        Context context=storage();GameRepository repo=new GameRepository(context);List<GameRepository.Game> bundled=repo.load();int initial=bundled.size();
+        GameRepository.Game source=bundled.get(0);String text=GameRepository.export(source,source.moves,false);
+        assertEquals("A user may keep their own copy of a bundled game",1,repo.importText(text,"My human study",false));
+        assertEquals("Repeated moves in another named import are a separate user collection",1,repo.importText(text,"Engine comparison",true));
+        GameRepository reopened=new GameRepository(context);List<GameRepository.Game> games=reopened.load();
+        assertEquals(initial+2,games.size());List<GameRepository.ImportedCollection> groups=reopened.importedCollections();
+        assertEquals(2,groups.size());assertEquals("My human study",groups.get(0).name);assertFalse(groups.get(0).engineGame);
+        assertEquals("Engine comparison",groups.get(1).name);assertTrue(groups.get(1).engineGame);
+        assertEquals(1,groups.get(0).gameCount);assertEquals(1,groups.get(1).gameCount);
+        assertFalse(groups.get(0).id.equals(groups.get(1).id));
+        Set<String> ids=new HashSet<>();for(GameRepository.Game game:games)assertTrue("Study-state IDs must stay unique",ids.add(game.id));
+        for(int i=0;i<initial;i++)assertFalse("Imports never modify bundled provenance",games.get(i).imported);
+        GameRepository.Game human=games.get(initial),engine=games.get(initial+1);
+        assertTrue(human.imported);assertFalse(human.engineGame);assertEquals(groups.get(0).id,human.importCollectionId);
+        assertTrue(engine.imported);assertTrue(engine.engineGame);assertEquals(groups.get(1).id,engine.importCollectionId);
+        assertEquals(source.moves,human.moves);assertEquals(source.moves,engine.moves);
+        String humanId=human.id,engineId=engine.id;
+        reopened.load();assertEquals(humanId,reopened.all().get(initial).id);assertEquals(engineId,reopened.all().get(initial+1).id);
+    }
+    public void testOneBatchDeduplicatesButSameNameCreatesDistinctCollections() throws Exception {
+        Context context=storage();GameRepository repo=new GameRepository(context);int initial=repo.load().size();
+        String text=pgn("Batch duplicate","1. b2e2 b9c7 2. a0a1");
+        assertEquals(1,repo.importText(text+"\n"+text,"Same name",false));
+        assertEquals(1,repo.importText(text,"Same name",false));
+        GameRepository reopened=new GameRepository(context);assertEquals(initial+2,reopened.load().size());
+        List<GameRepository.ImportedCollection> groups=reopened.importedCollections();assertEquals(2,groups.size());
+        assertEquals(groups.get(0).name,groups.get(1).name);assertFalse(groups.get(0).id.equals(groups.get(1).id));
+        groups.clear();assertEquals("Callers cannot mutate the repository's collection list",2,reopened.importedCollections().size());
+    }
+    public void testFlatImportsMigrateWithoutLosingSavedGameIdsOrMetadata() throws Exception {
+        Context context=storage();GameRepository repo=new GameRepository(context);int initial=repo.load().size();
+        assertEquals(1,repo.importText(pgn("Existing phone import","1. b2e2 b9c7 2. a0a1")));
+        GameRepository.Game old=repo.all().get(initial);String oldId=old.id;
+        JSONObject oldJson=old.json();oldJson.remove("engineGame");oldJson.remove("importCollectionId");
+        try(FileOutputStream out=new FileOutputStream(new File(directory,"imported-games.json"))){out.write(new JSONArray().put(oldJson).toString().getBytes(StandardCharsets.UTF_8));}
+        GameRepository migrated=new GameRepository(context);assertEquals(initial+1,migrated.load().size());
+        assertEquals(oldId,migrated.all().get(initial).id);assertEquals("Existing phone import",migrated.all().get(initial).event);
+        assertEquals("Imported games",migrated.importedCollections().get(0).name);assertEquals(1,migrated.importedCollections().get(0).gameCount);
+        assertEquals(1,migrated.importText(pgn("New collection","1. h2e2 h9g7 2. i0i1"),"My engines",true));
+        GameRepository reloaded=new GameRepository(context);assertEquals(initial+2,reloaded.load().size());
+        assertEquals(oldId,reloaded.all().get(initial).id);assertEquals(2,reloaded.importedCollections().size());
+        assertFalse(reloaded.all().get(initial).engineGame);assertTrue(reloaded.all().get(initial+1).engineGame);
+        try(FileInputStream in=new FileInputStream(new File(directory,"imported-games.json"))){assertEquals(2,new JSONObject(GameRepository.read(in)).getInt("schema"));}
+    }
+    public void testConcurrentNamedImportsKeepBothBatchesEvenWithIdenticalMoves() throws Exception {
+        Context context=storage();GameRepository first=new GameRepository(context),second=new GameRepository(context);int initial=first.load().size();second.load();
+        String text=pgn("Shared move record","1. b2e2 b9c7 2. a0a1");
+        assertEquals(1,first.importText(text,"First Activity",false));assertEquals(1,second.importText(text,"Recreated Activity",true));
+        GameRepository loaded=new GameRepository(context);assertEquals(initial+2,loaded.load().size());
+        List<GameRepository.ImportedCollection> groups=loaded.importedCollections();assertEquals(2,groups.size());
+        assertEquals("First Activity",groups.get(0).name);assertEquals("Recreated Activity",groups.get(1).name);
+    }
+    public void testInvalidNamedImportDoesNotCreateCollectionOrChangeCommittedFile() throws Exception {
+        Context context=storage();GameRepository repo=new GameRepository(context);int initial=repo.load().size();
+        String valid=pgn("Valid record","1. b2e2 b9c7 2. a0a1");assertEquals(1,repo.importText(valid,"Saved collection",false));
+        File saved=new File(directory,"imported-games.json");String before;try(FileInputStream in=new FileInputStream(saved)){before=GameRepository.read(in);}
+        String invalid=pgn("Illegal record","1. a0a9");
+        try{repo.importText(valid+"\n"+invalid,"Rejected batch",true);fail("The complete batch must validate before adding a collection");}catch(IllegalArgumentException expected){}
+        for(String name:new String[]{"   ","Line\nBreak",new String(new char[81]).replace('\0','x')}) {
+            try{repo.importText(valid,name,true);fail("Invalid collection name accepted");}catch(IllegalArgumentException expected){}
+        }
+        try(FileInputStream in=new FileInputStream(saved)){assertEquals(before,GameRepository.read(in));}
+        GameRepository reopened=new GameRepository(context);assertEquals(initial+1,reopened.load().size());assertEquals(1,reopened.importedCollections().size());
+    }
+    public void testUntrustedImportCannotChooseIdsOrEscapeItsAssignedCollection() throws Exception {
+        Context context=storage();GameRepository repo=new GameRepository(context);List<GameRepository.Game> original=repo.load();int initial=original.size();
+        JSONObject source=original.get(0).json().put("id",original.get(0).id).put("importCollectionId","forged-group").put("engineGame",true);
+        assertEquals(1,repo.importText(new JSONArray().put(source).toString(),"Chosen human collection",false));
+        GameRepository reopened=new GameRepository(context);reopened.load();GameRepository.Game imported=reopened.all().get(initial);
+        assertFalse(original.get(0).id.equals(imported.id));assertFalse(imported.engineGame);
+        assertEquals(reopened.importedCollections().get(0).id,imported.importCollectionId);
+        assertFalse("forged-group".equals(imported.importCollectionId));
     }
     public void testTrailingJsonContentRejectsWholeImport() throws Exception {
         Context context=storage();GameRepository repo=new GameRepository(context);int initial=repo.load().size();

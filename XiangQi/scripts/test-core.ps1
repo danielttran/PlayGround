@@ -25,7 +25,7 @@ $PackManifest=Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $ProjectRo
 $Names=@();$Corpus=@()
 foreach($Pack in $PackManifest.packs){
     $Records=(Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $ProjectRoot ('app\src\main\assets\'+$Pack.file)) | ConvertFrom-Json).games
-    foreach($Record in $Records){$Names+=$Record.red;$Names+=$Record.black;$Corpus+=($Record.id+"`t"+($Record.moves -join ' '))}
+    foreach($Record in $Records){if(-not $Pack.engineGame){$Names+=$Record.red;$Names+=$Record.black};$Corpus+=($Record.id+"`t"+($Record.moves -join ' ')+"`t"+$Record.startFen)}
 }
 $NameFile=Join-Path $Classes 'bundled-names.txt';$Names | Sort-Object -Unique | Set-Content -Encoding utf8 -LiteralPath $NameFile
 & $Java -Xmx512m -cp $Classes org.xiangqi.study.core.PlayerNamesTest $NameFile

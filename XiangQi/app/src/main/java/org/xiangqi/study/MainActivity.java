@@ -39,6 +39,8 @@ public final class MainActivity extends Activity {
     private List<GameRepository.Game> games=new ArrayList<>();
     private LinearLayout root,content,movesView,analysisBox;
     private ListView libraryList;
+    private Spinner librarySortPicker,libraryImportPicker;
+    private EditText librarySearch;
     private LibraryAdapter libraryAdapter;
     private List<GameRepository.Game> libraryMatches=new ArrayList<>();
     private TextView libraryEmpty;
@@ -53,16 +55,18 @@ public final class MainActivity extends Activity {
     private int ply,libraryFirstPosition,libraryTop;
     private boolean exploring,flipped,autoplay,destroyed,library=true,loaded;
     private boolean vsEngine,humanRed,engineThinking,analysisEnabled,foreground;
-    private String search="",pendingExport,librarySort="newest";
+    private String search="",pendingExport,librarySort="newest",libraryTab="human",selectedImportId="";
+    private String pendingImportName="Imported games";
+    private boolean pendingImportEngine;
     private Engine.Result lastResult;
-    private AlertDialog settingsDialog,engineSettingsDialog,colorDialog,presetDialog,playSideDialog,goToDialog;
+    private AlertDialog settingsDialog,engineSettingsDialog,colorDialog,presetDialog,playSideDialog,goToDialog,importCollectionDialog,pasteDialog,replaySpeedDialog;
     private float swipeStartX,swipeStartY;
     private boolean swipeTracking,swipeConsumed,swipeBlocked;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state); prefs=getSharedPreferences("study",MODE_PRIVATE); repository=new GameRepository(this);
-        librarySort=GameDateSort.order(prefs.getString("librarySort","newest"));
-        if(state!=null){search=state.getString("search", "");libraryFirstPosition=state.getInt("libraryFirstPosition",0);libraryTop=state.getInt("libraryTop",0);}
+        restoreLibrarySelection();
+        if(state!=null){pendingImportName=state.getString("pendingImportName","Imported games");pendingImportEngine=state.getBoolean("pendingImportEngine",false);}
         flipped=prefs.getBoolean("flipped",false);
         analysisEnabled=prefs.getBoolean("analysisEnabled",false);
         getWindow().setStatusBarColor(BG); getWindow().setNavigationBarColor(BG);
@@ -83,9 +87,9 @@ public final class MainActivity extends Activity {
             try {
                 List<GameRepository.Game> loadedGames=repository.load();
                 runOnUiThread(()->{
-                    if(destroyed)return; games=loadedGames; loaded=true;
-                    String id=prefs.getString("lastGame",""); GameRepository.Game resume=find(id);
-                    if(!prefs.getBoolean("library",true)&&resume!=null) openGame(resume,true); else showLibrary();
+                    if(destroyed)return; games=loadedGames; loaded=true;restoreLibrarySelection();validateImportSelection();
+                    boolean importedReady=!prefs.getString("newImportId","").isEmpty();prefs.edit().remove("newImportId").apply();String id=prefs.getString("lastGame",""); GameRepository.Game resume=find(id);
+                    if(!importedReady&&!prefs.getBoolean("library",true)&&resume!=null) openGame(resume,true); else showLibrary();
                     handleIntent(getIntent());
                 });
             } catch(Exception e) { runOnUiThread(()->{ if(!destroyed) { root.removeAllViews(); root.addView(text("The library could not be loaded.",20,LIGHT)); root.addView(text(message(e),14,MUTED)); root.addView(button("Retry",()->recreate(),true)); } }); }
@@ -107,21 +111,29 @@ public final class MainActivity extends Activity {
         if(current!=null)content.addView(button("Return to current game · swipe left\nRed: "+PlayerNames.display(current.red)+"\nBlack: "+PlayerNames.display(current.black),this::returnToCurrentGame,true));
         LinearLayout tools=row(); tools.addView(weight(button("Import games",this::importMenu,true),1));
         tools.addView(weight(button("About & sources",this::about,false),1)); content.addView(tools);
-        EditText field=new EditText(this); field.setSingleLine(true); field.setTextColor(LIGHT); field.setHintTextColor(MUTED);
-        field.setTextSize(15); field.setHint("Search player, event, round or collection"); field.setBackground(shape(SURFACE,LINE,12)); pad(field,14,6,14,6);
+        LinearLayout tabs=row();
+        String[] tabIds={"human","engine","imports"},tabLabels={getString(R.string.library_human_games),getString(R.string.library_engine_games),getString(R.string.library_my_imports)};
+        for(int i=0;i<tabIds.length;i++){
+            final String tabId=tabIds[i];Button tab=button(tabLabels[i],()->selectLibrary(tabId,selectedImportId),tabId.equals(libraryTab));
+            tab.setTextSize(12);tab.setSelected(tabId.equals(libraryTab));tab.setContentDescription(tabLabels[i]+" tab");tabs.addView(weight(tab,1));
+        }
+        content.addView(tabs);
+        if("imports".equals(libraryTab))buildImportSelector();
+        EditText field=new EditText(this);librarySearch=field; field.setSingleLine(true); field.setTextColor(LIGHT); field.setHintTextColor(MUTED);
+        field.setTextSize(15); field.setHint("Search player, event, round or collection");field.setContentDescription("Library search"); field.setBackground(shape(SURFACE,LINE,12)); pad(field,14,6,14,6);
         LinearLayout.LayoutParams fp=new LinearLayout.LayoutParams(-1,dp(52)); fp.setMargins(0,dp(14),0,dp(10)); content.addView(field,fp);
         LinearLayout sortRow=row();TextView sortLabel=text("Sort games",13,MUTED);sortRow.addView(sortLabel,new LinearLayout.LayoutParams(dp(88),-2));
-        Spinner sort=new Spinner(this);sort.setContentDescription("Game sort order");
+        Spinner sort=new Spinner(this);librarySortPicker=sort;sort.setContentDescription("Game sort order");
         ArrayAdapter<String> sortAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,new String[]{"Collection order","Newest first","Oldest first"}){
             @Override public View getView(int position,View convert,ViewGroup parent){TextView view=(TextView)super.getView(position,convert,parent);view.setTextColor(LIGHT);return view;}
         };
         sort.setAdapter(sortAdapter);sort.setSelection(index(librarySort,"collection","newest","oldest"));
         sortRow.addView(sort,new LinearLayout.LayoutParams(0,dp(48),1));content.addView(sortRow);
-        sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onItemSelected(AdapterView<?> parent,View view,int position,long id){String value=new String[]{"collection","newest","oldest"}[position];if(!value.equals(librarySort)){librarySort=value;prefs.edit().putString("librarySort",value).apply();resetLibraryScroll();renderCards();}}public void onNothingSelected(AdapterView<?> parent){}});
+        sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onItemSelected(AdapterView<?> parent,View view,int position,long id){if(!library||sort!=librarySortPicker)return;String value=new String[]{"collection","newest","oldest"}[position];if(!value.equals(librarySort)){librarySort=value;resetLibraryScroll();saveLibraryScope();renderCards();}}public void onNothingSelected(AdapterView<?> parent){}});
         status=text("",12,MUTED); pad(status,2,0,2,10); content.addView(status);
         libraryEmpty=text("No matching games. Try a player’s surname, or import a game pack.",16,MUTED);pad(libraryEmpty,4,24,4,24);content.addView(libraryEmpty);
         libraryAdapter=new LibraryAdapter();libraryList.setAdapter(libraryAdapter);field.setText(search);field.setSelection(field.length());
-        field.addTextChangedListener(new TextWatcher(){ public void beforeTextChanged(CharSequence s,int st,int count,int after){} public void onTextChanged(CharSequence s,int st,int before,int count){ search=s.toString();resetLibraryScroll();renderCards(); } public void afterTextChanged(Editable e){} });
+        field.addTextChangedListener(new TextWatcher(){ public void beforeTextChanged(CharSequence s,int st,int count,int after){} public void onTextChanged(CharSequence s,int st,int before,int count){if(!library||field!=librarySearch)return; search=s.toString();resetLibraryScroll();saveLibraryScope();renderCards(); } public void afterTextChanged(Editable e){} });
         renderCards();
         final ListView list=libraryList;final int restorePosition=libraryFirstPosition,restoreTop=libraryTop;
         list.post(()->{if(!destroyed&&library&&list==libraryList)list.setSelectionFromTop(Math.min(restorePosition,Math.max(0,list.getCount()-1)),restoreTop);});
@@ -132,12 +144,14 @@ public final class MainActivity extends Activity {
         libraryHideResults=StudySettings.load(this).hideResults;
         String needle=PlayerNames.fold(search).trim();
         List<GameRepository.Game> matches=new ArrayList<>();
-        for(GameRepository.Game item:GameDateSort.sorted(games,g->g.date,librarySort)) {
+        List<GameRepository.Game> collectionGames=scopedGames();
+        for(GameRepository.Game item:GameDateSort.sorted(collectionGames,g->g.date,librarySort)) {
             if(!needle.isEmpty() && !PlayerNames.fold(PlayerNames.searchText(item.red)+" "+PlayerNames.searchText(item.black)+" "+item.event+" "+item.round+" "+item.collection).contains(needle))continue;
             matches.add(item);
         }
         libraryMatches=matches;int count=matches.size();
-        status.setText(getResources().getQuantityString(R.plurals.library_count,games.size(),count,games.size()));
+        status.setText(getResources().getQuantityString(R.plurals.library_count,collectionGames.size(),count,collectionGames.size()));
+        libraryEmpty.setText(collectionGames.isEmpty()?("imports".equals(libraryTab)?R.string.library_empty_imports:"engine".equals(libraryTab)?R.string.library_empty_engines:R.string.library_empty_humans):R.string.library_no_matches);
         libraryEmpty.setVisibility(count==0?View.VISIBLE:View.GONE);
         // Rebind visible rows immediately for spoiler-setting changes; the
         // adapter handles all other rows lazily as the user scrolls to them.
@@ -146,6 +160,48 @@ public final class MainActivity extends Activity {
     }
     private void resetLibraryScroll(){libraryFirstPosition=0;libraryTop=0;if(libraryList!=null&&libraryList.getFirstVisiblePosition()>0)libraryList.setSelection(0);}
     private void rememberLibraryScroll(){if(library&&libraryList!=null){libraryFirstPosition=libraryList.getFirstVisiblePosition();View first=libraryList.getChildAt(0);libraryTop=first==null?0:first.getTop();}}
+    private String libraryScope(){return "imports".equals(libraryTab)?"import:"+selectedImportId:libraryTab;}
+    private void saveLibraryScope(){
+        if(prefs==null)return;String key="libraryScope:"+libraryScope()+":";
+        SharedPreferences.Editor edit=prefs.edit().putString("libraryTab",libraryTab).putString("selectedImportId",selectedImportId)
+            .putString(key+"search",search).putString(key+"sort",librarySort).putInt(key+"position",libraryFirstPosition).putInt(key+"top",libraryTop);
+        if("human".equals(libraryTab))edit.putString("librarySort",librarySort);edit.apply();
+    }
+    private void restoreLibrarySelection(){
+        libraryTab=prefs.getString("libraryTab","human");if(!Arrays.asList("human","engine","imports").contains(libraryTab))libraryTab="human";
+        selectedImportId=prefs.getString("selectedImportId","");String completed=prefs.getString("newImportId","");
+        if(!completed.isEmpty()){libraryTab="imports";selectedImportId=completed;}loadLibraryScope();
+    }
+    private void loadLibraryScope(){
+        String key="libraryScope:"+libraryScope()+":";search=prefs.getString(key+"search","");
+        librarySort=GameDateSort.order(prefs.getString(key+"sort","human".equals(libraryTab)?prefs.getString("librarySort","newest"):"newest"));
+        libraryFirstPosition=prefs.getInt(key+"position",0);libraryTop=prefs.getInt(key+"top",0);
+    }
+    private void validateImportSelection(){
+        List<GameRepository.ImportedCollection> collections=repository.importedCollections();
+        for(GameRepository.ImportedCollection collection:collections)if(collection.id.equals(selectedImportId))return;
+        selectedImportId=collections.isEmpty()?"":collections.get(0).id;if("imports".equals(libraryTab))loadLibraryScope();
+    }
+    private void selectLibrary(String tab,String importId){
+        if(tab.equals(libraryTab)&&(!"imports".equals(tab)||importId.equals(selectedImportId)))return;
+        rememberLibraryScroll();saveLibraryScope();libraryTab=tab;selectedImportId=importId;validateImportSelection();loadLibraryScope();
+        libraryList=null;libraryAdapter=null;showLibrary();saveLibraryScope();
+    }
+    private boolean inLibraryScope(GameRepository.Game item){
+        return "imports".equals(libraryTab)?item.imported&&selectedImportId.equals(item.importCollectionId):!item.imported&&item.engineGame=="engine".equals(libraryTab);
+    }
+    private List<GameRepository.Game> scopedGames(){List<GameRepository.Game> entries=new ArrayList<>();for(GameRepository.Game item:games)if(inLibraryScope(item))entries.add(item);return entries;}
+    private void buildImportSelector(){
+        List<GameRepository.ImportedCollection> collections=repository.importedCollections();
+        if(collections.isEmpty()){TextView empty=text("No imports yet · each import becomes its own collection",13,MUTED);pad(empty,4,8,4,4);content.addView(empty);return;}
+        LinearLayout selector=row();TextView label=text("Collection",13,MUTED);selector.addView(label,new LinearLayout.LayoutParams(dp(82),-2));
+        Spinner picker=new Spinner(this);libraryImportPicker=picker;picker.setContentDescription("Imported collection");List<String> labels=new ArrayList<>();int selected=0;
+        for(int i=0;i<collections.size();i++){GameRepository.ImportedCollection item=collections.get(i);labels.add(item.name+" · "+(item.engineGame?"Engine":"Human")+" · "+item.gameCount);if(item.id.equals(selectedImportId))selected=i;}
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels){
+            @Override public View getView(int position,View convert,ViewGroup parent){TextView view=(TextView)super.getView(position,convert,parent);view.setTextColor(LIGHT);view.setSingleLine(true);view.setEllipsize(TextUtils.TruncateAt.END);return view;}
+        };picker.setAdapter(adapter);picker.setSelection(selected);selector.addView(picker,new LinearLayout.LayoutParams(0,dp(52),1));content.addView(selector);
+        picker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onItemSelected(AdapterView<?> parent,View view,int position,long id){if(!library||picker!=libraryImportPicker||!"imports".equals(libraryTab))return;String value=collections.get(position).id;if(!value.equals(selectedImportId))selectLibrary("imports",value);}public void onNothingSelected(AdapterView<?> parent){}});
+    }
     private final class LibraryAdapter extends BaseAdapter {
         @Override public int getCount(){return libraryMatches.size();}
         @Override public GameRepository.Game getItem(int position){return libraryMatches.get(position);}
@@ -169,15 +225,21 @@ public final class MainActivity extends Activity {
             item=game;redName.setText(PlayerNames.display(game.red));blackName.setText(PlayerNames.display(game.black));score.setText(libraryHideResults?"":displayResult(game.result));result.setVisibility(libraryHideResults?View.GONE:View.VISIBLE);
             event.setText(game.event);round.setText(game.round);round.setVisibility(game.round.isEmpty()?View.GONE:View.VISIBLE);collection.setText(game.collection);collection.setVisibility(game.collection.isEmpty()?View.GONE:View.VISIBLE);
             clock.setText(timeControl(game.timeControl));clock.setVisibility(game.timeControl.isEmpty()?View.GONE:View.VISIBLE);
-            details.setText(getResources().getQuantityString(R.plurals.library_game_details,game.moves.size(),game.date.isEmpty()?"Undated":game.date,game.moves.size(),game.imported?" · Imported":""));
+            details.setText(getResources().getQuantityString(R.plurals.library_game_details,game.moves.size(),game.date.isEmpty()?"Undated":game.date,game.moves.size(),game.imported?" · Imported · "+(game.engineGame?"Engine":"Human"):game.engineGame?" · Engine game":""));
             boolean variation=prefs.getBoolean("exploring:"+game.id,false);int resume=variation?prefs.getInt("variationPly:"+game.id,0):Math.min(game.moves.size(),prefs.getInt("ply:"+game.id,0));
             action.setText(variation?getString(R.string.library_resume_variation,(resume+1)/2):resume>0?getString(R.string.library_resume_move,(resume+1)/2):getString(R.string.library_open_game));
-            setContentDescription("Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+". "+game.event+", "+game.round+(libraryHideResults?"":", result "+displayResult(game.result))+". Open game.");
+            setContentDescription("Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+". "+game.event+", "+game.round+(libraryHideResults?"":", result "+displayResult(game.result))+". "+(game.engineGame?"Engine game. ":"Human game. ")+"Open game.");
         }
     }
 
     private void openGame(GameRepository.Game selected,boolean restore) {
-        stopAutoplay(); cancelGameSearch(true); cancelAnalysis(); saveState(); game=selected; library=false;
+        stopAutoplay(); cancelGameSearch(true); cancelAnalysis(); saveState();
+        if(!inLibraryScope(selected)){
+            libraryTab=selected.imported?"imports":selected.engineGame?"engine":"human";
+            if(selected.imported)selectedImportId=selected.importCollectionId;
+            loadLibraryScope();saveLibraryScope();libraryList=null;libraryAdapter=null;
+        }
+        game=selected; library=false;
         workingMoves=new ArrayList<>(game.moves); exploring=false; ply=restore?prefs.getInt("ply:"+game.id,0):0;
         if(restore && prefs.getBoolean("exploring:"+game.id,false)) try {
             JSONArray array=new JSONArray(prefs.getString("variationMoves:"+game.id,"[]"));
@@ -271,10 +333,28 @@ public final class MainActivity extends Activity {
     private void toggleAutoplay() {
         boolean wasPlaying=vsEngine;cancelGameSearch(true);updateReplay();if(wasPlaying)resumeAnalysis();
         if(autoplay){stopAutoplay();return;} if(ply>=workingMoves.size())moveTo(0);
-        autoplay=true; autoplayButton.setText("Ⅱ"); autoplayButton.setContentDescription("Pause replay"); handler.postDelayed(playTick,1000);
+        autoplay=true; autoplayButton.setText("Ⅱ"); autoplayButton.setContentDescription("Pause replay"); handler.postDelayed(playTick,replayDelay());
     }
-    private final Runnable playTick=new Runnable(){public void run(){if(!autoplay||library)return;if(ply>=workingMoves.size()){stopAutoplay();return;}moveTo(ply+1);if(autoplay)handler.postDelayed(this,1000);}};
+    private final Runnable playTick=new Runnable(){public void run(){if(!autoplay||library)return;if(ply>=workingMoves.size()){stopAutoplay();return;}moveTo(ply+1);if(ply>=workingMoves.size())stopAutoplay();else if(autoplay)handler.postDelayed(this,replayDelay());}};
     private void stopAutoplay() { autoplay=false; handler.removeCallbacks(playTick); if(autoplayButton!=null){autoplayButton.setText("▶");autoplayButton.setContentDescription("Play replay");} }
+    private long replayDelay(){long value=prefs.getLong("replayDelayMillis",1000);return value>=500&&value<=60000?value:1000;}
+    private String replayDelayLabel(){return getString(R.string.replay_delay_label,java.text.NumberFormat.getNumberInstance().format(replayDelay()/1000.0));}
+    private void replaySpeed(Runnable changed){
+        LinearLayout body=column();pad(body,20,8,20,8);body.addView(text("Seconds between replay moves (0.5–60). This controls Play replay; engine thinking time is set separately.",14,MUTED));
+        EditText seconds=new EditText(this);seconds.setSingleLine(true);seconds.setTextColor(LIGHT);seconds.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        seconds.setContentDescription("Seconds between replay moves");seconds.setFilters(new InputFilter[]{new InputFilter.LengthFilter(7)});seconds.setText(String.valueOf(replayDelay()/1000.0));seconds.selectAll();body.addView(seconds);
+        replaySpeedDialog=dialog("Replay speed").setView(body).setNegativeButton("Cancel",null).setPositiveButton("Save",null).create();
+        final AlertDialog shown=replaySpeedDialog;shown.setOnDismissListener(d->replaySpeedDialog=null);shown.show();shown.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
+            try{
+                String raw=seconds.getText().toString().trim();StringBuilder normalized=new StringBuilder();
+                for(int i=0;i<raw.length();i++){char c=raw.charAt(i);int digit=Character.digit(c,10);normalized.append(digit>=0?(char)('0'+digit):c==','||c=='\u066b'?'.':c);}
+                double value=Double.parseDouble(normalized.toString());if(!Double.isFinite(value)||value<0.5||value>60)throw new NumberFormatException();
+                prefs.edit().putLong("replayDelayMillis",Math.round(value*1000)).apply();
+                if(autoplay){handler.removeCallbacks(playTick);handler.postDelayed(playTick,replayDelay());}
+                if(changed!=null)changed.run();shown.dismiss();
+            }catch(NumberFormatException invalid){seconds.setError("Enter seconds from 0.5 to 60");}
+        });
+    }
 
     private void toggleExplore() {
         stopAutoplay(); cancelGameSearch(true); cancelAnalysis();
@@ -301,7 +381,7 @@ public final class MainActivity extends Activity {
     }
 
     private List<GameRepository.Game> navigationGames() {
-        List<GameRepository.Game> ordered=GameDateSort.sorted(games,g->g.date,librarySort),matched=new ArrayList<>();
+        List<GameRepository.Game> ordered=GameDateSort.sorted(scopedGames(),g->g.date,librarySort),matched=new ArrayList<>();
         String needle=PlayerNames.fold(search).trim();
         for(GameRepository.Game item:ordered)if(needle.isEmpty()||PlayerNames.fold(PlayerNames.searchText(item.red)+" "+PlayerNames.searchText(item.black)+" "+item.event+" "+item.round+" "+item.collection).contains(needle))matched.add(item);
         return gameIndex(matched)>=0?matched:ordered;
@@ -452,7 +532,7 @@ public final class MainActivity extends Activity {
     }
 
     private String replayEvent() {
-        return game.event+" · "+game.round+(StudySettings.load(this).hideResults?"":" · "+displayResult(game.result))
+        return (game.imported?"My imports · ":"")+(game.engineGame?"Engine game":"Human game")+"\n"+game.event+" · "+game.round+(StudySettings.load(this).hideResults?"":" · "+displayResult(game.result))
             +(game.timeControl.isEmpty()?"":"\n"+timeControl(game.timeControl));
     }
     private void applyAppearance() {
@@ -466,6 +546,7 @@ public final class MainActivity extends Activity {
         CheckBox hide=new CheckBox(this);hide.setText(R.string.hide_game_results);hide.setTextColor(LIGHT);hide.setChecked(saved.hideResults);
         hide.setContentDescription("Hide game results, including accessibility announcements");body.addView(hide);
         TextView spoilerNote=text("Only recorded game results are hidden. Engine evaluations stay visible; exported PGN preserves the original result.",12,MUTED);pad(spoilerNote,0,0,0,10);body.addView(spoilerNote);
+        Button speed=button(getString(R.string.replay_speed_label,replayDelayLabel()),()->{},false);speed.setContentDescription("Replay speed");speed.setOnClickListener(v->replaySpeed(()->speed.setText(getString(R.string.replay_speed_label,replayDelayLabel()))));body.addView(speed);
         String[] boardIds=AppearancePresets.boardIds(),discIds=AppearancePresets.discIds();
         PresetSpinner boards=(PresetSpinner)settingChoice(body,"Board style",AppearancePresets.boardLabels(),index(saved.boardStyle,boardIds));
         Spinner glyphs=settingChoice(body,"Chinese piece characters",new String[]{"Traditional Chinese","Simplified Chinese"},index(saved.glyphStyle,"traditional","simplified"));
@@ -578,24 +659,52 @@ public final class MainActivity extends Activity {
         return false;
     }
 
-    private void importMenu() { dialog("Import games").setItems(new String[]{"Choose a PGN or JSON file","Paste ICCS PGN / JSON","Import format help"},(d,n)->{if(n==0)chooseFile();else if(n==1)paste();else importHelp();}).setNegativeButton("Cancel",null).show(); }
+    private void importMenu() { dialog("Import games").setItems(new String[]{"Choose a PGN or JSON file","Paste ICCS PGN / JSON","Import format help"},(d,n)->{if(n<2)importCollection(n,null);else importHelp();}).setNegativeButton("Cancel",null).show(); }
+    private void importCollection(int route,Uri uri){
+        LinearLayout body=column();pad(body,20,6,20,8);
+        body.addView(text("Each import is saved as a separate collection in My imports.",14,MUTED));
+        EditText name=new EditText(this);name.setSingleLine(true);name.setTextColor(LIGHT);name.setHintTextColor(MUTED);name.setHint("Collection name");name.setContentDescription("Import collection name");
+        name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(80)});body.addView(name,new LinearLayout.LayoutParams(-1,dp(56)));
+        RadioGroup type=new RadioGroup(this);type.setOrientation(RadioGroup.HORIZONTAL);type.setContentDescription("Import game type");
+        RadioButton human=new RadioButton(this);human.setId(View.generateViewId());human.setText(R.string.library_human_games);human.setTextColor(LIGHT);human.setContentDescription("Import human games");
+        RadioButton engines=new RadioButton(this);engines.setId(View.generateViewId());engines.setText(R.string.library_engine_games);engines.setTextColor(LIGHT);engines.setContentDescription("Import engine games");
+        type.addView(human,new RadioGroup.LayoutParams(0,dp(52),1));type.addView(engines,new RadioGroup.LayoutParams(0,dp(52),1));type.check(human.getId());body.addView(type);
+        importCollectionDialog=dialog("New import collection").setView(body).setNegativeButton("Cancel",null).setPositiveButton("Continue",null).create();
+        importCollectionDialog.setOnDismissListener(d->importCollectionDialog=null);importCollectionDialog.show();
+        final AlertDialog shown=importCollectionDialog;shown.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
+            String value=name.getText().toString().trim();if(value.isEmpty()){name.setError("Name this collection");return;}
+            pendingImportName=value;pendingImportEngine=engines.isChecked();shown.dismiss();
+            if(route==0)chooseFile();else if(route==1)paste();else importUri(uri);
+        });
+    }
     private void chooseFile() { Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT); intent.setType("*/*"); intent.addCategory(Intent.CATEGORY_OPENABLE); try{startActivityForResult(intent,IMPORT);}catch(ActivityNotFoundException e){error("File picker unavailable","Use Paste to import a game on this device.");} }
     private void paste() {
         EditText input=new EditText(this); input.setTextColor(LIGHT); input.setHintTextColor(MUTED); input.setHint("[Red \"Player\"]\n[Black \"Opponent\"]\n\n1. b2e2 b9c7 *"); input.setMinLines(7); input.setMaxLines(12); input.setGravity(Gravity.TOP); input.setTextSize(14); input.setTypeface(Typeface.MONOSPACE); pad(input,18,12,18,12);
-        AlertDialog d=dialog("Paste a game record").setView(input).setNegativeButton("Cancel",null).setPositiveButton("Import",null).create(); d.setOnShowListener(v->d.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(b->{String value=input.getText().toString();if(value.getBytes(StandardCharsets.UTF_8).length>GameRepository.MAX_BYTES){input.setError("Text exceeds 5 MB");return;}d.dismiss();importText(value);}));d.show();
+        input.setContentDescription("Game record text");
+        AlertDialog d=dialog("Paste into "+pendingImportName).setView(input).setNegativeButton("Cancel",null).setPositiveButton("Import",null).create();pasteDialog=d;d.setOnDismissListener(v->pasteDialog=null);
+        d.setOnShowListener(v->d.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(b->{String value=input.getText().toString();if(value.getBytes(StandardCharsets.UTF_8).length>GameRepository.MAX_BYTES){input.setError("Text exceeds 5 MB");return;}d.dismiss();importText(value);}));d.show();
     }
     private void importText(String text) {
-        toast("Checking all imported moves…"); io.execute(()->{try{int added=repository.importText(text);List<GameRepository.Game> updated=repository.all();runOnUiThread(()->{if(destroyed)return;games=updated;showLibrary();toast(added==0?"These games are already in your library.":"Imported "+added+" game"+(added==1?"":"s")+". Saved on this device.");});}catch(Exception e){runOnUiThread(()->{if(!destroyed)error("Import was not saved",message(e));});}});
+        final String name=pendingImportName;final boolean engineGames=pendingImportEngine;
+        toast("Checking all imported moves…");io.execute(()->{try{int added=repository.importText(text,name,engineGames);completeImport(added);}catch(Exception e){runOnUiThread(()->{if(!destroyed)error("Import was not saved",message(e));});}});
     }
     private void importUri(Uri uri) {
-        toast("Reading and checking game file…"); final ContentResolver resolver=getApplicationContext().getContentResolver();
+        toast("Reading and checking game file…"); final ContentResolver resolver=getApplicationContext().getContentResolver();final String name=pendingImportName;final boolean engineGames=pendingImportEngine;
         io.execute(()->{try(InputStream in=resolver.openInputStream(uri)){
             if(in==null)throw new IOException("The selected file could not be opened.");
-            int added=repository.importText(GameRepository.read(in));List<GameRepository.Game> updated=repository.all();
-            runOnUiThread(()->{if(destroyed)return;games=updated;showLibrary();toast(added==0?"These games are already in your library.":"Imported "+added+" game"+(added==1?"":"s")+". Saved on this device.");});
+            int added=repository.importText(GameRepository.read(in),name,engineGames);completeImport(added);
         }catch(Exception e){runOnUiThread(()->{if(!destroyed)error("Import was not saved",message(e));});}});
     }
-    private void importHelp() { dialog("Supported imports").setMessage("Import .pgn text using ICCS coordinates (a0–i9), or a normalized JSON pack. Example:\n\n[Red \"Player\"]\n[Black \"Opponent\"]\n[Result \"*\"]\n\n1. b2e2 b9c7 *\n\nComments and side variations in PGN are ignored; the main line is imported. Custom positions use a FEN tag. Every move must be legal, or the whole import is rejected. Duplicate move records are skipped.\n\nFile limit: 5 MB. Binary XQF / CBR / CBL, Chinese move notation and WXF move notation need conversion to ICCS PGN before importing.").setPositiveButton("Got it",null).show(); }
+    @android.annotation.SuppressLint("ApplySharedPref") // FILE_IO only: persist the destination before a replacement Activity's queued load, including after process death.
+    private void completeImport(int added){
+        List<GameRepository.Game> updated=repository.all();List<GameRepository.ImportedCollection> collections=repository.importedCollections();
+        String importedId=collections.get(collections.size()-1).id;
+        // A replacement Activity queues its load after this task and reads the
+        // destination even when the originating Activity has been destroyed.
+        prefs.edit().putString("libraryTab","imports").putString("selectedImportId",importedId).putString("newImportId",importedId).putBoolean("library",true).commit();
+        runOnUiThread(()->{if(destroyed)return;games=updated;selectLibrary("imports",importedId);prefs.edit().remove("newImportId").apply();toast("Imported "+added+" game"+(added==1?"":"s")+" into a separate collection. Saved on this device.");});
+    }
+    private void importHelp() { dialog("Supported imports").setMessage("Name your collection and choose Human games or Engine games. Each import appears separately under My imports and never changes the built-in Human or Engine collections.\n\nImport .pgn text using ICCS coordinates (a0–i9), or a normalized JSON pack. Example:\n\n[Red \"Player\"]\n[Black \"Opponent\"]\n[Result \"*\"]\n\n1. b2e2 b9c7 *\n\nComments and side variations in PGN are ignored; the main line is imported. Custom positions use a FEN tag. Every move must be legal, or the whole import is rejected. Duplicate move records within this import are skipped. The same game can be kept in different collections.\n\nFile limit: 5 MB. Binary XQF / CBR / CBL, Chinese move notation and WXF move notation need conversion to ICCS PGN before importing.").setPositiveButton("Got it",null).show(); }
     private void exportGame() {
         pendingExport=GameRepository.export(game,new ArrayList<>(workingMoves),exploring);
         Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT);intent.addCategory(Intent.CATEGORY_OPENABLE);intent.setType("application/x-chess-pgn");intent.putExtra(Intent.EXTRA_TITLE,"xiangqi-"+game.id.replaceAll("[^A-Za-z0-9_-]","_")+(exploring?"-variation":"")+".pgn");
@@ -616,7 +725,7 @@ public final class MainActivity extends Activity {
                 if(stream!=null&&!(stream instanceof Uri))throw new IllegalArgumentException("The shared file is not a document URI.");
                 uri=(Uri)stream;
             }
-            if(uri!=null&&(Intent.ACTION_VIEW.equals(intent.getAction())||Intent.ACTION_SEND.equals(intent.getAction()))){importUri(uri);setIntent(new Intent(this,MainActivity.class));}
+            if(uri!=null&&(Intent.ACTION_VIEW.equals(intent.getAction())||Intent.ACTION_SEND.equals(intent.getAction()))){importCollection(2,uri);setIntent(new Intent(this,MainActivity.class));}
         }catch(BadParcelableException|IllegalArgumentException e){setIntent(new Intent(this,MainActivity.class));error("Could not open shared game",message(e));}
     }
 
@@ -642,15 +751,15 @@ public final class MainActivity extends Activity {
         return value;
     }
     private void saveState() {
-        rememberLibraryScroll();if(prefs==null)return; SharedPreferences.Editor edit=prefs.edit().putBoolean("library",library).putBoolean("flipped",flipped);
+        rememberLibraryScroll();if(prefs==null)return;saveLibraryScope(); SharedPreferences.Editor edit=prefs.edit().putBoolean("library",library).putBoolean("flipped",flipped);
         if(game!=null){edit.putString("lastGame",game.id);if(!exploring)edit.putInt("ply:"+game.id,ply);edit.putBoolean("exploring:"+game.id,exploring);if(exploring){edit.putString("variationMoves:"+game.id,new JSONArray(workingMoves).toString()).putInt("variationPly:"+game.id,ply);}}
         edit.apply();
     }
-    @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();out.putString("pendingExport",pendingExport);out.putString("search",search);out.putInt("libraryFirstPosition",libraryFirstPosition);out.putInt("libraryTop",libraryTop);}
+    @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();out.putString("pendingExport",pendingExport);out.putString("pendingImportName",pendingImportName);out.putBoolean("pendingImportEngine",pendingImportEngine);}
     @Override protected void onRestoreInstanceState(Bundle in){super.onRestoreInstanceState(in);pendingExport=in.getString("pendingExport");}
     @Override protected void onStart(){super.onStart();foreground=true;resumeAnalysis();}
     @Override protected void onStop(){super.onStop();foreground=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
-    @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
+    @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
     @Override public void onBackPressed(){if(!library)showLibrary();else super.onBackPressed();}
 
     private AlertDialog.Builder dialog(String title){return new AlertDialog.Builder(this,android.R.style.Theme_Material_Dialog_Alert).setTitle(title);}

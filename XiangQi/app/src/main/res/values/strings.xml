@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Xiangqi Study</string>
+    <string name="library_human_games">Human games</string>
+    <string name="library_engine_games">Engine games</string>
+    <string name="library_my_imports">My imports</string>
+    <string name="library_empty_imports">Your imports stay in separate named collections. Use Import games to add one.</string>
+    <string name="library_empty_engines">No bundled engine games are available in this build.</string>
+    <string name="library_empty_humans">No bundled human games are available in this build.</string>
+    <string name="library_no_matches">No matching games. Try a player’s surname or clear the search.</string>
+    <string name="replay_delay_label">%1$s s between moves</string>
+    <string name="replay_speed_label">Replay speed · %1$s</string>
     <string name="hide_game_results">Hide game results (avoid spoilers)</string>
     <string name="color_preview">帅  将  兵  卒</string>
     <string name="color_channel">%1$s · %2$d</string>

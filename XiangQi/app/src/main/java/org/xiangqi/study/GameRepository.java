@@ -14,15 +14,18 @@ import java.util.*;
 public final class GameRepository {
     public static final int MAX_BYTES = 5 * 1024 * 1024;
     private static final int MAX_PLIES = 2000;
+    private static final String LEGACY_COLLECTION_ID = "legacy-imports";
     private static final Object FILE_LOCK = new Object();
     private final Context context;
     private final List<Game> games = new ArrayList<>();
     private final List<Game> imported = new ArrayList<>();
+    private final List<ImportedCollection> collections = new ArrayList<>();
     public GameRepository(Context context) { this.context = context.getApplicationContext(); }
 
     public static final class Game {
         public String id, event, round, date, red, black, result, sourceUrl, startFen, timeControl="", collection="";
-        public boolean imported;
+        public boolean imported, engineGame;
+        public String importCollectionId="";
         public final List<String> moves = new ArrayList<>();
         public String title() { return red + " · " + black; }
         public Position initial() { return startFen.isEmpty() ? Position.initial() : Position.fromFen(startFen); }
@@ -30,7 +33,19 @@ public final class GameRepository {
             JSONObject j = new JSONObject();
             j.put("id", id); j.put("event", event); j.put("round", round); j.put("date", date);
             j.put("red", red); j.put("black", black); j.put("result", result); j.put("sourceUrl", sourceUrl);
-            j.put("startFen", startFen); j.put("timeControl",timeControl); j.put("collection",collection); j.put("moves", new JSONArray(moves)); return j;
+            j.put("startFen", startFen); j.put("timeControl",timeControl); j.put("collection",collection);
+            j.put("engineGame",engineGame); j.put("importCollectionId",importCollectionId);
+            j.put("moves", new JSONArray(moves)); return j;
+        }
+    }
+
+    /** A user-owned import batch; its name is independent of source game metadata. */
+    public static final class ImportedCollection {
+        public final String id, name;
+        public final boolean engineGame;
+        public final int gameCount;
+        private ImportedCollection(String id,String name,boolean engineGame,int gameCount) {
+            this.id=id;this.name=name;this.engineGame=engineGame;this.gameCount=gameCount;
         }
     }
 
@@ -51,20 +66,64 @@ public final class GameRepository {
             for(Game game:entries){
                 if(!ids.add(game.id))throw new IOException("Duplicate bundled game ID");
                 if(game.collection.isEmpty())game.collection=pack.optString("label","");
+                game.engineGame=pack.optBoolean("engineGame",game.engineGame);
             }
             bundled.addAll(entries);
         }
         File file = new File(context.getFilesDir(), "imported-games.json");
         List<Game> saved = new ArrayList<>();
+        List<ImportedCollection> savedCollections = new ArrayList<>();
         if (file.isFile() || new File(file.getPath()+".bak").isFile())
-            try (InputStream in = new android.util.AtomicFile(file).openRead()) { saved = jsonGames(read(in), true); }
+            try (InputStream in = new android.util.AtomicFile(file).openRead()) {
+                String text=read(in);Object root=jsonRoot(text);
+                if(root instanceof JSONObject&&((JSONObject)root).optInt("schema",0)==2) {
+                    JSONObject stored=(JSONObject)root;JSONArray groups=stored.getJSONArray("collections");
+                    if(groups.length()>5000)throw new IOException("Too many saved import collections");
+                    Map<String,ImportedCollection> byId=new LinkedHashMap<>();
+                    for(int i=0;i<groups.length();i++) {
+                        JSONObject group=groups.getJSONObject(i);String id=group.getString("id"),name=collectionName(group.getString("name"));
+                        if(!id.matches("[a-zA-Z0-9-]{1,128}")||byId.containsKey(id))throw new IOException("Invalid saved import collection ID");
+                        byId.put(id,new ImportedCollection(id,name,group.optBoolean("engineGame",false),0));
+                    }
+                    saved=jsonGames(stored.getJSONArray("games"),true,true);
+                    Map<String,Integer> counts=new HashMap<>();
+                    for(Game game:saved) {
+                        ImportedCollection group=byId.get(game.importCollectionId);
+                        if(group==null)throw new IOException("Saved game has no import collection");
+                        game.engineGame=group.engineGame;counts.put(group.id,counts.getOrDefault(group.id,0)+1);
+                    }
+                    for(ImportedCollection group:byId.values())if(counts.containsKey(group.id))
+                        savedCollections.add(new ImportedCollection(group.id,group.name,group.engineGame,counts.get(group.id)));
+                } else {
+                    if(root instanceof JSONObject&&((JSONObject)root).has("schema"))
+                        throw new IOException("Unsupported saved import-library schema");
+                    // Before schema 2 all imports shared a flat array. Preserve their
+                    // content-derived IDs so existing saved study positions still resolve.
+                    saved=jsonGames(text,true);
+                    for(Game game:saved){game.importCollectionId=LEGACY_COLLECTION_ID;game.engineGame=false;}
+                    if(!saved.isEmpty())savedCollections.add(new ImportedCollection(LEGACY_COLLECTION_ID,"Imported games",false,saved.size()));
+                }
+            }
+        for(Game game:saved)if(!ids.add(game.id))throw new IOException("Duplicate saved game ID");
         games.clear(); imported.clear(); games.addAll(bundled); imported.addAll(saved); games.addAll(saved);
+        collections.clear();collections.addAll(savedCollections);
         return new ArrayList<>(games);
     }
 
     public synchronized List<Game> all() { return new ArrayList<>(games); }
+    public synchronized List<ImportedCollection> importedCollections() { return new ArrayList<>(collections); }
 
+    /** Compatibility entry point for the pre-collection importer and its dedup semantics. */
     public synchronized int importText(String text) throws Exception {
+        return importBatch(text,null,false);
+    }
+
+    /** Every successful explicit import becomes a separate named collection. */
+    public synchronized int importText(String text,String name,boolean engineGame) throws Exception {
+        return importBatch(text,collectionName(name),engineGame);
+    }
+
+    private int importBatch(String text,String name,boolean engineGame) throws Exception {
         if (text == null || text.trim().isEmpty()) throw new IllegalArgumentException("The file is empty.");
         if (text.length() > MAX_BYTES || text.getBytes(StandardCharsets.UTF_8).length > MAX_BYTES)
             throw new IllegalArgumentException("File exceeds the 5 MB import limit.");
@@ -84,39 +143,76 @@ public final class GameRepository {
         }
         if (candidates.isEmpty()) throw new IllegalArgumentException("No games found. Import ICCS PGN or a JSON game pack.");
         if (candidates.size() > 2000) throw new IllegalArgumentException("Import no more than 2,000 games at once.");
-        synchronized (FILE_LOCK) { return commit(candidates); }
+        synchronized (FILE_LOCK) { return commit(candidates,name,engineGame); }
     }
 
-    private int commit(List<Game> candidates) throws Exception {
+    private int commit(List<Game> candidates,String name,boolean engineGame) throws Exception {
         // Another Activity/repository may have imported since this instance loaded.
         // Read the latest committed snapshot under the same lock as the write.
         loadStored();
         Set<String> fingerprints = new HashSet<>();
-        for (Game g : games) fingerprints.add(fingerprint(g));
+        boolean legacy=name==null;
+        if(legacy)for (Game g : games) fingerprints.add(fingerprint(g));
+        String collectionId=legacy?LEGACY_COLLECTION_ID:"collection-"+UUID.randomUUID();
         List<Game> next = new ArrayList<>(imported);
-        for (Game g : candidates) if (fingerprints.add(fingerprint(g))) next.add(g);
+        for (Game g : candidates) {
+            String fingerprint=fingerprint(g);
+            if(fingerprints.add(fingerprint)) {
+                g.importCollectionId=collectionId;g.engineGame=engineGame;
+                g.id=legacy?fingerprint:"user-"+collectionId.substring("collection-".length())+"-"+fingerprint.substring("import-".length());
+                next.add(g);
+            }
+        }
         int added = next.size() - imported.size();
         if (added == 0) return 0;
         if (next.size() > 5000) throw new IllegalArgumentException("This import exceeds the 5,000 imported-game library limit.");
+        List<ImportedCollection> nextCollections=new ArrayList<>(collections);
+        if(legacy) {
+            int oldCount=0,index=-1;
+            for(int i=0;i<nextCollections.size();i++)if(nextCollections.get(i).id.equals(collectionId)){index=i;oldCount=nextCollections.get(i).gameCount;break;}
+            ImportedCollection group=new ImportedCollection(collectionId,"Imported games",false,oldCount+added);
+            if(index<0)nextCollections.add(group);else nextCollections.set(index,group);
+        } else nextCollections.add(new ImportedCollection(collectionId,name,engineGame,added));
         JSONArray array = new JSONArray(); for (Game g : next) array.put(g.json());
-        byte[] bytes = array.toString().getBytes(StandardCharsets.UTF_8);
+        JSONArray groups=new JSONArray();for(ImportedCollection group:nextCollections)
+            groups.put(new JSONObject().put("id",group.id).put("name",group.name).put("engineGame",group.engineGame));
+        byte[] bytes = new JSONObject().put("schema",2).put("collections",groups).put("games",array).toString().getBytes(StandardCharsets.UTF_8);
         if (bytes.length > MAX_BYTES) throw new IllegalArgumentException("Imported library would exceed 5 MB. Import fewer games.");
         android.util.AtomicFile file = new android.util.AtomicFile(new File(context.getFilesDir(), "imported-games.json"));
         FileOutputStream out = null;
         try { out = file.startWrite(); out.write(bytes); file.finishWrite(out); }
         catch (Exception e) { if (out != null) file.failWrite(out); throw e; }
         games.removeAll(imported); imported.clear(); imported.addAll(next); games.addAll(imported);
+        collections.clear();collections.addAll(nextCollections);
         return added;
     }
 
+    private static String collectionName(String name) {
+        String clean=name==null?"":name.trim();
+        if(clean.isEmpty())throw new IllegalArgumentException("Enter a name for this import collection.");
+        if(clean.length()>80)throw new IllegalArgumentException("Collection names can contain at most 80 characters.");
+        for(int i=0;i<clean.length();i++)if(Character.isISOControl(clean.charAt(i)))
+            throw new IllegalArgumentException("Collection names must use a single line of text.");
+        return clean;
+    }
+
     private static List<Game> jsonGames(String text, boolean imported) throws Exception {
+        Object root=jsonRoot(text);
+        JSONArray list = root instanceof JSONArray ? (JSONArray) root : ((JSONObject) root).getJSONArray("games");
+        return jsonGames(list,imported,false);
+    }
+
+    private static Object jsonRoot(String text) throws Exception {
         checkJsonDepth(text);
         org.json.JSONTokener tokener = new org.json.JSONTokener(text);
         Object root = tokener.nextValue();
         if (tokener.nextClean() != 0) throw new IllegalArgumentException("Unexpected content after the JSON game pack.");
         if (!(root instanceof JSONArray) && !(root instanceof JSONObject))
             throw new IllegalArgumentException("Import a JSON game array or an object containing games.");
-        JSONArray list = root instanceof JSONArray ? (JSONArray) root : ((JSONObject) root).getJSONArray("games");
+        return root;
+    }
+
+    private static List<Game> jsonGames(JSONArray list,boolean imported,boolean saved) throws Exception {
         if (list.length() > 5000) throw new IllegalArgumentException("Too many games in one file.");
         List<Game> output = new ArrayList<>();
         for (int i = 0; i < list.length(); i++) {
@@ -125,6 +221,8 @@ public final class GameRepository {
             g.date = j.optString("date", ""); g.red = j.optString("red", "Red"); g.black = j.optString("black", "Black");
             g.result = j.optString("result", "*"); g.sourceUrl = j.optString("sourceUrl", "");
             g.startFen = j.optString("startFen", ""); g.timeControl=j.optString("timeControl", ""); g.collection=j.optString("collection", ""); g.imported = imported;
+            g.engineGame=j.optBoolean("engineGame",false);
+            g.importCollectionId=saved?j.optString("importCollectionId",""):"";
             JSONArray moves = j.getJSONArray("moves");
             if (moves.length() > MAX_PLIES) throw new IllegalArgumentException("Game " + (i+1) + " exceeds 2,000 half-moves.");
             // Shipped records are canonical and exhaustively checked by the corpus audit.
@@ -133,7 +231,8 @@ public final class GameRepository {
                 String move=moves.getString(k);g.moves.add(imported?Position.normalizeMove(move):move);
             }
             if (imported) validate(g);
-            String stableId=imported?"":j.optString("id", "");
+            String stableId=imported&&!saved?"":j.optString("id", "");
+            if(saved&&!stableId.matches("[a-zA-Z0-9-]{1,128}"))throw new IOException("Invalid saved game ID");
             g.id = stableId.isEmpty()?fingerprint(g):stableId; output.add(g);
         }
         return output;

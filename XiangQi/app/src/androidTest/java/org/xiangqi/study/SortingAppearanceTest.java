@@ -123,7 +123,7 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         main(()->{assertEquals("",input[0].getText().toString());assertTrue("Clearing also retains input focus",input[0].hasFocus());assertEquals(398,gameCount());});
     }
     public void testContinuousLibraryIncludesEveryGameAndLazilyRecyclesRows() throws Exception {
-        launch();main(()->{try{int source=((List<?>)field("games").get(activity)).size();assertTrue(source>=337);assertEquals("Every preloaded/imported game is in the continuous adapter",source,gameCount());}catch(Exception e){throw new RuntimeException(e);}});
+        launch();main(()->{try{int source=0;for(Object value:(List<?>)field("games").get(activity)){GameRepository.Game game=(GameRepository.Game)value;if(!game.imported&&!game.engineGame)source++;}assertTrue(source>=337);assertEquals("Every built-in human game is in the Human adapter",source,gameCount());}catch(Exception e){throw new RuntimeException(e);}});
         List<GameRepository.Game> fixtures=new ArrayList<>();for(int i=0;i<85;i++)fixtures.add(game("Continuous fixture "+i,"2025-09-27","Continuous scroll audit"));
         replaceLibrary(fixtures);getInstrumentation().waitForIdleSync();
         main(()->{assertEquals(85,gameCount());assertEquals("Continuous fixture 0",firstRed());assertNull(findText(root(),"Previous 40 games"));assertNull(findText(root(),"Next 40 games"));assertTrue("Only on-screen rows are materialized",libraryList().getChildCount()<20);libraryList().setSelection(libraryList().getHeaderViewsCount()+84);});

@@ -16,8 +16,8 @@ public final class EvaluationBarView extends View {
     private final Path clip=new Path();
     private boolean active,flipped;
     private Integer score;
-    public EvaluationBarView(Context context){super(context);setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);setVisibility(INVISIBLE);describe();}
-    public void setEvaluation(boolean active,Integer score){this.active=active;this.score=active?score:null;setVisibility(active?VISIBLE:INVISIBLE);describe();invalidate();}
+    public EvaluationBarView(Context context){super(context);setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);setVisibility(GONE);describe();}
+    public void setEvaluation(boolean active,Integer score){this.active=active;this.score=active?score:null;setVisibility(active?VISIBLE:GONE);describe();invalidate();}
     public void setFlipped(boolean flipped){this.flipped=flipped;describe();invalidate();}
     private void describe(){
         String state=!active?"Analysis off. Neutral.":score==null?"Analysis on. Waiting for an evaluation.":String.format(Locale.getDefault(),"Red perspective %+.2f. %s",score/100.0,score>0?"Red advantage.":score<0?"Black advantage.":"Equal evaluation.");

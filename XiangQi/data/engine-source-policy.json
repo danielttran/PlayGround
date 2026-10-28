@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-28",
+  "target": "Complete standard-Xiangqi tournament games from 2026 with verified top dedicated-engine participants",
+  "minimumTargetYear": 2026,
+  "selection": {
+    "preferredGames": 250,
+    "requireFullMainLine": true,
+    "requireBothParticipantsToBeEngines": true,
+    "requireVerifiedTournamentAndParticipants": true,
+    "allowNewLocallyGeneratedSelfPlay": false,
+    "requireSourceAttribution": true,
+    "requireLegalReplayFromRecordedStart": true,
+    "preserveUnknownMetadata": true,
+    "allowDocumentedShortTimeControls": true,
+    "deduplicateBy": "canonical starting FEN and full main line",
+    "startingPositions": "Recorded noninitial positions are permitted and must retain their exact FEN.",
+    "excludeVariants": ["Jieqi", "Banqi", "Crazyhouse Xiangqi", "Fortress Xiangqi"],
+    "doNotInfer": ["hardware", "engine version", "network version", "time control", "exact date", "round", "result"]
+  },
+  "sources": [
+    {
+      "id": "kaka-time-league",
+      "url": "https://bbs.pikafish.org/forum.php?mod=viewthread&tid=179&page=1",
+      "status": "Ranking-test series, not a verified tournament archive. Login hides attachments, possibly only rating images; no game file verified yet.",
+      "evidence": "Organizer lists recent Pikafish, Cyclone NN and Xiaochong NN versions; the September 2026 text documents EPYC-9654 four-core tests at 60+0.6 seconds using unbalanced starting positions.",
+      "metadataScope": "These are league-wide reference conditions. Apply them to individual games only after matching the actual downloaded records."
+    },
+    {
+      "id": "pikafish-fishtest",
+      "url": "https://test.pikafish.org/",
+      "status": "Testing infrastructure confirmed; complete-game export not verified"
+    },
+    {
+      "id": "pxzero",
+      "url": "https://px0.org/",
+      "status": "Self-play activity confirmed; complete-game export not verified",
+      "relatedData": "https://www.kaggle.com/datasets/pikacat/px0data",
+      "note": "Training records must not be presented as full games without inspecting their actual format and continuity."
+    },
+    {
+      "id": "nanao-xiaochong-video",
+      "url": "https://www.bilibili.com/video/BV1B94czJEYQ/",
+      "status": "Match recording found; downloadable move record not found",
+      "reportedTimeControl": "2400+20",
+      "reportedResult": "1/2-1/2",
+      "note": "Uploader identifies Red NanAo and Black Xiaochong; exact engine versions and hardware remain unknown."
+    },
+    {
+      "id": "xiangqi-clash-2010",
+      "url": "https://home.hccnet.nl/h.g.muller/XQC2010.html",
+      "downloadUrl": "https://home.hccnet.nl/h.g.muller/XQC10.zip",
+      "status": "Archive inspected; held out because it predates the requested recent collection",
+      "sourceRecords": 516,
+      "sourceFormat": "WinBoard SAN-style Xiangqi PGN, not the app's ICCS PGN",
+      "sourceTimeControl": "40/600",
+      "note": "The ZIP contains XQC10total.pgn. No historical games were substituted for the recent collection."
+    }
+  ]
+}

@@ -130,8 +130,9 @@ public final class AuditFlowTest extends InstrumentationTestCase {
             Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(MainActivity.class.getName(),null,false);
             main(()->activity.recreate());Activity replacement=monitor.waitForActivityWithTimeout(8000);
             getInstrumentation().removeMonitor(monitor);assertNotNull(replacement);activity=replacement;
-            release.countDown();await((initial+1)+" of ",12000);
+            release.countDown();await("1 of 1 game",12000);
             assertEquals(initial+1,new GameRepository(getInstrumentation().getTargetContext()).load().size());
+            main(()->{try{Field tab=MainActivity.class.getDeclaredField("libraryTab");tab.setAccessible(true);assertEquals("A completed import opens its own collection after rotation","imports",tab.get(activity));}catch(Exception error){throw new RuntimeException(error);}});
             search("Rotation Audit Red");await("1 of ",5000);
         } finally {
             release.countDown();fileIo.submit(()->{}).get(15,TimeUnit.SECONDS);

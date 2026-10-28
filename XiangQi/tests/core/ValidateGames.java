@@ -14,9 +14,9 @@ public final class ValidateGames {
             int count = 0, plies = 0;
             for (String line : text.split("\\R")) {
                 if (line.trim().isEmpty()) continue;
-                String[] fields = line.split("\\t", 2);
-                if (fields.length != 2) throw new IllegalArgumentException("Bad TSV record");
-                Position position = Position.initial(); int ply = 0;
+                String[] fields = line.split("\\t", -1);
+                if (fields.length < 2 || fields.length > 3) throw new IllegalArgumentException("Bad TSV record");
+                Position position = fields.length == 3 && !fields[2].isEmpty() ? Position.fromFen(fields[2]) : Position.initial(); int ply = 0;
                 for (String move : fields[1].trim().split("\\s+")) {
                     try { position = position.play(move); }
                     catch (IllegalArgumentException e) { throw new IllegalArgumentException(fields[0] + " ply " + (ply + 1) + ": " + e.getMessage()); }

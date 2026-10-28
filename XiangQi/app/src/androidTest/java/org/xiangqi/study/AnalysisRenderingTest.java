@@ -84,12 +84,19 @@ public final class AnalysisRenderingTest extends InstrumentationTestCase {
                 LinearLayout row=new LinearLayout(getInstrumentation().getTargetContext());row.setOrientation(LinearLayout.HORIZONTAL);row.setGravity(Gravity.CENTER_VERTICAL);
                 EvaluationBarView rail=new EvaluationBarView(getInstrumentation().getTargetContext());BoardView board=new BoardView(getInstrumentation().getTargetContext());
                 LinearLayout.LayoutParams barSize=new LinearLayout.LayoutParams(dp(16),LinearLayout.LayoutParams.MATCH_PARENT);barSize.setMargins(0,0,dp(4),0);row.addView(rail,barSize);row.addView(board,new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1));
+                rail.setEvaluation(true,null);
                 row.measure(View.MeasureSpec.makeMeasureSpec(dp(width),View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));row.layout(0,0,row.getMeasuredWidth(),row.getMeasuredHeight());
                 assertEquals("Rail and board have exactly matching heights at width "+width,board.getHeight(),rail.getHeight());
                 assertEquals("The row follows the board's natural height",Math.round(board.getWidth()*1.10f),row.getHeight());
                 assertEquals("Only the16dp rail and4dp gap consume board width",dp(width)-dp(16)-dp(4),board.getWidth());
                 assertEquals("The board has no new horizontal padding",0,board.getPaddingLeft()+board.getPaddingRight());
                 assertEquals("Rail and board align at the top",board.getTop(),rail.getTop());
+                rail.setEvaluation(false,null);
+                row.measure(View.MeasureSpec.makeMeasureSpec(dp(width),View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));row.layout(0,0,row.getMeasuredWidth(),row.getMeasuredHeight());
+                assertEquals("Analysis off releases the rail and gap",View.GONE,rail.getVisibility());
+                assertEquals("Analysis off gives the board the full available width",dp(width),board.getWidth());
+                assertEquals("The expanded board stays centered with no empty left gutter",0,board.getLeft());
+                assertEquals(Math.round(board.getWidth()*1.10f),row.getHeight());
             }
         });
     }

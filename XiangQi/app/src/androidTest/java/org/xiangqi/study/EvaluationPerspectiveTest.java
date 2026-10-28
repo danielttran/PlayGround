@@ -87,7 +87,7 @@ public final class EvaluationPerspectiveTest extends InstrumentationTestCase {
         assertTrue(UiTestActions.clickPopup(getInstrumentation(),"Stop analysis"));
         assertRail(false,null);assertTrue(displayed().startsWith("Analysis off · last estimate"));
         main(()->{
-            View board=(View)get("board");assertEquals("Hiding the rail preserves board width",geometry[0],board.getWidth());assertEquals(geometry[1],board.getHeight());assertEquals(geometry[2],board.getLeft());assertEquals(geometry[3],board.getTop());
+            View board=(View)get("board");assertTrue("Stopping expands the board into the rail's former width",board.getWidth()>geometry[0]);assertTrue(board.getHeight()>geometry[1]);assertEquals("The expanded board fills its row",((View)board.getParent()).getWidth(),board.getWidth());assertEquals(0,board.getLeft());assertEquals(geometry[3],board.getTop());
             assertEquals(Boolean.FALSE,get("analysisEnabled"));
             assertTrue("Stopping removes all continuation arrows",((List<?>)viewField(get("board"),"analysisArrows")).isEmpty());
             findDescription(root(),"Next move").performClick();
@@ -124,7 +124,11 @@ public final class EvaluationPerspectiveTest extends InstrumentationTestCase {
         main(()->{assertEquals(Boolean.TRUE,get("analysisEnabled"));assertTrue("Saving settings restarts analysis for this position",((Integer)get("analysisGeneration"))>before[0]);});
         awaitCompleted(3);main(()->{
             Engine.Result result=(Engine.Result)get("lastResult");assertEquals(3,result.lines.size());
-            assertEquals("Each selected continuation draws one root move and one reply",6,((List<?>)viewField(get("board"),"analysisArrows")).size());
+            // A finite three-second fallback search can finish only depth 1.
+            // Every root must be drawn; a reply is required only when returned.
+            int available=0;for(Engine.Line line:result.lines)available+=Math.min(2,line.pv.size());
+            assertTrue("Every requested candidate has a root move",available>=3);
+            assertEquals("All available candidate moves and replies are drawn",available,((List<?>)viewField(get("board"),"analysisArrows")).size());
         });
     }
 
@@ -136,7 +140,7 @@ public final class EvaluationPerspectiveTest extends InstrumentationTestCase {
 
     private void assertRail(boolean active,Integer score){main(()->{
         Object rail=get("evaluationBar");assertNotNull(rail);assertEquals(active,viewField(rail,"active"));assertEquals(score,viewField(rail,"score"));
-        assertEquals("The hidden rail reserves its layout space",active?View.VISIBLE:View.INVISIBLE,((View)rail).getVisibility());
+        assertEquals("The off rail releases its layout space",active?View.VISIBLE:View.GONE,((View)rail).getVisibility());
         String text=((View)rail).getContentDescription().toString();
         if(!active)assertTrue(text.contains("Analysis off"));
         else if(score!=null){assertTrue(text.contains("Red perspective "+String.format(Locale.getDefault(),"%+.2f",score/100.0)));assertTrue(text.contains(score>0?"Red advantage":score<0?"Black advantage":"Equal evaluation"));}

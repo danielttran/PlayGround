@@ -1,18 +1,21 @@
 # Architecture
 
-Xiangqi Study 0.6.0 (version code 8) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.0 (version code 9) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
 `MainActivity` builds the searchable library and replay screen. Both screens have separate labelled Red/Black player rows. `PlayerNames` provides sourced romanized display/search aliases for every bundled Chinese source-name variant; original player metadata and exports remain unchanged. Search folds case/diacritics and includes Chinese names, aliases, event, round and collection.
 
-`GameDateSort` implements newest, oldest and original collection order. Only complete valid calendar dates participate in date ordering. Partial, invalid and unknown dates stay at the bottom in either direction; stable sorting preserves collection order for equal or incomplete dates. The selected sort order is persisted.
+`GameDateSort` implements newest, oldest and original collection order. Only complete valid calendar dates participate in date ordering. Partial, invalid and unknown dates stay at the bottom in either direction; stable sorting preserves collection order for equal or incomplete dates. Human and Engine tabs select bundled games of that type; My imports selects one named user collection. Search, sort and scroll are persisted per collection ID. Returning to a current game restores its own collection and navigation order.
 
 Replay has exactly five navigation buttons, ordered Previous game, Next game,
 Play, Previous move, Next move. Game navigation follows the current library search
 and sort and restores each game's saved ply/variation; if the current game is
-outside that search it uses the complete sorted library. Play toggles autoplay.
-Slider endpoints select the first/last positions. The top-right Game menu holds
+outside that search it uses the complete sorted selected collection. Play toggles autoplay.
+Replay speed accepts 0.5–60 seconds between moves and defaults to one second.
+It is stored independently of engine think time; changing it removes and
+reschedules a pending tick. Pause, backgrounding, game changes and the final
+move cancel playback. The top-right Game menu holds
 Flip board, Start/Stop analysis, Go to move…, Play against engine, Export game and Settings.
 Recorded replay has no standalone play-entry button below those controls. The
 contextual action is hidden during ordinary replay, becomes Stop playing during
@@ -21,7 +24,7 @@ suggestions and a stopped engine game remain entry points for free variation
 editing through the board and legal-move list.
 
 The library uses a recycling ListView containing every matching game, without
-page controls or a 40-game cutoff. Search and sorting use the entire library;
+page controls or a 40-game cutoff. Search and sorting use the entire selected collection;
 only visible cards need native view inflation. Move records show at most 40
 full-move rows around the current position. The complete source and variation
 histories remain available through the move controls, numeric Go to move…
@@ -30,10 +33,10 @@ the current history's complete half-move range, including zero and its final ply
 
 `BoardView` draws the nine-file, ten-rank board, Chinese-text pieces, selection and legal targets. A small board-edge dot shows the side to move without a wrapping turn label. Played moves use a separate arrow. `AnalysisVisuals` validates the first two moves of each ranked continuation before drawing the candidate and its reply, with the appropriate side color and rank labels. One to five continuations can therefore show up to two arrows per line; a missing reply is not invented. New search snapshots replace the displayed continuations. Replay positions are reconstructed from a game's starting FEN and move sequence. Exploring a variation works on a separate sequence so the recorded game and its source result remain intact. Exporting a variation gives it the unfinished result `*`.
 
-`EvaluationBarView` reserves a slim vertical rail beside the board. Positive
+`EvaluationBarView` displays a slim vertical rail beside the board. Positive
 scores favor Red and negative scores favor Black; flipping changes the rail's
 orientation without changing that perspective. Analysis off makes the rail
-invisible while reserving its space, and discards its score. Enabled analysis awaiting a result has a neutral
+GONE, releasing its width and margin so the board fills the row, and discards its score. Enabled analysis awaiting a result has a neutral
 split. Navigation clears the old position's score before searching the new one.
 
 Discs use a radius of 0.420 cell. Chinese glyph outlines are fitted inside each
@@ -99,6 +102,20 @@ invalidate late replies. The original record and source result are unchanged.
 ## Records and import boundary
 
 `GameRepository` loads the read-only packs listed by `assets/game-packs.json`, then adds private `imported-games.json`. Pack filenames and unique game IDs are validated; a pack label supplies collection metadata when the game omits it. `scripts/game_packs.py` shares the pack manifest with host audit tools. Imported records are validated in full before an `AtomicFile` write; failure leaves the existing library intact. A process-wide storage lock and reload-before-commit protect imports made by different Activity instances. Atomic-file reads recover interrupted writes. Fingerprints use starting FEN and canonical moves. Files and saved imports are capped at 5 MB, with metadata, game/move-count and parsing-depth bounds.
+
+Schema 2 stores import collection descriptors (stable ID, user name, Human/Engine
+classification) and games referencing their collection ID. Each explicit import
+gets a new collection and game IDs scoped to that collection; fingerprints remove
+duplicates only inside its own batch. Identical games can appear in multiple
+imports and alongside bundled copies. Source Collection tags remain independent
+of user names. Legacy flat arrays load into Imported games, preserving original
+game IDs and saved study positions; the next successful import atomically writes
+the upgraded schema. Imported content cannot supply a trusted collection ID.
+Completed import routing survives Activity recreation through a durable marker.
+
+No built-in engine pack is shipped until a qualifying 2026 top-engine tournament
+and its complete game files are verified. Ranking tests, older championships and
+newly generated self-play are not silently substituted. See [ENGINE-SOURCES.md](ENGINE-SOURCES.md).
 
 `Pgn` imports tagged ICCS-coordinate PGN main lines, retaining player/event metadata, starting FEN, result, source, time control and the optional `Collection` tag. Export preserves the collection and original source player names. Comments, numeric annotations, and balanced side variations are ignored. Unsupported notation and illegal moves produce errors identifying the game and half-move. The complete batch is rejected on an error. JSON imports use the same position/move validation. XQF, CBR, CBL, WXF move notation, and Chinese move notation are not supported yet.
 
