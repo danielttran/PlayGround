@@ -1,0 +1,37 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'org.xiangqi.study'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'org.xiangqi.study'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '0.1.0'
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    packaging { jniLibs { useLegacyPackaging true; keepDebugSymbols += ['**/libpikafish.so'] } }
+    // The x86 emulator exercises the same Java UI/core without ARM machine code.
+    if (project.hasProperty('withoutNative')) {
+        sourceSets.main.jniLibs.srcDirs = []
+        androidResources.ignoreAssetsPattern = 'pikafish.nnue'
+    }
+    lint { abortOnError true }
+}
+
+// Legacy framework test APIs are compile-time inputs for the test APK only.
+// The production manifest and APK must not require Android's test libraries.
+dependencies {
+    androidTestCompileOnly files(
+        "${android.sdkDirectory}/platforms/android-${android.compileSdk}/optional/android.test.runner.jar",
+        "${android.sdkDirectory}/platforms/android-${android.compileSdk}/optional/android.test.base.jar"
+    )
+}

@@ -1,0 +1,22 @@
+{
+  "screeningDate": "2026-10-27",
+  "scope": "International adult classical games only; 2025 WXF main championship, 60 minutes + 30 seconds per move. All rapid/open rapid/youth sections are excluded.",
+  "excludedNames": ["王天一", "王跃飞", "赵鑫鑫", "汪洋", "郑惟桐", "王廓", "孙逸阳", "赵金成", "张申宏", "刘俊达", "俞易肖", "孙勇征", "程鸣", "郝继超", "郑一泓", "党斐", "李少庚", "赵殿宇", "聂铁文", "武俊强", "苗利明", "黄竹风", "孙昕昊", "杨铭", "赵玮", "陆伟韬", "杨辉", "李小龙", "郑宇航", "马天越", "李艾东", "王宇航", "赵旸鹤", "崔革", "孟辰", "谢岿", "赵子雨", "曹岩磊", "黄文俊", "蔡佑广", "梁运龙", "洪智", "谢靖", "徐超", "申鹏", "蒋川", "徐崇峰"],
+  "sources": [
+    "https://www.sport.gov.cn/n20001280/n20067662/n20067613/c28114979/content.html",
+    "https://www.thepaper.cn/newsDetail_forward_29908354",
+    "https://www.sport.gov.cn/n20001280/n20067662/n20067613/c29534486/content.html"
+  ],
+  "method": "Conservative exact source-name matching, including expired sanctions and criticism notices. A name match is an exclusion rule, not a claim that a tournament participant is the sanctioned person. Two anonymized minors in the 2025 notice cannot be identity-matched. No claim of universal absence of misconduct is made.",
+  "preferredPlayers": ["赖理兄", "阮成保", "吴宗翰", "尹昇", "孟繁睿", "唐丹", "陈丽淳"],
+  "aliases": {
+    "赖理兄": "Lai Ly Huynh · 赖理兄",
+    "阮成保": "Nguyen Thanh Bao · 阮成保",
+    "吴宗翰": "Wu Zonghan (Andy Wo) · 吴宗翰",
+    "尹昇": "Yin Sheng · 尹昇",
+    "孟繁睿": "Meng Fanrui · 孟繁睿",
+    "唐丹": "Tang Dan · 唐丹",
+    "陈丽淳": "Chen Lichun · 陈丽淳"
+  },
+  "userConfirmedAlias": "Daniel identified the Singapore player he calls 'Andy Wo' as 吴宗翰. Wu Zonghan is displayed with that user-provided search alias."
+}

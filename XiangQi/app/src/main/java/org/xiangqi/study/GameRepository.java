@@ -1,0 +1,173 @@
+package org.xiangqi.study;
+
+import android.content.Context;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.xiangqi.study.core.Pgn;
+import org.xiangqi.study.core.Position;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.*;
+
+/** Private, offline library. Imports are checked in full before the library is changed. */
+public final class GameRepository {
+    public static final int MAX_BYTES = 5 * 1024 * 1024;
+    private final Context context;
+    private final List<Game> games = new ArrayList<>();
+    private final List<Game> imported = new ArrayList<>();
+    public GameRepository(Context context) { this.context = context.getApplicationContext(); }
+
+    public static final class Game {
+        public String id, event, round, date, red, black, result, sourceUrl, startFen, timeControl="";
+        public boolean imported;
+        public final List<String> moves = new ArrayList<>();
+        public String title() { return red + " · " + black; }
+        public Position initial() { return startFen.isEmpty() ? Position.initial() : Position.fromFen(startFen); }
+        public JSONObject json() throws Exception {
+            JSONObject j = new JSONObject();
+            j.put("id", id); j.put("event", event); j.put("round", round); j.put("date", date);
+            j.put("red", red); j.put("black", black); j.put("result", result); j.put("sourceUrl", sourceUrl);
+            j.put("startFen", startFen); j.put("timeControl",timeControl); j.put("moves", new JSONArray(moves)); return j;
+        }
+    }
+
+    public synchronized List<Game> load() throws Exception {
+        List<Game> bundled;
+        try (InputStream in = context.getAssets().open("games.json")) { bundled = jsonGames(read(in), false); }
+        File file = new File(context.getFilesDir(), "imported-games.json");
+        List<Game> saved = new ArrayList<>();
+        if (file.isFile() || new File(file.getPath()+".bak").isFile())
+            try (InputStream in = new android.util.AtomicFile(file).openRead()) { saved = jsonGames(read(in), true); }
+        games.clear(); imported.clear(); games.addAll(bundled); imported.addAll(saved); games.addAll(saved);
+        return new ArrayList<>(games);
+    }
+
+    public synchronized List<Game> all() { return new ArrayList<>(games); }
+
+    public synchronized int importText(String text) throws Exception {
+        List<Game> candidates;
+        String clean = text.replaceFirst("^\\uFEFF", "").trim();
+        if (clean.startsWith("{") || clean.startsWith("[{") || clean.matches("(?s)^\\[\\s*\\{.*")) candidates = jsonGames(clean, true);
+        else {
+            candidates = new ArrayList<>();
+            for (Pgn.Game source : Pgn.parse(clean)) {
+                Game g = new Game();
+                g.event = value(source.event, "Imported game"); g.round = value(source.round, "");
+                g.date = value(source.date, ""); g.red = value(source.red, "Red"); g.black = value(source.black, "Black");
+                g.result = value(source.result, "*"); g.sourceUrl = value(source.sourceUrl, "");
+                g.startFen = value(source.startFen, ""); g.timeControl=value(source.timeControl, ""); g.moves.addAll(source.moves); g.imported = true;
+                validate(g); g.id = fingerprint(g); candidates.add(g);
+            }
+        }
+        if (candidates.isEmpty()) throw new IllegalArgumentException("No games found. Import ICCS PGN or a JSON game pack.");
+        if (candidates.size() > 2000 || imported.size() + candidates.size() > 5000)
+            throw new IllegalArgumentException("This import exceeds the 5,000 imported-game library limit.");
+        Set<String> fingerprints = new HashSet<>();
+        for (Game g : games) fingerprints.add(fingerprint(g));
+        List<Game> next = new ArrayList<>(imported);
+        for (Game g : candidates) if (fingerprints.add(fingerprint(g))) next.add(g);
+        int added = next.size() - imported.size();
+        if (added == 0) return 0;
+        JSONArray array = new JSONArray(); for (Game g : next) array.put(g.json());
+        byte[] bytes = array.toString().getBytes(StandardCharsets.UTF_8);
+        if (bytes.length > MAX_BYTES) throw new IllegalArgumentException("Imported library would exceed 5 MB. Import fewer games.");
+        android.util.AtomicFile file = new android.util.AtomicFile(new File(context.getFilesDir(), "imported-games.json"));
+        FileOutputStream out = null;
+        try { out = file.startWrite(); out.write(bytes); file.finishWrite(out); }
+        catch (Exception e) { if (out != null) file.failWrite(out); throw e; }
+        games.removeAll(imported); imported.clear(); imported.addAll(next); games.addAll(imported);
+        return added;
+    }
+
+    private static List<Game> jsonGames(String text, boolean imported) throws Exception {
+        Object root = new org.json.JSONTokener(text).nextValue();
+        JSONArray list = root instanceof JSONArray ? (JSONArray) root : ((JSONObject) root).getJSONArray("games");
+        if (list.length() > 5000) throw new IllegalArgumentException("Too many games in one file.");
+        List<Game> output = new ArrayList<>();
+        for (int i = 0; i < list.length(); i++) {
+            JSONObject j = list.getJSONObject(i); Game g = new Game();
+            g.event = j.optString("event", "Imported game"); g.round = j.optString("round", "");
+            g.date = j.optString("date", ""); g.red = j.optString("red", "Red"); g.black = j.optString("black", "Black");
+            g.result = j.optString("result", "*"); g.sourceUrl = j.optString("sourceUrl", "");
+            g.startFen = j.optString("startFen", ""); g.timeControl=j.optString("timeControl", ""); g.imported = imported;
+            JSONArray moves = j.getJSONArray("moves");
+            if (moves.length() > 2000) throw new IllegalArgumentException("Game " + (i+1) + " exceeds 2,000 half-moves.");
+            // Shipped records are canonical and exhaustively checked by the corpus audit.
+            // Normalize untrusted imports before validation, storage and deduplication.
+            for (int k = 0; k < moves.length(); k++) {
+                String move=moves.getString(k);g.moves.add(imported?Position.normalizeMove(move):move);
+            }
+            if (imported) validate(g);
+            String stableId=imported?"":j.optString("id", "");
+            g.id = stableId.isEmpty()?fingerprint(g):stableId; output.add(g);
+        }
+        return output;
+    }
+
+    private static void validate(Game g) {
+        if (g.moves.isEmpty()) throw new IllegalArgumentException(g.title() + ": no moves found.");
+        Position position = g.initial();
+        validateStart(position);
+        for (int i = 0; i < g.moves.size(); i++) try { position = position.play(g.moves.get(i)); }
+        catch (RuntimeException e) { throw new IllegalArgumentException(g.title() + ": illegal move at half-move " + (i+1) + " (" + g.moves.get(i) + "). " + e.getMessage()); }
+        if (!Arrays.asList("1-0", "0-1", "1/2-1/2", "*").contains(g.result))
+            throw new IllegalArgumentException(g.title() + ": unsupported result " + g.result);
+    }
+
+    /** Sparse study positions are welcome; impossible piece geometry is rejected at import. */
+    private static void validateStart(Position position) {
+        int[][] counts=new int[2][128];
+        for(int index=0;index<90;index++) {
+            char piece=position.board[index];if(piece==0)continue;
+            boolean red=Character.isUpperCase(piece);char kind=Character.toUpperCase(piece);int side=red?0:1;
+            int maximum=kind=='K'?1:kind=='P'?5:2;
+            if(++counts[side][kind]>maximum)throw new IllegalArgumentException("Starting position has too many "+kind+" pieces for "+(red?"Red":"Black")+".");
+            String square=Position.square(index);int file=index%9,row=index/9;
+            if(kind=='K'&&(file<3||file>5||(red?(row<7):(row>2))))
+                throw new IllegalArgumentException("Starting position: the "+(red?"Red":"Black")+" general must be inside its own palace.");
+            if(kind=='A'&&!Arrays.asList(red?new String[]{"d0","f0","e1","d2","f2"}:new String[]{"d9","f9","e8","d7","f7"}).contains(square))
+                throw new IllegalArgumentException("Starting position: advisor on an unreachable square ("+square+").");
+            if(kind=='B'&&!Arrays.asList(red?new String[]{"c0","g0","a2","e2","i2","c4","g4"}:new String[]{"c9","g9","a7","e7","i7","c5","g5"}).contains(square))
+                throw new IllegalArgumentException("Starting position: elephant on an unreachable square ("+square+").");
+            if(kind=='P'&&(red?(row>6||row>=5&&file%2!=0):(row<3||row<=4&&file%2!=0)))
+                throw new IllegalArgumentException("Starting position: pawn on an unreachable square ("+square+").");
+        }
+        if(position.isInCheck(!position.redToMove))
+            throw new IllegalArgumentException("Starting position: the side that just moved is still in check.");
+    }
+
+    private static String fingerprint(Game g) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(g.initial().toFen().getBytes(StandardCharsets.UTF_8));
+        for (String move : g.moves) md.update(move.getBytes(StandardCharsets.US_ASCII));
+        StringBuilder key = new StringBuilder("import-"); for (byte b : md.digest()) key.append(String.format(Locale.ROOT, "%02x", b));
+        return key.toString();
+    }
+
+    public static String read(InputStream in) throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream(); byte[] buffer = new byte[8192]; int count;
+        while ((count = in.read(buffer)) != -1) { if (out.size()+count > MAX_BYTES) throw new IOException("File exceeds the 5 MB import limit."); out.write(buffer, 0, count); }
+        return out.toString("UTF-8");
+    }
+
+    public static String export(Game game, List<String> moves, boolean variation) {
+        StringBuilder s = new StringBuilder();
+        tag(s,"Event", game.event + (variation ? " · analysis variation" : "")); tag(s,"Date",game.date);
+        tag(s,"Round",game.round); tag(s,"Red",game.red); tag(s,"Black",game.black);
+        tag(s,"Result",variation ? "*" : game.result); tag(s,"Variant","Xiangqi"); tag(s,"Format","ICCS");
+        if (!game.timeControl.isEmpty()) tag(s,"TimeControl",game.timeControl);
+        if (!game.sourceUrl.isEmpty()) tag(s,"Source",game.sourceUrl);
+        if (!game.startFen.isEmpty()) { tag(s,"SetUp","1"); tag(s,"FEN",game.startFen); }
+        s.append('\n');
+        boolean startsRed = game.initial().redToMove;
+        for (int i=0; i<moves.size(); i++) {
+            if ((i + (startsRed ? 0 : 1)) % 2 == 0) s.append((i+(startsRed?0:1))/2+1).append(". ");
+            else if (i==0) s.append("1... ");
+            s.append(moves.get(i)).append(' '); if (i%12==11) s.append('\n');
+        }
+        return s.append(variation ? "*" : game.result).append('\n').toString();
+    }
+    private static void tag(StringBuilder s,String name,String value) { s.append('[').append(name).append(" \"").append(value.replace("\\","\\\\").replace("\"","\\\"").replace('\n',' ')).append("\"]\n"); }
+    private static String value(String value,String fallback) { return value==null || value.trim().isEmpty() ? fallback : value; }
+}

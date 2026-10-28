@@ -1,0 +1,208 @@
+{
+  "tournament": "19th World Xiangqi Championship, Shanghai, 2025",
+  "scope": "Adult men rounds 1–9 and women rounds 1–7; published main lines only",
+  "indexUrl": "https://www.wxf-xiangqi.org/index.php?Itemid=101&id=1788&lang=en&option=com_content&view=article",
+  "games": 285,
+  "halfMoves": 23340,
+  "roundCounts": {
+    "Men round 1": 24,
+    "Men round 2": 25,
+    "Men round 3": 25,
+    "Men round 4": 25,
+    "Men round 5": 25,
+    "Men round 6": 25,
+    "Men round 7": 25,
+    "Men round 8": 24,
+    "Men round 9": 25,
+    "Women round 1": 10,
+    "Women round 2": 10,
+    "Women round 3": 10,
+    "Women round 4": 10,
+    "Women round 5": 10,
+    "Women round 6": 10,
+    "Women round 7": 10
+  },
+  "downloadedGameCount": 293,
+  "excludedRecords": [
+    {
+      "division": "Men",
+      "round": 1,
+      "game": 20,
+      "title": "世锦赛男个 1-20 意大利 纳斯塔西奥 红先负 日本 可儿宏晖",
+      "reason": "No recorded moves (e.g. forfeit)",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1838:2025-19th-world-xiangqi-championships-men-round-1-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "division": "Men",
+      "round": 8,
+      "game": 23,
+      "title": "世锦赛男个 8-23 意大利 纳斯塔西奥 红先胜 缅甸 匡家卓",
+      "reason": "No recorded moves (e.g. forfeit)",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1898:2025-19th-world-xiangqi-championships-men-round-8-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r1-g16",
+      "title": "世锦赛男个 1-16 泰国 李小龙 红先负 英国 黄颢颐",
+      "reason": "Conservative disciplinary-notice name match",
+      "matchedNames": [
+        "李小龙"
+      ],
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1838:2025-19th-world-xiangqi-championships-men-round-1-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r2-g19",
+      "title": "世锦赛男个 2-19 荷兰 吴永生 红先胜 泰国 李小龙",
+      "reason": "Conservative disciplinary-notice name match",
+      "matchedNames": [
+        "李小龙"
+      ],
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1892:2025-19th-world-xiangqi-championships-men-round-2-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r3-g24",
+      "title": "世锦赛男个 3-24 日本 麻生达郎 红先胜 泰国 李小龙",
+      "reason": "Conservative disciplinary-notice name match",
+      "matchedNames": [
+        "李小龙"
+      ],
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1893:2025-19th-world-xiangqi-championships-men-round-3-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r4-g25",
+      "title": "世锦赛男个 4-25 泰国 李小龙 红先负 意大利 王大伟",
+      "reason": "Conservative disciplinary-notice name match",
+      "matchedNames": [
+        "李小龙"
+      ],
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1894:2025-19th-world-xiangqi-championships-men-round-4-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r6-g24",
+      "title": "世锦赛男个 6-24 泰国 李小龙 红先负 俄罗斯 斯克利亚罗夫",
+      "reason": "Conservative disciplinary-notice name match",
+      "matchedNames": [
+        "李小龙"
+      ],
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1896:2025-19th-world-xiangqi-championships-men-round-6-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r7-g25",
+      "title": "世锦赛男个 7-25 俄罗斯 梅德韦杰夫 红先胜 泰国 李小龙",
+      "reason": "Conservative disciplinary-notice name match",
+      "matchedNames": [
+        "李小龙"
+      ],
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1897:2025-19th-world-xiangqi-championships-men-round-7-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r8-g25",
+      "title": "世锦赛男个 8-25 日本 曾根敏彦 红先和 泰国 李小龙",
+      "reason": "Conservative disciplinary-notice name match",
+      "matchedNames": [
+        "李小龙"
+      ],
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1898:2025-19th-world-xiangqi-championships-men-round-8-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r9-g24",
+      "title": "世锦赛男个 9-25 泰国 李小龙 红先负 缅甸 匡家卓",
+      "reason": "Conservative disciplinary-notice name match",
+      "matchedNames": [
+        "李小龙"
+      ],
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1899:2025-19th-world-xiangqi-championships-men-round-9-game-records&catid=418&lang=en&Itemid=377"
+    }
+  ],
+  "curationPolicy": "data/curation-policy.json",
+  "classicalRegulationsUrl": "https://www.wxf-xiangqi.org/images/2025wxf_shanghai/19th_WXF__World_Xiangqi_Championship_Regulations.pdf",
+  "assetSha256": "ee4810dec011178d17a30df35c37c0dc2adfba3fd694f5e78df7d92f098142e8",
+  "sources": [
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?Itemid=101&id=1788&lang=en&option=com_content&view=article",
+      "sha256": "d1e200d0b7cfac19c8f36c2f35bd1478651eda3c86f00fed36315174d1edf0d0",
+      "bytes": 80175
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1838:2025-19th-world-xiangqi-championships-men-round-1-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "96fe18f11d73fd0dae2a0c199b9d848f2212d171b9d90a476e04e21892c1c92f",
+      "bytes": 90031
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1892:2025-19th-world-xiangqi-championships-men-round-2-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "b85fdf783d6004780f2a67ba6779b085cfed6fd10dcfc6641b000f65995bbe86",
+      "bytes": 93396
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1893:2025-19th-world-xiangqi-championships-men-round-3-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "0d84d787d023ae13a9a387329e43b0cd5a2ad6c151fda8008d8894f277050011",
+      "bytes": 91951
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1894:2025-19th-world-xiangqi-championships-men-round-4-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "9b95839e51a5501f55ada8f1473028c2b94524bfa5328a3eb81073ef30c30de5",
+      "bytes": 92670
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1895:2025-19th-world-xiangqi-championships-men-round-5-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "50716a512ae49244f43c4bab4a7c3e4b5362a467f7a6eafcd0b23726d99e981f",
+      "bytes": 92197
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1896:2025-19th-world-xiangqi-championships-men-round-6-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "85e8217dbd4308fe6a68b4f6d48caeb078969095c769a5867a6cf4f4981ac561",
+      "bytes": 93524
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1897:2025-19th-world-xiangqi-championships-men-round-7-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "183cc9c6d7050421d196f39284f5e1c98d05860b481ce458fa186bde9113adac",
+      "bytes": 92053
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1898:2025-19th-world-xiangqi-championships-men-round-8-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "9552a431089accbcd64b7df2cff0019cc006b7392eb665ad0909527e8c370058",
+      "bytes": 92079
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1899:2025-19th-world-xiangqi-championships-men-round-9-game-records&catid=418&lang=en&Itemid=377",
+      "sha256": "d9d33d7b38bfb451f22cd796d353742bbdc77c5c270e1412652353f61d4f85e8",
+      "bytes": 92076
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377",
+      "sha256": "d2140060015b29024beeb01992a05234368c9b42e46363d38468653239a88165",
+      "bytes": 62430
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377",
+      "sha256": "1b98756526c40122e6448f423dcb233bd1d2e6d5de192c1b72f5f85feddaedf1",
+      "bytes": 63014
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377",
+      "sha256": "47efc476cfd6185d36fbbc88a334910382c421561441e9dce8f315187eb85b45",
+      "bytes": 63780
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377",
+      "sha256": "0124be04c7e8592af5952067273e72fc91fb8392defd0e81ca38a74c3697e343",
+      "bytes": 63051
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377",
+      "sha256": "97da431f2f2ccaae00eb914f6d6002704cd6914f038e0270bd78a6f633c9ef64",
+      "bytes": 62338
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377",
+      "sha256": "ead2aeda25ff8aaab783682a069a0e2e9dd7ecc389552d546ee9ec421f612dca",
+      "bytes": 62891
+    },
+    {
+      "url": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377",
+      "sha256": "381f91efc2dea54990819f9fadf07891e04634dd3ed2ca840b109d5046ac38eb",
+      "bytes": 61954
+    }
+  ],
+  "notation": "ICCS; a0 is Red's bottom-left, i9 is top-right as viewed by Red",
+  "rights": "WXF site states All Rights Reserved. These are attributed factual moves and event metadata; no annotations, page design or board code copied. No general redistribution license asserted."
+}
