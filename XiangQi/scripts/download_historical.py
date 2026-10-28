@@ -100,8 +100,12 @@ def build(offline: bool) -> dict:
             ident = f"historical-wxf-{article}-g{index}"
             participants = tags.get("red", "") + " " + tags.get("black", "")
             reason = ""
-            if not any(name_key(name) in name_key(participants) for name in policy["masters"]):
+            if re.search(r"women|女子", block, re.I):
+                reason = "Women's record omitted by user collection preference"
+            elif not any(name_key(name) in name_key(participants) for name in policy["masters"]):
                 reason = "Outside curated master selection"
+            elif not any(name_key(name) in name_key(participants) for name in policy["menMasters"]):
+                reason = "No verified men's master-roster identity for collection admission"
             elif any(name in participants for name in excluded_names):
                 reason = "Participant matches current curation exclusion policy"
             elif tags.get("gametype") != "慢棋":
@@ -146,6 +150,8 @@ def build(offline: bool) -> dict:
                 "sourceTimeControl": timer,
                 "sourceGameType": tags["gametype"],
                 "classicalEvidence": "Official WXF record explicitly labels this game 慢棋 (slow/classical).",
+                "division": "Men",
+                "divisionEvidence": policy["menRosterEvidence"],
                 "sourceUrl": url,
                 "sourceTitle": tags.get("title", ""),
                 "moves": moves,
@@ -164,9 +170,10 @@ def build(offline: bool) -> dict:
         "byEvent": dict(sorted(Counter(game["event"] for game in games).items())),
         "datePrecision": dict(Counter(game["datePrecision"] for game in games)),
         "sources": sources, "excluded": excluded,
-        "scope": "Factual main lines and metadata only; no source annotations, photos or board implementation bundled. Classical status comes from each official record; precise clock is only asserted where recorded.",
+        "scope": "Men's curated master records only, using the explicit WXF Male titled-player roster and men's historical awards list. Women's records are omitted by user preference. Factual main lines and metadata only; classical status comes from each official record and precise clock is asserted only where recorded.",
+        "divisionCounts": {"Men": len(games)},
     }
-    MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    MANIFEST.write_bytes((json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
     return {key: manifest[key] for key in ("games", "plies", "byEvent", "datePrecision", "assetSha256")}
 
 

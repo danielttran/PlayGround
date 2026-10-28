@@ -1,7 +1,7 @@
 {
   "name": "World Championship 2023",
   "screeningDate": "2026-10-28",
-  "scope": "All eligible published adult classical main-line records from the official 2023 World Championship archive; not a best-game ranking and not every tournament slot.",
+  "scope": "All eligible published men's classical main-line records from the official 2023 World Championship archive; women's records omitted by user collection preference. Not a best-game ranking.",
   "indexUrl": "https://www.wxf-xiangqi.org/index.php?Itemid=313&id=1592&lang=en&option=com_content&view=article",
   "regulationsUrl": "https://www.wxf-xiangqi.org/images/2023_news_upload/2023_Entry_form_for_18th_WXC_.pdf",
   "programUrl": "https://www.wxf-xiangqi.org/images/2023_houston_wxc/Brochure_Content_11-231.pdf",
@@ -160,14 +160,6 @@
       "id": "vietnam-wxf-2023-1710-g8",
       "movesSha256": "f291856c0ec10cefa486e2b28b63c49f53d1745001fcc5c0f8618ef7088136d9"
     },
-    "1714-g4": {
-      "id": "vietnam-wxf-2023-1714-g4",
-      "movesSha256": "ee9012fbc2d9607cab2f36ef49e7efe21f95cfbd3304325adf2a75fe4a35a96f"
-    },
-    "1714-g2": {
-      "id": "vietnam-wxf-2023-1714-g2",
-      "movesSha256": "06a37504608dece1a8b98bbc61618cb93a8cbdd72f7d1565f522b609d7ca2b9a"
-    },
     "1709-g5": {
       "id": "vietnam-wxf-2023-1709-g5",
       "movesSha256": "223c5213126d8953541f2fecf3db853f42cb13b9bff90accb319e53b07546bd3"
@@ -183,22 +175,6 @@
     "1708-g2": {
       "id": "vietnam-wxf-2023-1708-g2",
       "movesSha256": "b799ae9ecaf8d062cb328ca91e7c24594fa92c70a7dfb92477620a964340bab5"
-    },
-    "1650-g2": {
-      "id": "vietnam-wxf-2023-1650-g2",
-      "movesSha256": "8468be61176cf23195cd503ee60a9d720cd9497f05623925103d6018e5fe21a8"
-    },
-    "1650-g1": {
-      "id": "vietnam-wxf-2023-1650-g1",
-      "movesSha256": "d5f728b2a7fd4a3320b9e183f9ed0a1ab262981c030f2e31a3ec549c0d5359f0"
-    },
-    "1649-g3": {
-      "id": "vietnam-wxf-2023-1649-g3",
-      "movesSha256": "b5d9e136c77b7809231e9bf06f796f10c0f1c4b009cd2d93833d706866593e2e"
-    },
-    "1649-g1": {
-      "id": "vietnam-wxf-2023-1649-g1",
-      "movesSha256": "e309e57c0e60c0ca094f2ef631fc69f11c5f6c3e379c454222d287a67a56b240"
     },
     "1641-g7": {
       "id": "vietnam-wxf-2023-1641-g7",
@@ -216,22 +192,6 @@
       "id": "vietnam-wxf-2023-1637-g4",
       "movesSha256": "f111b69e212e3c8c440d51ceaeddc42789d876471e9b33fa9d7b9efcba53032d"
     },
-    "1648-g5": {
-      "id": "vietnam-wxf-2023-1648-g5",
-      "movesSha256": "4ee010cf387c2283a5981ac66b7505eed66ec3bee338b0458922a6abe9c73040"
-    },
-    "1648-g3": {
-      "id": "vietnam-wxf-2023-1648-g3",
-      "movesSha256": "0088904134c439a382331fd9f9434222eb74cfe6c69195653dbbad26a0f7e127"
-    },
-    "1647-g5": {
-      "id": "vietnam-wxf-2023-1647-g5",
-      "movesSha256": "f593e974d4b2c24a870d56e2dcdd9c9ac6318611e2d54ca77c7d890284e9a973"
-    },
-    "1647-g2": {
-      "id": "vietnam-wxf-2023-1647-g2",
-      "movesSha256": "7975a8e07dcf27d9841bae886701ed0c396c7830f598fc9270dcd4b7c5b61a97"
-    },
     "1636-g6": {
       "id": "vietnam-wxf-2023-1636-g6",
       "movesSha256": "c69ba7b0b3af5d0d6d45e4d21da1932c6a5709fa1ef6239f22695a6cd665272e"
@@ -244,14 +204,6 @@
       "id": "vietnam-wxf-2023-1635-g1",
       "movesSha256": "c43281d4f4f44312ff8b8330a0317f27973400685b688be37e43de32125d4dc9"
     },
-    "1604-g4": {
-      "id": "vietnam-wxf-2023-1604-g4",
-      "movesSha256": "69870f3c6935520d8d8ddc3358401b0c1db47b1e3dd98a66cf302182b96a7505"
-    },
-    "1604-g1": {
-      "id": "vietnam-wxf-2023-1604-g1",
-      "movesSha256": "69efa9c2eeb5380392c704e04358292875337c11103894ac75ecae40667cbbb3"
-    },
     "1603-g5": {
       "id": "vietnam-wxf-2023-1603-g5",
       "movesSha256": "fec630bfcd9ccbd578072445deab87b51990e53f53604eaf9183871acb827c75"
@@ -259,14 +211,6 @@
     "1603-g3": {
       "id": "vietnam-wxf-2023-1603-g3",
       "movesSha256": "bc949e097d9bd34f003bf371428494da3976b04aa3b89dc95c25cdb1267f3f84"
-    },
-    "1594-g6": {
-      "id": "vietnam-wxf-2023-1594-g6",
-      "movesSha256": "de596ed0b73d30fdf4ef504e632a587e982ecc879bd7e97d8780087c701d4724"
-    },
-    "1594-g3": {
-      "id": "vietnam-wxf-2023-1594-g3",
-      "movesSha256": "5a9840707419cc92e3ae56a029dfb7d9c7f4daf9c24295f3d9cc315eba0f5a0f"
     },
     "1590-g7": {
       "id": "vietnam-wxf-2023-1590-g7",
@@ -600,5 +544,80 @@
         ]
       }
     ]
+  },
+  "includedDivisions": [
+    "Men"
+  ],
+  "retiredLegacyRecords": {
+    "1714-g4": {
+      "id": "vietnam-wxf-2023-1714-g4",
+      "movesSha256": "ee9012fbc2d9607cab2f36ef49e7efe21f95cfbd3304325adf2a75fe4a35a96f",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1714-g2": {
+      "id": "vietnam-wxf-2023-1714-g2",
+      "movesSha256": "06a37504608dece1a8b98bbc61618cb93a8cbdd72f7d1565f522b609d7ca2b9a",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1650-g2": {
+      "id": "vietnam-wxf-2023-1650-g2",
+      "movesSha256": "8468be61176cf23195cd503ee60a9d720cd9497f05623925103d6018e5fe21a8",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1650-g1": {
+      "id": "vietnam-wxf-2023-1650-g1",
+      "movesSha256": "d5f728b2a7fd4a3320b9e183f9ed0a1ab262981c030f2e31a3ec549c0d5359f0",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1649-g3": {
+      "id": "vietnam-wxf-2023-1649-g3",
+      "movesSha256": "b5d9e136c77b7809231e9bf06f796f10c0f1c4b009cd2d93833d706866593e2e",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1649-g1": {
+      "id": "vietnam-wxf-2023-1649-g1",
+      "movesSha256": "e309e57c0e60c0ca094f2ef631fc69f11c5f6c3e379c454222d287a67a56b240",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1648-g5": {
+      "id": "vietnam-wxf-2023-1648-g5",
+      "movesSha256": "4ee010cf387c2283a5981ac66b7505eed66ec3bee338b0458922a6abe9c73040",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1648-g3": {
+      "id": "vietnam-wxf-2023-1648-g3",
+      "movesSha256": "0088904134c439a382331fd9f9434222eb74cfe6c69195653dbbad26a0f7e127",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1647-g5": {
+      "id": "vietnam-wxf-2023-1647-g5",
+      "movesSha256": "f593e974d4b2c24a870d56e2dcdd9c9ac6318611e2d54ca77c7d890284e9a973",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1647-g2": {
+      "id": "vietnam-wxf-2023-1647-g2",
+      "movesSha256": "7975a8e07dcf27d9841bae886701ed0c396c7830f598fc9270dcd4b7c5b61a97",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1604-g4": {
+      "id": "vietnam-wxf-2023-1604-g4",
+      "movesSha256": "69870f3c6935520d8d8ddc3358401b0c1db47b1e3dd98a66cf302182b96a7505",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1604-g1": {
+      "id": "vietnam-wxf-2023-1604-g1",
+      "movesSha256": "69efa9c2eeb5380392c704e04358292875337c11103894ac75ecae40667cbbb3",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1594-g6": {
+      "id": "vietnam-wxf-2023-1594-g6",
+      "movesSha256": "de596ed0b73d30fdf4ef504e632a587e982ecc879bd7e97d8780087c701d4724",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1594-g3": {
+      "id": "vietnam-wxf-2023-1594-g3",
+      "movesSha256": "5a9840707419cc92e3ae56a029dfb7d9c7f4daf9c24295f3d9cc315eba0f5a0f",
+      "reason": "Women's division omitted by user collection preference"
+    }
   }
 }

@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "screeningDate": "2026-10-28",
+  "policySha256": "69d6ce84773d644305fbb5ba52c7eed423bb617dbf8ce59c578caaa05bcbaeb6",
+  "sharedCurationPolicySha256": "8f27257542efd6ea7120bb76a4a3cdcb1a0f80c4fe82fc0417217905b116d650",
+  "asset": "vietnamese-classics.json",
+  "assetSha256": "4a9d92fbb21739bb1fe170133656fcfe47b608d2dbfdae991932077d5247aed7",
+  "games": 36,
+  "halfMoves": 3112,
+  "sourceCandidateCount": 39,
+  "legalValidation": "Production Position; exactly one complete legal notation trace; all source tokens and ply counts retained",
+  "deduplication": "Exact full ICCS mainline against every other shipped pack and within this pack",
+  "sources": {
+    "2009": {
+      "event": "3rd Phuong Trang Vietnam Xiangqi Open 2009",
+      "timeControl": "4800+30",
+      "classicalRegulationsUrl": "https://vietnamchess.vn/index.php/chessnews/tournament-news/tournament-international/open-inter-events/puta3",
+      "classicalEvidence": "Official regulations §3 Stage 1 explicitly allocates 80 minutes per side plus 30 seconds per move for the 9-round Swiss. Only that stage is admitted; Stage 2 rapid/blitz tiebreaks are excluded.",
+      "resultsEvidence": "The same federation article gives all Swiss round-by-round results, final standings and a per-round calendar (21–25 March).",
+      "sourceTournamentId": 23,
+      "admittedSectionId": 24,
+      "resultsCrossTableSha256": "95e05c1da689bd894d8b734b05c9310d3275c1371e487b008822cb8aa3fbaac4"
+    },
+    "2016": {
+      "event": "5th Phuong Trang International Xiangqi Masters Cup 2016",
+      "timeControl": "3600+30",
+      "classicalRegulationsUrl": "https://vietnamchess.vn/news/phuongtrang2016",
+      "classicalEvidence": "Official regulations §4.2 gives 60 minutes per side plus 30 seconds per move from move one for each of the two main knockout/classification games. Group-stage 40+20 and Armageddon 6/5 minute games are excluded.",
+      "resultsEvidence": [
+        "https://vietnamchess.vn/images/stories/saigon/2016/vongtuket.jpg",
+        "https://vietnamchess.vn/images/stories/saigon/2016/vongbanket.jpg",
+        "https://vietnamchess.vn/images/stories/saigon/2016/vongchungket.jpg"
+      ],
+      "sourceTournamentId": 12,
+      "admittedSectionIds": [
+        17,
+        18
+      ]
+    }
+  },
+  "records": [
+    {
+      "id": "vietnam-classics-2016-1928",
+      "sourceGameId": 1928,
+      "sourceFactsSha256": "40f0d582b963121b96a23b36b91ab8f407e958ca91f6e56aa429313665cd32c6",
+      "mainlineSha256": "8eae9f69949b18ddf61b3d7db2bc745685e9303f68747a17b8fd96401a0f9ce6",
+      "plies": 65,
+      "finalFen": "3k1ab2/R2C5/4ba3/p7p/2p6/1R7/P1P5P/3rp4/9/4KA1r1 b - - 1 33"
+    },
+    {
+      "id": "vietnam-classics-2016-1929",
+      "sourceGameId": 1929,
+      "sourceFactsSha256": "7172d6d4acdd03860eb2438746afba9a7cbaaf156990b9aae0bf6d39e46e3832",
+      "mainlineSha256": "f59b63b19cb206b6d05c16d56ad1cfb5d757c739fe9344b602c27023c21e1133",
+      "plies": 50,
+      "finalFen": "r3ka3/4a4/1R2b4/p2R4p/2b6/6C2/P5r2/4B1c2/9/3AKAB2 w - - 2 26"
+    },
+    {
+      "id": "vietnam-classics-2016-1921",
+      "sourceGameId": 1921,
+      "sourceFactsSha256": "8a53cdb9a4271f3d64e46206843c50c9f0e74ad9e22e38e748a6230d622e8f2d",
+      "mainlineSha256": "a333f08c85049120a63f0284d8ed92365a16c749acb119de51bbc520518ac0e4",
+      "plies": 66,
+      "finalFen": "2b1ka3/4a4/n3b4/R8/P4r2p/4p3P/2R6/1rN1B4/4A4/3AK1B2 w - - 0 34"
+    },
+    {
+      "id": "vietnam-classics-2016-1926",
+      "sourceGameId": 1926,
+      "sourceFactsSha256": "68d9a8a39efc8bc2be884e2216466ed80817bdf0efb43c59956dd87900be91b4",
+      "mainlineSha256": "1076ebb7437e2eae3c9823cb9f800a8c57f73709fac5101cdce6071acc01b3f4",
+      "plies": 69,
+      "finalFen": "2bak4/4a4/4b4/p8/4r4/9/8R/4C4/4A4/2B1KAB2 b - - 0 35"
+    },
+    {
+      "id": "vietnam-classics-2016-1927",
+      "sourceGameId": 1927,
+      "sourceFactsSha256": "4f64182c19dda4e268a59dc7c7d72ac5a76fad6774e1a37b2655de036428fea2",
+      "mainlineSha256": "406bdd68e89913d8aa0ff7730127ec283ee3a79e6c0f15123c3b7e43c4459cb9",
+      "plies": 123,
+      "finalFen": "3kc4/4P4/5c2b/9/9/9/2N3pp1/4B4/3pA4/3AK1B2 b - - 1 62"
+    },
+    {
+      "id": "vietnam-classics-2016-1919",
+      "sourceGameId": 1919,
+      "sourceFactsSha256": "ff54c70fb3cf2c17b5e465b7beaf9094e2cc4d5a6db338c73d8404ddef22e2be",
+      "mainlineSha256": "ad75454da61452fde97f13c12d9db42ee128acdfd3d9280157b5ac772f774d75",
+      "plies": 95,
+      "finalFen": "9/5k3/3rb4/2p6/3P5/3R5/9/3A5/9/2BAK4 b - - 2 48"
+    },
+    {
+      "id": "vietnam-classics-2016-1922",
+      "sourceGameId": 1922,
+      "sourceFactsSha256": "54deb1b8bdeb69b50bd230f88eea1293ff8370197081947425c878d731776c34",
+      "mainlineSha256": "50076a5162e4c61daa8267882583c1c8ac6af15e4d06f209f388b3b73076b158",
+      "plies": 97,
+      "finalFen": "2N2ab2/3k5/4c4/3C5/4C4/p3n4/c8/4B4/4A4/4KAB2 b - - 7 49"
+    },
+    {
+      "id": "vietnam-classics-2016-1924",
+      "sourceGameId": 1924,
+      "sourceFactsSha256": "c07be0c88e8347cda7cd78fdddc143daddb790f1f4ebb14675dbf6ea56030e83",
+      "mainlineSha256": "5786fb1e811014149cfbb220cd2b662f0b1d6c2fb7e24a212c4e8019cc96b96e",
+      "plies": 139,
+      "finalFen": "2bak1P1c/4aR3/1n2b4/7r1/9/4C4/8C/3AB4/4A4/2B1K4 b - - 0 70"
+    },
+    {
+      "id": "vietnam-classics-2016-1914",
+      "sourceGameId": 1914,
+      "sourceFactsSha256": "e9627290ae1813f233996fbdceb99e1f7eb9405ed91815adfa697c2dfd5b4313",
+      "mainlineSha256": "e0271bcf328268a1eebcfecc9cb03692500ae15aff6abbcaff295ec941e3f68e",
+      "plies": 112,
+      "finalFen": "3ak1b2/4a4/4b1P2/3PC4/4P4/9/9/8B/3pA2r1/1cBAKR3 w - - 9 57"
+    },
+    {
+      "id": "vietnam-classics-2016-1923",
+      "sourceGameId": 1923,
+      "sourceFactsSha256": "e95428a05754d85ee3969a585b756762b1c96c6ee84741a574fc92f94055efc6",
+      "mainlineSha256": "ac759f89b702067c6424a46d92db1f2ac267cb25e79ab01f61e1d3584fea2e32",
+      "plies": 111,
+      "finalFen": "2bak1c2/4aP3/4b4/9/7R1/6B2/9/5A3/9/2B1K4 b - - 2 56"
+    },
+    {
+      "id": "vietnam-classics-2016-1925",
+      "sourceGameId": 1925,
+      "sourceFactsSha256": "cc2c9693b7c6d5d8109587543c08d4f922cf64a2f6ab1658f45147cbb45c6581",
+      "mainlineSha256": "510b63ff2fa88adcd2b6d7ed1a1303d54445f2996dbabbe734c38ffdd085d5d5",
+      "plies": 62,
+      "finalFen": "4kab2/4a4/4b4/p7p/9/P8/4p3P/4B4/1R2Ap3/cCrAK3C w - - 0 32"
+    },
+    {
+      "id": "vietnam-classics-2016-1915",
+      "sourceGameId": 1915,
+      "sourceFactsSha256": "9f4ba1dbfd03e92dc368b5815ee640ae924a40e87c9671be1f6a81de00846575",
+      "mainlineSha256": "68ee850595d88b1c60cd18e4731afabeea06d7fa11aad7646e657318af6cea4d",
+      "plies": 118,
+      "finalFen": "2Ra1ab2/5k3/9/5N3/9/5n3/9/3ApA1r1/5K3/9 w - - 9 60"
+    },
+    {
+      "id": "vietnam-classics-2016-1906",
+      "sourceGameId": 1906,
+      "sourceFactsSha256": "c2979d6aeb9b8b825b082c0652b2535f27b7b5c37f35c68f482fe39d51cce24d",
+      "mainlineSha256": "23bbae577074738a2f00e075bbe58537384d160bbe3f88f894c192a60099bf47",
+      "plies": 103,
+      "finalFen": "9/5k3/3a1a3/6C2/9/2P3p2/P5r2/B5cR1/4A4/3AK1B2 b - - 1 52"
+    },
+    {
+      "id": "vietnam-classics-2016-1907",
+      "sourceGameId": 1907,
+      "sourceFactsSha256": "4a4889b49cf42fb02ff01e139619c402da45e7f43ecf093a3a7ec6a0ed3edffe",
+      "mainlineSha256": "e7228ca35b2f0c3faf329693bcd31973a9cdf2b7ada722d4a5ad6078e41f986b",
+      "plies": 90,
+      "finalFen": "4ka3/9/9/3N1R2N/6b2/3c1c3/2r4nP/4B4/9/3AKAB2 w - - 4 46"
+    },
+    {
+      "id": "vietnam-classics-2016-1908",
+      "sourceGameId": 1908,
+      "sourceFactsSha256": "fce5c57a50b64e37ac89e19d8b822020796edb1fcf06bd5ce0da3d8a87383ed1",
+      "mainlineSha256": "1e020f2dec57e20c7ba8abf22bd7df68f1401921db95c16c877d3a4b21ade519",
+      "plies": 85,
+      "finalFen": "2R1kab2/4a4/3n5/p2N3r1/4P4/6B2/9/3AB4/4A4/3CK3c b - - 0 43"
+    },
+    {
+      "id": "vietnam-classics-2016-1910",
+      "sourceGameId": 1910,
+      "sourceFactsSha256": "b7000c89739f3675f1c2eda796893931e9f07fc9749dc7901451dfc762363e5c",
+      "mainlineSha256": "536c557fa3afc4e41dd253af1a336f11a65608968192d3a8660fa823ddbf9260",
+      "plies": 115,
+      "finalFen": "3ak4/2R1c3N/4ba3/6r2/9/8P/1p7/4B4/4K4/5A3 b - - 6 58"
+    },
+    {
+      "id": "vietnam-classics-2016-1911",
+      "sourceGameId": 1911,
+      "sourceFactsSha256": "72dcc2fe46b5920e00874c2b2f5f6cb8f8175723fe19947daee6109e3561ff4f",
+      "mainlineSha256": "00abc19a0db1c962ce073fb4a30b3ec509773c7c616b583c67dd34c50c3d3f88",
+      "plies": 119,
+      "finalFen": "3k1c3/6N2/b3n4/9/7rC/pp6P/5R3/4B4/4A4/2BAK4 b - - 17 60"
+    },
+    {
+      "id": "vietnam-classics-2016-1912",
+      "sourceGameId": 1912,
+      "sourceFactsSha256": "a0791fddd14758b1bb888b0eed712576f81eddf9ad542af495a52b22251a404e",
+      "mainlineSha256": "155c638dd4eb570b6c05a8ab122e4880d368d2c922defa8236559dc129820ef1",
+      "plies": 80,
+      "finalFen": "4ka3/4a2P1/1c2b4/4p4/2b4n1/2N6/4P4/1C2B4/4A4/2BAK4 w - - 5 41"
+    },
+    {
+      "id": "vietnam-classics-2009-2399",
+      "sourceGameId": 2399,
+      "sourceFactsSha256": "4a37420d09126774c06ee180e589bcb4632a3ba7609ecd0116e6c6e2aced68f6",
+      "mainlineSha256": "90f815bb2177ca6abdf2c16297048be3d1528b47e7aed8f05b8a601f870212b2",
+      "plies": 106,
+      "finalFen": "2bak4/4a4/4b4/p3p4/3R5/4P4/3N4P/1C2B4/1n2K3c/5r3 w - - 2 54"
+    },
+    {
+      "id": "vietnam-classics-2009-2400",
+      "sourceGameId": 2400,
+      "sourceFactsSha256": "ddf542f9ddd00ea6cde751dfe27a835b9cef3e1e14705542d7c0adfff257781c",
+      "mainlineSha256": "b829053dd6ef70c586b24248174b072ba8e7eeb19636933f1c16bb7a92038f00",
+      "plies": 47,
+      "finalFen": "3aka3/9/4b4/pRnRp4/9/6P2/P1r1P3P/4BC3/2r1A4/2BAK4 b - - 10 24"
+    },
+    {
+      "id": "vietnam-classics-2009-2411",
+      "sourceGameId": 2411,
+      "sourceFactsSha256": "5dd504c246167f837b8575760ce8abdf2fed67cca16e03c8e1d83dd800131ffe",
+      "mainlineSha256": "8e52c8ad4d9fb1867ce536c0f84be681cf8085b1bdae51f0a977d232f834fabf",
+      "plies": 102,
+      "finalFen": "2bak4/5c3/5N3/p2R5/5nb2/1p5r1/P7P/8B/4A4/4KA3 w - - 0 52"
+    },
+    {
+      "id": "vietnam-classics-2009-2412",
+      "sourceGameId": 2412,
+      "sourceFactsSha256": "6bbb64596298fffa85dff7ecf786df5fbf08384310bab4d8c3868b373e210755",
+      "mainlineSha256": "68ee13396a21596866a4946be13ed6ee203bcb6632d09065db64f8c65b094384",
+      "plies": 39,
+      "finalFen": "2bak1c1r/4a4/2ncb4/8p/p3pN3/5R3/P1r1P3P/C3B3C/4A4/2BAK3R b - - 0 20"
+    },
+    {
+      "id": "vietnam-classics-2009-2387",
+      "sourceGameId": 2387,
+      "sourceFactsSha256": "0431652f58af5e0896c3ad9541204dbbe60ca2dce6b4a7c0d13892e6d71403d8",
+      "mainlineSha256": "7392f815df4f45451b2fa2a25716e6580dc73e0ddccaa73602dd78ac7118c63b",
+      "plies": 66,
+      "finalFen": "3rkab2/4a4/4b4/R8/1r7/P8/5n3/3CB1C2/4A4/2BAK4 w - - 1 34"
+    },
+    {
+      "id": "vietnam-classics-2009-2390",
+      "sourceGameId": 2390,
+      "sourceFactsSha256": "965d4571922ef5389ab9c78f6fc965eef6bfb214ea529de75c0e1e82d2f5daf1",
+      "mainlineSha256": "27076eee21f396f5338afeb9cee8c10f4e5276dc0347c334c438a5ae60f262b9",
+      "plies": 73,
+      "finalFen": "C1b1ka3/1R2a4/6r2/5N2p/2b6/4P1B2/P6cP/7p1/4A4/2BAK4 b - - 1 37"
+    },
+    {
+      "id": "vietnam-classics-2009-2365",
+      "sourceGameId": 2365,
+      "sourceFactsSha256": "601d25411e4c3f955cf6d8b19ad6814e7cab959b2c6a6ab01761d2b3fb88b0a9",
+      "mainlineSha256": "769bd3ee4affbcac57eda1aa0b53640792986f5c46990a5a4e5bf4c49bcb48e9",
+      "plies": 76,
+      "finalFen": "2ba1k3/4a4/4b4/p7p/6p2/4P4/PRn1r3P/7rc/5C2R/3AKAB2 w - - 6 39"
+    },
+    {
+      "id": "vietnam-classics-2009-2337",
+      "sourceGameId": 2337,
+      "sourceFactsSha256": "dbe72f4f98c26ea92df5f53cf450f2106069374cd7ce323ef62aa43c949c8ac3",
+      "mainlineSha256": "917bd269e13e4dcf085e5d574c590c19f5748d6f3ca6f34c55757c93b3420562",
+      "plies": 79,
+      "finalFen": "3ak1b2/4a4/4b4/8P/6p2/5p3/1p4n2/4B2N1/4A4/4KAB2 b - - 0 40"
+    },
+    {
+      "id": "vietnam-classics-2009-2316",
+      "sourceGameId": 2316,
+      "sourceFactsSha256": "78f7c82354720468a1eb4b730947dd3b830e9c006c7750609a9be50bea5989b7",
+      "mainlineSha256": "8ceaacd1bde76c7f86ab3e19d9a4b6fa9af3baa4401abe423fa32c676cc37469",
+      "plies": 59,
+      "finalFen": "3k1a3/3R5/b2N1a3/4N3p/6p2/1p7/4P1n1P/1r5C1/4A4/2rAK1B2 b - - 5 30"
+    },
+    {
+      "id": "vietnam-classics-2009-2321",
+      "sourceGameId": 2321,
+      "sourceFactsSha256": "cd31496ed4023d05ee91f3876e7a4959912eb67ab2e877f8fb92ef228a38bcd9",
+      "mainlineSha256": "2bf018d9928c1c75af898a3c1a2dcae13f85306d66b7fe6101d5e0ebfe9140fd",
+      "plies": 66,
+      "finalFen": "3a1a2N/1c1k5/4b1R2/p1r3C1p/9/4n1P2/P7P/1C2B1N2/4A4/2BrK4 w - - 0 34"
+    },
+    {
+      "id": "vietnam-classics-2009-2323",
+      "sourceGameId": 2323,
+      "sourceFactsSha256": "8fd155f4715d72c0a050313e41d25aa313de71b755c40a7ec49213b645fc443f",
+      "mainlineSha256": "0032e69a75e5ad892f6506810e7bd469334f673685c3090095c0199b7a9cd5e5",
+      "plies": 54,
+      "finalFen": "4k1b2/4a4/2n1ba3/p1C1p4/5N2p/2P1PnB2/Pc4c1P/B3CAN2/9/4KA3 w - - 1 28"
+    },
+    {
+      "id": "vietnam-classics-2009-2392",
+      "sourceGameId": 2392,
+      "sourceFactsSha256": "3c83725805462b4e8ec9f0cac89574a225a9dae60ff33c7349a500a5e4896bb7",
+      "mainlineSha256": "b5f1cb6ff97585bfcbbc956790b7dbfb91eb258dc68a9c0c17be26f8e8161a09",
+      "plies": 71,
+      "finalFen": "4kab2/4a4/3cb4/p1C3R1p/9/P1N6/5r3/4B4/9/3AKAB2 b - - 24 36"
+    },
+    {
+      "id": "vietnam-classics-2009-2364",
+      "sourceGameId": 2364,
+      "sourceFactsSha256": "29d22164ee95202b4ff0912d25a203b880dca9aaddff282fd63519c0c3fbfe2c",
+      "mainlineSha256": "85aedfcafd397dd405daa567a256bc150233a038d561c8e5d1168424cf062f7e",
+      "plies": 61,
+      "finalFen": "3ak1b2/9/c3ba3/R7p/C8/4P4/p1P3r1P/N7B/n3A4/4KAB2 b - - 1 31"
+    },
+    {
+      "id": "vietnam-classics-2009-2354",
+      "sourceGameId": 2354,
+      "sourceFactsSha256": "fed031c91be1c4fa76fc3f06c01f287b06c5a88429bc9ba767d14cd525c94853",
+      "mainlineSha256": "31ba6a82993cc9dcbd11f0cea7df350f5324639c7d643a5200010616784e4ff5",
+      "plies": 55,
+      "finalFen": "2b1ka3/4a3c/4b4/p3p4/3P4p/1r7/P3PR2P/4C4/9/2BAKA3 b - - 1 28"
+    },
+    {
+      "id": "vietnam-classics-2009-2326",
+      "sourceGameId": 2326,
+      "sourceFactsSha256": "ae38f82a04bf453d7452e3f44736402ca6be36639355242521adf286573bd9ff",
+      "mainlineSha256": "058a55a8e7a119186892f9e68063c20304b3e371e9354b6fd3a6de0bec1ba10f",
+      "plies": 187,
+      "finalFen": "4k1b2/9/3a1a2b/9/2n6/9/5r3/2R1B4/4A4/4KA3 b - - 35 94"
+    },
+    {
+      "id": "vietnam-classics-2009-2340",
+      "sourceGameId": 2340,
+      "sourceFactsSha256": "65c8325b876c507b2459f5a5227c960077f2639126e6c1f766ed70ceed17687f",
+      "mainlineSha256": "a9828477b8a63740754aed6bbccdef53bbba217f97b5c95acdf4815fbb41fa3d",
+      "plies": 72,
+      "finalFen": "2b1kab2/4a4/3c5/8p/3nN4/7r1/6RCP/4B4/4A4/2B1KA3 w - - 6 37"
+    },
+    {
+      "id": "vietnam-classics-2009-2351",
+      "sourceGameId": 2351,
+      "sourceFactsSha256": "7c6e708ef9e6fc5f1ae43cf8c08d5463e8ef84ba086945b9f0839c7edfb3b40e",
+      "mainlineSha256": "a7e31c859842e3b597653025f54cb7ca43e947cc1024dfeec3fae98829fd1d60",
+      "plies": 132,
+      "finalFen": "3ak4/4a4/b8/9/2b6/2B2R3/4r4/4C4/3K2c2/9 w - - 16 67"
+    },
+    {
+      "id": "vietnam-classics-2009-2328",
+      "sourceGameId": 2328,
+      "sourceFactsSha256": "a83430005fcc40208a76e50533965507518fe11c35f19e518450794f7b825287",
+      "mainlineSha256": "e7bcd29428894378fd15ccbdb6bc523516483ee7ad38c906e7e06d25b8f80c11",
+      "plies": 68,
+      "finalFen": "2b6/5k3/4b3P/2r2c3/6p2/5R3/9/4B4/4A4/4KAB2 w - - 1 35"
+    }
+  ],
+  "rejected": [
+    {
+      "sourceGameId": 2376,
+      "completeLegalInterpretations": 2,
+      "reason": "Source WXF notation permits two complete legal mainlines; no guessed cannon origin is admitted."
+    },
+    {
+      "sourceGameId": 2325,
+      "completeLegalInterpretations": 1,
+      "reason": "Structured viewer names Triệu Nhữ Quyền / 赵汝权 / Chiu Yu Kuen, whereas the official final standings and Swiss cross-table identify the corresponding entrant as Chan Keung On / 陳強安. The same article guest roster uses Triệu Nhữ Quyền, so the source identity is internally inconsistent; no player-name repair is guessed."
+    },
+    {
+      "sourceGameId": 2386,
+      "completeLegalInterpretations": 2,
+      "reason": "Source WXF notation permits two complete legal mainlines; no guessed cannon origin is admitted."
+    }
+  ]
+}

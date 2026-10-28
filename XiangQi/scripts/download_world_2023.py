@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Fetch the eligible adult classical 2023 World Championship factual game records.
 
-The complete published adult archive is examined, without a player-strength or
+The complete published adult archive is examined, with only the men's division
+admitted by the user's collection preference, without a player-strength or
 best-game ranking. Existing identity exclusions, explicit rapid markers, missing
 moves/results and duplicate main lines are held out. No annotations are copied.
 --offline reproduces the pack from its bounded cache; --refresh revisits sources.
@@ -197,6 +198,8 @@ def build(args):
             red, black = (canonical_name(tags.get(side, ""), policy) for side in ("red", "black"))
             matched = sorted({red, black} & excluded_names)
             reasons = []
+            if division not in policy["includedDivisions"]:
+                reasons.append("Women's division omitted by user collection preference")
             if not tags.get("movelist"):
                 reasons.append("No recorded moves (bye/forfeit/unrecorded)")
             if tags.get("binit") != STANDARD_BINIT or tags.get("firstnum", "0") != "0":
@@ -269,13 +272,15 @@ def build(args):
         print(f"{division} round {number}: {count}/{len(blocks)} admitted", flush=True)
     if legacy_used != set(policy["legacyRecords"]):
         raise ValueError(f"Previously bundled games missing: {set(policy['legacyRecords'])-legacy_used}")
-    women_validation = verify_women_results(games, policy)
+    women_validation = verify_women_results(games, policy) if "Women" in policy["includedDivisions"] else {
+        "games": 0, "excluded": True, "reason": "Women's division omitted by user collection preference"}
     games.sort(key=lambda game: (game["date"], game["round"], game["id"]))
     payload = (json.dumps({"collection": policy["name"], "source": "Official World Xiangqi Federation adult championship archive", "games": games}, ensure_ascii=False, indent=2) + "\n").encode()
     manifest = {"collection": policy["name"], "scope": policy["scope"], "screeningDate": policy["screeningDate"],
                 "games": len(games), "halfMoves": sum(len(game["moves"]) for game in games), "sourceRecordSlots": raw_count,
                 "divisionCounts": dict(Counter(game["round"].split(" · ")[0] for game in games)),
                 "legacyGamesPreserved": len(legacy_used), "newGames": len(games)-len(legacy_used), "rounds": rounds,
+                "retiredLegacyGames": policy.get("retiredLegacyRecords", {}),
                 "metadataCorrections": corrections, "excludedRecords": exclusions, "sources": sources.items,
                 "resultCrossChecks": policy.get("resultCrossChecks", {}),
                 "womenFinalCrossTableValidation": women_validation,

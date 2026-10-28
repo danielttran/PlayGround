@@ -141,8 +141,11 @@ def build(offline=False, fetch_only=False):
                     continue
                 reject = {"id": ident, "red": red, "black": black, "sourceUrl": url}
                 reason = ""
+                division = "Women" if "Women" in label or "女子组" in label else "Men"
                 matched = sorted(set((red, black)) & set(excluded_names))
-                if matched:
+                if division not in policy["includedDivisions"]:
+                    reason = "Women's division omitted by user collection preference"
+                elif matched:
                     reason = "Participant matches current curation exclusion policy"
                     reject["matchedNames"] = matched
                 elif not tags.get("movelist"):
@@ -177,7 +180,6 @@ def build(offline=False, fetch_only=False):
                 override = policy["dateOverrides"].get(ident)
                 if override:
                     played = override["date"]
-                division = "Women" if "Women" in label or "女子组" in label else "Men"
                 round_match = re.search(r"R(\d+)T(\d+)", tags.get("title", ""))
                 page_round = re.search(r"Round\s*(\d+)", label)
                 readable_round = f"{division} · Round {int(round_match[1])} · Board {int(round_match[2])}" if round_match else f"{division} · Round {int(page_round[1])}" if page_round else label
@@ -220,7 +222,7 @@ def build(offline=False, fetch_only=False):
     payload = (json.dumps(pack, ensure_ascii=False, indent=2) + "\n").encode()
     manifest = {
         "collection": policy["name"], "screeningDate": policy["screeningDate"],
-        "scope": "Additional 2022 World Championship and 2023 Phuong Trang international adult classical games with a Vietnamese player. The broader 2023 World Championship pack owns its records; duplicate main lines, rapid/blitz/youth and unverified older clocks are excluded.",
+        "scope": "Additional men's 2022 World Championship and 2023 Phuong Trang international adult classical games with a Vietnamese player. Women's records are omitted by user preference. The broader 2023 World Championship pack owns its records; duplicate main lines, rapid/blitz/youth and unverified older clocks are excluded.",
         "games": len(games), "halfMoves": sum(len(g["moves"]) for g in games),
         "yearCounts": dict(Counter(g["date"][:4] for g in games)),
         "vietnamesePlayerCounts": {p: sum(p in (g["red"], g["black"]) for g in games) for p in sorted(set(p for s in policy["sources"] for p in s["vietnamesePlayers"]) | set(policy.get("additionalVietnamesePlayers", [])))},
@@ -230,7 +232,7 @@ def build(offline=False, fetch_only=False):
     }
     if not fetch_only:
         OUTPUT.write_bytes(payload)
-        MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        MANIFEST.write_bytes((json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
     else:
         (CACHE / "candidate-games.json").write_bytes(payload)
         (CACHE / "candidate-manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

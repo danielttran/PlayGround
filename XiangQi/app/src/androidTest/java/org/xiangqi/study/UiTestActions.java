@@ -25,6 +25,18 @@ public final class UiTestActions {
         if(failure[0]!=null)throw new RuntimeException(failure[0]);
     }
 
+    /** UI idle does not imply that a debounced background library query has finished. */
+    public static void awaitLibrarySearch(Instrumentation instrumentation,Activity activity)throws Exception {
+        long deadline=SystemClock.uptimeMillis()+15000;boolean[] ready={false};
+        java.lang.reflect.Field pending=MainActivity.class.getDeclaredField("librarySearchPending");pending.setAccessible(true);
+        java.lang.reflect.Method current=MainActivity.class.getDeclaredMethod("preparedLibraryCurrent");current.setAccessible(true);
+        while(SystemClock.uptimeMillis()<deadline){
+            runOnMain(instrumentation,()->{try{ready[0]=!activity.isDestroyed()&&!pending.getBoolean(activity)&&(Boolean)current.invoke(activity);}catch(Exception error){throw new RuntimeException(error);}});
+            if(ready[0]){instrumentation.waitForIdleSync();return;}Thread.sleep(25);
+        }
+        throw new AssertionError("The latest background library query did not complete");
+    }
+
     public static boolean clickPopup(Instrumentation instrumentation,String text)throws Exception {
         UiAutomation automation=instrumentation.getUiAutomation();
         long deadline=SystemClock.uptimeMillis()+8000,stableSince=0;

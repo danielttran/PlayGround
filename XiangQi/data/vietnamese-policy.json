@@ -1,17 +1,77 @@
 {
   "name": "Vietnamese international classical 2022–2023",
   "screeningDate": "2026-10-28",
-  "additionalVietnamesePlayers": ["郑亚生", "阮黄林", "何文进", "宗室日新", "汪洋北"],
-  "countryPrefixes": ["中国香港", "中国澳门", "中华台北", "马来西亚", "新加坡", "加拿大", "菲律宾", "印度尼西亚", "澳大利亚", "俄罗斯", "印度", "越南", "中国", "香港", "澳门", "台北", "东马", "西马", "美国", "英国", "日本", "德国", "法国", "泰国", "荷兰", "芬兰", "瑞典", "意大利", "柬埔寨"],
-  "nameVariants": {"赖里兄":"赖理兄", "賴理兄":"赖理兄", "所思和晴":"所司和晴", "阮黃燕":"阮黄燕", "黎氏金銮":"黎氏金鸾", "布莱恩乔":"布莱恩乔治", "NI KADEK SUGIAN":"NI KADEK SUGIANINGSIH"},
+  "additionalVietnamesePlayers": [
+    "郑亚生",
+    "阮黄林",
+    "何文进",
+    "宗室日新",
+    "汪洋北"
+  ],
+  "countryPrefixes": [
+    "中国香港",
+    "中国澳门",
+    "中华台北",
+    "马来西亚",
+    "新加坡",
+    "加拿大",
+    "菲律宾",
+    "印度尼西亚",
+    "澳大利亚",
+    "俄罗斯",
+    "印度",
+    "越南",
+    "中国",
+    "香港",
+    "澳门",
+    "台北",
+    "东马",
+    "西马",
+    "美国",
+    "英国",
+    "日本",
+    "德国",
+    "法国",
+    "泰国",
+    "荷兰",
+    "芬兰",
+    "瑞典",
+    "意大利",
+    "柬埔寨"
+  ],
+  "nameVariants": {
+    "赖里兄": "赖理兄",
+    "賴理兄": "赖理兄",
+    "所思和晴": "所司和晴",
+    "阮黃燕": "阮黄燕",
+    "黎氏金銮": "黎氏金鸾",
+    "布莱恩乔": "布莱恩乔治",
+    "NI KADEK SUGIAN": "NI KADEK SUGIANINGSIH"
+  },
   "excludedRecords": {},
   "dateOverrides": {
-    "vietnam-wxf-2022-1208-g2": {"date":"2022-10-28","note":"Official championship schedule places men's Round 9 on 28 October. Source record incorrectly says 27 October; original sourceDate retained. Evidence: https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result/2022_17th_wxc_competition_schedule_20221019.pdf"},
-    "vietnam-wxf-2022-1362-g2": {"date":"2022-10-28","note":"Official championship schedule places women's Round 7 on 28 October. 29 October was the separate rapid event. Original sourceDate retained. Evidence: https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result/2022_17th_wxc_competition_schedule_20221019.pdf"},
-    "vietnam-wxf-2022-1362-g4": {"date":"2022-10-28","note":"Official championship schedule places women's Round 7 on 28 October. 29 October was the separate rapid event. Original sourceDate retained. Evidence: https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result/2022_17th_wxc_competition_schedule_20221019.pdf"}
+    "vietnam-wxf-2022-1208-g2": {
+      "date": "2022-10-28",
+      "note": "Official championship schedule places men's Round 9 on 28 October. Source record incorrectly says 27 October; original sourceDate retained. Evidence: https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result/2022_17th_wxc_competition_schedule_20221019.pdf"
+    },
+    "vietnam-wxf-2022-1362-g2": {
+      "date": "2022-10-28",
+      "note": "Official championship schedule places women's Round 7 on 28 October. 29 October was the separate rapid event. Original sourceDate retained. Evidence: https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result/2022_17th_wxc_competition_schedule_20221019.pdf"
+    },
+    "vietnam-wxf-2022-1362-g4": {
+      "date": "2022-10-28",
+      "note": "Official championship schedule places women's Round 7 on 28 October. 29 October was the separate rapid event. Original sourceDate retained. Evidence: https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result/2022_17th_wxc_competition_schedule_20221019.pdf"
+    }
   },
   "metadataOverrides": {
-    "vietnam-wxf-2022-1216-g5": {"fields":{"red":"NI KADEK SUGIANINGSIH","black":"阮黄燕","result":"黑胜"},"note":"Blank player/result tags recovered from the same official record's explicit R01T05 title: NI KADEK SUGIANINGSIH 先负 阮黄燕. The final move comment also says 黑胜. Original blank sourceRed/sourceBlack retained."}
+    "vietnam-wxf-2022-1216-g5": {
+      "fields": {
+        "red": "NI KADEK SUGIANINGSIH",
+        "black": "阮黄燕",
+        "result": "黑胜"
+      },
+      "note": "Blank player/result tags recovered from the same official record's explicit R01T05 title: NI KADEK SUGIANINGSIH 先负 阮黄燕. The final move comment also says 黑胜. Original blank sourceRed/sourceBlack retained."
+    }
   },
   "sources": [
     {
@@ -19,9 +79,19 @@
       "indexUrl": "https://www.wxf-xiangqi.org/index.php?Itemid=313&id=1592&lang=en&option=com_content&view=article",
       "adultRoundPattern": "2023 18th World Xiangqi Championships (Men|Women) Round \\d+ Game Records",
       "minimumPages": 16,
-      "vietnamesePlayers": ["赖理兄", "阮明日光", "阮黄燕", "黎氏金鸾"],
+      "vietnamesePlayers": [
+        "赖理兄",
+        "阮明日光",
+        "阮黄燕",
+        "黎氏金鸾"
+      ],
       "timeControl": "3600+30",
-      "allowedSourceClocks": ["60+30", "60 分钟+30 秒", "60分钟+30秒", "1h+30''"],
+      "allowedSourceClocks": [
+        "60+30",
+        "60 分钟+30 秒",
+        "60分钟+30秒",
+        "1h+30''"
+      ],
       "regulationsUrl": "https://www.wxf-xiangqi.org/images/2023_news_upload/2023_Entry_form_for_18th_WXC_.pdf",
       "classicalEvidence": "Official adult main-championship regulations VII(b): 60 minutes base time plus 30 seconds increment per move. Separate rapid and youth links are excluded."
     },
@@ -30,9 +100,22 @@
       "indexUrl": "https://www.wxf-xiangqi.org/index.php?id=1147&option=com_content&view=article&lang=cn",
       "adultRoundPattern": "2022 世界象棋锦标赛赛谱 (男子组|女子组) 第",
       "minimumPages": 25,
-      "vietnamesePlayers": ["赖理兄", "阮成保", "阮黄燕", "黎氏金鸾"],
+      "vietnamesePlayers": [
+        "赖理兄",
+        "阮成保",
+        "阮黄燕",
+        "黎氏金鸾"
+      ],
       "timeControl": "3600+30",
-      "allowedSourceClocks": ["60+30", "60 分钟+30 秒", "60分钟+30秒", "60分钟 + 30秒", "1h+30''", "60分+30秒", "60分＋30秒"],
+      "allowedSourceClocks": [
+        "60+30",
+        "60 分钟+30 秒",
+        "60分钟+30秒",
+        "60分钟 + 30秒",
+        "1h+30''",
+        "60分+30秒",
+        "60分＋30秒"
+      ],
       "regulationsUrl": "https://www.wxf-xiangqi.org/images/event_announcement_folder_2022/17th_World_Xiangqi_Championship_Regulations.pdf",
       "classicalEvidence": "Official adult main-championship regulations: 60 minutes base time plus 30 seconds increment per move. Separate rapid and youth links are excluded."
     },
@@ -41,10 +124,23 @@
       "indexUrl": "https://www.wxf-xiangqi.org/index.php?id=215&lang=cn&option=com_content&view=article",
       "adultRoundPattern": "2019 World Xiangqi Championship (Men|Women) (Round|Championship)",
       "minimumPages": 24,
-      "vietnamesePlayers": ["赖理兄", "阮明日光", "高芳青", "阮黄燕", "汪洋北"],
+      "vietnamesePlayers": [
+        "赖理兄",
+        "阮明日光",
+        "高芳青",
+        "阮黄燕",
+        "汪洋北"
+      ],
       "timeControl": "Classical · exact clock unrecorded",
       "requireSlowMarker": true,
-      "allowedSourceClocks": ["60+30", "60 分钟+30 秒", "60分钟+30秒", "1h+30''", "60分+30秒", "60分＋30秒"],
+      "allowedSourceClocks": [
+        "60+30",
+        "60 分钟+30 秒",
+        "60分钟+30秒",
+        "1h+30''",
+        "60分+30秒",
+        "60分＋30秒"
+      ],
       "regulationsUrl": "https://www.wxf-xiangqi.org/index.php?id=215&lang=cn&option=com_content&view=article",
       "classicalEvidence": "Official WXF individual main-championship record explicitly labels the game 慢棋 (slow/classical). Exact clock retained only when the source records it."
     },
@@ -53,12 +149,28 @@
       "indexUrl": "https://www.wxf-xiangqi.org/index.php?id=501&lang=cn&option=com_content&view=article",
       "adultRoundPattern": "2017 World Xiangqi Championship (Men|Women) Round",
       "minimumPages": 34,
-      "vietnamesePlayers": ["阮明日光", "阮黄燕", "赖理兄", "黎氏金鸾", "汪洋北"],
+      "vietnamesePlayers": [
+        "阮明日光",
+        "阮黄燕",
+        "赖理兄",
+        "黎氏金鸾",
+        "汪洋北"
+      ],
       "timeControl": "Classical · exact clock unrecorded",
       "requireSlowMarker": true,
-      "allowedSourceClocks": ["60+30", "60 分钟+30 秒", "60分钟+30秒", "1h+30''", "60分+30秒", "60分＋30秒"],
+      "allowedSourceClocks": [
+        "60+30",
+        "60 分钟+30 秒",
+        "60分钟+30秒",
+        "1h+30''",
+        "60分+30秒",
+        "60分＋30秒"
+      ],
       "regulationsUrl": "https://www.wxf-xiangqi.org/index.php?id=501&lang=cn&option=com_content&view=article",
       "classicalEvidence": "Official WXF individual main-championship record explicitly labels the game 慢棋 (slow/classical). Exact clock retained only when the source records it."
     }
+  ],
+  "includedDivisions": [
+    "Men"
   ]
 }

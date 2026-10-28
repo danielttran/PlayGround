@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.3 (version code 12) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.4 (version code 13) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -28,7 +28,19 @@ remain additional entry points for variation editing and the legal-move list.
 
 The library uses a recycling ListView containing every matching game, without
 page controls or a 40-game cutoff. Search and sorting use the entire selected collection;
-only visible cards need native view inflation. The complete move record also uses
+only visible cards need native view inflation. A separate Activity-owned background
+executor builds `LibrarySearchIndex`: folded player aliases/event/round/collection
+metadata is cached once per loaded games-list identity, and each collection/sort
+order is cached. Text edits debounce for 120 ms. Requests carry a generation,
+source identity, collection, query, sort and view identity; stale results cannot
+replace the current library. Returning to an already prepared sort cancels any
+obsolete pending request before using its cache. Opening replay cancels library
+work and prepares its navigation snapshot independently if needed; game buttons
+wait for the current order rather than sorting on the UI thread. Imports replace
+the source-list identity, invalidating the index. Backgrounding cancels pending
+work; foregrounding resumes the latest missing request, and destruction shuts
+down the worker. Search focus/cursor and per-collection scroll preferences remain
+in the existing views/state. The complete move record also uses
 a recycling ListView, filling the replay screen's remaining height below the fixed
 header, board and controls. Scrolling the record does not move the board. Short
 screens cap and center the board to retain usable controls and a record row;
@@ -150,7 +162,7 @@ newly generated self-play are not silently substituted. See [ENGINE-SOURCES.md](
 
 `Pgn` imports tagged ICCS-coordinate PGN main lines, retaining player/event metadata, starting FEN, result, source, time control and the optional `Collection` tag. Export preserves the collection and original source player names. Comments, numeric annotations, and balanced side variations are ignored. Unsupported notation and illegal moves produce errors identifying the game and half-move. The complete batch is rejected on an error. JSON imports use the same position/move validation. XQF, CBR, CBL, WXF move notation, and Chinese move notation are not supported yet.
 
-The four packs contain **524 games and 44,587 half-moves**: 285 adult 2025 World Championship records (23,340 plies), 156 adult 2023 World Championship records (13,636 plies), 52 selected 1991–2003 World Championship master games (4,837 plies), and 31 additional Vietnamese international games (2,774 plies). Thirty previously bundled Vietnamese-focused 2023 records move into the broader 2023 pack with identical IDs and moves; the expansion adds 126 games. Recent games use `3600+30`; historical records explicitly mark slow/classical play and preserve exact clocks only when supplied. Source metadata corrections retain originals and evidence. Downloaders, hashes and exclusions are documented in [WORLD-2023-SOURCES.md](WORLD-2023-SOURCES.md), [SOURCES.md](SOURCES.md), [HISTORICAL-SOURCES.md](HISTORICAL-SOURCES.md) and [VIETNAMESE-SOURCES.md](VIETNAMESE-SOURCES.md).
+The five packs contain **428 men's games / 36,227 half-moves**: 215 2025 World Championship records (17,357 plies), 107 2023 World Championship records (9,362 plies), 52 selected 1991–2003 World Championship master games (4,837 plies), 18 additional Vietnamese international records (1,559 plies), and 36 Vietnamese master games from 2009/2016 (3,112 plies). Source-level division filters remove 132 earlier women's games while preserving all 392 retained IDs and moves. This does not filter or delete private imports. The new older pack uses official 2009 Swiss clocks `4800+30` and 2016 main knockout/classification clocks `3600+30`; group/rapid/blitz stages are excluded. Whole-mainline notation resolution must produce exactly one complete legal trace; two ambiguous records and one identity conflict remain outside the asset. Source metadata/results/calendar/brackets and shared curation-policy hashes accompany the factual records. See [VIETNAMESE-CLASSICS.md](VIETNAMESE-CLASSICS.md), [WORLD-2023-SOURCES.md](WORLD-2023-SOURCES.md), [SOURCES.md](SOURCES.md), [HISTORICAL-SOURCES.md](HISTORICAL-SOURCES.md) and [VIETNAMESE-SOURCES.md](VIETNAMESE-SOURCES.md).
 
 ## Position representation and rules
 

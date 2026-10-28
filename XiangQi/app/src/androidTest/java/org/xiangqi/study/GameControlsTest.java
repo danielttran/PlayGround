@@ -38,7 +38,7 @@ public final class GameControlsTest extends InstrumentationTestCase {
         first=fixture("a","Controls A","2020-01-01");middle=fixture("c","Controls C","2021-01-01");last=fixture("b","Controls B","2022-01-01");
         GameRepository.Game excluded=fixture("excluded","Unrelated player","2019-01-01");
         main(()->{set("games",new ArrayList<>(Arrays.asList(last,middle,excluded,first)));set("librarySort","oldest");set("search","Controls");open(first,false);});
-        getInstrumentation().waitForIdleSync();
+        UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);
     }
     @Override protected void tearDown()throws Exception{
         if(activity!=null&&!activity.isDestroyed())main(activity::finish);

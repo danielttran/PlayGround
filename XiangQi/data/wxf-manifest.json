@@ -1,9 +1,12 @@
 {
   "tournament": "19th World Xiangqi Championship, Shanghai, 2025",
-  "scope": "Adult men rounds 1–9 and women rounds 1–7; published main lines only",
+  "scope": "Adult men's rounds 1–9; published classical main lines only. Women's records are omitted by user collection preference.",
+  "divisionCounts": {
+    "Men": 215
+  },
   "indexUrl": "https://www.wxf-xiangqi.org/index.php?Itemid=101&id=1788&lang=en&option=com_content&view=article",
-  "games": 285,
-  "halfMoves": 23340,
+  "games": 215,
+  "halfMoves": 17357,
   "roundCounts": {
     "Men round 1": 24,
     "Men round 2": 25,
@@ -14,15 +17,15 @@
     "Men round 7": 25,
     "Men round 8": 24,
     "Men round 9": 25,
-    "Women round 1": 10,
-    "Women round 2": 10,
-    "Women round 3": 10,
-    "Women round 4": 10,
-    "Women round 5": 10,
-    "Women round 6": 10,
-    "Women round 7": 10
+    "Women round 1": 0,
+    "Women round 2": 0,
+    "Women round 3": 0,
+    "Women round 4": 0,
+    "Women round 5": 0,
+    "Women round 6": 0,
+    "Women round 7": 0
   },
-  "downloadedGameCount": 293,
+  "downloadedGameCount": 223,
   "excludedRecords": [
     {
       "division": "Men",
@@ -39,6 +42,636 @@
       "title": "世锦赛男个 8-23 意大利 纳斯塔西奥 红先胜 缅甸 匡家卓",
       "reason": "No recorded moves (e.g. forfeit)",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1898:2025-19th-world-xiangqi-championships-men-round-8-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g1",
+      "division": "Women",
+      "round": 1,
+      "game": 1,
+      "title": "世锦赛女个 1-1 中国澳门 李凯雯 红先负 马来西亚 唐语萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g2",
+      "division": "Women",
+      "round": 1,
+      "game": 2,
+      "title": "世锦赛女个 1-2 越南 谭氏垂容 红先胜 中国香港 林嘉欣",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g3",
+      "division": "Women",
+      "round": 1,
+      "game": 3,
+      "title": "世锦赛女个 1-3 中国香港 梁玮珊 红先胜 泰国 林文瑶",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g4",
+      "division": "Women",
+      "round": 1,
+      "game": 4,
+      "title": "世锦赛女个 1-4 美国 张婉昱 红先负 中国 陈丽淳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g5",
+      "division": "Women",
+      "round": 1,
+      "game": 5,
+      "title": "世锦赛女个 1-5 新加坡 陈茗芳 红先胜 东马 罗宝莹",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g6",
+      "division": "Women",
+      "round": 1,
+      "game": 6,
+      "title": "世锦赛女个 1-6 中华台北 李思谊 红先负 中国 唐丹",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g7",
+      "division": "Women",
+      "round": 1,
+      "game": 7,
+      "title": "世锦赛女个 1-7 新加坡 吴兰香 红先胜 马来西亚 黄宇晨",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g8",
+      "division": "Women",
+      "round": 1,
+      "game": 8,
+      "title": "世锦赛女个 1-8 越南 乔碧水 红先和 美国 龚勤",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g9",
+      "division": "Women",
+      "round": 1,
+      "game": 9,
+      "title": "世锦赛女个 1-9 德国 吴彩芳 红先负 东马 周盈萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r1-g10",
+      "division": "Women",
+      "round": 1,
+      "game": 10,
+      "title": "世锦赛女个 1-10 泰国 李玉芬 红先负 中华台北 林祐萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1839:2025-19th-world-xiangqi-championships-women-round-1-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g1",
+      "division": "Women",
+      "round": 2,
+      "game": 1,
+      "title": "世锦赛女个 2-1 中华台北 林祐萱 红先负 新加坡 吴兰香",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g2",
+      "division": "Women",
+      "round": 2,
+      "game": 2,
+      "title": "世锦赛女个 2-2 东马 周盈萱 红先胜 新加坡 陈茗芳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g3",
+      "division": "Women",
+      "round": 2,
+      "game": 3,
+      "title": "世锦赛女个 2-3 中国 唐丹 红先胜 中国香港 梁玮珊",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g4",
+      "division": "Women",
+      "round": 2,
+      "game": 4,
+      "title": "世锦赛女个 2-4 中国 陈丽淳 红先和 越南 谭氏垂容",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g5",
+      "division": "Women",
+      "round": 2,
+      "game": 5,
+      "title": "世锦赛女个 2-5 马来西亚 唐语萱 红先和 越南 乔碧水",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g6",
+      "division": "Women",
+      "round": 2,
+      "game": 6,
+      "title": "世锦赛女个 2-6 美国 龚勤 红先胜 泰国 李玉芬",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g7",
+      "division": "Women",
+      "round": 2,
+      "game": 7,
+      "title": "世锦赛女个 2-7 马来西亚 黄宇晨 红先胜 德国 吴彩芳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g8",
+      "division": "Women",
+      "round": 2,
+      "game": 8,
+      "title": "世锦赛女个 2-8 东马 罗宝莹 红先负 中华台北 李思谊",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g9",
+      "division": "Women",
+      "round": 2,
+      "game": 9,
+      "title": "世锦赛女个 2-9 泰国 林文瑶 红先负 美国 张婉昱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r2-g10",
+      "division": "Women",
+      "round": 2,
+      "game": 10,
+      "title": "世锦赛女个 2-10 中国香港 林嘉欣 红先胜 中国澳门 李凯雯",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1900:2025-19th-world-xiangqi-championships-women-round-2-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g1",
+      "division": "Women",
+      "round": 3,
+      "game": 1,
+      "title": "世锦赛女个 3-1 新加坡 吴兰香 红先和 中国 唐丹",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g2",
+      "division": "Women",
+      "round": 3,
+      "game": 2,
+      "title": "世锦赛女个 3-2 越南 谭氏垂容 红先胜 东马 周盈萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g3",
+      "division": "Women",
+      "round": 3,
+      "game": 3,
+      "title": "世锦赛女个 3-3 马来西亚 唐语萱 红先和 中国 陈丽淳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g4",
+      "division": "Women",
+      "round": 3,
+      "game": 4,
+      "title": "世锦赛女个 3-4 中国香港 梁玮珊 红先负 美国 龚勤",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g5",
+      "division": "Women",
+      "round": 3,
+      "game": 5,
+      "title": "世锦赛女个 3-5 美国 张婉昱 红先和 中国香港 林嘉欣",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g6",
+      "division": "Women",
+      "round": 3,
+      "game": 6,
+      "title": "世锦赛女个 3-6 新加坡 陈茗芳 红先和 马来西亚 黄宇晨",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g7",
+      "division": "Women",
+      "round": 3,
+      "game": 7,
+      "title": "世锦赛女个 3-7 中华台北 李思谊 红先和 中华台北 林祐萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g8",
+      "division": "Women",
+      "round": 3,
+      "game": 8,
+      "title": "世锦赛女个 3-8 越南 乔碧水 红先胜 泰国 林文瑶",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g9",
+      "division": "Women",
+      "round": 3,
+      "game": 9,
+      "title": "世锦赛女个 3-9 中国澳门 李凯雯 红先胜 东马 罗宝莹",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r3-g10",
+      "division": "Women",
+      "round": 3,
+      "game": 10,
+      "title": "世锦赛女个 3-10 德国 吴彩芳 红先胜 泰国 李玉芬",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1901:2025-19th-world-xiangqi-championships-women-round-3-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g1",
+      "division": "Women",
+      "round": 4,
+      "game": 1,
+      "title": "世锦赛女个 4-1 中国 唐丹 红先胜 越南 谭氏垂容",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g2",
+      "division": "Women",
+      "round": 4,
+      "game": 2,
+      "title": "世锦赛女个 4-2 美国 龚勤 红先负 马来西亚 唐语萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g3",
+      "division": "Women",
+      "round": 4,
+      "game": 3,
+      "title": "世锦赛女个 4-3 东马 周盈萱 红先负 越南 乔碧水",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g4",
+      "division": "Women",
+      "round": 4,
+      "game": 4,
+      "title": "世锦赛女个 4-4 中国 陈丽淳 红先胜 新加坡 吴兰香",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g5",
+      "division": "Women",
+      "round": 4,
+      "game": 5,
+      "title": "世锦赛女个 4-5 中华台北 林祐萱 红先胜 新加坡 陈茗芳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g6",
+      "division": "Women",
+      "round": 4,
+      "game": 6,
+      "title": "世锦赛女个 4-6 马来西亚 黄宇晨 红先和 美国 张婉昱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g7",
+      "division": "Women",
+      "round": 4,
+      "game": 7,
+      "title": "世锦赛女个 4-7 中国香港 林嘉欣 红先和 中华台北 李思谊",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g8",
+      "division": "Women",
+      "round": 4,
+      "game": 8,
+      "title": "世锦赛女个 4-8 德国 吴彩芳 红先负 中国香港 梁玮珊",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g9",
+      "division": "Women",
+      "round": 4,
+      "game": 9,
+      "title": "世锦赛女个 4-9 泰国 李玉芬 红先负 中国澳门 李凯雯",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r4-g10",
+      "division": "Women",
+      "round": 4,
+      "game": 10,
+      "title": "世锦赛女个 4-10 东马 罗宝莹 红先胜 泰国 林文瑶",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1902:2025-19th-world-xiangqi-championships-women-round-4-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g1",
+      "division": "Women",
+      "round": 5,
+      "game": 1,
+      "title": "世锦赛女个 5-1 马来西亚 唐语萱 红先负 中国 唐丹",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g2",
+      "division": "Women",
+      "round": 5,
+      "game": 2,
+      "title": "世锦赛女个 5-2 越南 乔碧水 红先负 中国 陈丽淳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g3",
+      "division": "Women",
+      "round": 5,
+      "game": 3,
+      "title": "世锦赛女个 5-3 越南 谭氏垂容 红先和 美国 龚勤",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g4",
+      "division": "Women",
+      "round": 5,
+      "game": 4,
+      "title": "世锦赛女个 5-4 中国澳门 李凯雯 红先和 中华台北 林祐萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g5",
+      "division": "Women",
+      "round": 5,
+      "game": 5,
+      "title": "世锦赛女个 5-5 中国香港 梁玮珊 红先负 中国香港 林嘉欣",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g6",
+      "division": "Women",
+      "round": 5,
+      "game": 6,
+      "title": "世锦赛女个 5-6 美国 张婉昱 红先胜 东马 周盈萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g7",
+      "division": "Women",
+      "round": 5,
+      "game": 7,
+      "title": "世锦赛女个 5-7 中华台北 李思谊 红先和 马来西亚 黄宇晨",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g8",
+      "division": "Women",
+      "round": 5,
+      "game": 8,
+      "title": "世锦赛女个 5-8 新加坡 吴兰香 红先胜 新加坡 陈茗芳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g9",
+      "division": "Women",
+      "round": 5,
+      "game": 9,
+      "title": "世锦赛女个 5-9 东马 罗宝莹 红先胜 德国 吴彩芳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r5-g10",
+      "division": "Women",
+      "round": 5,
+      "game": 10,
+      "title": "世锦赛女个 5-10 泰国 林文瑶 红先和 泰国 李玉芬",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1903:2025-19th-world-xiangqi-championships-women-round-5-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g1",
+      "division": "Women",
+      "round": 6,
+      "game": 1,
+      "title": "世锦赛女个 6-1 中国 唐丹 红先和 中国 陈丽淳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g2",
+      "division": "Women",
+      "round": 6,
+      "game": 2,
+      "title": "世锦赛女个 6-2 中华台北 林祐萱 红先胜 越南 乔碧水",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g3",
+      "division": "Women",
+      "round": 6,
+      "game": 3,
+      "title": "世锦赛女个 6-3 美国 龚勤 红先和 新加坡 吴兰香",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g4",
+      "division": "Women",
+      "round": 6,
+      "game": 4,
+      "title": "世锦赛女个 6-4 中国香港 林嘉欣 红先负 马来西亚 唐语萱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g5",
+      "division": "Women",
+      "round": 6,
+      "game": 5,
+      "title": "世锦赛女个 6-5 美国 张婉昱 红先和 越南 谭氏垂容",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g6",
+      "division": "Women",
+      "round": 6,
+      "game": 6,
+      "title": "世锦赛女个 6-6 马来西亚 黄宇晨 红先负 中国澳门 李凯雯",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g7",
+      "division": "Women",
+      "round": 6,
+      "game": 7,
+      "title": "世锦赛女个 6-7 东马 周盈萱 红先负 中华台北 李思谊",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g8",
+      "division": "Women",
+      "round": 6,
+      "game": 8,
+      "title": "世锦赛女个 6-8 中国香港 梁玮珊 红先胜 东马 罗宝莹",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g9",
+      "division": "Women",
+      "round": 6,
+      "game": 9,
+      "title": "世锦赛女个 6-9 新加坡 陈茗芳 红先胜 泰国 李玉芬",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r6-g10",
+      "division": "Women",
+      "round": 6,
+      "game": 10,
+      "title": "世锦赛女个 6-10 泰国 林文瑶 红先负 德国 吴彩芳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1904:2025-19th-world-xiangqi-championships-women-round-6-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g1",
+      "division": "Women",
+      "round": 7,
+      "game": 1,
+      "title": "世锦赛女个 7-1 中华台北 林祐萱 红先和 中国 唐丹",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g2",
+      "division": "Women",
+      "round": 7,
+      "game": 2,
+      "title": "世锦赛女个 7-2 中国 陈丽淳 红先胜 美国 龚勤",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g3",
+      "division": "Women",
+      "round": 7,
+      "game": 3,
+      "title": "世锦赛女个 7-3 马来西亚 唐语萱 红先负 美国 张婉昱",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g4",
+      "division": "Women",
+      "round": 7,
+      "game": 4,
+      "title": "世锦赛女个 7-4 中国澳门 李凯雯 红先胜 越南 谭氏垂容",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g5",
+      "division": "Women",
+      "round": 7,
+      "game": 5,
+      "title": "世锦赛女个 7-5 中华台北 李思谊 红先负 新加坡 吴兰香",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g6",
+      "division": "Women",
+      "round": 7,
+      "game": 6,
+      "title": "世锦赛女个 7-6 越南 乔碧水 红先胜 中国香港 梁玮珊",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g7",
+      "division": "Women",
+      "round": 7,
+      "game": 7,
+      "title": "世锦赛女个 7-7 马来西亚 黄宇晨 红先负 中国香港 林嘉欣",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g8",
+      "division": "Women",
+      "round": 7,
+      "game": 8,
+      "title": "世锦赛女个 7-8 德国 吴彩芳 红先和 新加坡 陈茗芳",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g9",
+      "division": "Women",
+      "round": 7,
+      "game": 9,
+      "title": "世锦赛女个 7-9 泰国 李玉芬 红先负 东马 罗宝莹",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-women-r7-g10",
+      "division": "Women",
+      "round": 7,
+      "game": 10,
+      "title": "世锦赛女个 7-10 东马 周盈萱 红先胜 泰国 林文瑶",
+      "reason": "Women's division omitted by user collection preference",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1905:2025-19th-world-xiangqi-championships-women-round-7-game-records&catid=419&lang=en&Itemid=377"
     },
     {
       "id": "wxf-2025-men-r1-g16",
@@ -115,7 +748,7 @@
   ],
   "curationPolicy": "data/curation-policy.json",
   "classicalRegulationsUrl": "https://www.wxf-xiangqi.org/images/2025wxf_shanghai/19th_WXF__World_Xiangqi_Championship_Regulations.pdf",
-  "assetSha256": "ee4810dec011178d17a30df35c37c0dc2adfba3fd694f5e78df7d92f098142e8",
+  "assetSha256": "058befc9c046491eff36c056b0f777d6106e74a950f419e185d423b284bb46a3",
   "sources": [
     {
       "url": "https://www.wxf-xiangqi.org/index.php?Itemid=101&id=1788&lang=en&option=com_content&view=article",

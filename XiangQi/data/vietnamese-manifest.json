@@ -1,12 +1,12 @@
 {
   "collection": "Vietnamese international classical 2022–2023",
   "screeningDate": "2026-10-28",
-  "scope": "Additional 2022 World Championship and 2023 Phuong Trang international adult classical games with a Vietnamese player. The broader 2023 World Championship pack owns its records; duplicate main lines, rapid/blitz/youth and unverified older clocks are excluded.",
-  "games": 31,
-  "halfMoves": 2774,
+  "scope": "Additional men's 2022 World Championship and 2023 Phuong Trang international adult classical games with a Vietnamese player. Women's records are omitted by user preference. The broader 2023 World Championship pack owns its records; duplicate main lines, rapid/blitz/youth and unverified older clocks are excluded.",
+  "games": 18,
+  "halfMoves": 1559,
   "yearCounts": {
     "2023": 4,
-    "2022": 27
+    "2022": 14
   },
   "vietnamesePlayerCounts": {
     "何文进": 1,
@@ -17,13 +17,13 @@
     "阮成保": 8,
     "阮明日光": 0,
     "阮黄林": 1,
-    "阮黄燕": 7,
+    "阮黄燕": 0,
     "高芳青": 0,
-    "黎氏金鸾": 7
+    "黎氏金鸾": 0
   },
-  "assetSha256": "b0749d204117709ebb851587d64cf88f08a48b3acb1c1df12ebf6eb266d3828f",
-  "policySha256": "a03fed7880443a15fd88aecbc9b43a63adc7be9f3a6432f2ee34f1d8cd6d99da",
-  "curationPolicySha256": "6c3f714ff9989cdcdbd3153b9470d858e593bb0c18035b55dd7827d4d4e976a3",
+  "assetSha256": "841c7c7ccc08a5883f9f2e3f40e94b5572e88d0648bb64884059edb04ac20d7f",
+  "policySha256": "740a3044de1e4c88aba21991575f66a117d85d8bcf32790fc6fec7f8d50ffa13",
+  "curationPolicySha256": "8f27257542efd6ea7120bb76a4a3cdcb1a0f80c4fe82fc0417217905b116d650",
   "deduplicatedAgainst": [
     "games.json",
     "historical-games.json",
@@ -51,16 +51,14 @@
       "red": "阮黄燕",
       "black": "龚勤",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1594-g3"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1594-g6",
       "red": "陈慧盈",
       "black": "黎氏金鸾",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1594-g6"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1603-g3",
@@ -83,16 +81,14 @@
       "red": "黎氏金鸾",
       "black": "吴兰香",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1604-g1"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1604-g4",
       "red": "林祐萱",
       "black": "阮黄燕",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1604-g4"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1635-g1",
@@ -165,64 +161,56 @@
       "red": "阮黄燕",
       "black": "刘欢",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1647-g2"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1647-g5",
       "red": "陈茗芳",
       "black": "黎氏金鸾",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1647-g5"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1648-g3",
       "red": "林嘉欣",
       "black": "阮黄燕",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1648-g3"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1648-g5",
       "red": "黎氏金鸾",
       "black": "洪千惠",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1648-g5"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1649-g1",
       "red": "阮黄燕",
       "black": "唐思楠",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1649-g1"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1649-g3",
       "red": "余欣如",
       "black": "黎氏金鸾",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1649-g3"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1650-g1",
       "red": "唐思楠",
       "black": "黎氏金鸾",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1650-g1"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1650-g2",
       "red": "吴兰香",
       "black": "阮黄燕",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1650-g2"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1708-g2",
@@ -289,16 +277,14 @@
       "red": "黎氏金鸾",
       "black": "刘欢",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1714-g2"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2023-1714-g4",
       "red": "阮黄燕",
       "black": "陈茗芳",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
-      "reason": "Duplicate main line",
-      "duplicateOf": "vietnam-wxf-2023-1714-g4"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2022-1193-g1",
@@ -329,6 +315,97 @@
         "王天一"
       ],
       "reason": "Participant matches current curation exclusion policy"
+    },
+    {
+      "id": "vietnam-wxf-2022-1216-g2",
+      "red": "黎氏金鸾",
+      "black": "陈幸琳",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1216:2022-世界象棋锦标赛赛谱-女子组-第一轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1216-g5",
+      "red": "NI KADEK SUGIANINGSIH",
+      "black": "阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1216:2022-世界象棋锦标赛赛谱-女子组-第一轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1217-g4",
+      "red": "阮黄燕",
+      "black": "彭柔安",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1217:2022-世界象棋锦标赛赛谱-女子组-第二轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1217-g5",
+      "red": "洪千惠",
+      "black": "黎氏金鸾",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1217:2022-世界象棋锦标赛赛谱-女子组-第二轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1218-g1",
+      "red": "陈茗芳",
+      "black": "阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1218:2022-世界象棋锦标赛赛谱-女子组-第三轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1218-g4",
+      "red": "黎氏金鸾",
+      "black": "NI KADEK SUGIANINGSIH",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1218:2022-世界象棋锦标赛赛谱-女子组-第三轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1219-g2",
+      "red": "阮黄燕",
+      "black": "黎氏金鸾",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1219:2022-世界象棋锦标赛赛谱-女子组-第四轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1220-g2",
+      "red": "林嘉欣",
+      "black": "阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1220:2022-世界象棋锦标赛赛谱-女子组-第五轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1220-g3",
+      "red": "黎氏金鸾",
+      "black": "李雯宜",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1220:2022-世界象棋锦标赛赛谱-女子组-第五轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1221-g1",
+      "red": "阮黄燕",
+      "black": "左文静",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1221:2022-世界象棋锦标赛赛谱-女子组-第六轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1221-g5",
+      "red": "詹敏珠",
+      "black": "黎氏金鸾",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1221:2022-世界象棋锦标赛赛谱-女子组-第六轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1362-g2",
+      "red": "陈幸琳",
+      "black": "阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1362:2022-世界象棋锦标赛赛谱-女子组-第七轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    {
+      "id": "vietnam-wxf-2022-1362-g4",
+      "red": "黎氏金鸾",
+      "black": "陈茗芳",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1362:2022-世界象棋锦标赛赛谱-女子组-第七轮&catid=301&lang=cn&Itemid=378",
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2019-261-g6",
@@ -449,42 +526,42 @@
       "red": "高芳青",
       "black": "贾丹",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=390:2019-wxc-women-round-01&catid=159&lang=cn&Itemid=378",
-      "reason": "No explicit slow/classical marker"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2019-392-g4",
       "red": "彭柔安",
       "black": "高芳青",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=392:2019-wxc-women-round-02&catid=159&lang=cn&Itemid=378",
-      "reason": "No explicit slow/classical marker"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2019-394-g5",
       "red": "张颖茵",
       "black": "高芳青",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=394:2019-wxc-women-round-04&catid=159&lang=cn&Itemid=378",
-      "reason": "No explicit slow/classical marker"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2019-395-g4",
       "red": "高芳青",
       "black": "陈茗芳",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=395:2019-wxc-women-round-05&catid=159&lang=cn&Itemid=378",
-      "reason": "No explicit slow/classical marker"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2019-396-g6",
       "red": "高芳青",
       "black": "唐丹",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=396:2019-wxc-women-round-06&catid=159&lang=cn&Itemid=378",
-      "reason": "No explicit slow/classical marker"
+      "reason": "Women's division omitted by user collection preference"
     },
     {
       "id": "vietnam-wxf-2019-397-g2",
       "red": "高芳青",
       "black": "余欣如",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=397:2019-wxc-women-round-07&catid=159&lang=cn&Itemid=378",
-      "reason": "No explicit slow/classical marker"
+      "reason": "Women's division omitted by user collection preference"
     }
   ],
   "sources": [

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download factual main-line records from WXF's public 2025 adult championship pages.
+"""Download factual main-line records from WXF's public 2025 men's championship pages.
 
 Standard library only. Cached requests, retries and one-second pacing keep requests
 bounded. Re-run with --offline to reproduce assets without a network connection.
@@ -89,6 +89,12 @@ def parse_games(source: str, division: str, number: int, url: str, exclusions=No
     blocks = re.findall(r"\[DhtmlXQiFrame\](.*?)\[/DhtmlXQiFrame\]", source, re.S)
     for index, block in enumerate(blocks, 1):
         tags = dict(re.findall(r"\[DhtmlXQ_(\w+)\](.*?)\[/DhtmlXQ_\1\]", block, re.S))
+        if division != "Men":
+            if exclusions is not None:
+                exclusions.append({"id": f"wxf-2025-{division.lower()}-r{number}-g{index}",
+                                   "division": division, "round": number, "game": index,
+                                   "title": tags.get("title", ""), "reason": "Women's division omitted by user collection preference", "sourceUrl": url})
+            continue
         if not tags.get("movelist"):
             if exclusions is not None:
                 exclusions.append({"division": division, "round": number, "game": index,
@@ -127,7 +133,7 @@ def parse_games(source: str, division: str, number: int, url: str, exclusions=No
         if game["sourceTimeControl"] not in ("60 分钟+30 秒", "60+30"):
             raise ValueError(f"Unverified classical time control: {game['sourceTimeControl']}")
         games.append(game)
-    if not games:
+    if not games and division == "Men":
         raise ValueError(f"No embedded games: {division} {number}")
     return games
 
@@ -214,7 +220,8 @@ def main():
     args.output.write_bytes(payload)
     manifest = {
         "tournament": "19th World Xiangqi Championship, Shanghai, 2025",
-        "scope": "Adult men rounds 1–9 and women rounds 1–7; published main lines only",
+        "scope": "Adult men's rounds 1–9; published classical main lines only. Women's records are omitted by user collection preference.",
+        "divisionCounts": {"Men": len(games)},
         "indexUrl": INDEX_URL,
         "games": len(games), "halfMoves": sum(len(game["moves"]) for game in games),
         "roundCounts": counts,
@@ -229,7 +236,7 @@ def main():
     }
     manifest_path = ROOT / "data/wxf-manifest.json"
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    manifest_path.write_bytes((json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
     print(f"Wrote {len(games)} games / {manifest['halfMoves']} half-moves to {args.output}")
 
 

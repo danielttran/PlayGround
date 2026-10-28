@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "collection": "World Championship masters 1991–2003",
-  "sourcePolicySha256": "0abac07d075b361ef0ff8b60f1a950c88bcca05695412797a09bff0f832e1251",
-  "curationPolicySha256": "6c3f714ff9989cdcdbd3153b9470d858e593bb0c18035b55dd7827d4d4e976a3",
-  "assetSha256": "3f88ee5ae280c219d09371983b717cef8bc43493ef88b051e9af37626786b958",
+  "sourcePolicySha256": "569eca9c4ecebb5a08b93654d3ad6b0684c2f7ff710a3824bbb62c9739f86545",
+  "curationPolicySha256": "8f27257542efd6ea7120bb76a4a3cdcb1a0f80c4fe82fc0417217905b116d650",
+  "assetSha256": "7758dd86f0b55e8587e286c2b80c639d9c8c1f0e1af6b23a7f092b65dabbc71e",
   "games": 52,
   "plies": 4837,
   "byEvent": {
@@ -262,7 +262,7 @@
     },
     {
       "id": "historical-wxf-407-g4",
-      "reason": "Outside curated master selection",
+      "reason": "Women's record omitted by user collection preference",
       "red": "张心欢",
       "black": "胡明",
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=407&option=com_content&view=article&lang=en"
@@ -1912,5 +1912,8 @@
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?id=1059&option=com_content&view=article&lang=en"
     }
   ],
-  "scope": "Factual main lines and metadata only; no source annotations, photos or board implementation bundled. Classical status comes from each official record; precise clock is only asserted where recorded."
+  "scope": "Men's curated master records only, using the explicit WXF Male titled-player roster and men's historical awards list. Women's records are omitted by user preference. Factual main lines and metadata only; classical status comes from each official record and precise clock is asserted only where recorded.",
+  "divisionCounts": {
+    "Men": 52
+  }
 }

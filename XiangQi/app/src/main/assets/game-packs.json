@@ -4,6 +4,7 @@
     {"file":"games.json","label":"World Championship 2025","sourceManifest":"data/wxf-manifest.json"},
     {"file":"world-2023-games.json","label":"World Championship 2023","sourceManifest":"data/world-2023-manifest.json"},
     {"file":"historical-games.json","label":"World Championship masters 1991–2003","sourceManifest":"data/historical-manifest.json"},
-    {"file":"vietnamese-games.json","label":"Vietnamese international classical 2022–2023","sourceManifest":"data/vietnamese-manifest.json"}
+    {"file":"vietnamese-games.json","label":"Vietnamese international classical 2022–2023","sourceManifest":"data/vietnamese-manifest.json"},
+    {"file":"vietnamese-classics.json","label":"Vietnamese masters classical 2009 & 2016","sourceManifest":"data/vietnamese-classics-manifest.json"}
   ]
 }

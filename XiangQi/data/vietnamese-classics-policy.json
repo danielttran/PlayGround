@@ -1,0 +1,950 @@
+{
+  "schemaVersion": 1,
+  "screeningDate": "2026-10-28",
+  "collection": "Vietnamese masters classical 2009 & 2016",
+  "scope": "Men’s complete mainlines from the official VietnamChess database: selected FUTA 2009 Swiss games at 80+30 and screened FUTA 2016 knockout/classification games at 60+30. No rapid/blitz tiebreaks, study positions or engine games.",
+  "selectionMethod": "FUTA 2009: selected wins by six Vietnamese masters over top-12 finishers or established international grandmasters, plus direct elite-opposition draws. FUTA 2016: all 18 source-available main classical knockout/classification games surviving shared player exclusions. These are transparent event/opposition proxies, not an engine ranking or a claim that these are objectively the best games.",
+  "sharedCurationPolicy": "data/curation-policy.json",
+  "sourceFactsKeys": [
+    "id",
+    "white_player_name",
+    "black_player_name",
+    "white_player_name_en",
+    "black_player_name_en",
+    "result",
+    "round",
+    "round_num",
+    "board_num",
+    "date_played",
+    "pgn_text",
+    "fen_initial",
+    "tournament_title"
+  ],
+  "sources": {
+    "2009": {
+      "event": "3rd Phuong Trang Vietnam Xiangqi Open 2009",
+      "timeControl": "4800+30",
+      "classicalRegulationsUrl": "https://vietnamchess.vn/index.php/chessnews/tournament-news/tournament-international/open-inter-events/puta3",
+      "classicalEvidence": "Official regulations §3 Stage 1 explicitly allocates 80 minutes per side plus 30 seconds per move for the 9-round Swiss. Only that stage is admitted; Stage 2 rapid/blitz tiebreaks are excluded.",
+      "resultsEvidence": "The same federation article gives all Swiss round-by-round results, final standings and a per-round calendar (21–25 March).",
+      "sourceTournamentId": 23,
+      "admittedSectionId": 24,
+      "resultsCrossTableSha256": "95e05c1da689bd894d8b734b05c9310d3275c1371e487b008822cb8aa3fbaac4"
+    },
+    "2016": {
+      "event": "5th Phuong Trang International Xiangqi Masters Cup 2016",
+      "timeControl": "3600+30",
+      "classicalRegulationsUrl": "https://vietnamchess.vn/news/phuongtrang2016",
+      "classicalEvidence": "Official regulations §4.2 gives 60 minutes per side plus 30 seconds per move from move one for each of the two main knockout/classification games. Group-stage 40+20 and Armageddon 6/5 minute games are excluded.",
+      "resultsEvidence": [
+        "https://vietnamchess.vn/images/stories/saigon/2016/vongtuket.jpg",
+        "https://vietnamchess.vn/images/stories/saigon/2016/vongbanket.jpg",
+        "https://vietnamchess.vn/images/stories/saigon/2016/vongchungket.jpg"
+      ],
+      "sourceTournamentId": 12,
+      "admittedSectionIds": [
+        17,
+        18
+      ]
+    }
+  },
+  "candidates": [
+    {
+      "sourceGameId": 1928,
+      "year": "2016",
+      "phase": "Fifth-place match",
+      "sourceFactsSha256": "40f0d582b963121b96a23b36b91ab8f407e958ca91f6e56aa429313665cd32c6",
+      "sourceListing": {
+        "tournament_id": 18,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 7,
+        "white_player_name": "Trềnh A Sáng",
+        "black_player_name": "Nguyễn Anh Quân",
+        "result": "1-0",
+        "date_played": "2016-12-28",
+        "ply_count": 65,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 1929,
+      "year": "2016",
+      "phase": "Seventh-place match",
+      "sourceFactsSha256": "7172d6d4acdd03860eb2438746afba9a7cbaaf156990b9aae0bf6d39e46e3832",
+      "sourceListing": {
+        "tournament_id": 18,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 8,
+        "white_player_name": "Đào Cao Khoa",
+        "black_player_name": "Tôn Thất Nhật Tân",
+        "result": "1/2-1/2",
+        "date_played": "2016-12-28",
+        "ply_count": 50,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 1921,
+      "year": "2016",
+      "phase": "Third-place match",
+      "sourceFactsSha256": "8a53cdb9a4271f3d64e46206843c50c9f0e74ad9e22e38e748a6230d622e8f2d",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 16,
+        "white_player_name": "Đào Quốc Hưng",
+        "black_player_name": "Đặng Cửu Tùng Lân",
+        "result": "1/2-1/2",
+        "date_played": "2016-12-28",
+        "ply_count": 66,
+        "tiebreak": 0,
+        "ko_stage": 6
+      }
+    },
+    {
+      "sourceGameId": 1926,
+      "year": "2016",
+      "phase": "Fifth-place match",
+      "sourceFactsSha256": "68d9a8a39efc8bc2be884e2216466ed80817bdf0efb43c59956dd87900be91b4",
+      "sourceListing": {
+        "tournament_id": 18,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 5,
+        "white_player_name": "Nguyễn Anh Quân",
+        "black_player_name": "Trềnh A Sáng",
+        "result": "1/2-1/2",
+        "date_played": "2016-12-27",
+        "ply_count": 69,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 1927,
+      "year": "2016",
+      "phase": "Seventh-place match",
+      "sourceFactsSha256": "4f64182c19dda4e268a59dc7c7d72ac5a76fad6774e1a37b2655de036428fea2",
+      "sourceListing": {
+        "tournament_id": 18,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 6,
+        "white_player_name": "Tôn Thất Nhật Tân",
+        "black_player_name": "Đào Cao Khoa",
+        "result": "0-1",
+        "date_played": "2016-12-27",
+        "ply_count": 123,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 1919,
+      "year": "2016",
+      "phase": "Third-place match",
+      "sourceFactsSha256": "ff54c70fb3cf2c17b5e465b7beaf9094e2cc4d5a6db338c73d8404ddef22e2be",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 14,
+        "white_player_name": "Đặng Cửu Tùng Lân",
+        "black_player_name": "Đào Quốc Hưng",
+        "result": "1-0",
+        "date_played": "2016-12-27",
+        "ply_count": 95,
+        "tiebreak": 0,
+        "ko_stage": 6
+      }
+    },
+    {
+      "sourceGameId": 1922,
+      "year": "2016",
+      "phase": "Places 5–8 semifinal",
+      "sourceFactsSha256": "54deb1b8bdeb69b50bd230f88eea1293ff8370197081947425c878d731776c34",
+      "sourceListing": {
+        "tournament_id": 18,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 1,
+        "white_player_name": "Nguyễn Anh Quân",
+        "black_player_name": "Đào Cao Khoa",
+        "result": "1-0",
+        "date_played": "2016-12-26",
+        "ply_count": 97,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 1924,
+      "year": "2016",
+      "phase": "Places 5–8 semifinal",
+      "sourceFactsSha256": "c07be0c88e8347cda7cd78fdddc143daddb790f1f4ebb14675dbf6ea56030e83",
+      "sourceListing": {
+        "tournament_id": 18,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 3,
+        "white_player_name": "Trềnh A Sáng",
+        "black_player_name": "Tôn Thất Nhật Tân",
+        "result": "1-0",
+        "date_played": "2016-12-26",
+        "ply_count": 139,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 1914,
+      "year": "2016",
+      "phase": "Semifinal",
+      "sourceFactsSha256": "e9627290ae1813f233996fbdceb99e1f7eb9405ed91815adfa697c2dfd5b4313",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 9,
+        "white_player_name": "Lại Lý Huynh",
+        "black_player_name": "Đào Quốc Hưng",
+        "result": "1/2-1/2",
+        "date_played": "2016-12-26",
+        "ply_count": 112,
+        "tiebreak": 0,
+        "ko_stage": 5
+      }
+    },
+    {
+      "sourceGameId": 1923,
+      "year": "2016",
+      "phase": "Places 5–8 semifinal",
+      "sourceFactsSha256": "e95428a05754d85ee3969a585b756762b1c96c6ee84741a574fc92f94055efc6",
+      "sourceListing": {
+        "tournament_id": 18,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 2,
+        "white_player_name": "Đào Cao Khoa",
+        "black_player_name": "Nguyễn Anh Quân",
+        "result": "1/2-1/2",
+        "date_played": "2016-12-26",
+        "ply_count": 111,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 1925,
+      "year": "2016",
+      "phase": "Places 5–8 semifinal",
+      "sourceFactsSha256": "cc2c9693b7c6d5d8109587543c08d4f922cf64a2f6ab1658f45147cbb45c6581",
+      "sourceListing": {
+        "tournament_id": 18,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 4,
+        "white_player_name": "Tôn Thất Nhật Tân",
+        "black_player_name": "Trềnh A Sáng",
+        "result": "0-1",
+        "date_played": "2016-12-26",
+        "ply_count": 62,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 1915,
+      "year": "2016",
+      "phase": "Semifinal",
+      "sourceFactsSha256": "9f4ba1dbfd03e92dc368b5815ee640ae924a40e87c9671be1f6a81de00846575",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 10,
+        "white_player_name": "Đào Quốc Hưng",
+        "black_player_name": "Lại Lý Huynh",
+        "result": "0-1",
+        "date_played": "2016-12-26",
+        "ply_count": 118,
+        "tiebreak": 0,
+        "ko_stage": 5
+      }
+    },
+    {
+      "sourceGameId": 1906,
+      "year": "2016",
+      "phase": "Quarterfinal",
+      "sourceFactsSha256": "c2979d6aeb9b8b825b082c0652b2535f27b7b5c37f35c68f482fe39d51cce24d",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 1,
+        "white_player_name": "Lại Lý Huynh",
+        "black_player_name": "Trềnh A Sáng",
+        "result": "1-0",
+        "date_played": "2016-12-25",
+        "ply_count": 103,
+        "tiebreak": 0,
+        "ko_stage": 4
+      }
+    },
+    {
+      "sourceGameId": 1907,
+      "year": "2016",
+      "phase": "Quarterfinal",
+      "sourceFactsSha256": "4a4889b49cf42fb02ff01e139619c402da45e7f43ecf093a3a7ec6a0ed3edffe",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 2,
+        "white_player_name": "Tôn Thất Nhật Tân",
+        "black_player_name": "Đào Quốc Hưng",
+        "result": "0-1",
+        "date_played": "2016-12-25",
+        "ply_count": 90,
+        "tiebreak": 0,
+        "ko_stage": 4
+      }
+    },
+    {
+      "sourceGameId": 1908,
+      "year": "2016",
+      "phase": "Quarterfinal",
+      "sourceFactsSha256": "fce5c57a50b64e37ac89e19d8b822020796edb1fcf06bd5ce0da3d8a87383ed1",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 3,
+        "white_player_name": "Đặng Cửu Tùng Lân",
+        "black_player_name": "Đào Cao Khoa",
+        "result": "1-0",
+        "date_played": "2016-12-25",
+        "ply_count": 85,
+        "tiebreak": 0,
+        "ko_stage": 4
+      }
+    },
+    {
+      "sourceGameId": 1910,
+      "year": "2016",
+      "phase": "Quarterfinal",
+      "sourceFactsSha256": "b7000c89739f3675f1c2eda796893931e9f07fc9749dc7901451dfc762363e5c",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 5,
+        "white_player_name": "Trềnh A Sáng",
+        "black_player_name": "Lại Lý Huynh",
+        "result": "0-1",
+        "date_played": "2016-12-25",
+        "ply_count": 115,
+        "tiebreak": 0,
+        "ko_stage": 4
+      }
+    },
+    {
+      "sourceGameId": 1911,
+      "year": "2016",
+      "phase": "Quarterfinal",
+      "sourceFactsSha256": "72dcc2fe46b5920e00874c2b2f5f6cb8f8175723fe19947daee6109e3561ff4f",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 6,
+        "white_player_name": "Đào Quốc Hưng",
+        "black_player_name": "Tôn Thất Nhật Tân",
+        "result": "1-0",
+        "date_played": "2016-12-25",
+        "ply_count": 119,
+        "tiebreak": 0,
+        "ko_stage": 4
+      }
+    },
+    {
+      "sourceGameId": 1912,
+      "year": "2016",
+      "phase": "Quarterfinal",
+      "sourceFactsSha256": "a0791fddd14758b1bb888b0eed712576f81eddf9ad542af495a52b22251a404e",
+      "sourceListing": {
+        "tournament_id": 17,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 7,
+        "white_player_name": "Đào Cao Khoa",
+        "black_player_name": "Đặng Cửu Tùng Lân",
+        "result": "1/2-1/2",
+        "date_played": "2016-12-25",
+        "ply_count": 80,
+        "tiebreak": 0,
+        "ko_stage": 4
+      }
+    },
+    {
+      "sourceGameId": 2399,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "4a37420d09126774c06ee180e589bcb4632a3ba7609ecd0116e6c6e2aced68f6",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "8",
+        "round_num": 8,
+        "board_num": 87,
+        "white_player_name": "Liểu Đại Hoa",
+        "black_player_name": "Đào Cao Khoa",
+        "result": "0-1",
+        "date_played": "2009-03-25",
+        "ply_count": 106,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 7,
+        "blackRank": 8,
+        "redEntry": "8w0",
+        "blackEntry": "7b1",
+        "round": 8
+      }
+    },
+    {
+      "sourceGameId": 2400,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "ddf542f9ddd00ea6cde751dfe27a835b9cef3e1e14705542d7c0adfff257781c",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "8",
+        "round_num": 8,
+        "board_num": 88,
+        "white_player_name": "Lại Lý Huynh",
+        "black_player_name": "Nguyễn Vũ Quân",
+        "result": "1-0",
+        "date_played": "2009-03-25",
+        "ply_count": 47,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 5,
+        "blackRank": 10,
+        "redEntry": "10w1",
+        "blackEntry": "5b0",
+        "round": 8
+      }
+    },
+    {
+      "sourceGameId": 2411,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "5dd504c246167f837b8575760ce8abdf2fed67cca16e03c8e1d83dd800131ffe",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "9",
+        "round_num": 9,
+        "board_num": 99,
+        "white_player_name": "Liểu Đại Hoa",
+        "black_player_name": "Nguyễn Hoàng Lâm",
+        "result": "0-1",
+        "date_played": "2009-03-25",
+        "ply_count": 102,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 7,
+        "blackRank": 4,
+        "redEntry": "4w0",
+        "blackEntry": "7b1",
+        "round": 9
+      }
+    },
+    {
+      "sourceGameId": 2412,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "6bbb64596298fffa85dff7ecf786df5fbf08384310bab4d8c3868b373e210755",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "9",
+        "round_num": 9,
+        "board_num": 100,
+        "white_player_name": "Nguyễn Thành Bảo",
+        "black_player_name": "Đào Cao Khoa",
+        "result": "1-0",
+        "date_played": "2009-03-25",
+        "ply_count": 39,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 3,
+        "blackRank": 8,
+        "redEntry": "8w1",
+        "blackEntry": "3b0",
+        "round": 9
+      }
+    },
+    {
+      "sourceGameId": 2387,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "0431652f58af5e0896c3ad9541204dbbe60ca2dce6b4a7c0d13892e6d71403d8",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "7",
+        "round_num": 7,
+        "board_num": 75,
+        "white_player_name": "Nguyễn Vũ Quân",
+        "black_player_name": "Nguyễn Thành Bảo",
+        "result": "0-1",
+        "date_played": "2009-03-24",
+        "ply_count": 66,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 10,
+        "blackRank": 3,
+        "redEntry": "3w0",
+        "blackEntry": "10b1",
+        "round": 7
+      }
+    },
+    {
+      "sourceGameId": 2390,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "965d4571922ef5389ab9c78f6fc965eef6bfb214ea529de75c0e1e82d2f5daf1",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "7",
+        "round_num": 7,
+        "board_num": 78,
+        "white_player_name": "Nguyễn Hoàng Lâm",
+        "black_player_name": "Mong Nhi",
+        "result": "1-0",
+        "date_played": "2009-03-24",
+        "ply_count": 73,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 4,
+        "blackRank": 12,
+        "redEntry": "12w1",
+        "blackEntry": "4b0",
+        "round": 7
+      }
+    },
+    {
+      "sourceGameId": 2365,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "601d25411e4c3f955cf6d8b19ad6814e7cab959b2c6a6ab01761d2b3fb88b0a9",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "5",
+        "round_num": 5,
+        "board_num": 53,
+        "white_player_name": "Trần Chánh Tâm",
+        "black_player_name": "Nguyễn Vũ Quân",
+        "result": "0-1",
+        "date_played": "2009-03-23",
+        "ply_count": 76,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 6,
+        "blackRank": 10,
+        "redEntry": "10w0",
+        "blackEntry": "6b1",
+        "round": 5
+      }
+    },
+    {
+      "sourceGameId": 2376,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "3bff746bd3046bd15e85d393c787dbcc57ec4155a88762b6c3cdb6dbf0be1fe3",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "6",
+        "round_num": 6,
+        "board_num": 64,
+        "white_player_name": "Nguyễn Vũ Quân",
+        "black_player_name": "Nguyễn Trần Đỗ Ninh",
+        "result": "1-0",
+        "date_played": "2009-03-23",
+        "ply_count": 91,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 10,
+        "blackRank": 11,
+        "redEntry": "11w1",
+        "blackEntry": "10b0",
+        "round": 6
+      }
+    },
+    {
+      "sourceGameId": 2337,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "dbe72f4f98c26ea92df5f53cf450f2106069374cd7ce323ef62aa43c949c8ac3",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "3",
+        "round_num": 3,
+        "board_num": 25,
+        "white_player_name": "Lại Lý Huynh",
+        "black_player_name": "Nguyễn Thành Bảo",
+        "result": "0-1",
+        "date_played": "2009-03-22",
+        "ply_count": 79,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 5,
+        "blackRank": 3,
+        "redEntry": "3w0",
+        "blackEntry": "5b1",
+        "round": 3
+      }
+    },
+    {
+      "sourceGameId": 2316,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "78f7c82354720468a1eb4b730947dd3b830e9c006c7750609a9be50bea5989b7",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 4,
+        "white_player_name": "Nguyễn Thành Bảo",
+        "black_player_name": "Mong Nhi",
+        "result": "1-0",
+        "date_played": "2009-03-21",
+        "ply_count": 59,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 3,
+        "blackRank": 12,
+        "redEntry": "12w1",
+        "blackEntry": "3b0",
+        "round": 1
+      }
+    },
+    {
+      "sourceGameId": 2321,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "cd31496ed4023d05ee91f3876e7a4959912eb67ab2e877f8fb92ef228a38bcd9",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 9,
+        "white_player_name": "Trương Cường",
+        "black_player_name": "Nguyễn Hoàng Lâm",
+        "result": "0-1",
+        "date_played": "2009-03-21",
+        "ply_count": 66,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 2,
+        "blackRank": 4,
+        "redEntry": "4w0",
+        "blackEntry": "2b1",
+        "round": 1
+      }
+    },
+    {
+      "sourceGameId": 2323,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "8fd155f4715d72c0a050313e41d25aa313de71b755c40a7ec49213b645fc443f",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "1",
+        "round_num": 1,
+        "board_num": 11,
+        "white_player_name": "Trần Chánh Tâm",
+        "black_player_name": "Trềnh A Sáng",
+        "result": "0-1",
+        "date_played": "2009-03-21",
+        "ply_count": 54,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 6,
+        "blackRank": 21,
+        "redEntry": "21w0",
+        "blackEntry": "6b1",
+        "round": 1
+      }
+    },
+    {
+      "sourceGameId": 2325,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "153749bffab1c77368637030381896be8ac473e3eda6298a0f7c077262a3e09a",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 13,
+        "white_player_name": "Nguyễn Thành Bảo",
+        "black_player_name": "Triệu Nhữ Quyền",
+        "result": "1-0",
+        "date_played": "2009-03-21",
+        "ply_count": 46,
+        "tiebreak": 0,
+        "ko_stage": 0
+      }
+    },
+    {
+      "sourceGameId": 2392,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "3c83725805462b4e8ec9f0cac89574a225a9dae60ff33c7349a500a5e4896bb7",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "7",
+        "round_num": 7,
+        "board_num": 80,
+        "white_player_name": "Đào Cao Khoa",
+        "black_player_name": "Ngô Quý Lâm",
+        "result": "1-0",
+        "date_played": "2009-03-24",
+        "ply_count": 71,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 8,
+        "blackRank": 18,
+        "redEntry": "18w1",
+        "blackEntry": "8b0",
+        "round": 7
+      }
+    },
+    {
+      "sourceGameId": 2386,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "ccf8eea8bb3140737eee2d9af39b8ce7c06aedbcc2944f552182b1a2cc62dbe3",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "7",
+        "round_num": 7,
+        "board_num": 74,
+        "white_player_name": "Lại Lý Huynh",
+        "black_player_name": "Liểu Đại Hoa",
+        "result": "1/2-1/2",
+        "date_played": "2009-03-24",
+        "ply_count": 79,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 5,
+        "blackRank": 7,
+        "redEntry": "7w½",
+        "blackEntry": "5b½",
+        "round": 7
+      }
+    },
+    {
+      "sourceGameId": 2364,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "29d22164ee95202b4ff0912d25a203b880dca9aaddff282fd63519c0c3fbfe2c",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "5",
+        "round_num": 5,
+        "board_num": 52,
+        "white_player_name": "Lại Lý Huynh",
+        "black_player_name": "Trương Cường",
+        "result": "1/2-1/2",
+        "date_played": "2009-03-23",
+        "ply_count": 61,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 5,
+        "blackRank": 2,
+        "redEntry": "2w½",
+        "blackEntry": "5b½",
+        "round": 5
+      }
+    },
+    {
+      "sourceGameId": 2354,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "fed031c91be1c4fa76fc3f06c01f287b06c5a88429bc9ba767d14cd525c94853",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "4",
+        "round_num": 4,
+        "board_num": 42,
+        "white_player_name": "Ngô Quý Lâm",
+        "black_player_name": "Nguyễn Vũ Quân",
+        "result": "1/2-1/2",
+        "date_played": "2009-03-22",
+        "ply_count": 55,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 18,
+        "blackRank": 10,
+        "redEntry": "10w½",
+        "blackEntry": "18b½",
+        "round": 4
+      }
+    },
+    {
+      "sourceGameId": 2326,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "ae38f82a04bf453d7452e3f44736402ca6be36639355242521adf286573bd9ff",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 14,
+        "white_player_name": "Nguyễn Hoàng Lâm",
+        "black_player_name": "Nguyễn Vũ Quân",
+        "result": "1/2-1/2",
+        "date_played": "2009-03-21",
+        "ply_count": 187,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 4,
+        "blackRank": 10,
+        "redEntry": "10w½",
+        "blackEntry": "4b½",
+        "round": 2
+      }
+    },
+    {
+      "sourceGameId": 2340,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "65c8325b876c507b2459f5a5227c960077f2639126e6c1f766ed70ceed17687f",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "3",
+        "round_num": 3,
+        "board_num": 28,
+        "white_player_name": "Đào Cao Khoa",
+        "black_player_name": "Nguyễn Hoàng Lâm",
+        "result": "1/2-1/2",
+        "date_played": "2009-03-22",
+        "ply_count": 72,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 8,
+        "blackRank": 4,
+        "redEntry": "4w½",
+        "blackEntry": "8b½",
+        "round": 3
+      }
+    },
+    {
+      "sourceGameId": 2351,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "7c6e708ef9e6fc5f1ae43cf8c08d5463e8ef84ba086945b9f0839c7edfb3b40e",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "4",
+        "round_num": 4,
+        "board_num": 39,
+        "white_player_name": "Đào Cao Khoa",
+        "black_player_name": "Lại Lý Huynh",
+        "result": "1/2-1/2",
+        "date_played": "2009-03-22",
+        "ply_count": 132,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 8,
+        "blackRank": 5,
+        "redEntry": "5w½",
+        "blackEntry": "8b½",
+        "round": 4
+      }
+    },
+    {
+      "sourceGameId": 2328,
+      "year": "2009",
+      "phase": "Swiss",
+      "sourceFactsSha256": "a83430005fcc40208a76e50533965507518fe11c35f19e518450794f7b825287",
+      "sourceListing": {
+        "tournament_id": 24,
+        "round": "2",
+        "round_num": 2,
+        "board_num": 16,
+        "white_player_name": "Uông Dương Bắc",
+        "black_player_name": "Đào Cao Khoa",
+        "result": "1/2-1/2",
+        "date_played": "2009-03-21",
+        "ply_count": 68,
+        "tiebreak": 0,
+        "ko_stage": 0
+      },
+      "sourceCrossTable": {
+        "redRank": 13,
+        "blackRank": 8,
+        "redEntry": "8w½",
+        "blackEntry": "13b½",
+        "round": 2
+      }
+    }
+  ],
+  "heldOut": {
+    "2376": {
+      "type": "notation-ambiguity",
+      "reason": "Source WXF notation permits two complete legal mainlines; no guessed cannon origin is admitted."
+    },
+    "2386": {
+      "type": "notation-ambiguity",
+      "reason": "Source WXF notation permits two complete legal mainlines; no guessed cannon origin is admitted."
+    },
+    "2325": {
+      "type": "player-identity-conflict",
+      "reason": "Structured viewer names Triệu Nhữ Quyền / 赵汝权 / Chiu Yu Kuen, whereas the official final standings and Swiss cross-table identify the corresponding entrant as Chan Keung On / 陳強安. The same article guest roster uses Triệu Nhữ Quyền, so the source identity is internally inconsistent; no player-name repair is guessed."
+    }
+  },
+  "additionalExclusions": "FUTA 2016 six knockout games involving 郑一泓 / Trịnh Nhất Hoằng fail the shared player policy. Group-stage 40+20 games, every tiebreak and unscreened events are outside this pack.",
+  "nameNotes": "蒙世行 is called Mong Nhi in both the official 2009 final standings and the structured source; preserve that source name instead of guessing a Vietnamese rendering of the characters. Historical current-profile team affiliations are not imported."
+}

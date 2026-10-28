@@ -38,6 +38,15 @@ public final class MainActivity extends Activity {
     // Activity loads after an import already queued by its predecessor.
     private static final ExecutorService FILE_IO=Executors.newSingleThreadExecutor();
     private final ExecutorService io=FILE_IO, engine=Executors.newSingleThreadExecutor();
+    private final ExecutorService libraryWorker=Executors.newSingleThreadExecutor(task->new Thread(()->{android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);task.run();},"xiangqi-library-search"));
+    private Future<?> librarySearchFuture;
+    private Runnable librarySearchDispatch;
+    private int librarySearchGeneration,pendingGameDirection;
+    private boolean librarySearchPending,libraryScrollResetPending;
+    private List<GameRepository.Game> requestedLibrarySource,preparedLibrarySource,workerLibrarySource;
+    private String requestedLibraryScope="",requestedLibrarySort="",requestedLibraryQuery="",preparedLibraryScope="",preparedLibrarySort="",preparedLibraryQuery="";
+    private LibrarySearchIndex workerLibraryIndex;
+    private LibrarySearchIndex.Result preparedLibrary;
     private Future<?> analysisFuture,playFuture;
     private int analysisGeneration,playGeneration;
     private SharedPreferences prefs;
@@ -119,6 +128,7 @@ public final class MainActivity extends Activity {
     }
 
     private void showLibrary() {
+        cancelLibrarySearch();
         seeking=false;replayProgress=null;
         stopAutoplay(); cancelGameSearch(true); cancelAnalysis(); saveState(); library=true; prefs.edit().putBoolean("library",true).apply();
         root.removeAllViews(); content=column();
@@ -154,35 +164,60 @@ public final class MainActivity extends Activity {
         sortRow.addView(sort,new LinearLayout.LayoutParams(0,dp(48),1));content.addView(sortRow);
         sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){public void onItemSelected(AdapterView<?> parent,View view,int position,long id){if(!library||sort!=librarySortPicker)return;String value=new String[]{"collection","newest","oldest"}[position];if(!value.equals(librarySort)){librarySort=value;resetLibraryScroll();saveLibraryScope();renderCards();}}public void onNothingSelected(AdapterView<?> parent){}});
         status=text("",12,MUTED); pad(status,2,0,2,10); content.addView(status);
-        libraryEmpty=text("No matching games. Try a player’s surname, or import a game pack.",16,MUTED);pad(libraryEmpty,4,24,4,24);content.addView(libraryEmpty);
-        libraryAdapter=new LibraryAdapter();libraryList.setAdapter(libraryAdapter);field.setText(search);field.setSelection(field.length());
-        field.addTextChangedListener(new TextWatcher(){ public void beforeTextChanged(CharSequence s,int st,int count,int after){} public void onTextChanged(CharSequence s,int st,int before,int count){if(!library||field!=librarySearch)return; search=s.toString();resetLibraryScroll();saveLibraryScope();renderCards(); } public void afterTextChanged(Editable e){} });
+        libraryEmpty=text("No matching games. Try a player’s surname, or import a game pack.",16,MUTED);pad(libraryEmpty,4,24,4,24);libraryEmpty.setVisibility(View.GONE);content.addView(libraryEmpty);
+        libraryMatches=Collections.emptyList();libraryAdapter=new LibraryAdapter();libraryList.setAdapter(libraryAdapter);field.setText(search);field.setSelection(field.length());
+        field.addTextChangedListener(new TextWatcher(){ public void beforeTextChanged(CharSequence s,int st,int count,int after){} public void onTextChanged(CharSequence s,int st,int before,int count){if(!library||field!=librarySearch)return; search=s.toString();resetLibraryScroll();requestLibrarySearch(120); } public void afterTextChanged(Editable e){} });
         renderCards();
-        final ListView list=libraryList;final int restorePosition=libraryFirstPosition,restoreTop=libraryTop;
-        list.post(()->{if(!destroyed&&library&&list==libraryList)list.setSelectionFromTop(Math.min(restorePosition,Math.max(0,list.getCount()-1)),restoreTop);});
     }
 
     private void renderCards() {
         if(libraryList==null||libraryAdapter==null||!library)return;
         libraryHideResults=StudySettings.load(this).hideResults;
-        String needle=PlayerNames.fold(search).trim();
-        List<GameRepository.Game> matches=new ArrayList<>();
-        List<GameRepository.Game> collectionGames=scopedGames();
-        for(GameRepository.Game item:GameDateSort.sorted(collectionGames,g->g.date,librarySort)) {
-            if(!needle.isEmpty() && !PlayerNames.fold(PlayerNames.searchText(item.red)+" "+PlayerNames.searchText(item.black)+" "+item.event+" "+item.round+" "+item.collection).contains(needle))continue;
-            matches.add(item);
-        }
-        libraryMatches=matches;int count=matches.size();
-        status.setText(getResources().getQuantityString(R.plurals.library_count,collectionGames.size(),count,collectionGames.size()));
-        libraryEmpty.setText(collectionGames.isEmpty()?("imports".equals(libraryTab)?R.string.library_empty_imports:"engine".equals(libraryTab)?R.string.library_empty_engines:R.string.library_empty_humans):R.string.library_no_matches);
-        libraryEmpty.setVisibility(count==0?View.VISIBLE:View.GONE);
         // Rebind visible rows immediately for spoiler-setting changes; the
         // adapter handles all other rows lazily as the user scrolls to them.
         for(int i=0;i<libraryList.getChildCount();i++)if(libraryList.getChildAt(i) instanceof GameCard){GameCard card=(GameCard)libraryList.getChildAt(i);if(card.item!=null)card.bind(card.item);}
-        libraryAdapter.notifyDataSetChanged();
+        if(preparedLibraryCurrent()){if(librarySearchPending)cancelLibrarySearch();rememberLibraryScrollIfPopulated();applyLibraryResult(preparedLibrary,libraryFirstPosition,libraryTop,librarySearchGeneration);}
+        else requestLibrarySearch(0);
     }
-    private void resetLibraryScroll(){libraryFirstPosition=0;libraryTop=0;if(libraryList!=null&&libraryList.getFirstVisiblePosition()>0)libraryList.setSelection(0);}
-    private void rememberLibraryScroll(){if(library&&libraryList!=null){libraryFirstPosition=libraryList.getFirstVisiblePosition();View first=libraryList.getChildAt(0);libraryTop=first==null?0:first.getTop();}}
+    private boolean preparedLibraryCurrent(){return preparedLibrary!=null&&preparedLibrarySource==games&&preparedLibraryScope.equals(libraryScope())&&preparedLibrarySort.equals(librarySort)&&preparedLibraryQuery.equals(search);}
+    private void rememberLibraryScrollIfPopulated(){if(libraryList!=null&&libraryList.getCount()>libraryList.getHeaderViewsCount())rememberLibraryScroll();}
+    private void requestLibrarySearch(long delay){
+        if(destroyed||!loaded||!foreground)return;
+        final List<GameRepository.Game> source=games;final String scope=libraryScope(),sort=librarySort,query=search;
+        if(librarySearchPending&&requestedLibrarySource==source&&requestedLibraryScope.equals(scope)&&requestedLibrarySort.equals(sort)&&requestedLibraryQuery.equals(query))return;
+        cancelLibrarySearchWork();final int generation=++librarySearchGeneration;librarySearchPending=true;
+        requestedLibrarySource=source;requestedLibraryScope=scope;requestedLibrarySort=sort;requestedLibraryQuery=query;
+        final ListView list=library?libraryList:null;final LibraryAdapter adapter=library?libraryAdapter:null;
+        if(preparedLibraryCurrent())rememberLibraryScrollIfPopulated();final int position=libraryFirstPosition,top=libraryTop;
+        final List<GameRepository.Game> snapshot=new ArrayList<>(source);
+        librarySearchDispatch=()->{
+            librarySearchDispatch=null;if(destroyed||generation!=librarySearchGeneration)return;saveLibraryScope();
+            librarySearchFuture=libraryWorker.submit(()->{
+                try{
+                    if(workerLibrarySource!=source){LibrarySearchIndex index=new LibrarySearchIndex(snapshot);if(Thread.currentThread().isInterrupted())return;workerLibraryIndex=index;workerLibrarySource=source;}
+                    LibrarySearchIndex.Result result=workerLibraryIndex.search(scope,sort,query);
+                    runOnUiThread(()->{
+                        if(destroyed||generation!=librarySearchGeneration||source!=games||!scope.equals(libraryScope())||!sort.equals(librarySort)||!query.equals(search))return;
+                        librarySearchFuture=null;librarySearchPending=false;preparedLibrary=result;preparedLibrarySource=source;preparedLibraryScope=scope;preparedLibrarySort=sort;preparedLibraryQuery=query;
+                        if(library&&list==libraryList&&adapter==libraryAdapter)applyLibraryResult(result,position,top,generation);
+                        if(!library){refreshGameNavigation();int direction=pendingGameDirection;pendingGameDirection=0;if(direction!=0)navigateGame(direction);}
+                    });
+                }catch(CancellationException ignored){/* Superseded requests never publish partial results. */}
+            });
+        };
+        handler.postDelayed(librarySearchDispatch,delay);
+    }
+    private void applyLibraryResult(LibrarySearchIndex.Result result,int position,int top,int generation){
+        if(!library||libraryList==null||libraryAdapter==null)return;libraryMatches=result.matches;int total=result.ordered.size();
+        status.setText(getResources().getQuantityString(R.plurals.library_count,total,result.matches.size(),total));
+        libraryEmpty.setText(total==0?("imports".equals(libraryTab)?R.string.library_empty_imports:"engine".equals(libraryTab)?R.string.library_empty_engines:R.string.library_empty_humans):R.string.library_no_matches);
+        libraryEmpty.setVisibility(result.matches.isEmpty()?View.VISIBLE:View.GONE);libraryAdapter.notifyDataSetChanged();
+        final ListView list=libraryList;list.post(()->{if(!destroyed&&library&&generation==librarySearchGeneration&&list==libraryList){list.setSelectionFromTop(Math.min(position,Math.max(0,list.getCount()-1)),top);list.postOnAnimation(()->{if(!destroyed&&library&&generation==librarySearchGeneration&&list==libraryList)libraryScrollResetPending=false;});}});
+    }
+    private void cancelLibrarySearchWork(){if(librarySearchDispatch!=null){handler.removeCallbacks(librarySearchDispatch);librarySearchDispatch=null;}if(librarySearchFuture!=null){librarySearchFuture.cancel(true);librarySearchFuture=null;}}
+    private void cancelLibrarySearch(){librarySearchGeneration++;librarySearchPending=false;pendingGameDirection=0;cancelLibrarySearchWork();}
+    private void resetLibraryScroll(){libraryFirstPosition=0;libraryTop=0;libraryScrollResetPending=true;if(libraryList!=null&&libraryList.getFirstVisiblePosition()>0)libraryList.setSelection(0);}
+    private void rememberLibraryScroll(){if(library&&libraryList!=null&&!libraryScrollResetPending){libraryFirstPosition=libraryList.getFirstVisiblePosition();View first=libraryList.getChildAt(0);libraryTop=first==null?0:first.getTop();}}
     private String libraryScope(){return "imports".equals(libraryTab)?"import:"+selectedImportId:libraryTab;}
     private void saveLibraryScope(){
         if(prefs==null)return;String key="libraryScope:"+libraryScope()+":";
@@ -196,6 +231,7 @@ public final class MainActivity extends Activity {
         if(!completed.isEmpty()){libraryTab="imports";selectedImportId=completed;}loadLibraryScope();
     }
     private void loadLibraryScope(){
+        libraryScrollResetPending=false;
         String key="libraryScope:"+libraryScope()+":";search=prefs.getString(key+"search","");
         librarySort=GameDateSort.order(prefs.getString(key+"sort","human".equals(libraryTab)?prefs.getString("librarySort","newest"):"newest"));
         libraryFirstPosition=prefs.getInt(key+"position",0);libraryTop=prefs.getInt(key+"top",0);
@@ -256,6 +292,7 @@ public final class MainActivity extends Activity {
     }
 
     private void openGame(GameRepository.Game selected,boolean restore) {
+        cancelLibrarySearch();
         stopAutoplay(); cancelGameSearch(true); cancelAnalysis(); saveState();
         if(!inLibraryScope(selected)){
             libraryTab=selected.imported?"imports":selected.engineGame?"engine":"human";
@@ -360,7 +397,7 @@ public final class MainActivity extends Activity {
         variationLabel.setText(vsEngine?"Playing as "+(humanRed?"Red":"Black")+" · "+(engineThinking?"engine thinking…":p.legalMoves().isEmpty()?"game over":"your move") :exploring?"Exploring a variation · Legal moves…":"");
         variationLabel.setOnClickListener(exploring?v->legalMoves():null);
         variationLabel.setContentDescription(exploring?"Explore mode. Open legal moves list.":variationLabel.getText());
-        List<GameRepository.Game> ordered=navigationGames();int current=gameIndex(ordered);previousGameButton.setEnabled(current>0);nextGameButton.setEnabled(current>=0&&current<ordered.size()-1);
+        refreshGameNavigation();
         renderMoves(); saveState();
     }
 
@@ -440,13 +477,12 @@ public final class MainActivity extends Activity {
     }
 
     private List<GameRepository.Game> navigationGames() {
-        List<GameRepository.Game> ordered=GameDateSort.sorted(scopedGames(),g->g.date,librarySort),matched=new ArrayList<>();
-        String needle=PlayerNames.fold(search).trim();
-        for(GameRepository.Game item:ordered)if(needle.isEmpty()||PlayerNames.fold(PlayerNames.searchText(item.red)+" "+PlayerNames.searchText(item.black)+" "+item.event+" "+item.round+" "+item.collection).contains(needle))matched.add(item);
-        return gameIndex(matched)>=0?matched:ordered;
+        if(!preparedLibraryCurrent()){requestLibrarySearch(0);return Collections.emptyList();}
+        return gameIndex(preparedLibrary.matches)>=0?preparedLibrary.matches:preparedLibrary.ordered;
     }
+    private void refreshGameNavigation(){if(library||previousGameButton==null||nextGameButton==null)return;List<GameRepository.Game> ordered=navigationGames();int current=gameIndex(ordered);previousGameButton.setEnabled(current>0);nextGameButton.setEnabled(current>=0&&current<ordered.size()-1);}
     private int gameIndex(List<GameRepository.Game> entries){for(int i=0;i<entries.size();i++)if(game!=null&&entries.get(i).id.equals(game.id))return i;return -1;}
-    private void navigateGame(int direction){List<GameRepository.Game> entries=navigationGames();int index=gameIndex(entries)+direction;if(index>=0&&index<entries.size())openGame(entries.get(index),true);}
+    private void navigateGame(int direction){if(!preparedLibraryCurrent()){pendingGameDirection=direction;requestLibrarySearch(0);return;}List<GameRepository.Game> entries=navigationGames();int index=gameIndex(entries)+direction;if(index>=0&&index<entries.size())openGame(entries.get(index),true);}
     private void gameMenu(View anchor) {
         PopupMenu menu=new PopupMenu(this,anchor);
         menu.getMenu().add(0,1,0,"Flip board");menu.getMenu().add(0,2,1,analysisEnabled?getString(R.string.stop_analysis):getString(R.string.analyze)).setCheckable(true).setChecked(analysisEnabled);
@@ -872,9 +908,9 @@ public final class MainActivity extends Activity {
     }
     @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();out.putString("pendingExport",pendingExport);out.putString("pendingImportName",pendingImportName);out.putBoolean("pendingImportEngine",pendingImportEngine);out.putBundle("importDraft",saveImportDraft());}
     @Override protected void onRestoreInstanceState(Bundle in){super.onRestoreInstanceState(in);pendingExport=in.getString("pendingExport");}
-    @Override protected void onStart(){super.onStart();foreground=true;resumeAnalysis();}
-    @Override protected void onStop(){super.onStop();foreground=false;seeking=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
-    @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(errorDialog!=null)errorDialog.dismiss();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
+    @Override protected void onStart(){super.onStart();foreground=true;if(loaded){if(library)renderCards();else refreshGameNavigation();}resumeAnalysis();}
+    @Override protected void onStop(){super.onStop();foreground=false;cancelLibrarySearch();seeking=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
+    @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);cancelLibrarySearch();libraryWorker.shutdownNow();handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(errorDialog!=null)errorDialog.dismiss();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
     @Override public void onBackPressed(){if(!library)showLibrary();else super.onBackPressed();}
 
     private AlertDialog.Builder dialog(String title){return new AlertDialog.Builder(this,android.R.style.Theme_Material_Dialog_Alert).setTitle(title);}

@@ -1,16 +1,15 @@
 {
   "collection": "World Championship 2023",
-  "scope": "All eligible published adult classical main-line records from the official 2023 World Championship archive; not a best-game ranking and not every tournament slot.",
+  "scope": "All eligible published men's classical main-line records from the official 2023 World Championship archive; women's records omitted by user collection preference. Not a best-game ranking.",
   "screeningDate": "2026-10-28",
-  "games": 156,
-  "halfMoves": 13636,
+  "games": 107,
+  "halfMoves": 9362,
   "sourceRecordSlots": 176,
   "divisionCounts": {
-    "Men": 107,
-    "Women": 49
+    "Men": 107
   },
-  "legacyGamesPreserved": 30,
-  "newGames": 126,
+  "legacyGamesPreserved": 16,
+  "newGames": 91,
   "rounds": [
     {
       "division": "Men",
@@ -80,51 +79,123 @@
       "round": 1,
       "article": 1594,
       "sourceRecords": 7,
-      "admittedGames": 7
+      "admittedGames": 0
     },
     {
       "division": "Women",
       "round": 2,
       "article": 1604,
       "sourceRecords": 7,
-      "admittedGames": 7
+      "admittedGames": 0
     },
     {
       "division": "Women",
       "round": 3,
       "article": 1647,
       "sourceRecords": 7,
-      "admittedGames": 7
+      "admittedGames": 0
     },
     {
       "division": "Women",
       "round": 4,
       "article": 1648,
       "sourceRecords": 7,
-      "admittedGames": 7
+      "admittedGames": 0
     },
     {
       "division": "Women",
       "round": 5,
       "article": 1649,
       "sourceRecords": 7,
-      "admittedGames": 7
+      "admittedGames": 0
     },
     {
       "division": "Women",
       "round": 6,
       "article": 1650,
       "sourceRecords": 7,
-      "admittedGames": 7
+      "admittedGames": 0
     },
     {
       "division": "Women",
       "round": 7,
       "article": 1714,
       "sourceRecords": 7,
-      "admittedGames": 7
+      "admittedGames": 0
     }
   ],
+  "retiredLegacyGames": {
+    "1714-g4": {
+      "id": "vietnam-wxf-2023-1714-g4",
+      "movesSha256": "ee9012fbc2d9607cab2f36ef49e7efe21f95cfbd3304325adf2a75fe4a35a96f",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1714-g2": {
+      "id": "vietnam-wxf-2023-1714-g2",
+      "movesSha256": "06a37504608dece1a8b98bbc61618cb93a8cbdd72f7d1565f522b609d7ca2b9a",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1650-g2": {
+      "id": "vietnam-wxf-2023-1650-g2",
+      "movesSha256": "8468be61176cf23195cd503ee60a9d720cd9497f05623925103d6018e5fe21a8",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1650-g1": {
+      "id": "vietnam-wxf-2023-1650-g1",
+      "movesSha256": "d5f728b2a7fd4a3320b9e183f9ed0a1ab262981c030f2e31a3ec549c0d5359f0",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1649-g3": {
+      "id": "vietnam-wxf-2023-1649-g3",
+      "movesSha256": "b5d9e136c77b7809231e9bf06f796f10c0f1c4b009cd2d93833d706866593e2e",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1649-g1": {
+      "id": "vietnam-wxf-2023-1649-g1",
+      "movesSha256": "e309e57c0e60c0ca094f2ef631fc69f11c5f6c3e379c454222d287a67a56b240",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1648-g5": {
+      "id": "vietnam-wxf-2023-1648-g5",
+      "movesSha256": "4ee010cf387c2283a5981ac66b7505eed66ec3bee338b0458922a6abe9c73040",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1648-g3": {
+      "id": "vietnam-wxf-2023-1648-g3",
+      "movesSha256": "0088904134c439a382331fd9f9434222eb74cfe6c69195653dbbad26a0f7e127",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1647-g5": {
+      "id": "vietnam-wxf-2023-1647-g5",
+      "movesSha256": "f593e974d4b2c24a870d56e2dcdd9c9ac6318611e2d54ca77c7d890284e9a973",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1647-g2": {
+      "id": "vietnam-wxf-2023-1647-g2",
+      "movesSha256": "7975a8e07dcf27d9841bae886701ed0c396c7830f598fc9270dcd4b7c5b61a97",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1604-g4": {
+      "id": "vietnam-wxf-2023-1604-g4",
+      "movesSha256": "69870f3c6935520d8d8ddc3358401b0c1db47b1e3dd98a66cf302182b96a7505",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1604-g1": {
+      "id": "vietnam-wxf-2023-1604-g1",
+      "movesSha256": "69efa9c2eeb5380392c704e04358292875337c11103894ac75ecae40667cbbb3",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1594-g6": {
+      "id": "vietnam-wxf-2023-1594-g6",
+      "movesSha256": "de596ed0b73d30fdf4ef504e632a587e982ecc879bd7e97d8780087c701d4724",
+      "reason": "Women's division omitted by user collection preference"
+    },
+    "1594-g3": {
+      "id": "vietnam-wxf-2023-1594-g3",
+      "movesSha256": "5a9840707419cc92e3ae56a029dfb7d9c7f4daf9c24295f3d9cc315eba0f5a0f",
+      "reason": "Women's division omitted by user collection preference"
+    }
+  },
   "metadataCorrections": [
     {
       "sourceRecord": "1590-g13",
@@ -155,11 +226,6 @@
       "sourceRecord": "1710-g12",
       "kind": "result",
       "note": "Source result tag is unknown. The same official record terminal comment at half-move69 says Red wins, and official Men Round9 Board11 result image independently confirms Gu Yi Qing (Red) defeated Radtai Lokutarapol (Black),2:0. Original sourceResult retained."
-    },
-    {
-      "sourceRecord": "1594-g1",
-      "kind": "date",
-      "note": "Source says2013/11/20. Official2023 program schedule places Women Round1 on20November2023; source year is a typographical error. Original sourceDate retained."
     }
   ],
   "excludedRecords": [
@@ -421,6 +487,545 @@
         "No recorded moves (bye/forfeit/unrecorded)",
         "Unresolved player metadata"
       ]
+    },
+    {
+      "sourceRecord": "1594-g1",
+      "red": "彭柔安",
+      "black": "唐思楠",
+      "sourceTitle": "1中华台北彭柔安红先负中国唐思楠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2013/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1594-g2",
+      "red": "余欣如",
+      "black": "刘欢",
+      "sourceTitle": "2东马余欣如红先负中国刘欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1594-g3",
+      "red": "阮黄燕",
+      "black": "龚勤",
+      "sourceTitle": "3越南阮黄燕红先胜美国龚勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1594-g4",
+      "red": "洪千惠",
+      "black": "林嘉欣",
+      "sourceTitle": "4东马洪千惠红先胜中国香港林嘉欣",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1594-g5",
+      "red": "陈茗芳",
+      "black": "素丽达",
+      "sourceTitle": "5新加坡陈茗芳红先胜泰国素丽达",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1594-g6",
+      "red": "陈慧盈",
+      "black": "黎氏金鸾",
+      "sourceTitle": "6马来西亚陈慧盈红先负越南黎氏金銮",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1594-g7",
+      "red": "吴兰香",
+      "black": "林祐萱",
+      "sourceTitle": "7新加坡吴兰香红先胜中华台北林祐萱",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1594:2023-18th-world-xiangqi-championships-women-round-01-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1604-g1",
+      "red": "黎氏金鸾",
+      "black": "吴兰香",
+      "sourceTitle": "1越南黎氏金銮红先负新加坡吴兰香",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1604-g2",
+      "red": "刘欢",
+      "black": "陈茗芳",
+      "sourceTitle": "2中国刘欢红先胜新加坡陈茗芳",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1604-g3",
+      "red": "唐思楠",
+      "black": "洪千惠",
+      "sourceTitle": "3中国唐思楠红先胜东马洪千惠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1604-g4",
+      "red": "林祐萱",
+      "black": "阮黄燕",
+      "sourceTitle": "4中华台北林祐萱红先和越南阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1604-g5",
+      "red": "素丽达",
+      "black": "陈慧盈",
+      "sourceTitle": "5泰国素丽达红先负马来西亚陈慧盈",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1604-g6",
+      "red": "林嘉欣",
+      "black": "余欣如",
+      "sourceTitle": "6中国香港林嘉欣红先胜东马余欣如",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1604-g7",
+      "red": "龚勤",
+      "black": "彭柔安",
+      "sourceTitle": "7美国龚勤 红先胜 中华台北彭柔安",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1604:2023-18th-world-xiangqi-championships-women-round-02-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/20",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1647-g1",
+      "red": "吴兰香",
+      "black": "唐思楠",
+      "sourceTitle": "1新加坡吴兰香 中国唐思楠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1647-g2",
+      "red": "阮黄燕",
+      "black": "刘欢",
+      "sourceTitle": "2越南阮黄燕 中国刘欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1647-g3",
+      "red": "洪千惠",
+      "black": "龚勤",
+      "sourceTitle": "3东马洪千惠 美国龚勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1647-g4",
+      "red": "陈慧盈",
+      "black": "林嘉欣",
+      "sourceTitle": "4马来西亚陈慧盈 红先负 中国香港林嘉欣",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1647-g5",
+      "red": "陈茗芳",
+      "black": "黎氏金鸾",
+      "sourceTitle": "5新加坡陈茗芳 越南黎氏金銮",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1647-g6",
+      "red": "彭柔安",
+      "black": "林祐萱",
+      "sourceTitle": "6中华台北彭柔安 中华台北林祐萱",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1647-g7",
+      "red": "余欣如",
+      "black": "素丽达",
+      "sourceTitle": "7东马余欣如 泰国素丽达",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1647:2023-18th-world-xiangqi-championships-women-round-03-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1648-g1",
+      "red": "唐思楠",
+      "black": "刘欢",
+      "sourceTitle": "1中国唐思楠 中国刘欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1648-g2",
+      "red": "龚勤",
+      "black": "吴兰香",
+      "sourceTitle": "2美国龚勤 新加坡吴兰香",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1648-g3",
+      "red": "林嘉欣",
+      "black": "阮黄燕",
+      "sourceTitle": "3中国香港林嘉欣 越南阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1648-g4",
+      "red": "陈茗芳",
+      "black": "陈慧盈",
+      "sourceTitle": "4新加坡陈茗芳 马来西亚陈慧盈",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1648-g5",
+      "red": "黎氏金鸾",
+      "black": "洪千惠",
+      "sourceTitle": "5越南黎氏金銮 东马洪千惠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1648-g6",
+      "red": "彭柔安",
+      "black": "余欣如",
+      "sourceTitle": "6中华台北彭柔安 东马余欣如",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1648-g7",
+      "red": "林祐萱",
+      "black": "素丽达",
+      "sourceTitle": "7中华台北林祐萱 泰国素丽达",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1648:2023-18th-world-xiangqi-championships-women-round-04-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/21",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1649-g1",
+      "red": "阮黄燕",
+      "black": "唐思楠",
+      "sourceTitle": "1越南阮黄燕 中国唐思楠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/22",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1649-g2",
+      "red": "刘欢",
+      "black": "吴兰香",
+      "sourceTitle": "2中国刘欢 新加坡吴兰香",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/22",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1649-g3",
+      "red": "余欣如",
+      "black": "黎氏金鸾",
+      "sourceTitle": "3东马余欣如 越南黎氏金銮",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/22",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1649-g4",
+      "red": "陈慧盈",
+      "black": "龚勤",
+      "sourceTitle": "4马来西亚陈慧盈 美国龚勤",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/22",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1649-g5",
+      "red": "林嘉欣",
+      "black": "陈茗芳",
+      "sourceTitle": "5中国香港林嘉欣 新加坡陈茗芳",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/22",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1649-g6",
+      "red": "洪千惠",
+      "black": "林祐萱",
+      "sourceTitle": "6东马洪千惠 中华台北林祐萱",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/22",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1649-g7",
+      "red": "素丽达",
+      "black": "彭柔安",
+      "sourceTitle": "7泰国素丽达 中华台北彭柔安",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1649:2023-18th-world-xiangqi-championships-women-round-05-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/22",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1650-g1",
+      "red": "唐思楠",
+      "black": "黎氏金鸾",
+      "sourceTitle": "1中国唐思楠 越南黎氏金銮",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1650-g2",
+      "red": "吴兰香",
+      "black": "阮黄燕",
+      "sourceTitle": "2新加坡吴兰香 越南阮黄燕",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1650-g3",
+      "red": "刘欢",
+      "black": "陈慧盈",
+      "sourceTitle": "3中国刘欢 马来西亚陈慧盈",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1650-g4",
+      "red": "林祐萱",
+      "black": "林嘉欣",
+      "sourceTitle": "4中华台北林祐萱 中国香港林嘉欣",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1650-g5",
+      "red": "陈茗芳",
+      "black": "彭柔安",
+      "sourceTitle": "5新加坡陈茗芳 中华台北彭柔安",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1650-g6",
+      "red": "龚勤",
+      "black": "余欣如",
+      "sourceTitle": "6美国龚勤 东马余欣如",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1650-g7",
+      "red": "素丽达",
+      "black": "洪千惠",
+      "sourceTitle": "7泰国素丽达 东马洪千惠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1650:2023-18th-world-xiangqi-championships-women-round-06-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1714-g1",
+      "red": "林嘉欣",
+      "black": "唐思楠",
+      "sourceTitle": "1中国香港林嘉欣 中国唐思楠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1714-g2",
+      "red": "黎氏金鸾",
+      "black": "刘欢",
+      "sourceTitle": "2越南黎氏金銮 中国刘欢",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1714-g3",
+      "red": "陈慧盈",
+      "black": "吴兰香",
+      "sourceTitle": "3马来西亚陈慧盈 新加坡吴兰香",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1714-g4",
+      "red": "阮黄燕",
+      "black": "陈茗芳",
+      "sourceTitle": "4越南阮黄燕 新加坡陈茗芳",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1714-g5",
+      "red": "彭柔安",
+      "black": "洪千惠",
+      "sourceTitle": "5中华台北彭柔安 东马洪千惠",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1714-g6",
+      "red": "余欣如",
+      "black": "林祐萱",
+      "sourceTitle": "6东马余欣如 中华台北林祐萱",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
+    },
+    {
+      "sourceRecord": "1714-g7",
+      "red": "龚勤",
+      "black": "素丽达",
+      "sourceTitle": "7美国龚勤 泰国素丽达",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1714:2023-18th-world-xiangqi-championships-women-round-07-game-records&catid=355&lang=en&Itemid=377",
+      "sourceDate": "2023/11/23",
+      "reasons": [
+        "Women's division omitted by user collection preference"
+      ]
     }
   ],
   "sources": [
@@ -650,14 +1255,13 @@
   ],
   "resultCrossChecks": {},
   "womenFinalCrossTableValidation": {
-    "games": 49,
-    "sourceUrl": "https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxc02womenr7result.jpg",
-    "pairingsAndResultsAgree": true,
-    "method": "Numeric opponents and cumulative points manually transcribed from the final official cross-table, then independently compared with every admitted Women game. Cumulative scores imply per-game results. All49 pairings and outcomes agree."
+    "games": 0,
+    "excluded": true,
+    "reason": "Women's division omitted by user collection preference"
   },
-  "policySha256": "1845cc9c3718eff0bb4849a501398047947928376447f3db23ce6bfd11abd7d7",
-  "curationPolicySha256": "6c3f714ff9989cdcdbd3153b9470d858e593bb0c18035b55dd7827d4d4e976a3",
-  "assetSha256": "c1e9acbfaf43585395284c1fd72ccd3026e01f07d21255862d5f75c3762e469e",
+  "policySha256": "9254416e5f7a5db1d95bf21bc0929d51ca9ca6db65d70ea3df9b0c4b0117b2d1",
+  "curationPolicySha256": "8f27257542efd6ea7120bb76a4a3cdcb1a0f80c4fe82fc0417217905b116d650",
+  "assetSha256": "11143ba5342adbedc36901519e318e0980ead7eecc0a1ced36cf46ee12b8792e",
   "notation": "ICCS; normal starting board, a0 at Red's lower-left",
   "rights": "Attributed factual main-line moves and event metadata only. No annotations, board code, photographs or source PDFs bundled. WXF retains rights in its pages; no blanket redistribution license asserted."
 }

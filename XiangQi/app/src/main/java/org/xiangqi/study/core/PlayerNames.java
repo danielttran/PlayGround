@@ -16,6 +16,7 @@ public final class PlayerNames {
     private static final String MEN_2022="https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result_1028/2022_17wxf__m_ranking2.pdf";
     private static final String WOMEN_2022="https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result_1028/2022_17wxf__w_ranking.pdf";
     private static final String FUTA_2023="https://vietnamchess.vn/document/2023/futa6-bulletin-full.pdf";
+    private static final String FUTA_2009="https://vietnamchess.vn/index.php/chessnews/tournament-news/tournament-international/open-inter-events/puta3";
     private static final Map<String,Name> NAMES=new HashMap<>(),EXACT=new HashMap<>();
     private static final class Name {
         final String chinese,readable,aliases,source;final boolean pinyin;
@@ -166,6 +167,18 @@ public final class PlayerNames {
         add("吴贵临","Wu Guilin","Wu Kui-lin Wu Kwei Lin", "https://www.wxf-xiangqi.org/index.php?id=444&option=com_content&view=article&lang=en");
         add("高维铉","Gao Weixuan","", "https://www.wxf-xiangqi.org/index.php?id=1011&option=com_content&view=article&lang=en");
         add("吴裕成","Ung Yu Dau","", "https://vietnamchess.com.vn/news/world-xq2007");
+        // The federation's bilingual Phuong Trang roster/results establish these
+        // Vietnamese names; source spelling variants remain searchable.
+        add("邓久松麟","Dang Cuu Tung Lan","Đặng Cửu Tùng Lân",FUTA_2009);
+        add("陶高科","Dao Cao Khoa","Đào Cao Khoa",FUTA_2009);
+        add("陶国兴","Dao Quoc Hung","Đào Quốc Hưng 陶囯兴",FUTA_2009);alias("陶囯兴","陶国兴");
+        add("柳大华","Liu Dahua","Liu Dai Hua",FUTA_2009);
+        add("蒙世行","Mong Nhi","",FUTA_2009);
+        add("阮英君","Nguyen Anh Quan","Nguyễn Anh Quân",FUTA_2009);
+        add("阮武军","Nguyen Vu Quan","Nguyễn Vũ Quân 阮武軍",FUTA_2009);alias("阮武軍","阮武军");
+        add("陈正心","Tran Chanh Tam","Trần Chánh Tâm",FUTA_2009);
+        add("张强","Zhang Qiang","",FUTA_2009);
+        alias("吳贵临","吴贵临");
         // The Italian federation's contemporary January 1999 ranking confirms
         // this spelling for the Italian participant recorded by WXF in 1999.
         add("余建国","Yu Jianguo","", "https://www.pi.infn.it/~carosi/chess/xqmtb50.pdf");

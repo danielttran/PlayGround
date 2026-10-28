@@ -1,11 +1,16 @@
 # World Championship 2023 adult classical collection
 
-This pack contains **156 published full-game records / 13,636 half-moves** from
-the 18th World Xiangqi Championship in Houston: **107 men's and 49 women's games**.
-It examines every published adult round, rather than ranking or choosing the
-"best" games. The earlier Vietnamese-focused pack contributed 30 of these records;
-their game IDs and exact move sequences are preserved. The expansion adds
-**126 distinct games**, without resetting those existing study positions.
+This pack contains **107 published men's full-game records / 9,362 half-moves**
+from the 18th World Xiangqi Championship in Houston. It examines every published
+adult round, rather than ranking or choosing the "best" games. The user's current
+collection preference omits the 49 women's records by their official source-page
+division. All 107 remaining IDs, moves and prior metadata are unchanged.
+
+The earlier Vietnamese-focused pack contributed 16 of the retained men's records.
+Those IDs and exact move fingerprints remain mandatory in the policy; the 14
+women's legacy IDs are retained separately as `retiredLegacyRecords`, with their
+original move fingerprints and the reason for removal. The broader men's pack
+therefore adds **91 records** beyond those 16 preserved games.
 
 ## Official sources and scope
 
@@ -25,7 +30,8 @@ their game IDs and exact move sequences are preserved. The expansion adds
   hashes are recorded in `data/world-2023-manifest.json`; no source images or PDFs
   are bundled in the app.
 
-The adult archive has **176 source slots**. Twenty are excluded: nine byes,
+The adult archive has **176 source slots**. The current pack excludes the 49
+women's source slots plus twenty other slots: nine byes,
 one unrecorded slot, nine classical games involving a name on the existing
 curation exclusion list, and one explicitly rapid final tiebreak. The rapid record
 also matches that list. It incorrectly repeats `60+30`, so filtering checks the
@@ -52,11 +58,14 @@ official round page and the actual board comes from the last explicit board
 ordinal, preserving the malformed title and a note. The rapid final inserted in
 the Round 9 page therefore does not shift later board numbers.
 
-All **49 women's pairings and outcomes** were compared independently with the
+Before the user's men-only preference, all **49 women's pairings and outcomes**
+were compared independently with the
 [final official seven-round cross-table](https://www.wxf-xiangqi.org/images/2023_houston_wxc_pair_results/18wxc02womenr7result.jpg).
 The numeric opponent/cumulative-point transcription is in the policy; the
-downloader checks every admitted pairing and reconstructs each per-game result
-from those cumulative points. All agree with the game records.
+earlier downloader checked every admitted pairing and reconstructed each
+per-game result from those cumulative points. All agreed with the game records.
+That historical transcription remains source evidence, while these records are
+now excluded from the bundled pack.
 
 The roster supplies five additional readable identities: Radtai Lokutarapol,
 Mian Wu, Olivier Tessier, Robin Hii Lu Bin and Suratsada Promsirinimit. The display
@@ -73,15 +82,16 @@ python scripts/download_world_2023.py --refresh
 ```
 
 Requests use a bounded cache, retry/size limits and one-second pacing. The new
-policy stores the thirty legacy source-record IDs and exact move fingerprints,
-so reproduction does not depend on those games remaining in the old pack.
+policy stores the sixteen retained men's legacy source-record IDs and exact move
+fingerprints, plus fourteen retired women's legacy entries, so reproduction does
+not depend on those games remaining in the old pack.
 Changing a previously bundled move sequence fails the build step for review.
 
-The generated 156 games were independently replayed using the app's production
-Java `Position.play`: **all 13,636 half-moves are legal**. Canonical comparisons
-against the prior 398-game preload find exactly the thirty preserved records,
-with identical IDs and moves, and no other exact duplicates. Internal move
-fingerprints are unique. Offline reproduction preserves the exact asset bytes.
+The previous 156-game pack was independently replayed using the app's production
+Java `Position.play`: all 13,636 half-moves were legal. The current 107-game pack
+is an exact subset: comparison with that prior asset confirms all retained IDs,
+moves and metadata are unchanged. Its 9,362 half-moves have unique main-line
+fingerprints, and offline reproduction preserves the exact asset bytes.
 
 Only factual main-line moves and event metadata are included. Source annotations,
 board code, photographs and PDFs are excluded. WXF retains rights in its original

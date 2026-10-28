@@ -31,6 +31,7 @@ public final class CollectionNavigationAuditTest extends InstrumentationTestCase
         study=context.getSharedPreferences("study",0);original=study.getAll();study.edit().clear().commit();
         activity=getInstrumentation().startActivitySync(new Intent(context,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
         await(()->Boolean.TRUE.equals(get("loaded"))&&Boolean.TRUE.equals(get("library")),15000,"Initial library did not load");
+        UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);
     }
 
     @Override protected void tearDown()throws Exception {
@@ -45,6 +46,7 @@ public final class CollectionNavigationAuditTest extends InstrumentationTestCase
 
     public void testCollectionSearchSortAndScrollSurviveRecreationIndependently()throws Exception {
         main(()->{search().setText("Trenh");sort().setSelection(2);});getInstrumentation().waitForIdleSync();
+        UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);
         final int[] matches={0};main(()->{matches[0]=matches().size();assertTrue(matches[0]>3);assertEquals("oldest",get("librarySort"));});
         clickDescription("Engine games tab");
         main(()->{assertEquals("",search().getText().toString());search().setText("Unreleased engine collection");sort().setSelection(0);});getInstrumentation().waitForIdleSync();
@@ -85,14 +87,14 @@ public final class CollectionNavigationAuditTest extends InstrumentationTestCase
         Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(MainActivity.class.getName(),null,false);
         main(activity::recreate);Activity replacement=monitor.waitForActivityWithTimeout(10000);getInstrumentation().removeMonitor(monitor);
         assertNotNull("Activity must recreate",replacement);activity=replacement;
-        await(()->Boolean.TRUE.equals(get("loaded"))&&Boolean.TRUE.equals(get("library")),15000,"Recreated library did not load");getInstrumentation().waitForIdleSync();
+        await(()->Boolean.TRUE.equals(get("loaded"))&&Boolean.TRUE.equals(get("library")),15000,"Recreated library did not load");UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);
     }
     private EditText search(){return (EditText)findDescription(root(),"Library search");}
     private Spinner sort(){return (Spinner)findDescription(root(),"Game sort order");}
     private ListView list(){return (ListView)get("libraryList");}
     @SuppressWarnings("unchecked") private List<GameRepository.Game> matches(){return (List<GameRepository.Game>)get("libraryMatches");}
     private View root(){return activity.getWindow().getDecorView();}
-    private void clickDescription(String description){main(()->{View view=findDescription(root(),description);assertNotNull(description,view);view.performClick();});getInstrumentation().waitForIdleSync();}
+    private void clickDescription(String description)throws Exception{main(()->{View view=findDescription(root(),description);assertNotNull(description,view);view.performClick();});UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);}
     private void main(Runnable action){UiTestActions.runOnMain(getInstrumentation(),action);}
     private void await(BooleanSupplier condition,long timeout,String failure)throws Exception {long until=SystemClock.uptimeMillis()+timeout;boolean[] ready={false};while(SystemClock.uptimeMillis()<until){main(()->ready[0]=condition.getAsBoolean());if(ready[0])return;Thread.sleep(40);}fail(failure);}
     private Object get(String name){try{Field field=MainActivity.class.getDeclaredField(name);field.setAccessible(true);return field.get(activity);}catch(Exception error){throw new RuntimeException(error);}}

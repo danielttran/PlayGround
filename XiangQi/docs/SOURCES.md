@@ -1,10 +1,9 @@
 # Preloaded international classical games
 
-The starter collection contains **285 real adult games, 23,340 half-moves**, from
+The starter collection contains **215 real adult men's games, 17,357 half-moves**, from
 the 19th World Xiangqi Championship in Shanghai, 22–27 September 2025. It includes
 9 games each by Lai Ly Huynh (赖理兄), Nguyen Thanh Bao (阮成保), Wu Zonghan (吴宗翰),
-Yin Sheng (尹昇), and Meng Fanrui (孟繁睿), and 7 each by Tang Dan (唐丹) and Chen
-Lichun (陈丽淳). Counts overlap when these players meet. Daniel confirmed that
+Yin Sheng (尹昇), and Meng Fanrui (孟繁睿). Counts overlap when these players meet. Daniel confirmed that
 the Singapore player he calls “Andy Wo” is 吴宗翰; that search alias is user supplied.
 
 The men's final, Yin Sheng–Lai Ly Huynh, is the first game. The original 108
@@ -19,7 +18,10 @@ library, with the remaining games available through browsing and search.
 - Each game carries its individual round-page URL and original Chinese source
   title. The data manifest records the SHA-256 and size of every fetched page.
 
-Only adult men's rounds 1–9 and women's rounds 1–7 are downloaded. The separate
+Adult men's rounds 1–9 and women's rounds 1–7 are examined, but only men's
+records are admitted. The 70 women's records are listed in the manifest as
+omitted by the user's collection preference. Division comes from the official
+round page, rather than guessing from a player's name. The separate
 World Open Rapid and youth links on the same index are never followed. Every
 included record's own `DhtmlXQ_timerule` agrees with 60+30; unknown or different
 time controls stop the downloader instead of silently entering the asset.
@@ -34,8 +36,9 @@ application's Xiangqi rules validator: **23,874 legal half-moves**.
 
 Eight records then matched the exclusion name 李小龙 and were conservatively
 omitted. This is **a source-name match**, not an assertion that the participant in
-those records is the person named in a disciplinary notice. The final pack
-contains 285 games and 23,340 half-moves. Excluded record IDs and source URLs
+those records is the person named in a disciplinary notice. The 70 women's records
+are also omitted by the user's collection preference. The final pack contains
+215 games and 17,357 half-moves. Excluded record IDs and source URLs
 are retained in `data/wxf-manifest.json`.
 
 `data/curation-policy.json` contains the repeatable exclusion list, including

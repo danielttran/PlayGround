@@ -94,8 +94,8 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
         main(()->assertEquals("Sort selection must survive recreation",2,((Spinner)findDescription(root(),"Game sort order")).getSelectedItemPosition()));
     }
     public void testLibrarySearchKeepsFocusDuringRealCharacterTyping()throws Exception{
-        int bundled=0;for(GameRepository.Game game:new GameRepository(getInstrumentation().getTargetContext()).load())if(!game.imported&&!game.engineGame)bundled++;
-        final int expectedBundled=bundled;
+        int bundled=0,trenh=0;for(GameRepository.Game game:new GameRepository(getInstrumentation().getTargetContext()).load())if(!game.imported&&!game.engineGame){bundled++;if((PlayerNames.searchText(game.red)+" "+PlayerNames.searchText(game.black)).contains("trenh"))trenh++;}
+        final int expectedBundled=bundled,expectedTrenh=trenh;
         launch();awaitLoadedLibrary();final EditText[] input={null};final Rect[] bounds={null};
         main(()->{
             assertEquals("The regression uses the complete real preload",expectedBundled,gameCount());
@@ -116,11 +116,11 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
                 assertTrue("Filtering must not take focus away from the search field",input[0].hasFocus());
             });
         }
-        main(()->assertEquals("All seven Trenh A Sang records are found",7,gameCount()));
+        main(()->assertEquals("All bundled Trenh A Sang records are found",expectedTrenh,gameCount()));
         getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_DEL);awaitSearchLayout(input[0]);
-        main(()->{assertEquals("Tren",input[0].getText().toString());assertTrue(input[0].hasFocus());assertEquals(7,gameCount());});
+        main(()->{assertEquals("Tren",input[0].getText().toString());assertTrue(input[0].hasFocus());assertEquals(expectedTrenh,gameCount());});
         getInstrumentation().sendStringSync("h");awaitSearchLayout(input[0]);
-        main(()->{assertEquals("Trenh",input[0].getText().toString());assertTrue(input[0].hasFocus());assertEquals(7,gameCount());});
+        main(()->{assertEquals("Trenh",input[0].getText().toString());assertTrue(input[0].hasFocus());assertEquals(expectedTrenh,gameCount());});
         for(int index=0;index<query.length();index++){getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_DEL);awaitSearchLayout(input[0]);}
         main(()->{assertEquals("",input[0].getText().toString());assertTrue("Clearing also retains input focus",input[0].hasFocus());assertEquals(expectedBundled,gameCount());});
     }
@@ -324,8 +324,8 @@ public final class SortingAppearanceTest extends InstrumentationTestCase {
     }
     private void assertColors(Integer board,Integer red,Integer black){StudySettings current=StudySettings.load(getInstrumentation().getTargetContext());assertEquals("Board override",board,current.boardColor);assertEquals("Red background override",red,current.redBackground);assertEquals("Black background override",black,current.blackBackground);}
     private void openColor(AlertDialog settings,String text){main(()->{View view=findText(settings.getWindow().getDecorView(),text);assertNotNull(view);view.performClick();});getInstrumentation().waitForIdleSync();}
-    private void launch()throws Exception{activity=getInstrumentation().startActivitySync(new Intent(getInstrumentation().getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));awaitLibrary();}
-    private void awaitSearchLayout(View input)throws Exception{CountDownLatch frame=new CountDownLatch(1);main(()->input.postOnAnimation(()->input.postOnAnimation(frame::countDown)));assertTrue("Search layout must settle",frame.await(5,TimeUnit.SECONDS));getInstrumentation().waitForIdleSync();}
+    private void launch()throws Exception{activity=getInstrumentation().startActivitySync(new Intent(getInstrumentation().getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));awaitLibrary();UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);}
+    private void awaitSearchLayout(View input)throws Exception{CountDownLatch frame=new CountDownLatch(1);main(()->input.postOnAnimation(()->input.postOnAnimation(frame::countDown)));assertTrue("Search layout must settle",frame.await(5,TimeUnit.SECONDS));UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);}
     private void awaitLibrary()throws Exception{long until=SystemClock.uptimeMillis()+15000;boolean[] ready={false};while(SystemClock.uptimeMillis()<until){main(()->ready[0]=findDescription(root(),"Game sort order")!=null);if(ready[0])return;Thread.sleep(50);}fail("Library did not load");}
     private void awaitLoadedLibrary()throws Exception{long until=SystemClock.uptimeMillis()+15000;boolean[] ready={false};while(SystemClock.uptimeMillis()<until){getInstrumentation().waitForIdleSync();main(()->{try{ready[0]=field("loaded").getBoolean(activity)&&field("library").getBoolean(activity)&&libraryList()!=null&&libraryList().getChildCount()>0;}catch(Exception e){throw new RuntimeException(e);}});if(ready[0])return;Thread.sleep(50);}fail("Scrolled library did not load");}
     private void assertLibraryScroll(int[] expected,String red){main(()->{assertEquals("First visible library position must survive",expected[0],libraryList().getFirstVisiblePosition());assertEquals("Partial-row pixel offset must survive",expected[1],libraryList().getChildAt(0).getTop());assertEquals("The same game remains at the top",red,firstRed());assertNull(findText(root(),"Xiangqi Study"));});}
