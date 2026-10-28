@@ -10,7 +10,7 @@ public final class AppearancePresetsTest {
     private static void check(boolean value,String message){assertions++;if(!value)throw new AssertionError(message);}
     public static void main(String[] ignored){
         String[] boards=AppearancePresets.boardIds(),discs=AppearancePresets.discIds();
-        check(boards.length==20,"Twenty board presets");check(discs.length==18,"Eighteen piece presets");
+        check(boards.length==24,"Twenty-four board presets");check(discs.length==22,"Twenty-two piece presets");
         check(Arrays.equals(Arrays.copyOf(boards,6),new String[]{"moss","wood","ink","rosewood","slate","bamboo"}),"Original board preference IDs/order retained");
         check(Arrays.equals(Arrays.copyOf(discs,6),new String[]{"cream","wood","jade","porcelain","rosewood","obsidian"}),"Original disc preference IDs/order retained");
         check(new HashSet<>(Arrays.asList(boards)).size()==boards.length,"No duplicate board IDs");
@@ -22,14 +22,25 @@ public final class AppearancePresetsTest {
             AppearancePresets.Board board=AppearancePresets.board(id);check(id.equals(board.id),"Every board ID resolves");
             check(board.label.length()>2,"Every board has a readable label");check((board.background>>>24)==255&&(board.grid>>>24)==255,"Board is opaque");
             check(contrast(board.background,board.grid)>=3,"Grid and compact coordinates contrast at least3:1: "+id);
-            check(board.texture>=AppearancePresets.FLAT&&board.texture<=AppearancePresets.STONE,"Recognized material");boardColors.add(board.background);
+            check(board.texture>=AppearancePresets.FLAT&&board.texture<=AppearancePresets.CARVED_WOOD,"Recognized material");boardColors.add(board.background);
         }
         for(String id:discs){
             AppearancePresets.Disc disc=AppearancePresets.disc(id);check(id.equals(disc.id),"Every disc ID resolves");check(disc.label.length()>2,"Every disc has a readable label");
             check((disc.redBackground>>>24)==255&&(disc.blackBackground>>>24)==255,"Both piece backgrounds are opaque");
-            check(disc.finish>=AppearancePresets.PLAIN&&disc.finish<=AppearancePresets.LACQUER,"Recognized finish");discColors.add(disc.redBackground);
+            check(disc.finish>=AppearancePresets.PLAIN&&disc.finish<=AppearancePresets.CARVED,"Recognized finish");discColors.add(disc.redBackground);
         }
-        check(boardColors.size()==boards.length,"All twenty board fills are distinct");check(discColors.size()==discs.length,"All eighteen Red disc fills are distinct");
+        check(boardColors.size()==boards.length,"Every board fill is distinct");check(discColors.size()==discs.length,"Every Red disc fill is distinct");
+        String[] references={"warm-maple","neon-violet","antique-gold","carved-honey"};
+        check(Arrays.equals(Arrays.copyOfRange(boards,20,24),references),"Four references append after all existing boards");
+        check(Arrays.equals(Arrays.copyOfRange(discs,18,22),references),"Matching reference disc IDs append after all existing discs");
+        for(int i=0;i<references.length;i++){
+            AppearancePresets.Board board=AppearancePresets.board(references[i]);AppearancePresets.Disc disc=AppearancePresets.disc(references[i]);
+            check(board.label.equals(disc.label),"Matched reference pair has one readable name");
+            check(board.texture==AppearancePresets.LIGHT_MAPLE+i,"Reference board uses its dedicated material");
+            check(disc.finish==AppearancePresets.BEVELED+i,"Reference disc uses its dedicated finish");
+            check(contrast(disc.redBackground,disc.redInk)>=4.5&&contrast(disc.blackBackground,disc.blackInk)>=4.5,"Reference glyph colors are legible before adaptive correction");
+            check(disc.redBackground!=disc.blackBackground,"Reference Red and Black backgrounds are distinguishable");
+        }
         check(AppearancePresets.board(null).id.equals("moss")&&AppearancePresets.board("unknown").id.equals("moss"),"Unknown/missing board preference safely defaults");
         check(AppearancePresets.disc(null).id.equals("cream")&&AppearancePresets.disc("symbols").id.equals("cream"),"Unknown/unsupported symbols safely default to Chinese discs");
         boards[0]="changed";discs[0]="changed";String[] labels=AppearancePresets.boardLabels();labels[0]="changed";

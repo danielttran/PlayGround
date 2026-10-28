@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.4.0 is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.5.0 is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -24,10 +24,14 @@ and variation histories remain available through the position slider and export.
 `BoardView` draws the nine-file, ten-rank board, Chinese-text pieces, selection and legal targets. A small board-edge dot shows the side to move without a wrapping turn label. Played moves and best-move hints use distinct arrows. The best-move arrow changes with completed analysis updates. Replay positions are reconstructed from a game's starting FEN and move sequence. Exploring a variation works on a separate sequence so the recorded game and its source result remain intact. Exporting a variation gives it the unfinished result `*`.
 
 `AppearancePresets` is an Android-free catalog shared by settings and the renderer:
-20 boards and 18 Chinese-character disc finishes, retaining the original six IDs
-and their surface colors. New wood/paper/stone materials, frames and disc rims
-are original Canvas drawings. [Appearance sources](APPEARANCE-SOURCES.md) document
-Xiangqi.com and Android references and the contrast-adjusted adaptations.
+24 boards and 22 Chinese-character disc finishes. The existing 20 board and 18
+disc IDs remain in their original order, including the original six selections
+and surface colors. Warm maple, Neon violet, Antique gold and Carved honey append
+four matching board/disc pairs from the supplied visual references. Grain,
+patina, decorative branches, glow, bevels, frames and shadows are original Canvas
+drawings rather than edited source screenshots. The river draws only 楚河 / 漢界,
+with no URL text. [Appearance sources](APPEARANCE-SOURCES.md) record those supplied
+references, earlier Xiangqi.com/Android examples and contrast-adjusted adaptations.
 
 `StudySettings` persists preset IDs, Traditional/Simplified characters,
 coordinates, result visibility and independent opaque RGB overrides. The latest
@@ -96,4 +100,4 @@ The Android manifest requests no `INTERNET` permission and disables automatic ap
 
 Pikafish's GPL-3.0 code and separately licensed NNUE weights retain their upstream notices and exact release source pointers under `third_party/pikafish`. WXF source material retains its own rights; app source licensing does not relicense game pages or engine assets.
 
-See [AUDIT-0.4.md](AUDIT-0.4.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover both bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.
+See [AUDIT-0.5.md](AUDIT-0.5.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover both bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.4.md](AUDIT-0.4.md), [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.

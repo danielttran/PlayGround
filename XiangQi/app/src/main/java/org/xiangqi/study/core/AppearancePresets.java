@@ -2,8 +2,10 @@ package org.xiangqi.study.core;
 
 /** Stable appearance IDs shared by settings and the Canvas renderer. */
 public final class AppearancePresets {
-    public static final int FLAT=0, WOOD=1, PAPER=2, STONE=3;
-    public static final int PLAIN=0, ENGRAVED=1, GLAZED=2, LACQUER=3;
+    public static final int FLAT=0, WOOD=1, PAPER=2, STONE=3,
+        LIGHT_MAPLE=4, NEON=5, ANTIQUE=6, CARVED_WOOD=7;
+    public static final int PLAIN=0, ENGRAVED=1, GLAZED=2, LACQUER=3,
+        BEVELED=4, NEON_GLOW=5, GILDED=6, CARVED=7;
     public static final class Board {
         public final String id,label;
         public final int background,grid,playedArrow,bestArrow,border,texture;
@@ -41,7 +43,11 @@ public final class AppearancePresets {
         b("midnight","Midnight",0xff16202e,0xff7f9aaf,0xffffca8a,0xffa7e2ce,0xff496b8a,FLAT),
         b("navy","Deep navy",0xff24364c,0xffa8bfca,0xffffc691,0xffb8ebd7,0xff5b7c96,FLAT),
         b("lavender","Lavender paper",0xffdcd8e6,0xff81728e,0xffa54c2c,0xff326650,0xffa89cb8,PAPER),
-        b("terracotta","Terracotta",0xffbd8464,0xff573e2d,0xff631f19,0xff164c3b,0xff835338,STONE)
+        b("terracotta","Terracotta",0xffbd8464,0xff573e2d,0xff631f19,0xff164c3b,0xff835338,STONE),
+        b("warm-maple","Warm maple",0xfff2e4cc,0xffa7642d,0xff98451f,0xff1b6a54,0xffc7986d,LIGHT_MAPLE),
+        b("neon-violet","Neon violet",0xff16004d,0xffa08ace,0xffffcc88,0xff83f3e5,0xffccb2ec,NEON),
+        b("antique-gold","Antique gold",0xffd9a757,0xff7f491d,0xff8f2d17,0xff1f6046,0xff996126,ANTIQUE),
+        b("carved-honey","Carved honey",0xffd7b07b,0xff82532b,0xff973326,0xff265d44,0xff603b1f,CARVED_WOOD)
     };
     private static final Disc[] DISCS={
         d("cream","Cream",0xffe8debb,0xffe8debb,0xffb2392b,0xff274440,PLAIN),
@@ -61,7 +67,11 @@ public final class AppearancePresets {
         d("walnut","Carved walnut",0xffb8844d,0xff8e5c37,0xff4d0000,0xfffff1d1,ENGRAVED),
         d("copper","Copper",0xffd5a070,0xffb47850,0xff681d17,0xff281b15,ENGRAVED),
         d("silver","Brushed silver",0xffdedde2,0xffbdc5cc,0xffa12634,0xff17232b,GLAZED),
-        d("night-jade","Night jade",0xff285446,0xff1e3334,0xffffbcac,0xffebf6e8,GLAZED)
+        d("night-jade","Night jade",0xff285446,0xff1e3334,0xffffbcac,0xffebf6e8,GLAZED),
+        d("warm-maple","Warm maple",0xffba2c24,0xff262727,0xffffffff,0xffffffff,BEVELED),
+        d("neon-violet","Neon violet",0xffffd5eb,0xffb9edff,0xffa42445,0xff173252,NEON_GLOW),
+        d("antique-gold","Antique gold",0xff761814,0xff242321,0xfff0c46d,0xfff0c46d,GILDED),
+        d("carved-honey","Carved honey",0xfff3c988,0xffedc17b,0xff7d2919,0xff33291d,CARVED)
     };
     private AppearancePresets(){}
     private static Board b(String id,String name,int background,int grid,int played,int best,int border,int texture){return new Board(id,name,background,grid,played,best,border,texture);}

@@ -1,6 +1,6 @@
 # Appearance references — 2026-10-28
 
-The app now has **20 board palettes and 18 Chinese-character piece finishes**.
+The app now has **24 board palettes and 22 Chinese-character piece finishes**.
 The first six preference IDs and their surface colors are preserved. Additional
 presets are original Canvas drawings informed by the following public primary
 references; the app does not bundle their screenshots, logos, fonts or piece
@@ -64,3 +64,25 @@ last-move arrows, best-move arrows and the side-to-move dot retain their geometr
 
 Source screenshots used for inspection remain ignored under `.cache` and
 `test-results/appearance-research`, separate from shipped app assets.
+
+## Four user-provided visual references (0.5)
+
+The user supplied four board screenshots for direct visual comparison. The four
+new paired presets use matching board and piece names so they can be combined
+without guessing which finish belongs with which surface. All previous 20 board
+and 18 piece IDs remain in their original order.
+
+| Reference | Paired preset | Observed details used for the original drawing |
+| --- | --- | --- |
+| Light wood with white-lettered black/Red pieces | Warm maple (`warm-maple`) | Pale cream vertical grain, a rounded beige outer frame with amber inner rails, white Chinese glyphs and edge rings, restrained bevel and drop shadow |
+| Purple board with luminous pieces | Neon violet (`neon-violet`) | Deep violet surface with a magenta center glow, pale cyan and pink disc faces, dark blue/Red Chinese glyphs, distinct colored halos outside the discs |
+| Gold paper with decorative branches | Antique gold (`antique-gold`) | Gold parchment patina, original corner/edge branch motifs, black and deep-maroon discs, gold Chinese glyphs and fine concentric rims |
+| Honey-colored carved wooden set | Carved honey (`carved-honey`) | Warm honey board, dark brown surrounding frame, raised honey/ivory discs with visible bevel and lower-right shadow, dark-brown/Red Chinese glyphs |
+
+These additions are procedural Canvas drawings. The supplied screenshots are
+inspection references and are not redistributed in the app or repository. No
+watermarked reference bitmap is edited or shipped. The app's own board rendering
+contains the river labels **楚河 / 漢界**, with no URL or website text in the river.
+Source links and credits remain in documentation rather than being drawn across
+the playing surface. Colors and contrast are adjusted for a compact phone board,
+so these are functional visual adaptations rather than pixel-identical images.

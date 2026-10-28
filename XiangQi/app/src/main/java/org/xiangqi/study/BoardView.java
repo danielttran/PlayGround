@@ -106,8 +106,15 @@ public final class BoardView extends View {
         if(!"none".equals(coordinateStyle))drawCoordinates(c,density);
         // The played move is a directional arrow, never source/destination tiles.
         drawArrow(c,lastMove,moveArrow,.075f,.27f,false);
+        // Paint every shadow/halo before any opaque face, so adjacent glowing
+        // pieces never wash out a character that has already been drawn.
+        if(discFinish>=AppearancePresets.BEVELED)for(int i=0;i<90;i++)if(position.board[i]!=0&&position.board[i]!='.')
+            drawReferenceUnderlay(c,i,Character.isUpperCase(position.board[i]));
         for(int i=0;i<90;i++) if(position.board[i]!=0 && position.board[i]!='.') {
-            int fill=Character.isUpperCase(position.board[i])?redDiscColor:blackDiscColor;
+            boolean redSide=Character.isUpperCase(position.board[i]);
+            int fill=redSide?redDiscColor:blackDiscColor,ink=redSide?red:black;
+            if(discFinish>=AppearancePresets.BEVELED)drawReferenceFace(c,i,fill,ink,redSide);
+            else {
             paint.setColor(fill); c.drawCircle(x(i),y(i),radius,paint);
             paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.026f); paint.setColor(Character.isUpperCase(position.board[i])?red:black);
             c.drawCircle(x(i),y(i),radius*.88f,paint); paint.setStyle(Paint.Style.FILL);
@@ -123,6 +130,8 @@ public final class BoardView extends View {
                 c.drawArc(x(i)-radius*.97f,y(i)-radius*.97f,x(i)+radius*.97f,y(i)+radius*.97f,205,110,false,paint);
                 paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);paint.setColor(Character.isUpperCase(position.board[i])?red:black);
             }
+            }
+            paint.setColor(ink);
             paint.setTextSize(step*.60f); paint.setTypeface(pieceTypeface);
             paint.getFontMetrics(fontMetrics); c.drawText(glyph(position.board[i]),x(i),y(i)-(fontMetrics.ascent+fontMetrics.descent)/2,paint);
             if(i==selected) { paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.075f); paint.setColor(Color.rgb(183,211,168)); c.drawCircle(x(i),y(i),radius*1.12f,paint); paint.setStyle(Paint.Style.FILL); }
@@ -136,6 +145,7 @@ public final class BoardView extends View {
     /** Light procedural material cues; custom RGB always keeps a flat exact fill. */
     private void drawSurface(Canvas canvas,float w,float h,float density){
         if(customBoard!=null)return;
+        if(boardTexture>=AppearancePresets.LIGHT_MAPLE){drawReferenceSurface(canvas,w,h,density);return;}
         if(boardTexture!=AppearancePresets.FLAT){
             surfaceClip.reset();surfaceClip.addRoundRect(0,0,w,h,14*density,14*density,Path.Direction.CW);
             int save=canvas.save();canvas.clipPath(surfaceClip);
@@ -165,6 +175,113 @@ public final class BoardView extends View {
             paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);
         }
     }
+
+    /** Original procedural materials inspired by the supplied reference boards. */
+    private void drawReferenceSurface(Canvas canvas,float w,float h,float density){
+        surfaceClip.reset();surfaceClip.addRoundRect(0,0,w,h,14*density,14*density,Path.Direction.CW);
+        int saved=canvas.save();canvas.clipPath(surfaceClip);
+        if(boardTexture==AppearancePresets.NEON){
+            paint.setShader(new RadialGradient(w*.50f,h*.50f,w*.76f,new int[]{0xff4c076c,boardColor,0xff0c0033},new float[]{0,.58f,1},Shader.TileMode.CLAMP));
+            canvas.drawRect(0,0,w,h,paint);paint.setShader(null);
+        }else if(boardTexture==AppearancePresets.ANTIQUE){
+            paint.setShader(new RadialGradient(w*.50f,h*.46f,w*.86f,new int[]{mix(boardColor,Color.WHITE,.16f),boardColor,mix(boardColor,0xff6d3515,.32f)},new float[]{0,.52f,1},Shader.TileMode.CLAMP));
+            canvas.drawRect(0,0,w,h,paint);paint.setShader(null);
+            // Fine, deterministic paper mottling rather than a stretched bitmap.
+            paint.setColor(0xff75401a);paint.setAlpha(17);
+            for(int i=0;i<1250;i++){
+                float xx=((i*73+19)%997)/997f*w,yy=((i*193+47)%991)/991f*h;
+                canvas.drawCircle(xx,yy,(.22f+(i%5)*.13f)*density,paint);
+            }
+            paint.setAlpha(255);drawAntiqueCorner(canvas,w,h,density,false);drawAntiqueCorner(canvas,w,h,density,true);
+        }else{
+            boolean maple=boardTexture==AppearancePresets.LIGHT_MAPLE;
+            paint.setShader(new LinearGradient(0,0,w,0,new int[]{mix(boardColor,Color.WHITE,maple?.16f:.07f),boardColor,mix(boardColor,0xff9a582d,maple?.07f:.12f)},new float[]{0,.47f,1},Shader.TileMode.CLAMP));
+            canvas.drawRect(0,0,w,h,paint);paint.setShader(null);
+            paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(Math.max(.55f,density*.45f));
+            for(int line=1;line<110;line++){
+                float xx=w*line/110f,bend=((line*7)%9-4)*density*.45f;
+                paint.setColor(line%3==0?Color.WHITE:0xff9e6839);paint.setAlpha(maple?(line%3==0?31:16):11);
+                surfaceGrain.reset();surfaceGrain.moveTo(xx,0);surfaceGrain.cubicTo(xx+bend,h*.27f,xx-bend*.8f,h*.76f,xx,h);canvas.drawPath(surfaceGrain,paint);
+            }
+            paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);
+        }
+        // Rounded outer rails sit in the existing rim; the grid never shrinks.
+        paint.setStyle(Paint.Style.STROKE);paint.setColor(boardBorder);
+        paint.setStrokeWidth((boardTexture==AppearancePresets.NEON?2.2f:3.2f)*density);
+        canvas.drawRoundRect(2*density,2*density,w-2*density,h-2*density,12*density,12*density,paint);
+        paint.setStrokeWidth(.65f*density);paint.setColor(mix(boardBorder,Color.WHITE,.45f));
+        canvas.drawRoundRect(5*density,5*density,w-5*density,h-5*density,9*density,9*density,paint);
+        if(boardTexture==AppearancePresets.LIGHT_MAPLE||boardTexture==AppearancePresets.CARVED_WOOD){
+            paint.setColor(bronze);paint.setAlpha(125);paint.setStrokeWidth(.8f*density);
+            canvas.drawLine(left-step*.08f,top,left-step*.08f,top+9*step,paint);
+            canvas.drawLine(left+step*8.08f,top,left+step*8.08f,top+9*step,paint);
+        }
+        paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);paint.setShader(null);canvas.restoreToCount(saved);
+    }
+
+    private void drawAntiqueCorner(Canvas canvas,float w,float h,float density,boolean opposite){
+        int saved=canvas.save();if(opposite){canvas.translate(w,h);canvas.rotate(180);}
+        paint.setColor(0xff8c5025);paint.setAlpha(58);paint.setStyle(Paint.Style.STROKE);paint.setStrokeCap(Paint.Cap.ROUND);paint.setStrokeWidth(1.7f*density);
+        surfaceGrain.reset();surfaceGrain.moveTo(-2*density,h*.20f);surfaceGrain.cubicTo(w*.045f,h*.12f,w*.025f,h*.065f,w*.17f,-3*density);canvas.drawPath(surfaceGrain,paint);
+        surfaceGrain.reset();surfaceGrain.moveTo(w*.036f,h*.13f);surfaceGrain.quadTo(w*.085f,h*.105f,w*.12f,h*.115f);canvas.drawPath(surfaceGrain,paint);
+        surfaceGrain.reset();surfaceGrain.moveTo(w*.064f,h*.061f);surfaceGrain.quadTo(w*.10f,h*.056f,w*.14f,h*.039f);canvas.drawPath(surfaceGrain,paint);
+        paint.setStyle(Paint.Style.FILL);
+        float[][] blooms={{.052f,.105f},{.115f,.112f},{.086f,.057f},{.137f,.036f},{.027f,.161f}};
+        for(int n=0;n<blooms.length;n++){
+            float cx=blooms[n][0]*w,cy=blooms[n][1]*h,r=(1.1f+(n%2)*.4f)*density;
+            for(int petal=0;petal<5;petal++){double angle=petal*Math.PI*2/5;canvas.drawCircle(cx+(float)Math.cos(angle)*r,cy+(float)Math.sin(angle)*r,r*.80f,paint);}
+            paint.setColor(0xffe3b76c);paint.setAlpha(90);canvas.drawCircle(cx,cy,r*.45f,paint);paint.setColor(0xff8c5025);paint.setAlpha(58);
+        }
+        paint.setAlpha(255);paint.setStrokeCap(Paint.Cap.BUTT);canvas.restoreToCount(saved);
+    }
+
+    private void drawReferenceUnderlay(Canvas canvas,int index,boolean redSide){
+        float cx=x(index),cy=y(index);paint.setStyle(Paint.Style.FILL);
+        if(discFinish==AppearancePresets.NEON_GLOW){
+            int halo=redSide?0xffff58bd:0xff43e5ff;
+            paint.setShader(new RadialGradient(cx,cy,radius*1.58f,new int[]{withAlpha(halo,130),withAlpha(halo,86),0},new float[]{0,.68f,1},Shader.TileMode.CLAMP));
+            canvas.drawCircle(cx,cy,radius*1.58f,paint);paint.setShader(null);
+            paint.setColor(redSide?0xffee70ca:0xff7960ed);paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(radius*.11f);canvas.drawCircle(cx,cy,radius*1.045f,paint);paint.setStyle(Paint.Style.FILL);
+        }else{
+            float offset=discFinish==AppearancePresets.CARVED?radius*.19f:radius*.10f;
+            paint.setShader(new RadialGradient(cx+radius*.10f,cy+offset,radius*1.34f,new int[]{0x79000000,0x41000000,0},new float[]{0,.73f,1},Shader.TileMode.CLAMP));
+            canvas.drawCircle(cx+radius*.10f,cy+offset,radius*1.34f,paint);paint.setShader(null);
+            if(discFinish==AppearancePresets.CARVED){
+                paint.setColor(mix(redSide?redDiscColor:blackDiscColor,0xff794921,.48f));canvas.drawCircle(cx,cy+radius*.12f,radius,paint);
+            }
+        }
+    }
+
+    private void drawReferenceFace(Canvas canvas,int index,int fill,int ink,boolean redSide){
+        float cx=x(index),cy=y(index);boolean custom=redSide?customRedDisc!=null:customBlackDisc!=null;
+        paint.setStyle(Paint.Style.FILL);paint.setColor(fill);
+        if(!custom&&discFinish!=AppearancePresets.NEON_GLOW){
+            paint.setShader(new RadialGradient(cx-radius*.17f,cy-radius*.19f,radius*1.24f,new int[]{fill,fill,mix(fill,Color.WHITE,discFinish==AppearancePresets.CARVED?.24f:.16f),mix(fill,Color.BLACK,.30f)},new float[]{0,.57f,.76f,1},Shader.TileMode.CLAMP));
+        }
+        canvas.drawCircle(cx,cy,radius,paint);paint.setShader(null);
+        paint.setStyle(Paint.Style.STROKE);
+        if(discFinish==AppearancePresets.NEON_GLOW){
+            paint.setColor(redSide?0xffff6dbf:0xff4be5ff);paint.setStrokeWidth(radius*.075f);canvas.drawCircle(cx,cy,radius*.94f,paint);
+            paint.setColor(redSide?0xfffffbff:0xfff0ffff);paint.setStrokeWidth(radius*.025f);canvas.drawCircle(cx,cy,radius*.82f,paint);
+            paint.setColor(redSide?0xffad428d:0xff7052bc);paint.setStrokeWidth(radius*.025f);canvas.drawCircle(cx,cy,radius*.71f,paint);
+        }else if(discFinish==AppearancePresets.GILDED){
+            paint.setColor(ink);paint.setStrokeWidth(radius*.026f);canvas.drawCircle(cx,cy,radius*.94f,paint);canvas.drawCircle(cx,cy,radius*.79f,paint);
+            paint.setStrokeWidth(radius*.011f);paint.setAlpha(135);canvas.drawCircle(cx,cy,radius*.86f,paint);paint.setAlpha(255);
+            paint.setStyle(Paint.Style.FILL);paint.setAlpha(170);
+            for(int dot=0;dot<44;dot++){double a=dot*Math.PI*2/44;canvas.drawCircle(cx+(float)Math.cos(a)*radius*.875f,cy+(float)Math.sin(a)*radius*.875f,radius*.012f,paint);}
+            paint.setAlpha(255);paint.setStyle(Paint.Style.STROKE);
+        }else if(discFinish==AppearancePresets.CARVED){
+            paint.setColor(mix(fill,0xff5e351c,.55f));paint.setStrokeWidth(radius*.045f);canvas.drawCircle(cx,cy,radius*.94f,paint);
+            paint.setColor(mix(fill,Color.WHITE,.45f));paint.setStrokeWidth(radius*.06f);canvas.drawArc(cx-radius*.87f,cy-radius*.87f,cx+radius*.87f,cy+radius*.87f,205,135,false,paint);
+            paint.setColor(mix(fill,0xff71461e,.42f));paint.setStrokeWidth(radius*.025f);canvas.drawCircle(cx,cy,radius*.72f,paint);
+        }else{
+            paint.setColor(ink);paint.setStrokeWidth(radius*.032f);canvas.drawCircle(cx,cy,radius*.91f,paint);canvas.drawCircle(cx,cy,radius*.78f,paint);
+            paint.setColor(mix(fill,Color.WHITE,.65f));paint.setStrokeWidth(radius*.035f);canvas.drawArc(cx-radius*.96f,cy-radius*.96f,cx+radius*.96f,cy+radius*.96f,210,112,false,paint);
+        }
+        paint.setStyle(Paint.Style.FILL);paint.setColor(ink);paint.setAlpha(255);
+    }
+    private static int withAlpha(int color,int alpha){return (color&0xffffff)|(alpha<<24);}
+    private static int mix(int first,int second,float amount){return Color.rgb(Math.round(Color.red(first)*(1-amount)+Color.red(second)*amount),Math.round(Color.green(first)*(1-amount)+Color.green(second)*amount),Math.round(Color.blue(first)*(1-amount)+Color.blue(second)*amount));}
     private void drawCoordinates(Canvas canvas,float density) {
         float horizontalRim=left-radius,verticalRim=top-radius;
         paint.setTypeface(Typeface.SANS_SERIF);paint.setTextSize(Math.min(10*density,Math.min(horizontalRim,verticalRim)*.72f));
