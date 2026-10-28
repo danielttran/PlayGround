@@ -1,6 +1,7 @@
 package org.xiangqi.study;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -65,6 +66,43 @@ public final class VariationEditingAuditTest extends InstrumentationTestCase {
         returnToRecord(4,true);awaitAnalysis();
         main(()->call("stopSearch"));tapMove("b0a2");assertVariation(Arrays.asList("b2e2","b9c7","a0a1","a9a8","b0a2"),false);returnToRecord(5,false);
         main(()->{assertNull(get("analysisFuture"));assertEquals(View.GONE,((View)get("analysisBox")).getVisibility());});
+    }
+
+    public void testLegalMoveChooserPausesReplayAndRejectsAStalePosition()throws Exception {
+        final AlertDialog[] chooser={null};final String[] chosen={null};
+        main(()->{
+            call("makeMove",new Class<?>[]{String.class},"b2e2");call("navigate",new Class<?>[]{int.class},0);
+            study.edit().putLong("replayDelayMillis",500).commit();call("toggleAutoplay");assertEquals(Boolean.TRUE,get("autoplay"));
+            chosen[0]=current().legalMoves().get(0);call("legalMoves");
+            assertEquals("Opening a position-specific move chooser pauses playback",Boolean.FALSE,get("autoplay"));
+            chooser[0]=(AlertDialog)get("legalMovesDialog");assertNotNull(chooser[0]);assertTrue(chooser[0].isShowing());
+        });
+        Thread.sleep(700);main(()->{
+            assertEquals("The chooser must keep its original position",0,get("ply"));
+            chooser[0].getListView().performItemClick(null,0,chooser[0].getListView().getAdapter().getItemId(0));
+            assertEquals(Collections.singletonList(chosen[0]),moves());assertEquals(1,get("ply"));assertEquals(source,recorded.moves);
+            call("navigate",new Class<?>[]{int.class},0);call("legalMoves");chooser[0]=(AlertDialog)get("legalMovesDialog");
+            call("navigate",new Class<?>[]{int.class},1);
+            chooser[0].getListView().performItemClick(null,0,chooser[0].getListView().getAdapter().getItemId(0));
+            assertEquals("A stale choice cannot change the new position",1,get("ply"));assertEquals(Collections.singletonList(chosen[0]),moves());assertNull(get("errorDialog"));
+            call("legalMoves");chooser[0]=(AlertDialog)get("legalMovesDialog");activity.finish();
+        });
+        await(activity::isDestroyed,5000,"Activity did not finish");assertFalse("The legal-move window closes on destruction",chooser[0].isShowing());
+    }
+
+    public void testEngineSideChooserPausesReplayAtTheSelectedPosition()throws Exception {
+        main(()->{
+            call("navigate",new Class<?>[]{int.class},1);study.edit().putLong("replayDelayMillis",500).commit();call("toggleAutoplay");
+            assertEquals(Boolean.TRUE,get("autoplay"));call("chooseEngineSide");
+            assertEquals("Choosing the engine side must freeze the advertised current position",Boolean.FALSE,get("autoplay"));
+        });
+        Thread.sleep(700);main(()->{
+            assertEquals(1,get("ply"));AlertDialog chooser=(AlertDialog)get("playSideDialog");assertTrue(chooser.isShowing());
+            chooser.getButton(AlertDialog.BUTTON_NEUTRAL).performClick();assertEquals(Boolean.FALSE,get("autoplay"));assertEquals(source,recorded.moves);
+            call("chooseEngineSide");chooser=(AlertDialog)get("playSideDialog");call("navigate",new Class<?>[]{int.class},2);
+            chooser.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+            assertEquals("A chooser from an old position cannot start a new engine game",Boolean.FALSE,get("vsEngine"));assertEquals(2,get("ply"));
+        });
     }
 
     private void assertVariation(List<String> expected,boolean enabled){main(()->{

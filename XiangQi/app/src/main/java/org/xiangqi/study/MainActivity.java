@@ -83,7 +83,7 @@ public final class MainActivity extends Activity {
     private RadioButton importEngineInput;
     private String pasteDraftToken="",pasteSessionId="";
     private Engine.Result lastResult;
-    private AlertDialog settingsDialog,engineSettingsDialog,colorDialog,presetDialog,playSideDialog,goToDialog,importCollectionDialog,pasteDialog,replaySpeedDialog,gameInformationDialog,errorDialog;
+    private AlertDialog settingsDialog,engineSettingsDialog,colorDialog,presetDialog,playSideDialog,legalMovesDialog,goToDialog,importCollectionDialog,pasteDialog,replaySpeedDialog,gameInformationDialog,errorDialog;
     private float swipeStartX,swipeStartY;
     private boolean swipeTracking,swipeConsumed,swipeBlocked;
 
@@ -133,6 +133,9 @@ public final class MainActivity extends Activity {
         stopAutoplay(); cancelGameSearch(true); cancelAnalysis(); saveState(); library=true; prefs.edit().putBoolean("library",true).apply();
         root.removeAllViews(); content=column();
         libraryList=new ListView(this);libraryList.setContentDescription("Game library");libraryList.setBackgroundColor(BG);
+        // Keep the saved position while this new view contains only its header.
+        // Backgrounding/recreation can save state before the worker restores rows.
+        libraryScrollResetPending=true;
         libraryList.setItemsCanFocus(true);
         libraryList.setDivider(new android.graphics.drawable.ColorDrawable(BG));libraryList.setDividerHeight(dp(9));libraryList.setHeaderDividersEnabled(false);
         libraryList.addHeaderView(content,null,true);root.addView(libraryList,new LinearLayout.LayoutParams(-1,-1));
@@ -470,11 +473,16 @@ public final class MainActivity extends Activity {
         } catch(RuntimeException e){error("Move could not be played",message(e));resumeAnalysis();}
     }
     private void legalMoves() {
-        if(!exploring||vsEngine&&(engineThinking||positions.get(ply).redToMove!=humanRed))return; List<String> moves=positions.get(ply).legalMoves();
+        if(!exploring||vsEngine&&(engineThinking||positions.get(ply).redToMove!=humanRed))return;
+        stopAutoplay();final GameRepository.Game selectedGame=game;final int selectedPly=ply;final Position selectedPosition=positions.get(ply);
+        List<String> moves=selectedPosition.legalMoves();
         if(moves.isEmpty()){toast("No legal moves in this position.");return;}
         String[] labels=new String[moves.size()];for(int i=0;i<labels.length;i++)labels[i]=pretty(moves.get(i));
-        dialog("Choose a legal move").setItems(labels,(d,n)->makeMove(moves.get(n))).setNegativeButton("Cancel",null).show();
+        if(legalMovesDialog!=null)legalMovesDialog.dismiss();
+        AlertDialog shown=dialog("Choose a legal move").setItems(labels,(d,n)->{if(activeReplayPosition(selectedGame,selectedPly,selectedPosition))makeMove(moves.get(n));}).setNegativeButton("Cancel",null).create();
+        legalMovesDialog=shown;shown.setOnDismissListener(d->{if(legalMovesDialog==shown)legalMovesDialog=null;});shown.show();
     }
+    private boolean activeReplayPosition(GameRepository.Game selectedGame,int selectedPly,Position selectedPosition){return !destroyed&&!library&&game==selectedGame&&ply==selectedPly&&ply<positions.size()&&positions.get(ply)==selectedPosition;}
 
     private List<GameRepository.Game> navigationGames() {
         if(!preparedLibraryCurrent()){requestLibrarySearch(0);return Collections.emptyList();}
@@ -513,8 +521,9 @@ public final class MainActivity extends Activity {
         });
     }
     private void chooseEngineSide(){
+        stopAutoplay();final GameRepository.Game selectedGame=game;final int selectedPly=ply;final Position selectedPosition=positions.get(ply);
         playSideDialog=dialog("Play against engine").setMessage("Start from the current position. Choose your side.\n\nThe computer uses the time-per-position setting, or 3 seconds per move when analysis is untimed. Your recorded game is preserved.")
-            .setPositiveButton("Play as Red",(d,w)->startEngineGame(true)).setNegativeButton("Play as Black",(d,w)->startEngineGame(false)).setNeutralButton("Cancel",null).create();
+            .setPositiveButton("Play as Red",(d,w)->{if(activeReplayPosition(selectedGame,selectedPly,selectedPosition))startEngineGame(true);}).setNegativeButton("Play as Black",(d,w)->{if(activeReplayPosition(selectedGame,selectedPly,selectedPosition))startEngineGame(false);}).setNeutralButton("Cancel",null).create();
         playSideDialog.setOnDismissListener(d->playSideDialog=null);playSideDialog.show();
     }
     private void startEngineGame(boolean red){
@@ -910,7 +919,7 @@ public final class MainActivity extends Activity {
     @Override protected void onRestoreInstanceState(Bundle in){super.onRestoreInstanceState(in);pendingExport=in.getString("pendingExport");}
     @Override protected void onStart(){super.onStart();foreground=true;if(loaded){if(library)renderCards();else refreshGameNavigation();}resumeAnalysis();}
     @Override protected void onStop(){super.onStop();foreground=false;cancelLibrarySearch();seeking=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
-    @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);cancelLibrarySearch();libraryWorker.shutdownNow();handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(errorDialog!=null)errorDialog.dismiss();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
+    @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);cancelLibrarySearch();libraryWorker.shutdownNow();handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(errorDialog!=null)errorDialog.dismiss();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(legalMovesDialog!=null)legalMovesDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
     @Override public void onBackPressed(){if(!library)showLibrary();else super.onBackPressed();}
 
     private AlertDialog.Builder dialog(String title){return new AlertDialog.Builder(this,android.R.style.Theme_Material_Dialog_Alert).setTitle(title);}

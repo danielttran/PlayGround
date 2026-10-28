@@ -68,6 +68,25 @@ public final class LibrarySearchConcurrencyTest extends InstrumentationTestCase 
         main(()->{search().setText("Alpha");activity.finish();});last.countDown();await(activity::isDestroyed,5000,"Activity did not finish");assertTrue("Destroyed activity shuts down its search executor",worker.isShutdown());assertTrue("No activity-owned search thread survives destruction",worker.awaitTermination(5,TimeUnit.SECONDS));
     }
 
+    public void testSavingARebuiltLibraryBeforeWorkerCompletionPreservesDeepScroll()throws Exception{
+        List<GameRepository.Game> corpus=new ArrayList<>();for(int i=0;i<40;i++)corpus.add(game("scroll-"+i,"Scroll player "+i,"2023-11-20",false));
+        main(()->{set("games",corpus);call("renderCards");});ready();
+        await(()->!(Boolean)get("libraryScrollResetPending"),5000,"Initial library selection did not settle");
+        main(()->((ListView)get("libraryList")).setSelectionFromTop(12,-21));
+        await(()->((ListView)get("libraryList")).getFirstVisiblePosition()>=12,5000,"Deep scroll fixture did not settle");
+        final int[] position=new int[2];main(()->{ListView list=(ListView)get("libraryList");position[0]=list.getFirstVisiblePosition();position[1]=list.getChildAt(0).getTop();});
+        CountDownLatch release=blockWorker();
+        main(()->{
+            // A recreated library has no prepared result. Its new list initially
+            // contains only the header, even though a deep position was saved.
+            set("preparedLibrary",null);call("showLibrary");assertTrue((Boolean)get("librarySearchPending"));call("saveState");
+            assertEquals("Saving before rows load must retain the game offset",position[0],study.getInt("libraryScope:human:position",-1));
+            assertEquals("Saving before rows load must retain the pixel offset",position[1],study.getInt("libraryScope:human:top",-1));
+        });
+        release.countDown();ready();
+        await(()->{ListView list=(ListView)get("libraryList");return list.getFirstVisiblePosition()==position[0]&&list.getChildAt(0)!=null&&list.getChildAt(0).getTop()==position[1];},5000,"Completed search did not restore the saved deep scroll");
+    }
+
     private CountDownLatch blockWorker()throws Exception{CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);releases.add(release);worker().submit(()->{entered.countDown();try{release.await(20,TimeUnit.SECONDS);}catch(InterruptedException cancelled){Thread.currentThread().interrupt();}});assertTrue("Search worker fixture must start",entered.await(3,TimeUnit.SECONDS));return release;}
     private ExecutorService worker(){return (ExecutorService)get("libraryWorker");}
     private void ready()throws Exception{UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);}

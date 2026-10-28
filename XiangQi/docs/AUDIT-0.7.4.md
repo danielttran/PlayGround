@@ -69,7 +69,7 @@ variants provide readable names/search while exports retain the source fields.
   concurrency checks, three collection-navigation/lifecycle checks, four named
   import/collection/replay-speed checks, sorted game navigation, real-keyboard
   search focus, and two actual-touch variation cases with analysis off/on.
-  The blocked-worker fixture uses 5,001 games and confirms that a UI frame,
+  The blocked-worker fixture uses 5,000 games and confirms that a UI frame,
   typing, focus and cursor remain responsive before releasing the worker.
   The emulator crash buffer is empty after these checks.
 

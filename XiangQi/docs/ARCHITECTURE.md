@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.4 (version code 13) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.5 (version code 14) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -25,6 +25,10 @@ toggle. A committed move forks only the working history and reveals the return
 action; the full source history is retained. Touching the board cancels autoplay
 before source-piece selection. Analysis suggestions and a stopped engine game
 remain additional entry points for variation editing and the legal-move list.
+Opening the legal-move or engine-side chooser stops autoplay. Both dialogs bind
+callbacks to the original Game, ply and Position identity; a choice cannot act
+on a different position after navigation, rebuilding or library entry. The
+legal-move dialog is tracked and dismissed during Activity destruction.
 
 The library uses a recycling ListView containing every matching game, without
 page controls or a 40-game cutoff. Search and sorting use the entire selected collection;
@@ -40,7 +44,10 @@ wait for the current order rather than sorting on the UI thread. Imports replace
 the source-list identity, invalidating the index. Backgrounding cancels pending
 work; foregrounding resumes the latest missing request, and destruction shuts
 down the worker. Search focus/cursor and per-collection scroll preferences remain
-in the existing views/state. The complete move record also uses
+in the existing views/state. A newly built header-only list marks its scroll
+restoration pending, so saving/backgrounding before search completion cannot
+replace the stored game/pixel offset with position zero. The guarded selection
+animation clears that pending state after rows have been restored. The complete move record also uses
 a recycling ListView, filling the replay screen's remaining height below the fixed
 header, board and controls. Scrolling the record does not move the board. Short
 screens cap and center the board to retain usable controls and a record row;
