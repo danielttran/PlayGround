@@ -92,7 +92,7 @@ public final class Position {
     public static String normalizeMove(String move) {
         if (move == null) throw new IllegalArgumentException("Missing move");
         String result = move.trim().toLowerCase(Locale.ROOT).replace("-", "").replace("–", "");
-        if (!result.matches("[a-i][0-9][a-i][0-9]")) throw new IllegalArgumentException("Expected ICCS coordinate move, got " + move);
+        if (!result.matches("[a-i][0-9][a-i][0-9]")) throw new IllegalArgumentException("Expected ICCS coordinate move, got " + (move.length()>80?move.substring(0,80)+"...":move));
         return result;
     }
 

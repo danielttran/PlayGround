@@ -8,7 +8,10 @@ public final class UciPosition {
     private UciPosition() {}
     public static String command(Position current, String startFen, List<String> history) {
         if (history == null || history.size() > 20000) throw new IllegalArgumentException("Missing or excessive position history");
-        Position cursor = Position.fromFen(startFen);
+        // Game packs omit startFen for ordinary games, matching Game.initial().
+        // Keep that default at this boundary too, rather than rejecting every
+        // preloaded game when the native engine is selected.
+        Position cursor = Position.fromFen(startFen == null || startFen.trim().isEmpty() ? Position.START_FEN : startFen);
         StringBuilder command = new StringBuilder("position ");
         command.append(cursor.toFen().equals(Position.START_FEN) ? "startpos" : "fen " + cursor.toFen());
         if (!history.isEmpty()) command.append(" moves");

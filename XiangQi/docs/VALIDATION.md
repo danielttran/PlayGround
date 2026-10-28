@@ -1,5 +1,9 @@
 # Validation - 2026-10-28
 
+> Historical 0.1.0 checks. A later audit found and fixed native starting-FEN and
+> import/persistence defects missed by these checks. Use the 0.2.0 APK and read
+> [AUDIT.md](AUDIT.md) for the expanded validation and current behavior.
+
 ## Delivered builds
 
 Both APKs are debug-signed, version 0.1.0, package `org.xiangqi.study`, minimum

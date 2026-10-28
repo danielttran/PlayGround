@@ -11,7 +11,9 @@ public final class Engine {
     private final long deadline;
     private long nodes;
 
-    private Engine(long millis) { deadline = System.nanoTime() + Math.max(1, Math.min(millis, 60000)) * 1000000L; }
+    private Engine(long millis) { deadline = millis <= 0 ? Long.MAX_VALUE : System.nanoTime() + Math.min(millis, 3600000L) * 1000000L; }
+
+    public interface ProgressListener { void onProgress(Result snapshot); }
 
     public static final class Result {
         /** Centipawns from Red's perspective, including terminal scores +/-30000. */
@@ -20,9 +22,22 @@ public final class Engine {
         public long nodes;
         public String bestMove;
         public List<String> pv = Collections.emptyList();
+
+        /** An independent progress snapshot; later search updates cannot change its PV. */
+        public Result copy() {
+            Result copy = new Result(); copy.score = score; copy.depth = depth;
+            copy.nodes = nodes; copy.bestMove = bestMove;
+            copy.pv = Collections.unmodifiableList(new ArrayList<>(pv));
+            return copy;
+        }
     }
 
     public static Result analyze(Position position, int maxDepth, long millis) {
+        return analyze(position, maxDepth, millis, null);
+    }
+
+    /** millis <= 0 searches to the requested depth, or until interrupted. */
+    public static Result analyze(Position position, int maxDepth, long millis, ProgressListener listener) {
         Engine search = new Engine(millis);
         Position root = position.copy();
         List<String> moves = root.legalMoves();
@@ -32,7 +47,7 @@ public final class Engine {
         search.order(root, moves, null);
         result.bestMove = moves.get(0);
         result.pv = Collections.singletonList(result.bestMove);
-        for (int depth = 1; depth <= Math.max(1, Math.min(maxDepth, 12)); depth++) {
+        for (int depth = 1; depth <= Math.max(1, Math.min(maxDepth, 64)); depth++) {
             try {
                 search.checkTime();
                 List<String> pv = new ArrayList<>();
@@ -41,6 +56,8 @@ public final class Engine {
                 result.score = root.redToMove ? score : -score;
                 result.pv = Collections.unmodifiableList(new ArrayList<>(pv));
                 result.bestMove = pv.isEmpty() ? null : pv.get(0);
+                result.nodes = search.nodes;
+                if (listener != null) listener.onProgress(result.copy());
                 if (Math.abs(score) >= MATE - 100) break;
             } catch (TimeUp e) { break; }
         }

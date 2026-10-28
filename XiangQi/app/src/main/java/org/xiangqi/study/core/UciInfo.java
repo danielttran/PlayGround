@@ -20,7 +20,10 @@ public final class UciInfo {
                 else if (tokens[i].equals("score") && i + 2 < tokens.length) {
                     String type = tokens[++i]; int value = Integer.parseInt(tokens[++i]);
                     if (type.equals("cp")) { score = Math.max(-29900, Math.min(29900, value)); scored = true; }
-                    else if (type.equals("mate")) { score = (value >= 0 ? 1 : -1) * (30000 - Math.min(Math.abs(value), 99)); scored = true; }
+                    else if (type.equals("mate")) {
+                        // UCI mate 0 is the side to move already checkmated.
+                        score = (value > 0 ? 1 : -1) * (30000 - (int)Math.min(Math.abs((long)value), 99)); scored = true;
+                    }
                 } else if (tokens[i].equals("lowerbound") || tokens[i].equals("upperbound")) bound = true;
                 else if (tokens[i].equals("pv")) { pvAt = i + 1; break; }
             } catch (NumberFormatException ignored) { return; }

@@ -13,6 +13,8 @@ import java.util.*;
 /** Private, offline library. Imports are checked in full before the library is changed. */
 public final class GameRepository {
     public static final int MAX_BYTES = 5 * 1024 * 1024;
+    private static final int MAX_PLIES = 2000;
+    private static final Object FILE_LOCK = new Object();
     private final Context context;
     private final List<Game> games = new ArrayList<>();
     private final List<Game> imported = new ArrayList<>();
@@ -33,6 +35,10 @@ public final class GameRepository {
     }
 
     public synchronized List<Game> load() throws Exception {
+        synchronized (FILE_LOCK) { return loadStored(); }
+    }
+
+    private List<Game> loadStored() throws Exception {
         List<Game> bundled;
         try (InputStream in = context.getAssets().open("games.json")) { bundled = jsonGames(read(in), false); }
         File file = new File(context.getFilesDir(), "imported-games.json");
@@ -46,6 +52,9 @@ public final class GameRepository {
     public synchronized List<Game> all() { return new ArrayList<>(games); }
 
     public synchronized int importText(String text) throws Exception {
+        if (text == null || text.trim().isEmpty()) throw new IllegalArgumentException("The file is empty.");
+        if (text.length() > MAX_BYTES || text.getBytes(StandardCharsets.UTF_8).length > MAX_BYTES)
+            throw new IllegalArgumentException("File exceeds the 5 MB import limit.");
         List<Game> candidates;
         String clean = text.replaceFirst("^\\uFEFF", "").trim();
         if (clean.startsWith("{") || clean.startsWith("[{") || clean.matches("(?s)^\\[\\s*\\{.*")) candidates = jsonGames(clean, true);
@@ -61,14 +70,21 @@ public final class GameRepository {
             }
         }
         if (candidates.isEmpty()) throw new IllegalArgumentException("No games found. Import ICCS PGN or a JSON game pack.");
-        if (candidates.size() > 2000 || imported.size() + candidates.size() > 5000)
-            throw new IllegalArgumentException("This import exceeds the 5,000 imported-game library limit.");
+        if (candidates.size() > 2000) throw new IllegalArgumentException("Import no more than 2,000 games at once.");
+        synchronized (FILE_LOCK) { return commit(candidates); }
+    }
+
+    private int commit(List<Game> candidates) throws Exception {
+        // Another Activity/repository may have imported since this instance loaded.
+        // Read the latest committed snapshot under the same lock as the write.
+        loadStored();
         Set<String> fingerprints = new HashSet<>();
         for (Game g : games) fingerprints.add(fingerprint(g));
         List<Game> next = new ArrayList<>(imported);
         for (Game g : candidates) if (fingerprints.add(fingerprint(g))) next.add(g);
         int added = next.size() - imported.size();
         if (added == 0) return 0;
+        if (next.size() > 5000) throw new IllegalArgumentException("This import exceeds the 5,000 imported-game library limit.");
         JSONArray array = new JSONArray(); for (Game g : next) array.put(g.json());
         byte[] bytes = array.toString().getBytes(StandardCharsets.UTF_8);
         if (bytes.length > MAX_BYTES) throw new IllegalArgumentException("Imported library would exceed 5 MB. Import fewer games.");
@@ -81,7 +97,12 @@ public final class GameRepository {
     }
 
     private static List<Game> jsonGames(String text, boolean imported) throws Exception {
-        Object root = new org.json.JSONTokener(text).nextValue();
+        checkJsonDepth(text);
+        org.json.JSONTokener tokener = new org.json.JSONTokener(text);
+        Object root = tokener.nextValue();
+        if (tokener.nextClean() != 0) throw new IllegalArgumentException("Unexpected content after the JSON game pack.");
+        if (!(root instanceof JSONArray) && !(root instanceof JSONObject))
+            throw new IllegalArgumentException("Import a JSON game array or an object containing games.");
         JSONArray list = root instanceof JSONArray ? (JSONArray) root : ((JSONObject) root).getJSONArray("games");
         if (list.length() > 5000) throw new IllegalArgumentException("Too many games in one file.");
         List<Game> output = new ArrayList<>();
@@ -92,7 +113,7 @@ public final class GameRepository {
             g.result = j.optString("result", "*"); g.sourceUrl = j.optString("sourceUrl", "");
             g.startFen = j.optString("startFen", ""); g.timeControl=j.optString("timeControl", ""); g.imported = imported;
             JSONArray moves = j.getJSONArray("moves");
-            if (moves.length() > 2000) throw new IllegalArgumentException("Game " + (i+1) + " exceeds 2,000 half-moves.");
+            if (moves.length() > MAX_PLIES) throw new IllegalArgumentException("Game " + (i+1) + " exceeds 2,000 half-moves.");
             // Shipped records are canonical and exhaustively checked by the corpus audit.
             // Normalize untrusted imports before validation, storage and deduplication.
             for (int k = 0; k < moves.length(); k++) {
@@ -105,14 +126,43 @@ public final class GameRepository {
         return output;
     }
 
+    /** Android's JSONTokener recurses before schema validation; bound its stack use. */
+    private static void checkJsonDepth(String text) {
+        int depth=0;char quote=0;boolean escaped=false,lineComment=false,blockComment=false,literal=false;
+        for(int i=0;i<text.length();i++) {
+            char c=text.charAt(i),next=i+1<text.length()?text.charAt(i+1):0;
+            if(lineComment){if(c=='\n'||c=='\r'){lineComment=false;literal=false;}continue;}
+            if(blockComment){if(c=='*'&&next=='/'){blockComment=false;i++;}continue;}
+            if(quote!=0){if(escaped)escaped=false;else if(c=='\\')escaped=true;else if(c==quote){quote=0;literal=true;}continue;}
+            if((c=='"'||c=='\'')&&!literal){quote=c;continue;}
+            // Match the Android parser's accepted comments without counting their text.
+            if(c=='#'){lineComment=true;continue;}
+            if(c=='/'&&next=='/'){lineComment=true;i++;continue;}
+            if(c=='/'&&next=='*'){blockComment=true;i++;continue;}
+            if(c=='['||c=='{'){
+                literal=false;if(++depth>32)throw new IllegalArgumentException("JSON nesting exceeds the 32-level import limit.");
+            } else if(c==']'||c=='}') {
+                literal=false;if(--depth<0)throw new IllegalArgumentException("Unbalanced JSON container.");
+            } else if(Character.isWhitespace(c)||c==','||c==':'||c=='='||c==';')literal=false;
+            else literal=true;
+        }
+    }
+
     private static void validate(Game g) {
+        metadata("Event",g.event,1024);metadata("Round",g.round,256);metadata("Date",g.date,128);
+        metadata("Red player",g.red,256);metadata("Black player",g.black,256);metadata("Result",g.result,16);
+        metadata("Source URL",g.sourceUrl,4096);metadata("Time control",g.timeControl,128);metadata("FEN",g.startFen,512);
         if (g.moves.isEmpty()) throw new IllegalArgumentException(g.title() + ": no moves found.");
+        if (g.moves.size() > MAX_PLIES) throw new IllegalArgumentException(g.title() + ": exceeds 2,000 half-moves.");
         Position position = g.initial();
         validateStart(position);
         for (int i = 0; i < g.moves.size(); i++) try { position = position.play(g.moves.get(i)); }
         catch (RuntimeException e) { throw new IllegalArgumentException(g.title() + ": illegal move at half-move " + (i+1) + " (" + g.moves.get(i) + "). " + e.getMessage()); }
         if (!Arrays.asList("1-0", "0-1", "1/2-1/2", "*").contains(g.result))
             throw new IllegalArgumentException(g.title() + ": unsupported result " + g.result);
+    }
+    private static void metadata(String field,String value,int maximum) {
+        if(value!=null&&value.length()>maximum)throw new IllegalArgumentException(field+" exceeds the "+maximum+" character metadata limit.");
     }
 
     /** Sparse study positions are welcome; impossible piece geometry is rejected at import. */

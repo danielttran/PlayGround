@@ -9,10 +9,14 @@ The men's final, Yin Sheng–Lai Ly Huynh, comes first. Games by the requested p
 ## Use the app
 
 - Search the library by player, event, or round; tap a game to open it.
+- Red and Black have separate labelled player rows. Swipe right from the game to the library; swipe left to return to the current game, or use **Return to current game**. Your position and variation are restored.
 - Step through moves, drag the replay slider, autoplay, or flip the board. The app remembers replay and variation positions.
 - Tap **Analyze** for a Red-perspective evaluation, suggested move, depth, and continuation. Positive centipawns favor Red; negative values favor Black.
+- Analysis updates the evaluation and best-move arrow during search. **Stop analysis** retains the latest estimate; moving to another position clears it. Played moves use a separate arrow instead of highlighted squares.
 - Tap **Play from here** to explore a variation using the board or legal-move list. Return to the recorded game whenever needed.
 - Use **Import games** to choose a file or paste text. Use **Export** to save the recorded game or current variation as ICCS PGN.
+- **Settings** hides recorded results by default, including accessibility announcements. Engine evaluations stay visible, and PGN exports retain the actual result. Choose Moss/Wood/Ink boards, Traditional/Simplified Chinese characters, Cream/Wood/Jade discs, and Off/ICCS/Numeric coordinates. All piece styles use Chinese text.
+- **Engine settings** controls search depth, time, threads, and hash memory. Native defaults are depth 128, untimed until stopped, all available CPU cores, and RAM-aware hash allocation. Saving settings restarts an active search. The built-in engine is limited to depth 64 and is substantially weaker.
 
 The ARM64 build bundles **Pikafish 2026-09-06**, which runs locally. The portable emulator build uses the smaller built-in classical engine. The displayed engine name identifies the engine actually used. The built-in engine has limited search strength and does not adjudicate tournament repetition or perpetual-chase rules. Pikafish receives the complete position history and applies its engine rules; neither mode is a complete WXF match arbiter.
 
@@ -20,13 +24,13 @@ There is no `INTERNET` permission, analytics, account, or cloud analysis. Import
 
 ## Install on an Android 12 ARM64 phone
 
-The prepared debug APK is placed at `dist/XiangqiStudy-0.1.0-android12-arm64.apk`. Copy it to the phone, open it, and allow installation from the selected file manager when Android prompts. Alternatively, with USB debugging and Android platform tools configured:
+The current debug APK is at **`dist/XiangqiStudy-latest.apk`**, with a versioned copy at `dist/XiangqiStudy-0.2.0-android12-arm64.apk`. Copy it to the phone, open it, and allow installation from the selected file manager when Android prompts. Install over the existing app to retain imported games and saved positions. Alternatively, with USB debugging and Android platform tools configured:
 
 ```powershell
-adb install -r dist/XiangqiStudy-0.1.0-android12-arm64.apk
+adb install -r dist/XiangqiStudy-latest.apk
 ```
 
-The app's minimum Android version is 8.0/API 26. The bundled native APK requires ARM64; an x86 emulator uses a separate build without the native library. Phone installation and ARM64 engine execution remain unverified until tested on the actual device.
+The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. `dist/XiangqiStudy-portable-latest.apk` uses the Java engine on other architectures. Native execution on the physical phone remains a device-specific check.
 
 ## Build and check
 
@@ -51,7 +55,7 @@ python scripts/test-pikafish.py --engine C:\path\to\Pikafish-Windows-x86-64-univ
 
 Place the matching official `pikafish.nnue` beside that executable, or pass `--network`. This check sends the same UCI initialization/history commands and parses the actual engine output with the production Java parser; it does not execute Android code.
 
-Verification: 146 core assertions, initial-position perft `44 / 1920 / 79666`, legal replay of all 285 games/23,340 half-moves, Windows Pikafish protocol checks, and four passing Android 12 device tests. Both clean builds pass lint with no issues; APK signatures and exact bundled engine/network hashes are verified. See [validation and screenshots](docs/VALIDATION.md) for evidence and device-specific limits.
+The audit fixed the empty starting-FEN bug that prevented preloaded games from reaching Pikafish, along with import, persistence, parser, and terminal-score defects. See [the current audit](docs/AUDIT.md) for validation, known limits, and updated screenshots. [Initial 0.1.0 validation](docs/VALIDATION.md) is retained as historical evidence.
 
 ## Import formats
 

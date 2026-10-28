@@ -1,6 +1,7 @@
 package org.xiangqi.study;
 
 import android.content.Context;
+import android.os.Build;
 
 import org.xiangqi.study.core.Engine;
 import org.xiangqi.study.core.Position;
@@ -12,22 +13,43 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.AtomicMoveNotSupportedException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.security.MessageDigest;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-/** Runs the bundled, extracted Android PIE engine using its UCI protocol. Background use only. */
+/** Runs the bundled standalone Android engine using UCI. Background use only. */
 public final class PikafishEngine {
     private static final String EOF = "\u0000EOF";
+    private static final long NETWORK_BYTES = 50706378L;
+    private static final String NETWORK_SHA256 = "7d13d73569a9b571ba0eb20cf1596247bc2a42738967e61afef6482b231e900e";
+    private static File verifiedNetwork;
+    private static long verifiedModified;
     private PikafishEngine() {}
 
+    /** A zero time limit searches until the requested depth or explicit cancellation. */
+    public static final class Options {
+        public final int maxDepth, threads, hashMb;
+        public final long millis;
+        public Options(int maxDepth, long millis, int threads, int hashMb) {
+            this.maxDepth = Math.max(1, Math.min(maxDepth, 128));
+            this.millis = millis <= 0 ? 0 : Math.max(50, Math.min(millis, 3600000));
+            this.threads = Math.max(1, Math.min(threads, Math.max(1, Runtime.getRuntime().availableProcessors())));
+            this.hashMb = Math.max(16, Math.min(hashMb, 512));
+        }
+    }
+
     public static boolean available(Context context) {
-        return binary(context).isFile();
+        return Build.VERSION.SDK_INT >= 29 && binary(context).isFile();
     }
 
     private static File binary(Context context) {
@@ -35,25 +57,51 @@ public final class PikafishEngine {
     }
 
     private static synchronized File prepareNetwork(Context context) throws Exception {
+        if (Thread.currentThread().isInterrupted()) throw new InterruptedException("Pikafish initialization cancelled");
         File directory = new File(context.getFilesDir(), "pikafish-2026-09-06");
         if (!directory.isDirectory() && !directory.mkdirs()) throw new IllegalStateException("Cannot create Pikafish data directory");
         File network = new File(directory, "pikafish.nnue");
-        if (network.isFile() && network.length() > 0) return network;
+        if (network.isFile() && network.length() == NETWORK_BYTES) {
+            if (network.equals(verifiedNetwork) && network.lastModified() == verifiedModified) return network;
+            try (InputStream input = Files.newInputStream(network.toPath())) {
+                if (copyAndHash(input, null).equals(NETWORK_SHA256)) {
+                    markVerified(network); return network;
+                }
+            }
+        }
         File temporary = new File(directory, "pikafish.nnue.tmp");
         boolean done = false;
         try {
             try (InputStream input = context.getAssets().open("pikafish.nnue"); FileOutputStream output = new FileOutputStream(temporary)) {
-                byte[] buffer = new byte[262144]; int read;
-                while ((read = input.read(buffer)) != -1) {
-                    if (Thread.currentThread().isInterrupted()) throw new InterruptedException("Pikafish initialization cancelled");
-                    output.write(buffer, 0, read);
-                }
+                String digest = copyAndHash(input, output);
                 output.getFD().sync();
+                if (temporary.length() != NETWORK_BYTES || !digest.equals(NETWORK_SHA256))
+                    throw new IOException("Bundled Pikafish network failed its integrity check");
             }
-            if (temporary.length() == 0 || !temporary.renameTo(network)) throw new IllegalStateException("Cannot install bundled Pikafish network");
+            try { Files.move(temporary.toPath(), network.toPath(), StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING); }
+            catch (AtomicMoveNotSupportedException e) { Files.move(temporary.toPath(), network.toPath(), StandardCopyOption.REPLACE_EXISTING); }
+            markVerified(network);
             done = true;
             return network;
         } finally { if (!done) temporary.delete(); }
+    }
+
+    private static String copyAndHash(InputStream input, FileOutputStream output) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] buffer = new byte[262144]; int read;
+        while ((read = input.read(buffer)) != -1) {
+            if (Thread.currentThread().isInterrupted()) throw new InterruptedException("Pikafish initialization cancelled");
+            digest.update(buffer, 0, read);
+            if (output != null) output.write(buffer, 0, read);
+        }
+        StringBuilder result = new StringBuilder(64);
+        for (byte value : digest.digest()) result.append(Character.forDigit((value >>> 4) & 15, 16)).append(Character.forDigit(value & 15, 16));
+        return result.toString();
+    }
+
+    private static void markVerified(File network) {
+        verifiedNetwork = network;
+        verifiedModified = network.lastModified();
     }
 
     public static Engine.Result analyze(Context context, Position position, int maxDepth, long millis) throws Exception {
@@ -61,11 +109,18 @@ public final class PikafishEngine {
     }
 
     public static Engine.Result analyze(Context context, Position position, String startFen, List<String> history, int maxDepth, long millis) throws Exception {
-        if (!available(context)) throw new IllegalStateException("Pikafish is not bundled for this device ABI");
+        return analyze(context, position, startFen, history, new Options(maxDepth, millis, 1, 32), null);
+    }
+
+    public static Engine.Result analyze(Context context, Position position, String startFen, List<String> history, Options options, Engine.ProgressListener listener) throws Exception {
+        if (options == null) throw new IllegalArgumentException("Analysis options are required");
+        if (!available(context)) throw new IllegalStateException("Pikafish requires Android 10 or later and a supported bundled device ABI");
         Position root = position.copy(); List<String> legal = root.legalMoves();
         String positionCommand = UciPosition.command(root, startFen, history);
         if (legal.isEmpty()) {
-            Engine.Result terminal = new Engine.Result(); terminal.score = root.redToMove ? -30000 : 30000; return terminal;
+            Engine.Result terminal = new Engine.Result(); terminal.score = root.redToMove ? -30000 : 30000;
+            if (listener != null) listener.onProgress(terminal.copy());
+            return terminal;
         }
         File network = prepareNetwork(context);
         if (Thread.currentThread().isInterrupted()) throw new InterruptedException("Pikafish analysis cancelled");
@@ -87,20 +142,27 @@ public final class PikafishEngine {
         try {
             command(output, "uci");
             await(lines, "uciok", 15000);
-            command(output, "setoption name Threads value 1");
-            command(output, "setoption name Hash value 32");
+            command(output, "setoption name Threads value " + options.threads);
+            command(output, "setoption name Hash value " + options.hashMb);
             command(output, "setoption name MultiPV value 1");
             command(output, "setoption name EvalFile value " + network.getAbsolutePath());
             command(output, "isready"); await(lines, "readyok", 20000);
             command(output, "ucinewgame");
             command(output, positionCommand);
-            long budget = Math.max(50, Math.min(millis, 60000));
-            command(output, "go depth " + Math.max(1, Math.min(maxDepth, 128)) + " movetime " + budget);
-            long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(budget + 5000);
+            command(output, "go depth " + options.maxDepth + (options.millis > 0 ? " movetime " + options.millis : ""));
+            long deadline = options.millis <= 0 ? Long.MAX_VALUE : System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(options.millis + 5000);
             Engine.Result result = new Engine.Result();
+            int publishedDepth = 0;
             while (true) {
                 String line = next(lines, deadline);
-                if (line.startsWith("info ")) UciInfo.update(result, root, line);
+                if (line.startsWith("info ")) {
+                    List<String> previousPv = result.pv;
+                    UciInfo.update(result, root, line);
+                    // UciInfo replaces the PV only after accepting an exact score and legal continuation.
+                    if (listener != null && result.pv != previousPv && result.depth >= publishedDepth) {
+                        listener.onProgress(result.copy()); publishedDepth = result.depth;
+                    }
+                }
                 if (line.startsWith("bestmove ")) {
                     String[] parts = line.split("\\s+");
                     if (parts.length < 2 || !legal.contains(parts[1])) throw new IllegalStateException("Pikafish returned an invalid best move");
@@ -130,13 +192,15 @@ public final class PikafishEngine {
     }
 
     private static String next(BlockingQueue<String> lines, long deadline) throws Exception {
-        if (Thread.currentThread().isInterrupted()) throw new InterruptedException("Pikafish analysis cancelled");
-        long left = deadline - System.nanoTime();
-        if (left <= 0) throw new IllegalStateException("Pikafish timed out");
-        String line = lines.poll(left, TimeUnit.NANOSECONDS);
-        if (line == null) throw new IllegalStateException("Pikafish timed out");
-        if (line.equals(EOF)) throw new IllegalStateException("Pikafish exited before completing analysis");
-        if (line.contains("CRITICAL ERROR") || line.startsWith("ERROR")) throw new IllegalStateException(line);
-        return line;
+        while (true) {
+            if (Thread.currentThread().isInterrupted()) throw new InterruptedException("Pikafish analysis cancelled");
+            long left = deadline == Long.MAX_VALUE ? TimeUnit.MILLISECONDS.toNanos(250) : deadline - System.nanoTime();
+            if (left <= 0) throw new IllegalStateException("Pikafish timed out");
+            String line = lines.poll(Math.min(left, TimeUnit.MILLISECONDS.toNanos(250)), TimeUnit.NANOSECONDS);
+            if (line == null) continue;
+            if (line.equals(EOF)) throw new IllegalStateException("Pikafish exited before completing analysis");
+            if (line.contains("CRITICAL ERROR") || line.startsWith("ERROR")) throw new IllegalStateException(line);
+            return line;
+        }
     }
 }
