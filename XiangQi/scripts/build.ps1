@@ -2,6 +2,28 @@ param([switch]$Portable, [switch]$Check)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 
+function Notify-ApkDeliveryChanged([string]$Path, [bool]$Replaced) {
+    if(-not ('XiangqiDelivery.ShellNotifications' -as [type])){
+        Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+namespace XiangqiDelivery {
+    public static class ShellNotifications {
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+        public static extern void SHChangeNotify(uint eventId, uint flags,
+            [MarshalAs(UnmanagedType.LPWStr)] string path, IntPtr unused);
+    }
+}
+'@
+    }
+    # Atomic replacement can leave an open Explorer tab caching the previous
+    # size. MTP then receives old object metadata but the new file's bytes.
+    # PATHW | FLUSH delivers the file and directory updates before returning.
+    $eventId=if($Replaced){0x2000}else{0x0002} # UPDATEITEM / CREATE
+    [XiangqiDelivery.ShellNotifications]::SHChangeNotify($eventId,0x1005,$Path,[IntPtr]::Zero)
+    [XiangqiDelivery.ShellNotifications]::SHChangeNotify(0x1000,0x1005,[IO.Path]::GetDirectoryName($Path),[IntPtr]::Zero)
+}
+
 function Publish-VerifiedApk([string]$Source, [string]$Directory) {
     $directory=[IO.Path]::GetFullPath($Directory)
     $expected=[IO.Path]::GetFullPath((Join-Path $projectRoot 'dist'))
@@ -19,12 +41,14 @@ function Publish-VerifiedApk([string]$Source, [string]$Directory) {
         if((Get-FileHash -LiteralPath $staged -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $Source -Algorithm SHA256).Hash){throw 'Staged APK changed'}
         # Same-volume replacement is atomic, including on Windows PowerShell 5.
         # The previous delivery survives any failure before this operation.
-        if([IO.File]::Exists($destination)){[IO.File]::Replace($staged,$destination,[NullString]::Value)}else{[IO.File]::Move($staged,$destination)}
+        $replaced=[IO.File]::Exists($destination)
+        if($replaced){[IO.File]::Replace($staged,$destination,[NullString]::Value)}else{[IO.File]::Move($staged,$destination)}
         foreach($old in Get-ChildItem -LiteralPath $directory -File -Filter 'XiangqiStudy*.apk'){
             $resolved=[IO.Path]::GetFullPath($old.FullName)
             if(-not [string]::Equals([IO.Path]::GetDirectoryName($resolved),$directory,[StringComparison]::OrdinalIgnoreCase)){throw 'Cleanup escaped the exact APK directory'}
             if(-not [string]::Equals($resolved,$destination,[StringComparison]::OrdinalIgnoreCase)){Remove-Item -LiteralPath $resolved}
         }
+        Notify-ApkDeliveryChanged -Path $destination -Replaced $replaced
         return $destination
     }finally{
         if(Test-Path -LiteralPath $staged){Remove-Item -LiteralPath $staged}
