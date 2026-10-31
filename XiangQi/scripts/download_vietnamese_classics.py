@@ -6,6 +6,8 @@ facts, event clocks, section identity and independent result/calendar evidence.
 Notation is resolved against production Position, admitting exactly one entire
 legal mainline. Ambiguous or changed source data is never silently repaired.
 """
+from game_packs import retain_full_length
+
 import argparse
 import concurrent.futures
 import hashlib
@@ -238,6 +240,10 @@ def main():
             'metadataStatus': 'Viewer/listing metadata and official results/calendar or bracket checked',
             'moves': moves,
         }
+        length_excluded = []
+        if not retain_full_length([game], length_excluded):
+            rejected.append({"sourceGameId": game_id, "reason": length_excluded[0]["reason"], "halfMoves": len(moves)})
+            continue
         games.append(game)
         records.append({'id': game['id'], 'sourceGameId': game_id,
                         'sourceFactsSha256': candidate['sourceFactsSha256'],

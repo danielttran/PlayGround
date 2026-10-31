@@ -7,6 +7,8 @@ HTML, annotations, photos and the third-party board implementation are not bundl
 """
 from __future__ import annotations
 
+from game_packs import retain_full_length
+
 import argparse
 import hashlib
 import html
@@ -244,7 +246,11 @@ def main():
         for side in ("red", "black"):
             game[side] = policy["aliases"].get(game[side], game[side])
         selected.append(game)
-    games = selected
+    games = retain_full_length(selected, exclusions)
+    published_counts = dict(counts)
+    counts = {f'{division} round {number}': sum(
+        game['id'].startswith(f'wxf-2025-{division.lower()}-r{number}-g') for game in games)
+        for division, number, _ in links}
     metadata_raw = (ROOT / 'data/wxf2025-metadata-policy.json').read_bytes()
     result_check = verify_results(games, json.loads(metadata_raw), policy)
     # The final leads, then requested players, then the remaining archive.
@@ -269,6 +275,7 @@ def main():
         "indexUrl": INDEX_URL,
         "games": len(games), "halfMoves": sum(len(game["moves"]) for game in games),
         "roundCounts": counts,
+        "publishedRoundCounts": published_counts,
         "downloadedGameCount": downloaded_count,
         "excludedRecords": exclusions,
         "curationPolicy": "data/curation-policy.json",

@@ -1,5 +1,7 @@
 # Phuong Trang Masters 2025 classical collection
 
+0.7.12 curation: this pack now contains 124 games / 12,012 half-moves after six records ending before numbered move 20 were removed. Earlier acquisition counts below remain historical evidence.
+
 Reviewed 2026-10-31. The sixth human pack adds **130 complete men's games /
 12,216 half-moves**, taking the preload to **558 games / 48,443 half-moves**.
 The earlier five packs retain their IDs, metadata and moves. No starting-FEN

@@ -1,5 +1,7 @@
 # World Championship 2023 adult classical collection
 
+0.7.12 curation: this pack now contains 99 games / 9,124 half-moves after eight records ending before numbered move 20 were removed. Earlier acquisition counts below remain historical evidence.
+
 This pack contains **107 published men's full-game records / 9,362 half-moves**
 from the 18th World Xiangqi Championship in Houston. It examines every published
 adult round, rather than ranking or choosing the "best" games. The user's current

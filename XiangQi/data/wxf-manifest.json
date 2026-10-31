@@ -2,12 +2,30 @@
   "tournament": "19th World Xiangqi Championship, Shanghai, 2025",
   "scope": "Adult men's rounds 1–9; published classical main lines only. Women's records are omitted by user collection preference.",
   "divisionCounts": {
-    "Men": 215
+    "Men": 204
   },
   "indexUrl": "https://www.wxf-xiangqi.org/index.php?Itemid=101&id=1788&lang=en&option=com_content&view=article",
-  "games": 215,
-  "halfMoves": 17357,
+  "games": 204,
+  "halfMoves": 17007,
   "roundCounts": {
+    "Men round 1": 21,
+    "Men round 2": 23,
+    "Men round 3": 23,
+    "Men round 4": 21,
+    "Men round 5": 25,
+    "Men round 6": 23,
+    "Men round 7": 22,
+    "Men round 8": 22,
+    "Men round 9": 24,
+    "Women round 1": 0,
+    "Women round 2": 0,
+    "Women round 3": 0,
+    "Women round 4": 0,
+    "Women round 5": 0,
+    "Women round 6": 0,
+    "Women round 7": 0
+  },
+  "publishedRoundCounts": {
     "Men round 1": 24,
     "Men round 2": 25,
     "Men round 3": 25,
@@ -744,14 +762,80 @@
         "李小龙"
       ],
       "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1899:2025-19th-world-xiangqi-championships-men-round-9-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r1-g19",
+      "halfMoves": 33,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1838:2025-19th-world-xiangqi-championships-men-round-1-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r1-g21",
+      "halfMoves": 31,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1838:2025-19th-world-xiangqi-championships-men-round-1-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r2-g1",
+      "halfMoves": 18,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1892:2025-19th-world-xiangqi-championships-men-round-2-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r3-g18",
+      "halfMoves": 30,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1893:2025-19th-world-xiangqi-championships-men-round-3-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r4-g7",
+      "halfMoves": 32,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1894:2025-19th-world-xiangqi-championships-men-round-4-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r4-g12",
+      "halfMoves": 34,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1894:2025-19th-world-xiangqi-championships-men-round-4-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r4-g20",
+      "halfMoves": 36,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1894:2025-19th-world-xiangqi-championships-men-round-4-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r6-g21",
+      "halfMoves": 35,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1896:2025-19th-world-xiangqi-championships-men-round-6-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r7-g6",
+      "halfMoves": 31,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1897:2025-19th-world-xiangqi-championships-men-round-7-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r7-g21",
+      "halfMoves": 37,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1897:2025-19th-world-xiangqi-championships-men-round-7-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2025-men-r8-g10",
+      "halfMoves": 33,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1898:2025-19th-world-xiangqi-championships-men-round-8-game-records&catid=418&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
     }
   ],
   "curationPolicy": "data/curation-policy.json",
   "classicalRegulationsUrl": "https://www.wxf-xiangqi.org/images/2025wxf_shanghai/19th_WXF__World_Xiangqi_Championship_Regulations.pdf",
-  "assetSha256": "c9054d099c7fc41321faedf99055d439bd71d7cb11ff8478b8bc405ca197122c",
+  "assetSha256": "027bc8e96d8fbba1bc1b1ff5499aecd01aca793c7ec73899054af812db7310c6",
   "metadataPolicySha256": "35993807e58888e71dcf3155c1f1ea629245814bcd8d612e1f01df6400915b33",
   "resultCrossChecks": {
-    "games": 215,
+    "games": 204,
     "sourceUrl": "https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf",
     "sourcePdfSha256": "1b099660526f6b1e1ad107a5db9fdba7c8f3781b1eee83b0088a60ecb23167f4",
     "method": "Both reciprocal opponent/colour cells and cumulative-score differences"

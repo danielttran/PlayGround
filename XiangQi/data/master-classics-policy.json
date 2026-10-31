@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-31",
+  "collection": "Selected classical master games",
+  "masters": [
+    "万春林",
+    "于幼华",
+    "刘殿中",
+    "卜凤波",
+    "吕钦",
+    "吴宗翰",
+    "吴贵临",
+    "庄玉庭",
+    "张强",
+    "徐天利",
+    "徐天红",
+    "景学义",
+    "李家庆",
+    "李来群",
+    "李锦欢",
+    "杨官璘",
+    "柳大华",
+    "武明一",
+    "汪洋北",
+    "王嘉良",
+    "王斌",
+    "胡荣华",
+    "许国义",
+    "许银川",
+    "赖理兄",
+    "赵国荣",
+    "赵汝权",
+    "郑亚生",
+    "金松",
+    "金波",
+    "阮成保",
+    "阮明日光",
+    "阮黄林",
+    "陈富杰",
+    "陶汉明",
+    "黄仕清",
+    "黄学谦",
+    "黄海林",
+    "黎德志"
+  ],
+  "clocks": {
+    "": "Classical · exact clock unrecorded",
+    "60分＋30秒": "3600+30",
+    "60分+30秒": "3600+30",
+    "60 30": "Classical · source clock 60 30",
+    "60分+20秒": "3600+20",
+    "60分＋20秒": "3600+20"
+  },
+  "events": {
+    "1980年全国象棋个人赛": "Chinese National Individual Championship 1980",
+    "1997年第二届广洋杯象棋大棋圣赛": "Guangyang Grandmaster Cup 1997",
+    "2010年楠溪江杯全国象棋甲级联赛": "Chinese Xiangqi League 2010",
+    "2010年第04届杨官璘杯全国象棋公开赛": "Yang Guanlin Cup 2010",
+    "2011年句容茅山·碧桂园杯全国象棋个人赛": "Chinese National Individual Championship 2011",
+    "2011年第12届世界象棋锦标赛": "World Championship 2011",
+    "2011年首届世界智力精英运动会": "World Mind Games 2011",
+    "2012年伊泰杯全国象棋甲级联赛": "Chinese Xiangqi League 2012",
+    "2012年第02届世界智力精英运动会": "World Mind Games 2012",
+    "2012年第04届淮阴·韩信杯象棋国际名人赛": "Han Xin Cup 2012",
+    "2012年第05届杨官璘杯全国象棋公开赛": "Yang Guanlin Cup 2012",
+    "2012年第05届杨官璘杯全国象棋公开赛海外组": "Yang Guanlin Cup 2012 · Overseas",
+    "2013年QQ游戏天下棋弈全国象棋甲级联赛": "Chinese Xiangqi League 2013",
+    "2013年永虹·得坤杯第16届亚洲象棋个人赛": "Asian Individual Championship 2013",
+    "2013年碧桂园杯第13届世界象棋锦标赛": "World Championship 2013",
+    "2013年第02届碧桂园杯全国象棋冠军邀请赛": "Country Garden Champions Cup 2013",
+    "2013年第03届世界智力精英运动会": "World Mind Games 2013",
+    "2013年第05届淮阴·韩信杯象棋国际名人赛": "Han Xin Cup 2013",
+    "2014年第03届碧桂园杯全国象棋冠军邀请赛": "Country Garden Champions Cup 2014",
+    "2015年第04届碧桂园杯全国象棋冠军邀请赛": "Country Garden Champions Cup 2015",
+    "2015年第07届淮阴·韩信杯象棋国际名人赛": "Han Xin Cup 2015",
+    "2015年腾讯棋牌全国象棋甲级联赛": "Chinese Xiangqi League 2015",
+    "2016年国际智力运动联盟智力运动精英赛": "IMSA Elite Mind Games 2016",
+    "2017年第06届碧桂园杯全国象棋冠军邀请赛": "Country Garden Champions Cup 2017",
+    "2018年全国象棋团体赛": "Chinese National Team Championship 2018",
+    "第二届“嘉丰房地产杯”象棋王位赛": "Jiafeng Chess King Cup 1995"
+  },
+  "selectionMethod": "100 master-versus-master complete classical games, selected from 219 legally replayed candidates. Each source explicitly marks 慢棋; conflicting short clocks excluded. Five fixed-node Pikafish history samples screen for large early advantages (over 250 normalized centipawns at plies 20 or 40) and endings needing further review. Prefer requested Vietnamese players, historic master encounters, recorded clocks and competitive early play; at most 15 records from one source event, six per pairing and 45 draws. This is a curated study set, not a claim of objectively best games or exhaustive engine accuracy grading.",
+  "legalCandidates": 219,
+  "screenedEligible": 205,
+  "selected": 100,
+  "heldOut": [
+    {
+      "sha": "b4878ae9ab6a804c0c7f9cc3816f9b2c70c1da7b",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "31d21ee5cfb556432a7932d91dd80568b94d7300",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "7a02f53ce39635a15395de9337627c6b0e2b8c6c",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "fb19b2c90530105f45239833fd05e263cd73b134",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "98eeb80db436f55068d649f5c8b0ee569ce2f21a",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "8b134e19090f85572a47cc8009ee8a79976be285",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "ecc2483663345ff54da4b8a572709e3e21becacd",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "abbb8a9a0525081fbbafc65f57e0cd932c7ece2a",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "26bfe12a1dbb8cf2274961e88eaab54757e6adca",
+      "reason": "Ending requires further source review"
+    },
+    {
+      "sha": "11a61f8a5a1fe65713d811a334522aa004c99a3c",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "71f984446753b920f6446e9d833e3a758c540799",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "da8a7df7d0f78e5524872cfeaa042641d0aee53e",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "61c0c80fc001cf8047e5d7c9398c49ed5f7595f6",
+      "reason": "Large early advantage"
+    },
+    {
+      "sha": "f78091a6ce7c2cc72da1ea01d4b14746dbf111e0",
+      "reason": "Large early advantage"
+    }
+  ],
+  "dateRoundScope": "Recorded date and round retained after parsing and event-year consistency checks. Community transcription is attributed; no claim of independent historical verification of every result. Raw source fields remain in pinned facts."
+}

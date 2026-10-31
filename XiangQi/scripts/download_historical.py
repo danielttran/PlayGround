@@ -7,6 +7,8 @@ Use --offline to reproduce from the cached downloaded source pages.
 """
 from __future__ import annotations
 
+from game_packs import retain_full_length
+
 import argparse
 from collections import Counter
 from datetime import date
@@ -159,6 +161,7 @@ def build(offline: bool) -> dict:
             if override.get("note"):
                 game["dateNote"] = override["note"]
             games.append(game)
+    games = retain_full_length(games, excluded)
     games.sort(key=lambda game: (game["date"], game["id"]))
     pack = {"collection": policy["name"], "source": "World Xiangqi Federation historical championship archive", "games": games}
     output_raw = (json.dumps(pack, ensure_ascii=False, indent=2) + "\n").encode()

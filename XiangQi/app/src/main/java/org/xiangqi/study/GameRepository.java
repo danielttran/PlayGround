@@ -25,7 +25,7 @@ public final class GameRepository {
     public static final class Game {
         public String id, event, round, date, red, black, result, sourceUrl, startFen, timeControl="", collection="";
         public boolean imported, engineGame;
-        public String importCollectionId="";
+        public String importCollectionId="", engineIdentity="", metadataNote="";
         public final List<String> moves = new ArrayList<>();
         public String title() { return red + " · " + black; }
         public Position initial() { return startFen.isEmpty() ? Position.initial() : Position.fromFen(startFen); }
@@ -35,6 +35,7 @@ public final class GameRepository {
             j.put("red", red); j.put("black", black); j.put("result", result); j.put("sourceUrl", sourceUrl);
             j.put("startFen", startFen); j.put("timeControl",timeControl); j.put("collection",collection);
             j.put("engineGame",engineGame); j.put("importCollectionId",importCollectionId);
+            j.put("engineIdentity",engineIdentity); j.put("metadataNote",metadataNote);
             j.put("moves", new JSONArray(moves)); return j;
         }
     }
@@ -245,6 +246,7 @@ public final class GameRepository {
             g.result = j.optString("result", "*"); g.sourceUrl = j.optString("sourceUrl", "");
             g.startFen = j.optString("startFen", ""); g.timeControl=j.optString("timeControl", ""); g.collection=j.optString("collection", ""); g.imported = imported;
             g.engineGame=j.optBoolean("engineGame",false);
+            g.engineIdentity=j.optString("engineIdentity","");g.metadataNote=j.optString("metadataNote","");
             g.importCollectionId=saved?j.optString("importCollectionId",""):"";
             JSONArray moves = j.getJSONArray("moves");
             if (moves.length() > MAX_PLIES) throw new IllegalArgumentException("Game " + (i+1) + " exceeds 2,000 half-moves.");

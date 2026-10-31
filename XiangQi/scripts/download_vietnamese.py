@@ -8,6 +8,8 @@ their original IDs; this supplement deduplicates against it. --fetch-only downlo
 --offline reproduces the selected pack from the downloaded source cache.
 """
 from __future__ import annotations
+from game_packs import retain_full_length
+
 import argparse
 from collections import Counter
 from datetime import date
@@ -217,6 +219,7 @@ def build(offline=False, fetch_only=False):
             seen[fingerprint] = item["id"]
         sources.append({"kind": "audited factual supplement", "path": str(supplement.relative_to(ROOT)),
                         "sha256": sha(supplement_raw), "sourceManifest": str(supplement_proof.relative_to(ROOT))})
+    games = retain_full_length(games, exclusions)
     games.sort(key=lambda g: (g["date"], g["id"]), reverse=True)
     pack = {"collection": policy["name"], "source": "Official World Xiangqi Federation adult championship archives", "games": games}
     payload = (json.dumps(pack, ensure_ascii=False, indent=2) + "\n").encode()

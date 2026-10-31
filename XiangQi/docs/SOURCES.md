@@ -1,5 +1,7 @@
 # Preloaded international classical games
 
+0.7.12 curation: this pack now contains 204 games / 17,007 half-moves after 11 records ending before numbered move 20 were removed. Counts in the earlier acquisition audit below describe its original coverage.
+
 The starter collection contains **215 real adult men's games, 17,357 half-moves**, from
 the 19th World Xiangqi Championship in Shanghai, 22–27 September 2025. It includes
 9 games each by Lai Ly Huynh (赖理兄), Nguyen Thanh Bao (阮成保), Wu Zonghan (吴宗翰),

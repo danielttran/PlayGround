@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Reproduce the screened 2025 Phuong Trang classical collection."""
+from game_packs import retain_full_length
+
 import argparse
 import copy
 import hashlib
@@ -173,6 +175,10 @@ def main():
                                'classical-game result retained separately from aggregate match result'),
             'moves': moves,
         }
+        length_excluded = []
+        if not retain_full_length([game], length_excluded):
+            rejected.append({"sourceGameId": ident, "reason": length_excluded[0]["reason"], "halfMoves": len(moves)})
+            continue
         games.append(game)
         records.append({'id': game['id'], 'sourceGameId': ident,
                         'sourceFactsSha256': expected[ident]['sourceFactsSha256'],

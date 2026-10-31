@@ -14,10 +14,15 @@ p.add_argument('--engine',type=pathlib.Path,required=True)
 p.add_argument('--network',type=pathlib.Path)
 p.add_argument('--all-plies',action='store_true',help='Compare legal moves at every recorded ply, not just four samples per game')
 p.add_argument('--legal-only',action='store_true',help='Validate histories and legal moves without running searches')
+p.add_argument('--pack',help='Limit a data-only audit to one asset filename')
 p.add_argument('--java-home',type=pathlib.Path,default=pathlib.Path(os.environ.get('JAVA_HOME',r'C:\Dev\Tools\jdk-21.0.12.1+1')))
 a=p.parse_args();engine=a.engine.resolve();network=(a.network or engine.parent/'pikafish.nnue').resolve()
 work=ROOT/'build/native-pack-audit';classes=work/'classes';classes.mkdir(parents=True,exist_ok=True)
-packs=read_packs();pack=[game for _,games,_ in packs for game in games]
+packs=read_packs()
+if a.pack:
+    packs=[entry for entry in packs if entry[0]['file']==a.pack]
+    if not packs:raise ValueError('Unknown pack: '+a.pack)
+pack=[game for _,games,_ in packs for game in games]
 tsv=work/'games.tsv';tsv.write_text(''.join(g['id']+'\t'+g.get('startFen','')+'\t'+' '.join(g['moves'])+'\n' for g in pack),encoding='utf-8')
 sources=list((ROOT/'app/src/main/java/org/xiangqi/study/core').glob('*.java'))+[ROOT/'tests/core/NativePositionCases.java']
 subprocess.run([str(a.java_home/'bin/javac.exe'),'-encoding','UTF-8','-d',str(classes),*map(str,sources)],check=True,timeout=60)

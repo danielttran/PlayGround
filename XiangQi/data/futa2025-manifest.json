@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "screeningDate": "2026-10-31",
   "policySha256": "dcdffe499761d57e1eefc3b84ac6e0d6c3b1b1ae3e0e6cd107a15d715b468d16",
-  "sharedCurationPolicySha256": "8f27257542efd6ea7120bb76a4a3cdcb1a0f80c4fe82fc0417217905b116d650",
+  "sharedCurationPolicySha256": "5f55c5eb6c887bb09a43c47043fd8d1092c87bf9a4b52effaed19f3d680fc612",
   "asset": "futa2025-games.json",
-  "assetSha256": "70f892ba40d799126cab1ed3f55677e0ae676c9a24709decff293715c33e16eb",
-  "games": 130,
-  "halfMoves": 12216,
+  "assetSha256": "89d155057d164d4fbea993ea8792158b3e7764f90f7b38e9fd0d5dd327b229a3",
+  "games": 124,
+  "halfMoves": 12012,
   "sourceCandidateCount": 138,
   "legalValidation": "Production Position; exactly one complete legal notation trace",
   "deduplication": "Starting FEN and full mainline against all other packs and within this pack",
@@ -250,14 +250,6 @@
       "mainlineSha256": "88773892217f33f70d3d8b0f429dc936c95b6339d216c892fb0894ec4c9ad6de",
       "plies": 64,
       "finalFen": "2baka1R1/9/2cCb4/2r5p/1P1N5/r5P2/4P3P/3RB4/4A1n2/3K2B2 w - - 10 33"
-    },
-    {
-      "id": "futa2025-1279",
-      "sourceGameId": 1279,
-      "sourceFactsSha256": "daf9eb46033e74bddeddf29240f556f020e2acd60d64920e2a96fce3cf18bcaf",
-      "mainlineSha256": "34a14ea5f7f4ecf38ed44ab7b374b8c107c040589288194d4899c8ce2b736bd5",
-      "plies": 35,
-      "finalFen": "4kab2/4a4/4b4/p1n1p1p1p/9/7R1/1rcCPrP1P/B3B1N2/4A4/2RAK4 b - - 1 18"
     },
     {
       "id": "futa2025-1280",
@@ -724,14 +716,6 @@
       "finalFen": "3akab2/9/4b4/P7p/6p2/9/2n3P1P/4B4/4A3N/2BAK4 w - - 4 27"
     },
     {
-      "id": "futa2025-1340",
-      "sourceGameId": 1340,
-      "sourceFactsSha256": "2ae90b575766f1b54e36be7f4edfa90f71b84fbe315cf33be0383c5d209b34e2",
-      "mainlineSha256": "d8f58ad8f896ccacad0fc34e5d1cc27db05a0702879866b20cc5c4260a2749aa",
-      "plies": 36,
-      "finalFen": "2bak1b2/4a4/n1c6/p1pRp1r1p/9/9/P3n3P/1N2BC2N/4A4/4KAB2 w - - 4 19"
-    },
-    {
       "id": "futa2025-1341",
       "sourceGameId": 1341,
       "sourceFactsSha256": "e049841f36a8aa17eadcd117f68d53e82e4d42694b4a63a54e3a2cd82e3b335a",
@@ -834,14 +818,6 @@
       "mainlineSha256": "f1708612829182cfead6be0c3434db4d3441daf524fea1fb6b3b5d5621305aec",
       "plies": 183,
       "finalFen": "9/3k5/2c6/9/9/9/4R4/5A3/4K4/3r5 b - - 1 92"
-    },
-    {
-      "id": "futa2025-1354",
-      "sourceGameId": 1354,
-      "sourceFactsSha256": "e51ee70e9a872dc372020e9c56fe7dbf91cbb718793bd9c6252237b79a318a73",
-      "mainlineSha256": "58159f1a1a9228f0f64d4d02ecc15751fe4da32a9a0e6a942f911d4294ba9511",
-      "plies": 30,
-      "finalFen": "3akab2/4c4/2n1b1R1c/p1p1p3p/6p2/2P1P4/P5P1P/2N1C1r2/4C4/2BAKAB2 w - - 1 16"
     },
     {
       "id": "futa2025-1355",
@@ -1004,28 +980,12 @@
       "finalFen": "C1bak4/4a4/9/4R4/8p/9/9/5n1c1/1N7/4KAr2 w - - 0 55"
     },
     {
-      "id": "futa2025-1376",
-      "sourceGameId": 1376,
-      "sourceFactsSha256": "6017ddaebc437ac449c72623e4a96786b275eb42299b6b66aca115fcaafc1a70",
-      "mainlineSha256": "7ca1279cb519e7a6dd2639b11f2464d52d49874ba75fb1bbc9e9acbcb9318951",
-      "plies": 34,
-      "finalFen": "r3kab2/3ca4/1c2b1n2/p3pR2p/7r1/3N2C2/P3P3P/6N2/9/R1BAKAB2 w - - 1 18"
-    },
-    {
       "id": "futa2025-1377",
       "sourceGameId": 1377,
       "sourceFactsSha256": "5d5f57c30c895a306387353fea7759b1c7dfee93bf3346f12391c2d6b8fcefd2",
       "mainlineSha256": "50dab0e16d339c33a80d992ddb962d7d71b40fc059e5aa1d19b519677497cab8",
       "plies": 57,
       "finalFen": "4k1r2/4a4/4b4/8p/1R7/1p4p2/2P6/9/9/2BAKAB2 b - - 0 29"
-    },
-    {
-      "id": "futa2025-1378",
-      "sourceGameId": 1378,
-      "sourceFactsSha256": "22bf4e6a497d952b31bdb9712817fc48529d76d774ca7bd2e81cba9898f88a95",
-      "mainlineSha256": "e5aecfefa32ea9fa996069a6cb1bc41739f34ed5fd04d7607c2999d9aefc534f",
-      "plies": 36,
-      "finalFen": "1rb1ka1n1/4a4/2n1b4/p1C2C3/2p1p4/8P/PcP1P1c2/2N1B1N2/4A4/1RBAK4 w - - 4 19"
     },
     {
       "id": "futa2025-1380",
@@ -1042,20 +1002,17 @@
       "mainlineSha256": "e7962696b542a554e8cf787bcbb52276c7fefdf43856afb1de5e99495f363cfd",
       "plies": 48,
       "finalFen": "2rk1ab2/3na1N2/2c1b4/1R2C1p1p/p3P4/6P2/P7P/B8/2p6/3AKAB2 w - - 9 25"
-    },
-    {
-      "id": "futa2025-1382",
-      "sourceGameId": 1382,
-      "sourceFactsSha256": "f2b05a38a7f6e6f64188c8ebc8cba1d1caddd0f51bc7b2ea13ef5c88ec0d81eb",
-      "mainlineSha256": "bd2303501bbea4afc64ae3697090dd2f103a84d75b1fca1b809c8086e5ce8d08",
-      "plies": 33,
-      "finalFen": "1rb1ka1r1/3ca4/4b4/p1R5p/6p2/2P6/P3P1n1P/3CB1N2/9/R2AKAB2 b - - 0 17"
     }
   ],
   "rejected": [
     {
       "sourceGameId": 1276,
       "reason": "Two complete legal notation interpretations"
+    },
+    {
+      "sourceGameId": 1279,
+      "reason": "User curation: game ends before numbered move 20",
+      "halfMoves": 35
     },
     {
       "sourceGameId": 1320,
@@ -1066,12 +1023,37 @@
       "reason": "Two complete legal notation interpretations"
     },
     {
+      "sourceGameId": 1340,
+      "reason": "User curation: game ends before numbered move 20",
+      "halfMoves": 36
+    },
+    {
+      "sourceGameId": 1354,
+      "reason": "User curation: game ends before numbered move 20",
+      "halfMoves": 30
+    },
+    {
       "sourceGameId": 1369,
       "reason": "Two complete legal notation interpretations"
     },
     {
+      "sourceGameId": 1376,
+      "reason": "User curation: game ends before numbered move 20",
+      "halfMoves": 34
+    },
+    {
+      "sourceGameId": 1378,
+      "reason": "User curation: game ends before numbered move 20",
+      "halfMoves": 36
+    },
+    {
       "sourceGameId": 1379,
       "reason": "Source explicitly marks the scoresheet lost; only two half-moves"
+    },
+    {
+      "sourceGameId": 1382,
+      "reason": "User curation: game ends before numbered move 20",
+      "halfMoves": 33
     },
     {
       "sourceGameId": 1384,

@@ -1,0 +1,283 @@
+{
+  "policy": "Remove games ending before numbered move 20; a Red/Black pair is one numbered move. Games reaching Red move 20 remain.",
+  "originalGames": 558,
+  "removedCount": 25,
+  "retainedGames": 533,
+  "removed": [
+    {
+      "id": "wxf-2025-men-r1-g21",
+      "red": "Meng Fanrui · 孟繁睿",
+      "black": "梅德韦杰夫",
+      "event": "World Championship 2025",
+      "round": "Men · Round 1 · Board 21",
+      "date": "2025-09-22",
+      "halfMoves": 31,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1838:2025-19th-world-xiangqi-championships-men-round-1-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r7-g21",
+      "red": "王大伟",
+      "black": "所司和晴",
+      "event": "World Championship 2025",
+      "round": "Men · Round 7 · Board 21",
+      "date": "2025-09-25",
+      "halfMoves": 37,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1897:2025-19th-world-xiangqi-championships-men-round-7-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r7-g6",
+      "red": "郭胜文",
+      "black": "黄学谦",
+      "event": "World Championship 2025",
+      "round": "Men · Round 7 · Board 6",
+      "date": "2025-09-25",
+      "halfMoves": 31,
+      "result": "1/2-1/2",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1897:2025-19th-world-xiangqi-championships-men-round-7-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r8-g10",
+      "red": "李虢綕",
+      "black": "方毅",
+      "event": "World Championship 2025",
+      "round": "Men · Round 8 · Board 10",
+      "date": "2025-09-25",
+      "halfMoves": 33,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1898:2025-19th-world-xiangqi-championships-men-round-8-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r6-g21",
+      "red": "刘嘉琪",
+      "black": "曾根敏彦",
+      "event": "World Championship 2025",
+      "round": "Men · Round 6 · Board 21",
+      "date": "2025-09-24",
+      "halfMoves": 35,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1896:2025-19th-world-xiangqi-championships-men-round-6-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r3-g18",
+      "red": "匡家卓",
+      "black": "甘建希",
+      "event": "World Championship 2025",
+      "round": "Men · Round 3 · Board 18",
+      "date": "2025-09-23",
+      "halfMoves": 30,
+      "result": "0-1",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1893:2025-19th-world-xiangqi-championships-men-round-3-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r4-g12",
+      "red": "顾亿庆",
+      "black": "李铭坚",
+      "event": "World Championship 2025",
+      "round": "Men · Round 4 · Board 12",
+      "date": "2025-09-23",
+      "halfMoves": 34,
+      "result": "0-1",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1894:2025-19th-world-xiangqi-championships-men-round-4-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r4-g20",
+      "red": "斯克利亚罗夫",
+      "black": "陈万威",
+      "event": "World Championship 2025",
+      "round": "Men · Round 4 · Board 20",
+      "date": "2025-09-23",
+      "halfMoves": 36,
+      "result": "0-1",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1894:2025-19th-world-xiangqi-championships-men-round-4-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r4-g7",
+      "red": "黄颢颐",
+      "black": "林进强",
+      "event": "World Championship 2025",
+      "round": "Men · Round 4 · Board 7",
+      "date": "2025-09-23",
+      "halfMoves": 32,
+      "result": "0-1",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1894:2025-19th-world-xiangqi-championships-men-round-4-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r1-g19",
+      "red": "阮日光",
+      "black": "斯克利亚罗夫",
+      "event": "World Championship 2025",
+      "round": "Men · Round 1 · Board 19",
+      "date": "2025-09-22",
+      "halfMoves": 33,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1838:2025-19th-world-xiangqi-championships-men-round-1-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2025-men-r2-g1",
+      "red": "古贝蒂",
+      "black": "郭胜文",
+      "event": "World Championship 2025",
+      "round": "Men · Round 2 · Board 1",
+      "date": "2025-09-22",
+      "halfMoves": 18,
+      "result": "0-1",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1892:2025-19th-world-xiangqi-championships-men-round-2-game-records&catid=418&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2023-men-r3-g13",
+      "red": "奥利维尔",
+      "black": "顾亿庆",
+      "event": "World Championship 2023",
+      "round": "Men · Round 3 · Board 13",
+      "date": "2023-11-21",
+      "halfMoves": 25,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2023-men-r3-g3",
+      "red": "刘亿豪",
+      "black": "吴宗翰",
+      "event": "World Championship 2023",
+      "round": "Men · Round 3 · Board 3",
+      "date": "2023-11-21",
+      "halfMoves": 28,
+      "result": "0-1",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2023-men-r4-g13",
+      "red": "顾亿庆",
+      "black": "麻生达郎",
+      "event": "World Championship 2023",
+      "round": "Men · Round 4 · Board 13",
+      "date": "2023-11-21",
+      "halfMoves": 27,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377"
+    },
+    {
+      "id": "vietnam-wxf-2023-1636-g3",
+      "red": "黎德志",
+      "black": "赖理兄",
+      "event": "World Championship 2023",
+      "round": "Men · Round 4 · Board 3",
+      "date": "2023-11-21",
+      "halfMoves": 31,
+      "result": "1/2-1/2",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2023-men-r8-g10",
+      "red": "许鲁斌",
+      "black": "奥利维尔",
+      "event": "World Championship 2023",
+      "round": "Men · Round 8 · Board 10",
+      "date": "2023-11-23",
+      "halfMoves": 25,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2023-men-r9-g13",
+      "red": "奥利维尔",
+      "black": "梅俊海",
+      "event": "World Championship 2023",
+      "round": "Men · Round 9 · Board 12",
+      "date": "2023-11-24",
+      "halfMoves": 28,
+      "result": "0-1",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2023-men-r9-g3",
+      "red": "吴宗翰",
+      "black": "黎德志",
+      "event": "World Championship 2023",
+      "round": "Men · Round 9 · Board 2",
+      "date": "2023-11-24",
+      "halfMoves": 37,
+      "result": "1/2-1/2",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377"
+    },
+    {
+      "id": "wxf-2023-men-r9-g7",
+      "red": "黄学谦",
+      "black": "庄宏明",
+      "event": "World Championship 2023",
+      "round": "Men · Round 9 · Board 6",
+      "date": "2023-11-24",
+      "halfMoves": 37,
+      "result": "1-0",
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377"
+    },
+    {
+      "id": "futa2025-1382",
+      "red": "陈清新",
+      "black": "陈光日",
+      "event": "7th Phuong Trang International Xiangqi Masters Cup 2025",
+      "round": "Swiss · Round 9",
+      "date": "2025-12-28",
+      "halfMoves": 33,
+      "result": "1/2-1/2",
+      "sourceUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?view=game&id=1382"
+    },
+    {
+      "id": "futa2025-1378",
+      "red": "阮英敏",
+      "black": "阮陈杜宁",
+      "event": "7th Phuong Trang International Xiangqi Masters Cup 2025",
+      "round": "Swiss · Round 9",
+      "date": "2025-12-28",
+      "halfMoves": 36,
+      "result": "1-0",
+      "sourceUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?view=game&id=1378"
+    },
+    {
+      "id": "futa2025-1376",
+      "red": "何文进",
+      "black": "潘阮公明",
+      "event": "7th Phuong Trang International Xiangqi Masters Cup 2025",
+      "round": "Swiss · Round 9",
+      "date": "2025-12-28",
+      "halfMoves": 34,
+      "result": "1/2-1/2",
+      "sourceUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?view=game&id=1376"
+    },
+    {
+      "id": "futa2025-1354",
+      "red": "王家瑞",
+      "black": "许文章",
+      "event": "7th Phuong Trang International Xiangqi Masters Cup 2025",
+      "round": "Semifinal · Round 8",
+      "date": "2025-12-27",
+      "halfMoves": 30,
+      "result": "1/2-1/2",
+      "sourceUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?view=game&id=1354"
+    },
+    {
+      "id": "futa2025-1340",
+      "red": "邓有庄",
+      "black": "阮成保",
+      "event": "7th Phuong Trang International Xiangqi Masters Cup 2025",
+      "round": "Swiss · Round 7",
+      "date": "2025-12-26",
+      "halfMoves": 36,
+      "result": "1/2-1/2",
+      "sourceUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?view=game&id=1340"
+    },
+    {
+      "id": "futa2025-1279",
+      "red": "阮明日光",
+      "black": "宗室日新",
+      "event": "7th Phuong Trang International Xiangqi Masters Cup 2025",
+      "round": "Swiss · Round 3",
+      "date": "2025-12-23",
+      "halfMoves": 35,
+      "result": "1-0",
+      "sourceUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?view=game&id=1279"
+    }
+  ]
+}

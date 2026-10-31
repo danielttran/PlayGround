@@ -273,13 +273,14 @@ public final class MainActivity extends Activity {
     /** Recycled row: player TextView → side row → game card stays accessible. */
     private final class GameCard extends LinearLayout {
         private GameRepository.Game item;
-        private final TextView redName,blackName,score,event,round,collection,clock,details,action;
+        private final TextView redName,blackName,score,event,round,collection,clock,provenance,details,action;
         private final LinearLayout result;
         GameCard(){
             super(MainActivity.this);setOrientation(LinearLayout.VERTICAL);setBackground(shape(SURFACE,LINE,15));pad(this,14,14,14,12);setLayoutParams(new AbsListView.LayoutParams(-1,-2));
             LinearLayout redRow=playerRow("RED","",16),blackRow=playerRow("BLACK","",16);addView(redRow);addView(blackRow);redName=(TextView)redRow.getChildAt(1);blackName=(TextView)blackRow.getChildAt(1);
             result=row();result.addView(text("Result",12,MUTED),new LinearLayout.LayoutParams(0,-2,1));score=text("",14,MUTED);result.addView(score);addView(result);
             event=text("",14,MUTED);pad(event,0,10,0,0);addView(event);round=text("",13,MUTED);addView(round);collection=text("",12,ACCENT);addView(collection);clock=text("",12,ACCENT);addView(clock);
+            provenance=text("",12,ACCENT);addView(provenance);
             details=text("",12,MUTED);pad(details,0,14,0,6);addView(details);action=text("",13,ACCENT);action.setGravity(Gravity.END);addView(action);
             setFocusable(true);setOnClickListener(v->{if(item!=null){rememberLibraryScroll();openGame(item,true);}});
         }
@@ -287,6 +288,8 @@ public final class MainActivity extends Activity {
             item=game;redName.setText(PlayerNames.display(game.red));blackName.setText(PlayerNames.display(game.black));score.setText(libraryHideResults?"":displayResult(game.result));result.setVisibility(libraryHideResults?View.GONE:View.VISIBLE);
             event.setText(game.event);round.setText(game.round);round.setVisibility(game.round.isEmpty()?View.GONE:View.VISIBLE);collection.setText(getString(R.string.library_import_collection,game.collection));collection.setVisibility(game.imported&&!game.collection.isEmpty()?View.VISIBLE:View.GONE);
             clock.setText(timeControl(game.timeControl));clock.setVisibility(game.timeControl.isEmpty()?View.GONE:View.VISIBLE);
+            provenance.setText("accounts_unverified".equals(game.engineIdentity)?"Engine-named accounts · unverified":"Source-labelled engine match");
+            provenance.setVisibility(game.engineGame&&!game.engineIdentity.isEmpty()?View.VISIBLE:View.GONE);
             details.setText(getResources().getQuantityString(R.plurals.library_game_details,game.moves.size(),game.date.isEmpty()?"Undated":game.date,game.moves.size(),game.imported?" · Imported · "+(game.engineGame?"Engine":"Human"):game.engineGame?" · Engine game":""));
             boolean variation=prefs.getBoolean("exploring:"+game.id,false);int resume=variation?prefs.getInt("variationPly:"+game.id,0):Math.min(game.moves.size(),prefs.getInt("ply:"+game.id,0));
             action.setText(variation?getString(R.string.library_resume_variation,(resume+1)/2):resume>0?getString(R.string.library_resume_move,(resume+1)/2):getString(R.string.library_open_game));
@@ -373,7 +376,7 @@ public final class MainActivity extends Activity {
         }
     }
 
-    private void gameInformation(){String info="Red: "+PlayerNames.display(game.red)+"\nBlack: "+PlayerNames.display(game.black)+"\n\n"+replayEvent()+(game.date.isEmpty()?"":"\n"+game.date);AlertDialog.Builder details=dialog("Game information").setMessage(info).setPositiveButton("Close",null);Uri source=Uri.parse(game.sourceUrl==null?"":game.sourceUrl);if("https".equalsIgnoreCase(source.getScheme())||"http".equalsIgnoreCase(source.getScheme()))details.setNeutralButton("View source",(d,w)->openSource(game.sourceUrl));gameInformationDialog=details.create();gameInformationDialog.setOnDismissListener(d->{if(gameInformationDialog==d)gameInformationDialog=null;});gameInformationDialog.show();}
+    private void gameInformation(){String info="Red: "+PlayerNames.display(game.red)+"\nBlack: "+PlayerNames.display(game.black)+"\n\n"+replayEvent()+(game.date.isEmpty()?"":"\n"+game.date)+(game.metadataNote.isEmpty()?"":"\n\n"+game.metadataNote);AlertDialog.Builder details=dialog("Game information").setMessage(info).setPositiveButton("Close",null);Uri source=Uri.parse(game.sourceUrl==null?"":game.sourceUrl);if("https".equalsIgnoreCase(source.getScheme())||"http".equalsIgnoreCase(source.getScheme()))details.setNeutralButton("View source",(d,w)->openSource(game.sourceUrl));gameInformationDialog=details.create();gameInformationDialog.setOnDismissListener(d->{if(gameInformationDialog==d)gameInformationDialog=null;});gameInformationDialog.show();}
     private Button skipGameButton(boolean previous){Button control=button("",()->navigateGame(previous?-1:1),false);control.setForeground(new SkipGameIcon(previous));control.setForegroundGravity(Gravity.CENTER);return control;}
     private final class SkipGameIcon extends Drawable {
         private final boolean previous;private final Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);private final Path triangle=new Path();private int alpha=255;

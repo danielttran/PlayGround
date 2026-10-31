@@ -198,6 +198,28 @@ public final class PlayerNames {
         add("王家瑞","Wang Jia Rui","Vương Gia Thụy",FUTA_2025);
         add("阮煌林","Nguyen Hoang Lam (M)","Nguyễn Hoàng Lâm (M)",FUTA_2025);
         add("潘阮公明","Phan Nguyen Cong Minh","Phan Nguyễn Công Minh",FUTA_2025);
+        // Mandarin transliterations for the selected Chinese master records.
+        NAMES.put("卜凤波",new Name("卜凤波","Bu Fengbo","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("金波",new Name("金波","Jin Bo","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("万春林",new Name("万春林","Wan Chunlin","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("杨德琪",new Name("杨德琪","Yang Deqi","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("潘振波",new Name("潘振波","Pan Zhenbo","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("徐天红",new Name("徐天红","Xu Tianhong","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("许文学",new Name("许文学","Xu Wenxue","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("徐天利",new Name("徐天利","Xu Tianli","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("庄玉庭",new Name("庄玉庭","Zhuang Yuting","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("黄仕清",new Name("黄仕清","Huang Shiqing","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("许国义",new Name("许国义","Xu Guoyi","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("金松",new Name("金松","Jin Song","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("景学义",new Name("景学义","Jing Xueyi","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("王嘉良",new Name("王嘉良","Wang Jialiang","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("黄海林",new Name("黄海林","Huang Hailin","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("陈富杰",new Name("陈富杰","Chen Fujie","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("尚威",new Name("尚威","Shang Wei","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("杨官璘",new Name("杨官璘","Yang Guanlin","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("王斌",new Name("王斌","Wang Bin","","Mandarin pinyin; identity from pinned master-game source",true));
+        NAMES.put("刘殿中",new Name("刘殿中","Liu Dianzhong","","Mandarin pinyin; identity from pinned master-game source",true));
+        add("武明一","Vo Minh Nhat","Võ Minh Nhất","https://www.wxf-xiangqi.org/images/Player_Titled_List/WXF_Titled_Player_List_Public_Edition.pdf");
         alias("吳宗翰","吴宗翰");
         alias("郑彦隆)","郑彦隆");
         alias("阮煌林 (M)","阮煌林");

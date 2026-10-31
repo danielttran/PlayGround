@@ -2,14 +2,14 @@
   "collection": "World Championship 2023",
   "scope": "All eligible published men's classical main-line records from the official 2023 World Championship archive; women's records omitted by user collection preference. Not a best-game ranking.",
   "screeningDate": "2026-10-28",
-  "games": 107,
-  "halfMoves": 9362,
+  "games": 99,
+  "halfMoves": 9124,
   "sourceRecordSlots": 176,
   "divisionCounts": {
-    "Men": 107
+    "Men": 99
   },
-  "legacyGamesPreserved": 16,
-  "newGames": 91,
+  "legacyGamesPreserved": 15,
+  "newGames": 84,
   "rounds": [
     {
       "division": "Men",
@@ -30,14 +30,14 @@
       "round": 3,
       "article": 1635,
       "sourceRecords": 14,
-      "admittedGames": 12
+      "admittedGames": 10
     },
     {
       "division": "Men",
       "round": 4,
       "article": 1636,
       "sourceRecords": 14,
-      "admittedGames": 12
+      "admittedGames": 10
     },
     {
       "division": "Men",
@@ -65,14 +65,14 @@
       "round": 8,
       "article": 1709,
       "sourceRecords": 14,
-      "admittedGames": 11
+      "admittedGames": 10
     },
     {
       "division": "Men",
       "round": 9,
       "article": 1710,
       "sourceRecords": 15,
-      "admittedGames": 12
+      "admittedGames": 9
     },
     {
       "division": "Women",
@@ -1026,6 +1026,54 @@
       "reasons": [
         "Women's division omitted by user collection preference"
       ]
+    },
+    {
+      "id": "wxf-2023-men-r3-g3",
+      "halfMoves": 28,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2023-men-r3-g13",
+      "halfMoves": 25,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1635:2023-18th-world-xiangqi-championships-men-round-03-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "vietnam-wxf-2023-1636-g3",
+      "halfMoves": 31,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2023-men-r4-g13",
+      "halfMoves": 27,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1636:2023-18th-world-xiangqi-championships-men-round-04-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2023-men-r8-g10",
+      "halfMoves": 25,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1709:2023-18th-world-xiangqi-championships-men-round-08-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2023-men-r9-g3",
+      "halfMoves": 37,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2023-men-r9-g7",
+      "halfMoves": 37,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
+    },
+    {
+      "id": "wxf-2023-men-r9-g13",
+      "halfMoves": 28,
+      "sourceUrl": "https://www.wxf-xiangqi.org/index.php?option=com_content&view=article&id=1710:2023-18th-world-xiangqi-championships-men-round-09-game-records&catid=354&lang=en&Itemid=377",
+      "reason": "User curation: game ends before numbered move 20"
     }
   ],
   "sources": [
@@ -1260,8 +1308,8 @@
     "reason": "Women's division omitted by user collection preference"
   },
   "policySha256": "9254416e5f7a5db1d95bf21bc0929d51ca9ca6db65d70ea3df9b0c4b0117b2d1",
-  "curationPolicySha256": "8f27257542efd6ea7120bb76a4a3cdcb1a0f80c4fe82fc0417217905b116d650",
-  "assetSha256": "11143ba5342adbedc36901519e318e0980ead7eecc0a1ced36cf46ee12b8792e",
+  "curationPolicySha256": "5f55c5eb6c887bb09a43c47043fd8d1092c87bf9a4b52effaed19f3d680fc612",
+  "assetSha256": "34578f19c546bb3197726fdd120a424fccdb02f1b239eff1ad0dba71b2fc8148",
   "notation": "ICCS; normal starting board, a0 at Red's lower-left",
   "rights": "Attributed factual main-line moves and event metadata only. No annotations, board code, photographs or source PDFs bundled. WXF retains rights in its pages; no blanket redistribution license asserted."
 }

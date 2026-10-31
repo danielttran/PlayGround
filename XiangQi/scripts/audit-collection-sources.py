@@ -31,6 +31,7 @@ def main():
     targets = {}
     ids, lines = set(), set()
     summaries, limitations = [], []
+    minimum_moves = json.loads((ROOT / 'data/curation-policy.json').read_bytes())['minimumNumberedMoves']
     for entry, games, digest in packs:
         if entry.get('engineGame'):
             raise ValueError('Add an engine-specific source reproducer before auditing engine packs')
@@ -58,6 +59,8 @@ def main():
             lines.add(key)
             if not game['moves'] or not all(re.fullmatch('[a-i][0-9][a-i][0-9]', m) for m in game['moves']):
                 raise ValueError(f'{ident}: missing or malformed moves')
+            if (len(game['moves']) + 1) // 2 < minimum_moves:
+                raise ValueError(f'{ident}: below current minimum numbered move')
             if game['result'] not in ('1-0', '0-1', '1/2-1/2'):
                 raise ValueError(f'{ident}: unknown result')
             value = game['date']
@@ -86,6 +89,7 @@ def main():
     import download_vietnamese
     import download_vietnamese_classics
     import download_futa2025
+    import build_master_classics
     captured, log = {}, io.StringIO()
     original_write = Path.write_bytes
 
@@ -103,7 +107,7 @@ def main():
         download_historical.build(True)
         download_vietnamese.build(True, False)
         # These pinned source converters already provide strict check-only mode.
-        for module in (download_vietnamese_classics, download_futa2025):
+        for module in (download_vietnamese_classics, download_futa2025, build_master_classics):
             with patch.object(sys, 'argv', [module.__name__, '--check']):
                 module.main()
     if len(captured) != 8:
@@ -121,7 +125,7 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     args.output.with_suffix('.log').write_text(log.getvalue(), encoding='utf-8')
-    print(f"PASS: {report['games']} games / {report['halfMoves']} half-moves; all six human packs reproduce exactly; no duplicates")
+    print(f"PASS: {report['games']} games / {report['halfMoves']} half-moves; all {len(packs)} human packs reproduce exactly; no duplicates")
     print(f'Preserved uncertainty/metadata-note records: {len(limitations)}. Report: {args.output}')
 
 

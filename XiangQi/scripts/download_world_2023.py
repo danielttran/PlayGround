@@ -9,6 +9,8 @@ moves/results and duplicate main lines are held out. No annotations are copied.
 """
 from __future__ import annotations
 
+from game_packs import retain_full_length
+
 import argparse
 from collections import Counter
 from datetime import date
@@ -274,12 +276,17 @@ def build(args):
         raise ValueError(f"Previously bundled games missing: {set(policy['legacyRecords'])-legacy_used}")
     women_validation = verify_women_results(games, policy) if "Women" in policy["includedDivisions"] else {
         "games": 0, "excluded": True, "reason": "Women's division omitted by user collection preference"}
+    games = retain_full_length(games, exclusions)
+    kept_ids = {game["id"] for game in games}
+    legacy_kept = sum(record["id"] in kept_ids for record in policy["legacyRecords"].values())
+    for row in rounds:
+        row["admittedGames"] = sum(game["round"].startswith(f'{row["division"]} · Round {row["round"]} ·') for game in games)
     games.sort(key=lambda game: (game["date"], game["round"], game["id"]))
     payload = (json.dumps({"collection": policy["name"], "source": "Official World Xiangqi Federation adult championship archive", "games": games}, ensure_ascii=False, indent=2) + "\n").encode()
     manifest = {"collection": policy["name"], "scope": policy["scope"], "screeningDate": policy["screeningDate"],
                 "games": len(games), "halfMoves": sum(len(game["moves"]) for game in games), "sourceRecordSlots": raw_count,
                 "divisionCounts": dict(Counter(game["round"].split(" · ")[0] for game in games)),
-                "legacyGamesPreserved": len(legacy_used), "newGames": len(games)-len(legacy_used), "rounds": rounds,
+                "legacyGamesPreserved": legacy_kept, "newGames": len(games)-legacy_kept, "rounds": rounds,
                 "retiredLegacyGames": policy.get("retiredLegacyRecords", {}),
                 "metadataCorrections": corrections, "excludedRecords": exclusions, "sources": sources.items,
                 "resultCrossChecks": policy.get("resultCrossChecks", {}),

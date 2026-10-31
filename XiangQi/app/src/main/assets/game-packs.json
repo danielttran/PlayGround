@@ -30,6 +30,11 @@
       "file": "futa2025-games.json",
       "label": "Phuong Trang Masters 2025",
       "sourceManifest": "data/futa2025-manifest.json"
+    },
+    {
+      "file": "master-classics.json",
+      "label": "Selected classical master games",
+      "sourceManifest": "data/master-classics-manifest.json"
     }
   ]
 }
