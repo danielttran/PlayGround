@@ -144,9 +144,9 @@ public final class MainActivity extends Activity {
         Button settings=button("Settings",this::settings,false);heading.addView(settings,new LinearLayout.LayoutParams(dp(94),dp(48)));content.addView(heading);
         TextView subtitle=text("A world of games. A board to understand them.",14,MUTED); pad(subtitle,0,4,0,18); content.addView(subtitle);
         GameRepository.Game current=currentGame();
-        if(current!=null)content.addView(button("Return to current game · swipe left\nRed: "+PlayerNames.display(current.red)+"\nBlack: "+PlayerNames.display(current.black),this::returnToCurrentGame,true));
-        LinearLayout tools=row(); tools.addView(weight(button("Import games",this::importMenu,true),1));
-        tools.addView(weight(button("About & sources",this::about,false),1)); content.addView(tools);
+        LinearLayout tools=row();
+        if(current!=null)tools.addView(weight(button("Return to current game",this::returnToCurrentGame,false),1));
+        tools.addView(weight(button("Import games",this::importMenu,false),1));content.addView(tools);
         LinearLayout tabs=row();
         String[] tabIds={"human","engine","imports"},tabLabels={getString(R.string.library_human_games),getString(R.string.library_engine_games),getString(R.string.library_my_imports)};
         for(int i=0;i<tabIds.length;i++){
@@ -656,7 +656,7 @@ public final class MainActivity extends Activity {
     }
     private void applyAppearance() {
         StudySettings s=StudySettings.load(this);
-        if(board!=null){board.setAppearance(s.boardStyle,s.glyphStyle,s.discStyle);board.setCoordinates(s.coordinateStyle);board.setCustomColors(s.boardColor,s.redBackground,s.blackBackground);}
+        if(board!=null){board.setMoveAnimationMillis(StudySettings.moveAnimationMillis(this));board.setAppearance(s.boardStyle,s.glyphStyle,s.discStyle);board.setCoordinates(s.coordinateStyle);board.setCustomColors(s.boardColor,s.redBackground,s.blackBackground);}
         if(library)renderCards();else if(eventLabel!=null)eventLabel.setText(replayEvent());
     }
     private void settings() {
@@ -668,9 +668,11 @@ public final class MainActivity extends Activity {
         Button speed=button(getString(R.string.replay_speed_label,replayDelayLabel()),()->{},false);speed.setContentDescription("Replay speed");speed.setOnClickListener(v->replaySpeed(()->speed.setText(getString(R.string.replay_speed_label,replayDelayLabel()))));body.addView(speed);
         String[] boardIds=AppearancePresets.boardIds(),discIds=AppearancePresets.discIds();
         ArrowChoice boards=settingChoice(body,"Board style",AppearancePresets.boardLabels(),index(saved.boardStyle,boardIds));
-        ArrowChoice glyphs=settingChoice(body,"Chinese piece characters",new String[]{"Traditional Chinese","Simplified Chinese"},index(saved.glyphStyle,"traditional","simplified"));
         ArrowChoice discs=settingChoice(body,"Piece finish",AppearancePresets.discLabels(),index(saved.discStyle,discIds));
         ArrowChoice coordinates=settingChoice(body,"Board coordinates",new String[]{"Off","ICCS · a–i / 0–9","Numeric · 0–8 / 0–9"},index(saved.coordinateStyle,"none","iccs","numeric"));
+        ArrowChoice glyphs=settingChoice(body,"Chinese piece characters",new String[]{"Traditional Chinese","Simplified Chinese"},index(saved.glyphStyle,"traditional","simplified"));
+        String[] animationLabels={"Off","100 ms","200 ms (default)","300 ms","500 ms","800 ms"};int[] animationTimes={0,100,200,300,500,800};int animationSelected=2;for(int i=0;i<animationTimes.length;i++)if(animationTimes[i]==StudySettings.moveAnimationMillis(this))animationSelected=i;
+        ArrowChoice animation=settingChoice(body,"Move slide duration",animationLabels,animationSelected);
         TextView previewLabel=text("Live board preview",13,ACCENT);pad(previewLabel,0,12,0,5);body.addView(previewLabel);
         BoardView preview=new BoardView(this);preview.setPosition(library||positions.isEmpty()?Position.initial():positions.get(ply).copy(),"",false);
         preview.setAppearance(saved.boardStyle,saved.glyphStyle,saved.discStyle);preview.setCoordinates(saved.coordinateStyle);preview.setCustomColors(saved.boardColor,saved.redBackground,saved.blackBackground);body.addView(preview,new LinearLayout.LayoutParams(-1,-2));
@@ -692,6 +694,7 @@ public final class MainActivity extends Activity {
         boards.onPresetSelected(position->{StudySettings.selectBoardPreset(this,boardIds[position]);changed.run();});
         discs.onPresetSelected(position->{StudySettings.selectDiscPreset(this,discIds[position]);changed.run();});
         glyphs.onPresetSelected(position->changed.run());coordinates.onPresetSelected(position->changed.run());hide.setOnCheckedChangeListener((button,checked)->changed.run());
+        animation.onPresetSelected(position->{StudySettings.setMoveAnimationMillis(this,animationTimes[position]);if(board!=null)board.setMoveAnimationMillis(animationTimes[position]);preview.setMoveAnimationMillis(animationTimes[position]);});
         body.removeView(hide);body.removeView(spoilerNote);body.removeView(speed);body.addView(speed);body.addView(hide);body.addView(spoilerNote);
         body.removeView(previewLabel);body.removeView(preview);
         int available=Math.max(dp(240),getResources().getDisplayMetrics().heightPixels-dp(180));

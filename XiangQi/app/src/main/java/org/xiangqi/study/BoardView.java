@@ -11,7 +11,7 @@ import org.xiangqi.study.core.Engine;
 import java.util.*;
 
 /** A resolution-independent Xiangqi board using intersection coordinates. */
-public final class BoardView extends View {
+public class BoardView extends View {
     public interface MoveListener { void onMove(String move); }
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint.FontMetrics fontMetrics=new Paint.FontMetrics();
@@ -19,6 +19,22 @@ public final class BoardView extends View {
     private final Map<String,Float> fittedGlyphSizes=new HashMap<>();
     private float fittedGlyphStep;
     private Position position = Position.initial();
+    private boolean positionInitialized;
+    private int slideFrom=-1,slideTo=-1,animationMillis;
+    private char capturedPiece;
+    private long slideStarted;
+    public void setMoveAnimationMillis(int millis){int value=Math.max(0,Math.min(1000,millis));if(value!=animationMillis){slideTo=-1;animationMillis=value;invalidate();}}
+    protected long animationTimeMillis(){return android.os.SystemClock.uptimeMillis();}
+    private void prepareSlide(Position next){
+        if(!positionInitialized||animationMillis==0){slideTo=-1;return;}
+        int a=-1,b=-1,count=0;for(int i=0;i<90;i++)if(position.board[i]!=next.board[i]){if(count==0)a=i;else if(count==1)b=i;count++;}
+        if(count==0)return;
+        slideTo=-1;if(count!=2||position.redToMove==next.redToMove)return;
+        if(position.board[a]!=0&&position.board[a]!='.'&&position.board[a]==next.board[b]){slideFrom=a;slideTo=b;}
+        else if(position.board[b]!=0&&position.board[b]!='.'&&position.board[b]==next.board[a]){slideFrom=b;slideTo=a;}
+        if(slideTo>=0){capturedPiece=position.board[slideTo];slideStarted=animationTimeMillis();}
+    }
+    @Override protected void onDetachedFromWindow(){slideTo=-1;super.onDetachedFromWindow();}
     private boolean flipped, editing;
     private int selected = -1;
     private String lastMove = "", hintMove = "";
@@ -39,7 +55,7 @@ public final class BoardView extends View {
     private String coordinateStyle="none";
     private static final String[] FILE_LABELS={"a","b","c","d","e","f","g","h","i"};
     private static final String[] NUMBER_LABELS={"0","1","2","3","4","5","6","7","8","9"};
-    public BoardView(Context context) { super(context); setLayerType(View.LAYER_TYPE_SOFTWARE,null); setFocusable(true); setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES); }
+    public BoardView(Context context) { super(context);animationMillis=StudySettings.moveAnimationMillis(context); setLayerType(View.LAYER_TYPE_SOFTWARE,null); setFocusable(true); setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES); }
     public void setMoveListener(MoveListener listener) { this.listener=listener; }
     public void setAppearance(String boardStyle,String glyphStyle,String discStyle) {
         AppearancePresets.Board board=AppearancePresets.board(boardStyle);
@@ -78,11 +94,11 @@ public final class BoardView extends View {
         return readableMonochrome(background);
     }
     public void setPosition(Position p,String last,boolean editing) {
-        this.position=p; this.lastMove=last==null?"":last; this.editing=editing; selected=-1; hintMove="";analysisArrows=Collections.emptyList();
+        prepareSlide(p);positionInitialized=true;this.position=p; this.lastMove=last==null?"":last; this.editing=editing; selected=-1; hintMove="";analysisArrows=Collections.emptyList();
         legal=editing?p.legalMoves():Collections.emptyList();
         setContentDescription("Xiangqi board. " + (p.redToMove?"Red":"Black") + " to move. " + (editing?"Explore mode. Tap a piece, then a legal destination. Use the legal move list for accessible input.":"Replay mode. Use the move navigation controls.")); invalidate();
     }
-    public void setFlipped(boolean flipped) { this.flipped=flipped; invalidate(); }
+    public void setFlipped(boolean flipped) { if(this.flipped!=flipped)slideTo=-1;this.flipped=flipped; invalidate(); }
     public void setCoordinates(String style) { coordinateStyle="iccs".equals(style)||"numeric".equals(style)?style:"none";invalidate(); }
     public void setHint(String move) { hintMove=move==null?"":move;analysisArrows=Collections.emptyList();invalidate(); }
     /** Every selected engine line contributes its first legal move and legal reply. */
@@ -119,35 +135,13 @@ public final class BoardView extends View {
         if(!"none".equals(coordinateStyle))drawCoordinates(c,density);
         // The played move is a directional arrow, never source/destination tiles.
         drawArrow(c,lastMove,moveArrow,.11f,.29f,false);
-        // Paint every shadow/halo before any opaque face, so adjacent glowing
-        // pieces never wash out a character that has already been drawn.
-        if(discFinish>=AppearancePresets.BEVELED)for(int i=0;i<90;i++)if(position.board[i]!=0&&position.board[i]!='.')
-            drawReferenceUnderlay(c,i,Character.isUpperCase(position.board[i]));
-        for(int i=0;i<90;i++) if(position.board[i]!=0 && position.board[i]!='.') {
-            boolean redSide=Character.isUpperCase(position.board[i]);
-            int fill=redSide?redDiscColor:blackDiscColor,ink=redSide?red:black;
-            if(discFinish>=AppearancePresets.BEVELED)drawReferenceFace(c,i,fill,ink,redSide);
-            else {
-            paint.setColor(fill); c.drawCircle(x(i),y(i),radius,paint);
-            paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.026f); paint.setColor(Character.isUpperCase(position.board[i])?red:black);
-            c.drawCircle(x(i),y(i),radius*.88f,paint); paint.setStyle(Paint.Style.FILL);
-            if(discFinish==AppearancePresets.ENGRAVED){paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.012f);c.drawCircle(x(i),y(i),radius*.76f,paint);paint.setStyle(Paint.Style.FILL);}
-            if(discFinish==AppearancePresets.GLAZED){
-                paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.018f);paint.setColor(readableMonochrome(fill));paint.setAlpha(70);
-                c.drawArc(x(i)-radius*.96f,y(i)-radius*.96f,x(i)+radius*.96f,y(i)+radius*.96f,205,105,false,paint);
-                paint.setStyle(Paint.Style.FILL);paint.setAlpha(255);paint.setColor(Character.isUpperCase(position.board[i])?red:black);
-            }
-            if(discFinish==AppearancePresets.LACQUER){
-                paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.014f);c.drawCircle(x(i),y(i),radius*.76f,paint);
-                paint.setColor(readableMonochrome(fill));paint.setAlpha(110);paint.setStrokeWidth(step*.018f);
-                c.drawArc(x(i)-radius*.97f,y(i)-radius*.97f,x(i)+radius*.97f,y(i)+radius*.97f,205,110,false,paint);
-                paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);paint.setColor(Character.isUpperCase(position.board[i])?red:black);
-            }
-            }
-            paint.setColor(ink);
-            String character=glyph(position.board[i]);paint.setTypeface(pieceTypeface);paint.setTextSize(fittedGlyphSize(character,density));paint.setAlpha(255);
-            paint.getFontMetrics(fontMetrics);c.drawText(character,x(i),y(i)-(fontMetrics.ascent+fontMetrics.descent)/2,paint);
-            if(i==selected) { paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.075f); paint.setColor(Color.rgb(183,211,168)); c.drawCircle(x(i),y(i),radius*1.12f,paint); paint.setStyle(Paint.Style.FILL); }
+        float progress=1f;if(slideTo>=0){progress=Math.min(1f,(animationTimeMillis()-slideStarted)/(float)animationMillis);if(progress>=1f)slideTo=-1;}
+        if(discFinish>=AppearancePresets.BEVELED)for(int i=0;i<90;i++)if(i!=slideTo&&position.board[i]!=0&&position.board[i]!='.')drawReferenceUnderlay(c,i,Character.isUpperCase(position.board[i]));
+        for(int i=0;i<90;i++)if(i!=slideTo&&position.board[i]!=0&&position.board[i]!='.')drawPiece(c,i,position.board[i]);
+        if(slideTo>=0){
+            if(capturedPiece!=0&&capturedPiece!='.'){if(discFinish>=AppearancePresets.BEVELED)drawReferenceUnderlay(c,slideTo,Character.isUpperCase(capturedPiece));drawPiece(c,slideTo,capturedPiece);}
+            float eased=progress*progress*(3-2*progress);int saved=c.save();c.translate((x(slideFrom)-x(slideTo))*(1-eased),(y(slideFrom)-y(slideTo))*(1-eased));
+            if(discFinish>=AppearancePresets.BEVELED)drawReferenceUnderlay(c,slideTo,Character.isUpperCase(position.board[slideTo]));drawPiece(c,slideTo,position.board[slideTo]);c.restoreToCount(saved);postInvalidateOnAnimation();
         }
         if(selected>=0) for(String move:legal) if(Position.index(move.substring(0,2))==selected) {
             int dest=Position.index(move.substring(2)); paint.setColor(Color.argb(175,182,213,170)); c.drawCircle(x(dest),y(dest),step*.12f,paint);
@@ -162,6 +156,32 @@ public final class BoardView extends View {
             for(AnalysisVisuals.Arrow arrow:analysisArrows)drawAnalysisArrow(c,arrow,true);
         }
         drawTurnIndicator(c,density);
+    }
+    private void drawPiece(Canvas c,int i,char piece){float density=getResources().getDisplayMetrics().density;
+            boolean redSide=Character.isUpperCase(piece);
+            int fill=redSide?redDiscColor:blackDiscColor,ink=redSide?red:black;
+            if(discFinish>=AppearancePresets.BEVELED)drawReferenceFace(c,i,fill,ink,redSide);
+            else {
+            paint.setColor(fill); c.drawCircle(x(i),y(i),radius,paint);
+            paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.026f); paint.setColor(Character.isUpperCase(piece)?red:black);
+            c.drawCircle(x(i),y(i),radius*.88f,paint); paint.setStyle(Paint.Style.FILL);
+            if(discFinish==AppearancePresets.ENGRAVED){paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.012f);c.drawCircle(x(i),y(i),radius*.76f,paint);paint.setStyle(Paint.Style.FILL);}
+            if(discFinish==AppearancePresets.GLAZED){
+                paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.018f);paint.setColor(readableMonochrome(fill));paint.setAlpha(70);
+                c.drawArc(x(i)-radius*.96f,y(i)-radius*.96f,x(i)+radius*.96f,y(i)+radius*.96f,205,105,false,paint);
+                paint.setStyle(Paint.Style.FILL);paint.setAlpha(255);paint.setColor(Character.isUpperCase(piece)?red:black);
+            }
+            if(discFinish==AppearancePresets.LACQUER){
+                paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(step*.014f);c.drawCircle(x(i),y(i),radius*.76f,paint);
+                paint.setColor(readableMonochrome(fill));paint.setAlpha(110);paint.setStrokeWidth(step*.018f);
+                c.drawArc(x(i)-radius*.97f,y(i)-radius*.97f,x(i)+radius*.97f,y(i)+radius*.97f,205,110,false,paint);
+                paint.setAlpha(255);paint.setStyle(Paint.Style.FILL);paint.setColor(Character.isUpperCase(piece)?red:black);
+            }
+            }
+            paint.setColor(ink);
+            String character=glyph(piece);paint.setTypeface(pieceTypeface);paint.setTextSize(fittedGlyphSize(character,density));paint.setAlpha(255);
+            paint.getFontMetrics(fontMetrics);c.drawText(character,x(i),y(i)-(fontMetrics.ascent+fontMetrics.descent)/2,paint);
+            if(i==selected) { paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(step*.075f); paint.setColor(Color.rgb(183,211,168)); c.drawCircle(x(i),y(i),radius*1.12f,paint); paint.setStyle(Paint.Style.FILL); }
     }
     /** Light procedural material cues; custom RGB always keeps a flat exact fill. */
     private void drawSurface(Canvas canvas,float w,float h,float density){

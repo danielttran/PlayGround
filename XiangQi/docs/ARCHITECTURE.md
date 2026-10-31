@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.8 (version code 17) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.9 (version code 18) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -69,10 +69,10 @@ cell size. Glyphs and rank badges remain opaque. Analysis shafts are 0.15 cell
 and composite in one shared 40% opacity layer; the played arrow is 0.11 cell at 40%.
 
 `AppearancePresets` is an Android-free catalog shared by settings and the renderer:
-24 boards and 22 Chinese-character disc finishes. The existing 20 board and 18
-disc IDs remain in their original order, including the original six selections
-and surface colors. Warm maple, Neon violet, Antique gold and Carved honey append
-four matching board/disc pairs from the supplied visual references. Grain,
+24 boards and 16 Chinese-character disc finishes. All board IDs remain available.
+Ten similar disc finishes were retired in 0.7.9; unknown or retired disc IDs fall
+back to Classic. Four distinct-color piece pairs join the retained finishes.
+Warm maple, Neon violet, Antique gold and Carved honey use the supplied visual references. Grain,
 patina, decorative branches, glow, bevels, frames and shadows are original Canvas
 drawings rather than edited source screenshots. The river draws only 楚河 / 漢界,
 with no URL text. [Appearance sources](APPEARANCE-SOURCES.md) record those supplied
@@ -219,3 +219,8 @@ ArrowChoice replaces all four appearance selectors. Only explicit arrow presses 
 ## Appearance and dialog audit (0.7.8)
 
 Arrow rows retain a 56 dp minimum and 48 dp buttons but grow with their text instead of imposing a fixed height. The preview is additionally bounded by the actual measured panel dimensions, reserving 72 dp for scrollable controls; in extremely short windows it yields its space to the controls. Dialog dismissal clears color, engine settings, game information, go-to, engine-side and replay-speed fields only when that instance is still current.
+
+
+## Piece catalog and motion (0.7.9)
+
+The catalog contains24boards and16piece finishes: ten requested IDs are removed and four contrasting palettes added. Unknown/retired disc IDs default to xiangqi-com; board IDs are unchanged. Obsidian now uses an opaque crimson Red face with white ink. StudySettings stores moveAnimationMillis separately from colors/replay delay (default200, valid0–1000; UI choices0/100/200/300/500/800). BoardView tracks an initial-binding flag and animates only two-cell, opposite-turn board changes. Game logic updates immediately; only the disc render is translated with a smoothstep time fraction. Captured pieces remain visible until arrival. Same-position refreshes preserve the active slide; newer moves, flipping, disabling motion and detachment discard stale motion. Large jumps/first binding are immediate.

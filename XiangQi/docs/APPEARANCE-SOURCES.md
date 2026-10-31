@@ -86,3 +86,41 @@ contains the river labels **楚河 / 漢界**, with no URL or website text in th
 Source links and credits remain in documentation rather than being drawn across
 the playing surface. Colors and contrast are adjusted for a compact phone board,
 so these are functional visual adaptations rather than pixel-identical images.
+
+
+## Distinct sides and retired finishes (0.7.9)
+
+The user's ten retired piece options are Xiangqi One Coral, Golden ivory, Carved
+walnut, Copper, Brushed silver, Night jade, Cream, Wood, Jade and Porcelain. These
+are removed from the piece selector; all board presets remain. Saved retired
+piece IDs fall back to the existing red/black Classic finish. The current catalog
+has 16 piece finishes.
+
+New original Canvas palettes prioritize side identification by face color and
+opaque contrasting Chinese lettering. They are adaptations of color/material
+ideas, not copies of commercial art or bitmap assets:
+
+| Palette | Red face | Black-side face | Character ink |
+|---|---|---|---|
+| Ruby and snow | ruby red | near white | white / charcoal |
+| Scarlet and cobalt | scarlet | cobalt blue | white / white |
+| Sunset and navy | orange-red | deep navy | dark brown / white |
+| Garnet and mint | dark garnet | pale mint | white / dark green |
+
+Web references inspected:
+
+- [Yellow Mountain Imports acrylic Xiangqi set](https://www.ymimports.com/products/us-cc005-a)
+  uses strongly separated red/white and black/white pieces. It informed solid
+  opaque faces, clear rims and the red/light-face alternatives.
+- [Unicode-hosted Xiangqi design proposal](https://www.unicode.org/wg2/docs/n4748-xiangqi.pdf)
+  documents red/blue lettering and light/dark print representations. It informed
+  the Scarlet/cobalt and dark/light alternatives. Only Chinese text is used in
+  the app; the proposal's optional pictorial symbols are not offered.
+- [Xiangqi.com](https://www.xiangqi.com/) retains the familiar red/black convention
+  used by Classic and the revised Obsidian finish.
+
+Obsidian's formerly muted pink lettering on gray is replaced with a saturated
+crimson face and white lettering. Its Red glyph contrast exceeds7:1; each new
+palette's glyphs exceed4.5:1 before the existing adaptive contrast correction.
+The new side-face RGB distance also exceeds180 on a0–255 RGB scale. This check
+supports the design review; it is not a claim of universal color-blind accessibility.

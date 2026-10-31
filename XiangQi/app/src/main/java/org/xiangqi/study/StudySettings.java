@@ -20,7 +20,7 @@ public final class StudySettings {
     public static StudySettings load(Context context) {
         SharedPreferences p=context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE);
         return new StudySettings(p.getString("board","moss"),p.getString("glyph","traditional"),
-            p.getString("disc","cream"),p.getString("coordinates","none"),p.getBoolean("hideResults",true),
+            p.getString("disc","xiangqi-com"),p.getString("coordinates","none"),p.getBoolean("hideResults",true),
             custom(p,"boardColor"),custom(p,"redBackground"),custom(p,"blackBackground"));
     }
     public static void save(Context context,String board,String glyph,String disc,boolean hide) {
@@ -37,6 +37,8 @@ public final class StudySettings {
         if(!old.discStyle.equals(s.discStyle))edit.remove("redBackground").remove("blackBackground");
         edit.apply();
     }
+    public static int moveAnimationMillis(Context context){int value=context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE).getInt("moveAnimationMillis",200);return value>=0&&value<=1000?value:200;}
+    public static void setMoveAnimationMillis(Context context,int millis){if(millis<0||millis>1000)throw new IllegalArgumentException("Animation must be 0–1000 ms");context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE).edit().putInt("moveAnimationMillis",millis).apply();}
     /** Explicit selection also replaces a custom color when choosing the same preset. */
     public static void selectBoardPreset(Context context,String board) {
         context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE).edit()

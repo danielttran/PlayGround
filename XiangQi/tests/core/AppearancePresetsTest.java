@@ -10,9 +10,9 @@ public final class AppearancePresetsTest {
     private static void check(boolean value,String message){assertions++;if(!value)throw new AssertionError(message);}
     public static void main(String[] ignored){
         String[] boards=AppearancePresets.boardIds(),discs=AppearancePresets.discIds();
-        check(boards.length==24,"Twenty-four board presets");check(discs.length==22,"Twenty-two piece presets");
+        check(boards.length==24,"Twenty-four board presets");check(discs.length==16,"Sixteen curated piece presets");
         check(Arrays.equals(Arrays.copyOf(boards,6),new String[]{"moss","wood","ink","rosewood","slate","bamboo"}),"Original board preference IDs/order retained");
-        check(Arrays.equals(Arrays.copyOf(discs,6),new String[]{"cream","wood","jade","porcelain","rosewood","obsidian"}),"Original disc preference IDs/order retained");
+        check(discs[0].equals("xiangqi-com"),"High-contrast Classic is the migration default");
         check(new HashSet<>(Arrays.asList(boards)).size()==boards.length,"No duplicate board IDs");
         check(new HashSet<>(Arrays.asList(discs)).size()==discs.length,"No duplicate disc IDs");
         check(new HashSet<>(Arrays.asList(AppearancePresets.boardLabels())).size()==boards.length,"No duplicate board labels");
@@ -32,7 +32,7 @@ public final class AppearancePresetsTest {
         check(boardColors.size()==boards.length,"Every board fill is distinct");check(discColors.size()==discs.length,"Every Red disc fill is distinct");
         String[] references={"warm-maple","neon-violet","antique-gold","carved-honey"};
         check(Arrays.equals(Arrays.copyOfRange(boards,20,24),references),"Four references append after all existing boards");
-        check(Arrays.equals(Arrays.copyOfRange(discs,18,22),references),"Matching reference disc IDs append after all existing discs");
+        for(String ref:references)check(Arrays.asList(discs).contains(ref),"Retained reference disc ID: "+ref);
         for(int i=0;i<references.length;i++){
             AppearancePresets.Board board=AppearancePresets.board(references[i]);AppearancePresets.Disc disc=AppearancePresets.disc(references[i]);
             check(board.label.equals(disc.label),"Matched reference pair has one readable name");
@@ -42,10 +42,13 @@ public final class AppearancePresetsTest {
             check(disc.redBackground!=disc.blackBackground,"Reference Red and Black backgrounds are distinguishable");
         }
         check(AppearancePresets.board(null).id.equals("moss")&&AppearancePresets.board("unknown").id.equals("moss"),"Unknown/missing board preference safely defaults");
-        check(AppearancePresets.disc(null).id.equals("cream")&&AppearancePresets.disc("symbols").id.equals("cream"),"Unknown/unsupported symbols safely default to Chinese discs");
+        check(AppearancePresets.disc(null).id.equals("xiangqi-com")&&AppearancePresets.disc("symbols").id.equals("xiangqi-com"),"Unknown/unsupported symbols safely default to Chinese discs");
         boards[0]="changed";discs[0]="changed";String[] labels=AppearancePresets.boardLabels();labels[0]="changed";
-        check(AppearancePresets.boardIds()[0].equals("moss")&&AppearancePresets.discIds()[0].equals("cream")&&AppearancePresets.boardLabels()[0].equals("Moss"),"Callers cannot mutate catalog arrays");
+        check(AppearancePresets.boardIds()[0].equals("moss")&&AppearancePresets.discIds()[0].equals("xiangqi-com")&&AppearancePresets.boardLabels()[0].equals("Moss"),"Callers cannot mutate catalog arrays");
         check(AppearancePresets.disc("xiangqi-com").redInk==0xffffffff&&AppearancePresets.disc("xiangqi-com").blackInk==0xffffffff,"Xiangqi.com character discs use white glyphs");
+        for(String retired:new String[]{"one-coral","classic-ivory","walnut","copper","silver","night-jade","cream","wood","jade","porcelain"}){check(!Arrays.asList(AppearancePresets.discIds()).contains(retired),"Retired option absent: "+retired);check(AppearancePresets.disc(retired).id.equals("xiangqi-com"),"Retired saved selection migrates safely: "+retired);}
+        for(String fresh:new String[]{"ruby-snow","scarlet-cobalt","sunset-navy","garnet-mint"}){AppearancePresets.Disc d=AppearancePresets.disc(fresh);check(contrast(d.redBackground,d.redInk)>=4.5&&contrast(d.blackBackground,d.blackInk)>=4.5,"New glyph contrast: "+fresh);int distance=0;for(int shift:new int[]{0,8,16}){int delta=((d.redBackground>>shift)&255)-((d.blackBackground>>shift)&255);distance+=delta*delta;}check(distance>=180*180,"New sides have clearly different face colors: "+fresh);}
+        check(AppearancePresets.disc("obsidian").redInk==0xffffffff&&contrast(AppearancePresets.disc("obsidian").redBackground,0xffffffff)>=7,"Obsidian Red has strong white lettering");
         System.out.println("Appearance presets: "+assertions+" assertions passed");
     }
     private static double contrast(int a,int b){double x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
