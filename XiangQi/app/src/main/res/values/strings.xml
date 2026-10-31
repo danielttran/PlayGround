@@ -39,4 +39,5 @@
     <string name="analysis_winning">%1$s winning (forced-win score)</string>
     <string name="analysis_terminal">%1$s · final position\n%2$s has no legal move. %3$s wins.\n%4$s</string>
     <string name="import_draft_restore_error">The draft could not be restored. Paste the game text again (up to 5 MB).</string>
+    <string name="library_import_collection">Import: %1$s</string>
 </resources>

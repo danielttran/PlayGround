@@ -41,12 +41,12 @@ public final class ReplayLayoutAuditTest extends InstrumentationTestCase {
             ViewGroup content=(ViewGroup)get("content");View board=(View)get("board"),boardRow=(View)board.getParent();assertEquals(1,content.indexOfChild(boardRow));assertEquals(content.getWidth(),board.getWidth());assertNull(get("positionLabel"));assertEquals(View.GONE,((View)get("variationLabel")).getVisibility());assertEquals(View.GONE,((View)get("analysisBox")).getVisibility());
             View title=(View)get("gameTitle");String description=title.getContentDescription().toString();assertTrue(description.contains("Red:"));assertTrue(description.contains("Black:"));assertNotNull(findDescription(content,"Library"));assertNotNull(findDescription(content,"Game menu"));
             GameRepository.Game game=new GameRepository.Game();game.id="lazy-layout-audit";game.red="Record Red";game.black="Record Black";game.event="Long move record";game.round="";game.date="2026-10-28";game.sourceUrl="";game.startFen="";game.result="*";for(int i=0;i<500;i++)game.moves.addAll(Arrays.asList("b0c2","b9c7","c2b0","c7b9"));set("games",new ArrayList<>(Collections.singletonList(game)));call("openGame",new Class<?>[]{GameRepository.Game.class,boolean.class},game,false);
-        });getInstrumentation().waitForIdleSync();final Rect[] before={null};main(()->{assertEquals(1000,list().getCount());assertTrue("Only visible move rows are inflated",list().getChildCount()<20);before[0]=bounds((View)get("board"));list().setSelection(900);});
+        });getInstrumentation().waitForIdleSync();final Rect[] before={null};main(()->{assertEquals(1001,list().getCount());assertTrue("Only visible move rows are inflated",list().getChildCount()<20);before[0]=bounds((View)get("board"));list().setSelection(900);});
         await(()->list().getFirstVisiblePosition()>=850,5000,"The complete move record did not scroll to its later rows");main(()->{assertEquals(before[0],bounds((View)get("board")));assertTrue(list().getChildCount()<20);assertFalse((Boolean)get("library"));});
     }
     public void testAnalysisPanelIsConditionalBoundedAndKeepsAllLinesScrollable()throws Exception{
         main(()->call("analyze"));getInstrumentation().waitForIdleSync();final Rect[] board={null};final int[] height={0};main(()->{assertEquals(View.VISIBLE,((View)get("analysisBox")).getVisibility());board[0]=bounds((View)get("board"));height[0]=((View)get("analysisBox")).getHeight();call("cancelAnalysis");
-            Position position=positions().get((Integer)get("ply"));List<Engine.Line> lines=new ArrayList<>();List<String> legal=position.legalMoves();for(int i=0;i<5;i++){String first=legal.get(i);List<String> reply=position.play(first).legalMoves();lines.add(new Engine.Line(i+1,100-i,8,Arrays.asList(first,reply.get(0))));}Engine.Result result=new Engine.Result();result.lines=lines;result.pv=lines.get(0).pv;result.bestMove=result.pv.get(0);result.score=100;result.depth=8;result.nodes=5000;call("renderAnalysis",new Class<?>[]{Engine.Result.class,String.class,boolean.class,boolean.class},result,"Built-in analysis",false,false);
+            Position position=positions().get((Integer)get("ply"));List<Engine.Line> lines=new ArrayList<>();List<String> legal=position.legalMoves();for(int i=0;i<5;i++){String first=legal.get(i);List<String> reply=position.play(first).legalMoves();lines.add(new Engine.Line(i+1,100-i,8,continuation(position,first)));}Engine.Result result=new Engine.Result();result.lines=lines;result.pv=lines.get(0).pv;result.bestMove=result.pv.get(0);result.score=100;result.depth=8;result.nodes=5000;call("renderAnalysis",new Class<?>[]{Engine.Result.class,String.class,boolean.class,boolean.class},result,"Built-in analysis",false,false);
         });getInstrumentation().waitForIdleSync();main(()->{assertEquals(height[0],((View)get("analysisBox")).getHeight());assertEquals(board[0],bounds((View)get("board")));assertTrue(((TextView)get("analysisText")).getText().toString().contains("Line 5"));((ScrollView)get("analysisScroll")).fullScroll(View.FOCUS_DOWN);});getInstrumentation().waitForIdleSync();
         try{await(()->((ScrollView)get("analysisScroll")).getScrollY()>0,3000,"All PV text must remain scrollable inside the fixed panel");}
         catch(junit.framework.AssertionFailedError failure){final String[] geometry={""};main(()->{ScrollView scroll=(ScrollView)get("analysisScroll");TextView text=(TextView)get("analysisText");geometry[0]=" [textHeight="+text.getHeight()+", viewportHeight="+scroll.getHeight()+", textLines="+text.getLineCount()+", scrollY="+scroll.getScrollY()+"]";});fail(failure.getMessage()+geometry[0]);}
@@ -59,6 +59,35 @@ public final class ReplayLayoutAuditTest extends InstrumentationTestCase {
             ((View)get("gameTitle")).performClick();AlertDialog info=(AlertDialog)get("gameInformationDialog");assertNotNull(info);String text=((TextView)info.findViewById(android.R.id.message)).getText().toString();assertTrue(text.contains("Red:"));assertTrue(text.contains("Black:"));assertFalse("Hidden results remain hidden in game information",text.contains("0–1"));info.dismiss();
         });
     }
+    public void testDenseColumnsAndResultFooterRespectSpoilerBoundary()throws Exception{
+        final String[] finalResult={null};main(()->{
+            GameRepository.Game game=games().get(0);game.result="0-1";call("renderMoves");
+            int last=list().getCount()-1;TextView footer=(TextView)list().getAdapter().getView(last,null,list());finalResult[0]=footer.getText().toString();assertEquals("Result: 0–1 · Black wins",finalResult[0]);
+            assertTrue("Spoiler preference remains enabled",StudySettings.load(activity).hideResults);
+            assertFalse("Result is not placed above the moves",hasText(root(),finalResult[0]));
+            assertTrue(list().getChildAt(0).getHeight()<=dp(29));call("analyze");
+        });getInstrumentation().waitForIdleSync();main(()->{
+            View record=(View)get("movesView"),engine=(View)get("analysisBox");Rect left=bounds(record),right=bounds(engine);
+            assertTrue("Engine lines sit to the right of record moves",left.right<=right.left);assertTrue("Both columns use the same lower region",Math.abs(left.bottom-right.bottom)<=dp(4));
+            list().setSelection(list().getCount()-1);
+        });await(()->hasText(root(),finalResult[0]),5000,"Scrolling to the end did not reveal the result");
+        main(()->{assertEquals(View.VISIBLE,((View)get("analysisBox")).getVisibility());call("stopSearch");});
+    }
+    public void testLibraryShowsEventYearsWithoutCollectionRanges()throws Exception{
+        main(()->{
+            GameRepository.Game a=fixture("1997","World Championship 1997","World Championship masters 1991–2003");
+            GameRepository.Game b=fixture("2016","Masters Cup 2016","Vietnamese masters classical 2009 & 2016");
+            set("games",new ArrayList<>(Arrays.asList(a,b)));call("showLibrary");
+        });UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);main(()->{
+            assertTrue(hasText(root(),"World Championship 1997"));assertTrue(hasText(root(),"Masters Cup 2016"));
+            assertFalse(hasText(root(),"World Championship masters 1991–2003"));assertFalse(hasText(root(),"Vietnamese masters classical 2009 & 2016"));
+        });
+    }
+    private GameRepository.Game fixture(String year,String event,String collection){GameRepository.Game game=new GameRepository.Game();game.id="metadata-"+year;game.red="Red";game.black="Black";game.event=event;game.round="Round 1";game.date=year;game.collection=collection;game.result="0-1";game.sourceUrl="";game.startFen="";game.moves.addAll(Arrays.asList("b2e2","b9c7"));return game;}
+    private View root(){return activity.getWindow().getDecorView();}
+    private boolean hasText(View view,String text){if(view instanceof TextView&&text.equals(((TextView)view).getText().toString()))return true;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++)if(hasText(group.getChildAt(i),text))return true;}return false;}
+
+    private List<String> continuation(Position start,String first){List<String> pv=new ArrayList<>();pv.add(first);Position next=start.play(first);while(pv.size()<8&&!next.legalMoves().isEmpty()){String move=next.legalMoves().get(0);pv.add(move);next=next.play(move);}return pv;}
     private int dp(int value){return Math.round(value*getInstrumentation().getTargetContext().getResources().getDisplayMetrics().density);}
     private Rect bounds(View view){Rect bounds=new Rect();view.getGlobalVisibleRect(bounds);return bounds;}
     private ListView list(){return (ListView)get("movesView");}

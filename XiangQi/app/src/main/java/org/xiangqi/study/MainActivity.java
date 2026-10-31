@@ -52,7 +52,7 @@ public final class MainActivity extends Activity {
     private SharedPreferences prefs;
     private GameRepository repository;
     private List<GameRepository.Game> games=new ArrayList<>();
-    private LinearLayout root,content,analysisBox,replayBoardRow,replayContextRow,gameTitle;
+    private LinearLayout root,content,analysisBox,replayBoardRow,replayContextRow,gameTitle,movePanels;
     private ListView libraryList,movesView;
     private MoveRecordAdapter movesAdapter;
     private Spinner librarySortPicker,libraryImportPicker;
@@ -285,7 +285,7 @@ public final class MainActivity extends Activity {
         }
         void bind(GameRepository.Game game){
             item=game;redName.setText(PlayerNames.display(game.red));blackName.setText(PlayerNames.display(game.black));score.setText(libraryHideResults?"":displayResult(game.result));result.setVisibility(libraryHideResults?View.GONE:View.VISIBLE);
-            event.setText(game.event);round.setText(game.round);round.setVisibility(game.round.isEmpty()?View.GONE:View.VISIBLE);collection.setText(game.collection);collection.setVisibility(game.collection.isEmpty()?View.GONE:View.VISIBLE);
+            event.setText(game.event);round.setText(game.round);round.setVisibility(game.round.isEmpty()?View.GONE:View.VISIBLE);collection.setText(getString(R.string.library_import_collection,game.collection));collection.setVisibility(game.imported&&!game.collection.isEmpty()?View.VISIBLE:View.GONE);
             clock.setText(timeControl(game.timeControl));clock.setVisibility(game.timeControl.isEmpty()?View.GONE:View.VISIBLE);
             details.setText(getResources().getQuantityString(R.plurals.library_game_details,game.moves.size(),game.date.isEmpty()?"Undated":game.date,game.moves.size(),game.imported?" · Imported · "+(game.engineGame?"Engine":"Human"):game.engineGame?" · Engine game":""));
             boolean variation=prefs.getBoolean("exploring:"+game.id,false);int resume=variation?prefs.getInt("variationPly:"+game.id,0):Math.min(game.moves.size(),prefs.getInt("ply:"+game.id,0));
@@ -350,10 +350,13 @@ public final class MainActivity extends Activity {
         for(int i=0;i<controls.getChildCount();i++){LinearLayout.LayoutParams spacing=(LinearLayout.LayoutParams)controls.getChildAt(i).getLayoutParams();spacing.topMargin=0;spacing.bottomMargin=0;}
         replayContextRow=row();variationLabel=text("",12,ACCENT);variationLabel.setMaxLines(2);variationLabel.setEllipsize(TextUtils.TruncateAt.END);replayContextRow.addView(variationLabel,new LinearLayout.LayoutParams(0,-2,1));
         exploreButton=button("Return to recorded game",()->{if(vsEngine)stopEngineGame();else toggleExplore();},false);exploreButton.setTextSize(11);exploreButton.setSingleLine(true);exploreButton.setPadding(dp(4),0,dp(4),0);exploreButton.setMinHeight(dp(32));exploreButton.setMinimumHeight(dp(32));replayContextRow.addView(exploreButton,new LinearLayout.LayoutParams(dp(146),dp(32)));content.addView(replayContextRow,new LinearLayout.LayoutParams(-1,dp(36)));
-        analysisBox=column();analysisBox.setBackground(shape(SURFACE,0,12));pad(analysisBox,10,6,10,6);analysisText=text(analysisIntro(),12,MUTED);analysisScroll=new ScrollView(this);analysisScroll.setContentDescription("Analysis details");analysisScroll.addView(analysisText,new ScrollView.LayoutParams(-1,-2));
-        analysisBox.addView(analysisScroll,new LinearLayout.LayoutParams(-1,0,1));content.addView(analysisBox,new LinearLayout.LayoutParams(-1,dp(92)));analysisBox.setVisibility(analysisEnabled&&!vsEngine?View.VISIBLE:View.GONE);
-        TextView movesTitle=text("MOVE RECORD",12,MUTED);pad(movesTitle,3,4,3,4);content.addView(movesTitle);
-        movesView=new ListView(this);movesView.setContentDescription("Move record");movesView.setItemsCanFocus(true);movesView.setDividerHeight(0);movesView.setBackgroundColor(BG);movesAdapter=new MoveRecordAdapter();movesView.setAdapter(movesAdapter);content.addView(movesView,new LinearLayout.LayoutParams(-1,0,1));
+        movePanels=row();movePanels.setBaselineAligned(false);movePanels.setGravity(Gravity.TOP);content.addView(movePanels,new LinearLayout.LayoutParams(-1,0,1));
+        LinearLayout recordBox=column();movePanels.addView(recordBox,new LinearLayout.LayoutParams(0,-1,1));
+        TextView movesTitle=text("RECORD · RED / BLACK",10,MUTED);pad(movesTitle,2,2,2,2);recordBox.addView(movesTitle);
+        movesView=new ListView(this);movesView.setContentDescription("Move record");movesView.setItemsCanFocus(true);movesView.setDividerHeight(0);movesView.setBackgroundColor(BG);movesAdapter=new MoveRecordAdapter();movesView.setAdapter(movesAdapter);recordBox.addView(movesView,new LinearLayout.LayoutParams(-1,0,1));
+        analysisBox=column();analysisBox.setBackground(shape(SURFACE,0,6));pad(analysisBox,5,2,5,2);analysisText=text(analysisIntro(),11,MUTED);analysisScroll=new ScrollView(this);analysisScroll.setContentDescription("Analysis details");
+        LinearLayout engineContent=column();engineContent.addView(text("ENGINE LINES",10,ACCENT));engineContent.addView(analysisText);analysisScroll.addView(engineContent,new ScrollView.LayoutParams(-1,-2));
+        analysisBox.addView(analysisScroll,new LinearLayout.LayoutParams(-1,0,1));LinearLayout.LayoutParams engineSize=new LinearLayout.LayoutParams(0,-1,1);engineSize.leftMargin=dp(5);movePanels.addView(analysisBox,engineSize);analysisBox.setVisibility(analysisEnabled&&!vsEngine?View.VISIBLE:View.GONE);
     }
 
     /** Fixed replay stack; only the move list scrolls. Short displays cap the board proportionally. */
@@ -362,8 +365,8 @@ public final class MainActivity extends Activity {
         @Override protected void onMeasure(int widthSpec,int heightSpec){
             int width=MeasureSpec.getSize(widthSpec)-getPaddingLeft()-getPaddingRight(),height=MeasureSpec.getSize(heightSpec)-getPaddingTop()-getPaddingBottom();
             if(replayBoardRow!=null&&replayBoardRow.getParent()==this&&MeasureSpec.getMode(heightSpec)!=MeasureSpec.UNSPECIFIED){
-                int fixed=0;for(int i=0;i<getChildCount();i++){View child=getChildAt(i);if(child==replayBoardRow||child==movesView||child.getVisibility()==GONE)continue;measureChildWithMargins(child,widthSpec,0,MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED),0);LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)child.getLayoutParams();fixed+=child.getMeasuredHeight()+lp.topMargin+lp.bottomMargin;}
-                int rail=evaluationBar.getVisibility()==VISIBLE?dp(20):0,boardHeight=Math.max(0,height-fixed-dp(56));
+                int fixed=0;for(int i=0;i<getChildCount();i++){View child=getChildAt(i);if(child==replayBoardRow||child==movePanels||child.getVisibility()==GONE)continue;measureChildWithMargins(child,widthSpec,0,MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED),0);LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)child.getLayoutParams();fixed+=child.getMeasuredHeight()+lp.topMargin+lp.bottomMargin;}
+                int rail=evaluationBar.getVisibility()==VISIBLE?dp(20):0,boardHeight=Math.max(0,height-fixed-dp(96));
                 LinearLayout.LayoutParams size=(LinearLayout.LayoutParams)replayBoardRow.getLayoutParams();size.width=Math.max(rail,Math.min(width,(int)(boardHeight/1.10f)+rail));size.gravity=Gravity.CENTER_HORIZONTAL;
             }
             super.onMeasure(widthSpec,heightSpec);
@@ -409,16 +412,28 @@ public final class MainActivity extends Activity {
         int visible=current-movesView.getFirstVisiblePosition();View selected=visible>=0&&visible<movesView.getChildCount()?movesView.getChildAt(visible):null;
         if(selected==null||selected.getTop()<0||selected.getBottom()>movesView.getHeight())movesView.setSelectionFromTop(current,0);
     }
+    private int recordRows(){return (workingMoves.size()+(positions.get(0).redToMove?0:1)+1)/2;}
     private final class MoveRecordAdapter extends BaseAdapter {
-        @Override public int getCount(){return (workingMoves.size()+(positions.get(0).redToMove?0:1)+1)/2;}
+        @Override public int getCount(){return recordRows()+1;}
+        @Override public int getViewTypeCount(){return 2;}
+        @Override public int getItemViewType(int position){return position==recordRows()?1:0;}
+        @Override public boolean areAllItemsEnabled(){return false;}
+        @Override public boolean isEnabled(int position){return position<recordRows();}
         @Override public Object getItem(int position){return position;}
         @Override public long getItemId(int position){return position;}
-        @Override public View getView(int position,View convert,ViewGroup parent){MoveRecordRow row=convert instanceof MoveRecordRow?(MoveRecordRow)convert:new MoveRecordRow();row.bind(position);return row;}
+        @Override public View getView(int position,View convert,ViewGroup parent){
+            if(position==recordRows()){
+                TextView result=convert instanceof TextView?(TextView)convert:text("",12,ACCENT);pad(result,3,6,3,8);
+                String value=exploring||vsEngine?"Variation · unfinished": "1-0".equals(game.result)?"Result: 1–0 · Red wins":"0-1".equals(game.result)?"Result: 0–1 · Black wins":"1/2-1/2".equals(game.result)?"Result: ½–½ · Draw":"Result: unrecorded";
+                result.setText(value);result.setContentDescription(value);result.setLayoutParams(new AbsListView.LayoutParams(-1,-2));return result;
+            }
+            MoveRecordRow row=convert instanceof MoveRecordRow?(MoveRecordRow)convert:new MoveRecordRow();row.bind(position);return row;
+        }
     }
     private final class MoveRecordRow extends LinearLayout {
         private final TextView number,red,black;
-        MoveRecordRow(){super(MainActivity.this);setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setLayoutParams(new AbsListView.LayoutParams(-1,dp(40)));number=text("",12,MUTED);number.setGravity(Gravity.CENTER_VERTICAL);addView(number,new LinearLayout.LayoutParams(dp(30),-1));red=cell();black=cell();addView(red,new LinearLayout.LayoutParams(0,-1,1));addView(black,new LinearLayout.LayoutParams(0,-1,1));}
-        private TextView cell(){TextView label=text("",14,LIGHT);label.setGravity(Gravity.CENTER_VERTICAL);label.setTypeface(Typeface.MONOSPACE,Typeface.NORMAL);pad(label,10,0,4,0);return label;}
+        MoveRecordRow(){super(MainActivity.this);setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setLayoutParams(new AbsListView.LayoutParams(-1,dp(28)));number=text("",10,MUTED);number.setSingleLine(true);number.setGravity(Gravity.CENTER_VERTICAL);addView(number,new LinearLayout.LayoutParams(dp(30),-1));red=cell();black=cell();addView(red,new LinearLayout.LayoutParams(0,-1,1));addView(black,new LinearLayout.LayoutParams(0,-1,1));}
+        private TextView cell(){TextView label=text("",12,LIGHT);label.setSingleLine(true);label.setGravity(Gravity.CENTER_VERTICAL);label.setTypeface(Typeface.MONOSPACE,Typeface.NORMAL);pad(label,2,0,1,0);return label;}
         void bind(int row){number.setText(getString(R.string.move_record_number,row+1));bindCell(red,row*2-(positions.get(0).redToMove?0:1));bindCell(black,row*2+1-(positions.get(0).redToMove?0:1));}
         private void bindCell(TextView label,int index){boolean valid=index>=0&&index<workingMoves.size();label.setText(valid?pretty(workingMoves.get(index)):"");label.setFocusable(valid);label.setContentDescription(valid?"After half-move "+(index+1)+", "+workingMoves.get(index):"");label.setOnClickListener(valid?v->navigate(index+1):null);label.setBackground(valid&&ply==index+1?shape(SURFACE,0,8):null);}
     }

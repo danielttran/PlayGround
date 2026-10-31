@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.5 (version code 14) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.6 (version code 15) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -108,9 +108,9 @@ search without disabling the toggle; returning to foreground study resumes it.
 Activity recreation reloads the choice. Generation identifiers reject obsolete
 progress and final results. Only explicit Stop analysis disables the toggle;
 it clears continuation arrows and deactivates the evaluation rail. The analysis
-panel is GONE unless analysis is enabled outside opponent play. Its fixed 92 dp
-height keeps engine updates from moving the board; continuation text scrolls
-within that panel so all configured lines remain available. Engine-setting
+column is GONE unless analysis is enabled outside opponent play. It shares the
+flexible lower area beside the record, so engine updates cannot move the board;
+continuation text scrolls independently so all configured lines remain available. Engine-setting
 changes restart enabled analysis even if its previous finite search completed.
 Backgrounding cancels autoplay.
 
@@ -204,3 +204,8 @@ The Android manifest requests no `INTERNET` permission and disables automatic ap
 Pikafish's GPL-3.0 code and separately licensed NNUE weights retain their upstream notices and exact release source pointers under `third_party/pikafish`. WXF source material retains its own rights; app source licensing does not relicense game pages or engine assets.
 
 See [AUDIT-0.7.3.md](AUDIT-0.7.3.md) for current checks and device-specific results. Production-adapter tests execute the actual Java adapter with test-only Android stubs and real Windows Pikafish, including blank-FEN input, corruption recovery, live updates, drawn histories, deadlines and cancellation. Combined-corpus native tests cover all four bundled packs. Long histories reaching native rule-60 count 120 are preserved for real search; native `perft` reparses its generated FEN and rejects that counter, so the audit normalizes a separate enumeration copy before restoring full history for search. Emulator UI tests use the Java engine; physical Android ARM64 checks are recorded separately and must not be inferred from host/emulator results. [AUDIT-0.7.2.md](AUDIT-0.7.2.md), [AUDIT-0.7.1.md](AUDIT-0.7.1.md), [AUDIT-0.7.md](AUDIT-0.7.md), [AUDIT-0.6.md](AUDIT-0.6.md), [AUDIT-0.5.2.md](AUDIT-0.5.2.md), [AUDIT-0.5.1.md](AUDIT-0.5.1.md), [AUDIT-0.5.md](AUDIT-0.5.md), [AUDIT-0.4.md](AUDIT-0.4.md), [AUDIT-0.3.md](AUDIT-0.3.md), [AUDIT.md](AUDIT.md) and [VALIDATION.md](VALIDATION.md) retain earlier-version evidence.
+
+
+## Compact record and engine columns (0.7.6)
+
+The flexible lower row contains the recycling record list and, while analysis is enabled, a separately scrolling engine column. Both share the available height instead of reserving a separate analysis panel above the record. Record rows use 28 dp height, 12 sp move text and 2 dp leading cell padding. A separate adapter view type adds a final result row after the source moves regardless of hideResults; variations show an unfinished label and never borrow the source outcome. Library cards show each game's event, round and actual date; built-in multi-year collection labels stay in searchable metadata rather than appearing as another event date. Private import labels are explicitly prefixed Import.
