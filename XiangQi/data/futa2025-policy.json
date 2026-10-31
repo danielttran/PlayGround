@@ -1,0 +1,749 @@
+{
+  "schemaVersion": 1,
+  "screeningDate": "2026-10-31",
+  "collection": "Phuong Trang Masters 2025",
+  "event": "7th Phuong Trang International Xiangqi Masters Cup 2025",
+  "scope": "Full adult men's main classical games; rapid tiebreaks and ambiguous records excluded.",
+  "sharedCurationPolicy": "data/curation-policy.json",
+  "listingUrl": "https://vietnamchess.vn/index.php?option=com_xqbase&format=json&task=ajax.pubTournamentGames&tournament_id=2",
+  "viewerUrl": "https://vietnamchess.vn/databank/xqbase-vietnamchess?view=game&id={}",
+  "regulationsUrl": "https://vietnamchess.vn/index.php/regulations-futa7",
+  "resultsUrl": "https://vietnamchess.vn/index.php/news-futa7-en?catid=237&id=2380:futa7-day6-en&view=article",
+  "classicalEvidence": "Official regulations 4.1: 60 minutes plus 30 seconds from move one. Section 4.2: the first semifinal/final/third-place game is classical; later 10+5/5+3/Armageddon tiebreaks excluded.",
+  "sourceInitialFen": "rheakaehr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RHEAKAEHR w - - 0 1",
+  "canonicalInitialFen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w - - 0 1",
+  "sourceFactsKeys": [
+    "id",
+    "round",
+    "round_num",
+    "board_num",
+    "white_player_name",
+    "black_player_name",
+    "white_player_name_en",
+    "black_player_name_en",
+    "result",
+    "date_played",
+    "pgn_text",
+    "fen_initial",
+    "tournament_title"
+  ],
+  "roundDates": {
+    "1": "2025-12-22",
+    "2": "2025-12-22",
+    "3": "2025-12-23",
+    "4": "2025-12-24",
+    "5": "2025-12-24",
+    "6": "2025-12-26",
+    "7": "2025-12-26",
+    "8": "2025-12-27",
+    "9": "2025-12-28"
+  },
+  "rapidGameIds": [
+    1384,
+    1385,
+    1386
+  ],
+  "ambiguousGameIds": [
+    1276,
+    1320,
+    1326,
+    1369
+  ],
+  "finalFour": [
+    "阮成保",
+    "许文章",
+    "华辰昊",
+    "王家瑞"
+  ],
+  "vietnameseFinalist": "阮成保",
+  "nameNormalizations": {
+    "吳宗翰": "吴宗翰",
+    "郑彦隆)": "郑彦隆",
+    "阮煌林 (M)": "阮煌林",
+    "趙奕帆": "赵奕帆",
+    "武囯达": "武国达"
+  },
+  "sourceBoardNumberNote": "Event-wide record sequence, not a physical board number. Retained only as sourceBoardNumber.",
+  "participants": {
+    "陈光日": {
+      "readable": "Tran Quang Nhat",
+      "sourceName": "Trần Quang Nhật"
+    },
+    "赖理兄": {
+      "readable": "Lai Ly Huynh",
+      "sourceName": "Lại Lý Huynh"
+    },
+    "吴宗翰": {
+      "readable": "Woo Tsung Han Alvin",
+      "sourceName": "Ngô Tông Hàn"
+    },
+    "何文进": {
+      "readable": "Ha Van Tien",
+      "sourceName": "Hà Văn Tiến"
+    },
+    "陈清新": {
+      "readable": "Tran Thanh Tan",
+      "sourceName": "Trần Thanh Tân"
+    },
+    "阮成保": {
+      "readable": "Nguyen Thanh Bao",
+      "sourceName": "Nguyễn Thành Bảo"
+    },
+    "阮明日光": {
+      "readable": "Nguyen Minh Nhat Quang",
+      "sourceName": "Nguyễn Minh Nhật Quang"
+    },
+    "段德显": {
+      "readable": "Doan Duc Hien",
+      "sourceName": "Đoàn Đức Hiền"
+    },
+    "陶囯兴": {
+      "readable": "Dao Quoc Hung",
+      "sourceName": "Đào Quốc Hưng"
+    },
+    "李虢綕": {
+      "readable": "Lee Wen Ze",
+      "sourceName": "Lý Quắc Chức"
+    },
+    "冯家俊": {
+      "readable": "Fung Ga Zen",
+      "sourceName": "Phùng Gia Tuấn"
+    },
+    "宗室日新": {
+      "readable": "Ton That Nhat Tan",
+      "sourceName": "Tôn Thất Nhật Tân"
+    },
+    "武国达": {
+      "readable": "Vu Quoc Dat",
+      "sourceName": "Vũ Quốc Đạt"
+    },
+    "郑彦隆": {
+      "readable": "Cheng Yin Lung",
+      "sourceName": "Trịnh Ngạn Long"
+    },
+    "赵奕帆": {
+      "readable": "Chao I Fan",
+      "sourceName": "Triệu Dịch Phàm"
+    },
+    "阮光日": {
+      "readable": "Nguyen Quang Nhat",
+      "sourceName": "Nguyễn Quang Nhật"
+    },
+    "阮陈杜宁": {
+      "readable": "Nguyen Tran Do Ninh",
+      "sourceName": "Nguyễn Trần Đỗ Ninh"
+    },
+    "华辰昊": {
+      "readable": "Hua Chen Hao",
+      "sourceName": "Hoa Thần Hạo"
+    },
+    "许文章": {
+      "readable": "Xu Wen Zhang",
+      "sourceName": "Hứa Văn Chương"
+    },
+    "邓有庄": {
+      "readable": "Dang Huu Trang",
+      "sourceName": "Đặng Hữu Trang"
+    },
+    "阮英敏": {
+      "readable": "Nguyen Anh Man",
+      "sourceName": "Nguyễn Anh Mẫn"
+    },
+    "王家瑞": {
+      "readable": "Wang Jia Rui",
+      "sourceName": "Vương Gia Thụy"
+    },
+    "葛振衣": {
+      "readable": "Ge Jen Yi",
+      "sourceName": "Cát Chấn Y"
+    },
+    "阮英君": {
+      "readable": "Nguyen Anh Quan",
+      "sourceName": "Nguyễn Anh Quân"
+    },
+    "阮煌林": {
+      "readable": "Nguyen Hoang Lam (M)",
+      "sourceName": "Nguyễn Hoàng Lâm (M)"
+    },
+    "刘亿豪": {
+      "readable": "Low Yi Hao",
+      "sourceName": "Lưu Ức Hào"
+    },
+    "黎德志": {
+      "readable": "Li De Zhi",
+      "sourceName": "Lê Đức Chí"
+    },
+    "潘阮公明": {
+      "readable": "Phan Nguyen Cong Minh",
+      "sourceName": "Phan Nguyễn Công Minh"
+    },
+    "陈正心": {
+      "readable": "Tran Chanh Tam",
+      "sourceName": "Trần Chánh Tâm"
+    },
+    "汪洋北": {
+      "readable": "Uong Duong Bac",
+      "sourceName": "Uông Dương Bắc"
+    }
+  },
+  "records": [
+    {
+      "sourceGameId": 1248,
+      "sourceFactsSha256": "7f239e4706345a6eaf2d42f12aef68cd30b81fe0363a071c49f4b71f4ea98a5d"
+    },
+    {
+      "sourceGameId": 1249,
+      "sourceFactsSha256": "783ddb491674f5ace6e36c49e73723cd97ffa4fe5ed0d4bcae835e9975f381f3"
+    },
+    {
+      "sourceGameId": 1250,
+      "sourceFactsSha256": "73b766f52cce0603c232027ee1eef8f1bc8393e951b5aa770ee5cfd49843be34"
+    },
+    {
+      "sourceGameId": 1251,
+      "sourceFactsSha256": "2392ffbd8663bab649610b7308a18c01ec5ebe8cb7e6afdbff2c15c87296883f"
+    },
+    {
+      "sourceGameId": 1252,
+      "sourceFactsSha256": "470b40f2a0822f56c52167b0e054093f412d4db3d07aa079ec30c498105ff8e4"
+    },
+    {
+      "sourceGameId": 1253,
+      "sourceFactsSha256": "6bd5de0b5d3e83c7cc2e46a18659ce1b90eeae0b37c4ed944996228fe8813bb2"
+    },
+    {
+      "sourceGameId": 1254,
+      "sourceFactsSha256": "bdeefdc7109a91772485e9a0167334a183c90ef0b9153761b34da38551ff924f"
+    },
+    {
+      "sourceGameId": 1255,
+      "sourceFactsSha256": "ecc556f8c05412bfd76f0f467b2f4d706879c1154ddb5c757bbbc6f59b32168c"
+    },
+    {
+      "sourceGameId": 1256,
+      "sourceFactsSha256": "ccee3ac6e702ea17be5ae7e8a25e1b1139458f5eb9aeb978edabfcf81466a904"
+    },
+    {
+      "sourceGameId": 1257,
+      "sourceFactsSha256": "a5ace30bf9ac196774b355e09473d17a86f24320a4c0109cc5e46c782e3c4ece"
+    },
+    {
+      "sourceGameId": 1258,
+      "sourceFactsSha256": "4165aa09314ea2aaed6601dc1dec208a7fd6f9e4d7b211a78a7a8ebb59ca230f"
+    },
+    {
+      "sourceGameId": 1259,
+      "sourceFactsSha256": "a6e01f92e530be999e5e750d9ba6f7a1a99030d111e688f10c8998f704d793c0"
+    },
+    {
+      "sourceGameId": 1260,
+      "sourceFactsSha256": "22c4f43541e1353f087aefb77e5a7938f7495b2bbd1ae6dcd03618b8f6a6296a"
+    },
+    {
+      "sourceGameId": 1261,
+      "sourceFactsSha256": "389fbf988c7c2c0815050398e09a495b2eb13d591cea7179b2234b16b7e7a8ce"
+    },
+    {
+      "sourceGameId": 1262,
+      "sourceFactsSha256": "fef84d627d115493f8e1ca318f052f1109915fd60f3bae176d7534dc56a7dac3"
+    },
+    {
+      "sourceGameId": 1263,
+      "sourceFactsSha256": "23cddfbf94f6947df4053f325dbca0e4beb7317b377c5bc72f3bf4e218f07195"
+    },
+    {
+      "sourceGameId": 1264,
+      "sourceFactsSha256": "acfa1caf2c0fb53efc0b3bcce49f66b23ee2d1ce296f510af3358a1542a80169"
+    },
+    {
+      "sourceGameId": 1265,
+      "sourceFactsSha256": "7a351d3af66dca4ca5e5c2d93bbecf030a0adbbc043bc6cbddbcd6e2f8ea88c1"
+    },
+    {
+      "sourceGameId": 1266,
+      "sourceFactsSha256": "1b1bec9755dacc6da321cce9b471f119b0997851a6648f7fb4286cdb4cf1af55"
+    },
+    {
+      "sourceGameId": 1267,
+      "sourceFactsSha256": "ed0012eaa7b36be592c0e79903eeda17f85a64b656393331d6c2f1c2facc2438"
+    },
+    {
+      "sourceGameId": 1268,
+      "sourceFactsSha256": "1f46da875129cb571abc75d4974bea001737c500dad7dec269e7f6e3b0846852"
+    },
+    {
+      "sourceGameId": 1269,
+      "sourceFactsSha256": "11619838628b24af2305de391fd4e11126246d8efc94f4ea6dabdb34e3395dcf"
+    },
+    {
+      "sourceGameId": 1270,
+      "sourceFactsSha256": "731322b00c3a7bb70f8079be60fc6fa7e22a26de0753cd0945a9acc982d803d4"
+    },
+    {
+      "sourceGameId": 1271,
+      "sourceFactsSha256": "8ea435b8a6b6d1cdc9a5d4e66d8cfdd90fa355ac9cf913b7e18a028f65aaf104"
+    },
+    {
+      "sourceGameId": 1272,
+      "sourceFactsSha256": "711e925b0301a579287489a1c825ab0347e1f2fda1c3ec317ec4096ce6f84f75"
+    },
+    {
+      "sourceGameId": 1273,
+      "sourceFactsSha256": "e8ae0e8abda5775498fc74063a80c36dcf3f7313ac21087f3817f9f406fd7524"
+    },
+    {
+      "sourceGameId": 1274,
+      "sourceFactsSha256": "4230d787ec5ce862bb7e012339ebfd493875a86928a223aa142c88c2f4af1c7d"
+    },
+    {
+      "sourceGameId": 1275,
+      "sourceFactsSha256": "104bf7df26969b8f5aadc42610426d08ebddd8edbfb5574dd14f6763e0772a96"
+    },
+    {
+      "sourceGameId": 1276,
+      "sourceFactsSha256": "662b3b26cb903b395d48b0eef4379ca2523d74fbef4ddb0adb54978677ae1d97"
+    },
+    {
+      "sourceGameId": 1277,
+      "sourceFactsSha256": "be5358721eda075a6226b574e647c524fbdf5f0b9a5821ca1728339fe2b59715"
+    },
+    {
+      "sourceGameId": 1278,
+      "sourceFactsSha256": "aa54def58d5bc1bfe1e8a8aaee64d40bf6f5165f229414808f315e6e09d8eee9"
+    },
+    {
+      "sourceGameId": 1279,
+      "sourceFactsSha256": "daf9eb46033e74bddeddf29240f556f020e2acd60d64920e2a96fce3cf18bcaf"
+    },
+    {
+      "sourceGameId": 1280,
+      "sourceFactsSha256": "4385ba42e6a2ebca50f8a4a4251d1f56eab36c4125f3355f58a3148c3b7d41fc"
+    },
+    {
+      "sourceGameId": 1281,
+      "sourceFactsSha256": "6e439ad3b3d3bd472d86e111a7f7856c8f1e30c7f4099ea6592e0c5ac6a3f040"
+    },
+    {
+      "sourceGameId": 1282,
+      "sourceFactsSha256": "d17875e0c191d773d422f4f6df938db745aac1eb8cf3feb005ee1e7321122423"
+    },
+    {
+      "sourceGameId": 1283,
+      "sourceFactsSha256": "343c76fae829e44f893066f8d415d6b8abe1480a50ba396f023f5a3ecf87a799"
+    },
+    {
+      "sourceGameId": 1284,
+      "sourceFactsSha256": "3b5d8e5f844886ad59cce37981f94a5b37a65bdbc10b67402d989a30c2b40f98"
+    },
+    {
+      "sourceGameId": 1285,
+      "sourceFactsSha256": "e63d8b1ff4f666a3d1073ae4fdaffd6b438460126b8d9d101195368f30724863"
+    },
+    {
+      "sourceGameId": 1286,
+      "sourceFactsSha256": "1de08f4fa2f9cae346a91495b0cbdf0b74d918a2a89549b604b3da509dadb393"
+    },
+    {
+      "sourceGameId": 1287,
+      "sourceFactsSha256": "758c660d2f6a24e03e4ef0e34abb0ea5fd02bc7bd3e744519dac5b8c9cc76c9d"
+    },
+    {
+      "sourceGameId": 1288,
+      "sourceFactsSha256": "17735d05bbfe13d3461b950d40cc3981c23f66f961291c1e4dae44747eb99847"
+    },
+    {
+      "sourceGameId": 1289,
+      "sourceFactsSha256": "747de5e080412f269b288d6ca1c0e1bc44bc6bce40ec5cf0fd92eab879f1341f"
+    },
+    {
+      "sourceGameId": 1290,
+      "sourceFactsSha256": "ffb97461d421ce9fe18304a145db5dd573347c0ca91a6a2e7bdcbe7426092231"
+    },
+    {
+      "sourceGameId": 1291,
+      "sourceFactsSha256": "6207b4d9043d074d3379d6dc76e6536073eae3d15ff183d63f6db3bf3e2035fe"
+    },
+    {
+      "sourceGameId": 1292,
+      "sourceFactsSha256": "999ab640d53658e9562dbd66bd20883ba8b413f1ef29566655d2c16a23400e07"
+    },
+    {
+      "sourceGameId": 1293,
+      "sourceFactsSha256": "2e801a2f5ccf545b27ca8dc5a910ccfd7832eafa4e1bda86c213091d4c3040fd"
+    },
+    {
+      "sourceGameId": 1294,
+      "sourceFactsSha256": "b76573e31a18d40221744d52831438f7fa1f4dadcb34d39504cbe5f5e585ad28"
+    },
+    {
+      "sourceGameId": 1295,
+      "sourceFactsSha256": "932f8dbb9e036dee51f09e023cdbc87123995ed16f9f965d5bb35bf1916544c6"
+    },
+    {
+      "sourceGameId": 1296,
+      "sourceFactsSha256": "23ab750e68371fc4803a66eec9e3abd24cadf299ffaad7bb0f5a1c8ef41d28dc"
+    },
+    {
+      "sourceGameId": 1297,
+      "sourceFactsSha256": "6e3330b0aabff3878597d00827c13575f411d24882bb707281ffbe08a29a0a7a"
+    },
+    {
+      "sourceGameId": 1298,
+      "sourceFactsSha256": "130498e30c312af32a186d12bf66b0b2a3bdb1c3bd6458e4bd9f1100989761ef"
+    },
+    {
+      "sourceGameId": 1299,
+      "sourceFactsSha256": "f5d7eb8e0190d1f95038a7c0461e0bf415d2982c213a1e52ba6a1de52dffa4cc"
+    },
+    {
+      "sourceGameId": 1300,
+      "sourceFactsSha256": "606f0281ab2808d1a3990d0dbd6ed1116f144ae2934e953df013803f22b01b57"
+    },
+    {
+      "sourceGameId": 1301,
+      "sourceFactsSha256": "79d404b0224928bb797ffac57fc707f0ec7f57a0ec170fcbf41398d0f275076e"
+    },
+    {
+      "sourceGameId": 1302,
+      "sourceFactsSha256": "b9660e782a897b9805bebfc782568e3d6f00fcd0fafa65c3df92ec308163c123"
+    },
+    {
+      "sourceGameId": 1303,
+      "sourceFactsSha256": "10934cc3a8d43a50f362cbcc7e27ba608b50ef127ae0897a099db46494f554da"
+    },
+    {
+      "sourceGameId": 1304,
+      "sourceFactsSha256": "d565f5fe83d17251a271a12eaac8e8ca9d55963d2b7f21fba62e435f176ddc40"
+    },
+    {
+      "sourceGameId": 1305,
+      "sourceFactsSha256": "9bda5c3df5597c2ddb07338b1d935efde080c8879eff51a12025fdd85de76493"
+    },
+    {
+      "sourceGameId": 1306,
+      "sourceFactsSha256": "0db728beec3dc5bbde62f7f7d894b27f5cb6302b1b53c63eb0b7031abf292a58"
+    },
+    {
+      "sourceGameId": 1307,
+      "sourceFactsSha256": "d02d0a46193fb1aeb91e8828447c779825074084d6ee4c96c26b9ab22da2eb0b"
+    },
+    {
+      "sourceGameId": 1308,
+      "sourceFactsSha256": "bf15b060bf9ce0ec366aa147ab21f5d9f0819702b5d813227ca07f17c7406d00"
+    },
+    {
+      "sourceGameId": 1309,
+      "sourceFactsSha256": "a084ffc7deeef5b02e4eadd6960d3545b75058b99446bf536554fb12ce52538f"
+    },
+    {
+      "sourceGameId": 1310,
+      "sourceFactsSha256": "20bb7105dcb7bbfcab99b3eedd6b840cb1f8b14dd81ed90e322da26f84cd5719"
+    },
+    {
+      "sourceGameId": 1311,
+      "sourceFactsSha256": "39bdb6182a41fa8afb66f0e58bb435424b297d6d2e3d990dba66dda9e94c1595"
+    },
+    {
+      "sourceGameId": 1312,
+      "sourceFactsSha256": "08278d54adc5649791027fbaa322948bb0dd8d370fda169d27e9efd6984d1563"
+    },
+    {
+      "sourceGameId": 1313,
+      "sourceFactsSha256": "21eacadb6575132384290e2dcc598b303d9d8b1bc67cef522b87c997d5a99228"
+    },
+    {
+      "sourceGameId": 1314,
+      "sourceFactsSha256": "082a27f78005634128889041e8d20b10783ef57b495baf63d15636a857ba3d7b"
+    },
+    {
+      "sourceGameId": 1315,
+      "sourceFactsSha256": "e1c664b2be85a121ab9616f4a9c4005d308da98f6ba4331ec4526a1d0d29781b"
+    },
+    {
+      "sourceGameId": 1316,
+      "sourceFactsSha256": "b569dcca58d55f8680867c91cc7660433aeb69df168708fc09b40182fd009efe"
+    },
+    {
+      "sourceGameId": 1317,
+      "sourceFactsSha256": "c6050d1e85720816fe381244e8d9d91d4a065521217c527b95f518f3588ef3ae"
+    },
+    {
+      "sourceGameId": 1318,
+      "sourceFactsSha256": "a860dd16a3ec48113687f46af0ece1f9d643b56c89c1ed1b68da962a25c6774f"
+    },
+    {
+      "sourceGameId": 1319,
+      "sourceFactsSha256": "002e1f2e8ebbaa75d1e421d93294bdcb5cbd15667e904cc7e88269ee9e3fbf32"
+    },
+    {
+      "sourceGameId": 1320,
+      "sourceFactsSha256": "6d788c1b0b80c80f9e5ca2f0e3d7cef9693ae1f9ad9c00ec8eb3b2cc63027c5d"
+    },
+    {
+      "sourceGameId": 1321,
+      "sourceFactsSha256": "d85fe641aa320df361a1285dc8364dc3a07e26595186ca9f78f2cf25e93334a7"
+    },
+    {
+      "sourceGameId": 1322,
+      "sourceFactsSha256": "a34fa75e858eee3318b58836322d7d47784d2f2dabd4ada9b2c4be892fd2e14e"
+    },
+    {
+      "sourceGameId": 1323,
+      "sourceFactsSha256": "59b1dfe0f8c72c79d3f5e6749d8ca10529ea7ba343efc4f6891a82f1b44f2888"
+    },
+    {
+      "sourceGameId": 1324,
+      "sourceFactsSha256": "e608a8581124e2ecd5e20bbfa4163da6d5c619e492b616a109e1aa95f305fb1a"
+    },
+    {
+      "sourceGameId": 1325,
+      "sourceFactsSha256": "1ec50faabed7f1284ea36ad2ac9e12f6f05777f2ddd2d57c2e07051ce653382f"
+    },
+    {
+      "sourceGameId": 1326,
+      "sourceFactsSha256": "6627c0ab20adbd9e5ad27dd660baa344e6464c441cf06b6ed2f950b58fd585a0"
+    },
+    {
+      "sourceGameId": 1327,
+      "sourceFactsSha256": "69af102274696736e95dfd01b715ce6521b0c9981ad7a857d104477c5c2150b3"
+    },
+    {
+      "sourceGameId": 1328,
+      "sourceFactsSha256": "424ad0c8cac5a418bffdbe377bc552b50d99d456e95ecee404c16ec2659bf668"
+    },
+    {
+      "sourceGameId": 1329,
+      "sourceFactsSha256": "97c8705c59053fb78be16b1655f708095088d008356fa061c64cc531a27585bf"
+    },
+    {
+      "sourceGameId": 1330,
+      "sourceFactsSha256": "56f8e88217c21f93e3c42b092f2236080fc4ccb02a765a16cf93586d300a688f"
+    },
+    {
+      "sourceGameId": 1331,
+      "sourceFactsSha256": "5f9d39c621ca2ebbc3dd3739c6ea4d3ef7693b7e29662d7771494c863f5c8bb1"
+    },
+    {
+      "sourceGameId": 1332,
+      "sourceFactsSha256": "0c19e9b2153f1cb1cc6fc5539451c11eacda3968c6ea650392b9edade106fd56"
+    },
+    {
+      "sourceGameId": 1333,
+      "sourceFactsSha256": "77cc63fc1b09669cb760903e30eb75874b879dd819c385795bb7a9175d13cf7a"
+    },
+    {
+      "sourceGameId": 1334,
+      "sourceFactsSha256": "4ca2108874933233377e6932ae75d1215f68d3da9bdb430799a713c667605026"
+    },
+    {
+      "sourceGameId": 1335,
+      "sourceFactsSha256": "a0b0e0161b9acdbe2b043ea19ca095d29af566099af224cebd06e5381b44d24b"
+    },
+    {
+      "sourceGameId": 1336,
+      "sourceFactsSha256": "b5ffd0b5ce698b9b92998569db0053b49e53731cc9d1b23b1e59e6514a24accb"
+    },
+    {
+      "sourceGameId": 1337,
+      "sourceFactsSha256": "fed7dc1c7f446e24f7db02450d2a867676d002a05868b958e37c81334dbcf31c"
+    },
+    {
+      "sourceGameId": 1338,
+      "sourceFactsSha256": "c45a03b730d4cf9aa50280bce77b9dad5e4770e80265f66b7f827f0c46633678"
+    },
+    {
+      "sourceGameId": 1339,
+      "sourceFactsSha256": "a2c66a017d834310c610a3647c2f556057d61c150e2d0c035c7ef3a51c0c7524"
+    },
+    {
+      "sourceGameId": 1340,
+      "sourceFactsSha256": "2ae90b575766f1b54e36be7f4edfa90f71b84fbe315cf33be0383c5d209b34e2"
+    },
+    {
+      "sourceGameId": 1341,
+      "sourceFactsSha256": "e049841f36a8aa17eadcd117f68d53e82e4d42694b4a63a54e3a2cd82e3b335a"
+    },
+    {
+      "sourceGameId": 1342,
+      "sourceFactsSha256": "65eb6f8d49bb9ab59ca79f99061e1bb7288e13a6bd3f2d16a19bb553c4a0883a"
+    },
+    {
+      "sourceGameId": 1343,
+      "sourceFactsSha256": "117bed2c31d4e55cbfe0301c9287412819731b75d9b82575107a7767a8baef42"
+    },
+    {
+      "sourceGameId": 1344,
+      "sourceFactsSha256": "8a44a3154b1ef23117c3f2c8add3697d264127bdc22a562336ace710807c1325"
+    },
+    {
+      "sourceGameId": 1345,
+      "sourceFactsSha256": "1291dc106f613a89c2a2d9d1f738d65cc7dbb4c62cc2994e49e35ac390902771"
+    },
+    {
+      "sourceGameId": 1346,
+      "sourceFactsSha256": "1b36aaef0f6af39ad4dbd751dec2c863b894afe6265d2d41d64a27d1091ecfc1"
+    },
+    {
+      "sourceGameId": 1347,
+      "sourceFactsSha256": "6e67b03f117f99f4936fef1cd5a878f44e7980d0a61cbf9ef03e4da481977007"
+    },
+    {
+      "sourceGameId": 1348,
+      "sourceFactsSha256": "57b11fcb7dd5dcbd97a1f341415f71415d3a789d84ac430f4a5e723faffbbcc0"
+    },
+    {
+      "sourceGameId": 1349,
+      "sourceFactsSha256": "ed1619084a839c6733886f71f445145ca27ce76dc66811f6cfef42dfdc082668"
+    },
+    {
+      "sourceGameId": 1350,
+      "sourceFactsSha256": "d73cc1a95a3d8f2efd1b69c04a5307c5989e05a7daca6bdf30003d899137852a"
+    },
+    {
+      "sourceGameId": 1351,
+      "sourceFactsSha256": "31f8508beda25b00f343bd77d8b284fa1803f359e6b5dd6e330d0c08a3869ad7"
+    },
+    {
+      "sourceGameId": 1352,
+      "sourceFactsSha256": "62ec55ebfdb0e45ec55a474fb2a1e90ebb036b40eaebb6b3c52cb1b8429bc955"
+    },
+    {
+      "sourceGameId": 1353,
+      "sourceFactsSha256": "e3e7cac575beefe59e3f87c1c76e1b75e954253c73c183c3f472ee7f8d57e445"
+    },
+    {
+      "sourceGameId": 1384,
+      "sourceFactsSha256": "4f3b8dbcaaa3b56fc6297717397bd77a286febd62e63ce80740a9311ba5ae687"
+    },
+    {
+      "sourceGameId": 1354,
+      "sourceFactsSha256": "e51ee70e9a872dc372020e9c56fe7dbf91cbb718793bd9c6252237b79a318a73"
+    },
+    {
+      "sourceGameId": 1385,
+      "sourceFactsSha256": "dd20779120d5748ef0aea02075e92ccf737ce411f2066786b991d039c083ab1b"
+    },
+    {
+      "sourceGameId": 1355,
+      "sourceFactsSha256": "18569ab98fc1f1ce0b87c32ec2808ca31cd29aebe428cd26690cf2820cc52f7f"
+    },
+    {
+      "sourceGameId": 1356,
+      "sourceFactsSha256": "307475bfa2f1aa30cafb83c3f11b6e70d77e37d64118098cc19e883074685d55"
+    },
+    {
+      "sourceGameId": 1357,
+      "sourceFactsSha256": "29a5dc1990d0735c92b76fa0f7a19d17f1e6f41cb62d26efe6c88d41b394f7dc"
+    },
+    {
+      "sourceGameId": 1358,
+      "sourceFactsSha256": "6c276d8daeef119b49d93fae2beeb87f1ce65258bfd4adf745d6bbb86b410f74"
+    },
+    {
+      "sourceGameId": 1359,
+      "sourceFactsSha256": "ec1495bd3e6d7a875a60e90e4aed0b26c5b61a05117fb61a67ceb329afd7fffd"
+    },
+    {
+      "sourceGameId": 1360,
+      "sourceFactsSha256": "807f6aef49e92c2fc7ecdcf1677ab227b04adba9e3306bac3ad3375134adeffb"
+    },
+    {
+      "sourceGameId": 1361,
+      "sourceFactsSha256": "94b23a309252046c86fde85b96cda788dac51a90a8875cb1eefb777f9b2d9a15"
+    },
+    {
+      "sourceGameId": 1362,
+      "sourceFactsSha256": "6bf9025570e19ad1095bd0266a139b339ef5f4e1f78a7aa0786ba4349068f0d6"
+    },
+    {
+      "sourceGameId": 1363,
+      "sourceFactsSha256": "ce5d830b781946a10161dfa4009570b81b9f22c218a46aebf79768d376db8c2c"
+    },
+    {
+      "sourceGameId": 1364,
+      "sourceFactsSha256": "1b4cffa77a2c714f26d5389046c5785290dfb5b3302a0524b46710190a1c74b6"
+    },
+    {
+      "sourceGameId": 1365,
+      "sourceFactsSha256": "3c8404667918d97122843b58a875701b8a819a67c182dae799922c1317c0593b"
+    },
+    {
+      "sourceGameId": 1366,
+      "sourceFactsSha256": "e200b69627b534a6ece0b463310c01a911408dae51f3a272005ba8bd369e641d"
+    },
+    {
+      "sourceGameId": 1367,
+      "sourceFactsSha256": "37a8507240a40741b74e0d7d5adfaf839d69767babef0a7b69cc079d75a1d569"
+    },
+    {
+      "sourceGameId": 1368,
+      "sourceFactsSha256": "f9d1173c37b8fdeab9ae3e89459e9bebf7d3fe74fc849d8fffaa42e66176856c"
+    },
+    {
+      "sourceGameId": 1386,
+      "sourceFactsSha256": "96df89b885b8dbea2071d65bdb2ed1ab8fdb9c94b596f29c503d33006c3fcb30"
+    },
+    {
+      "sourceGameId": 1369,
+      "sourceFactsSha256": "000dced7f4eb8e68ede21fa4cb525f4e6fe2872e84b47f0e4ba97c68792cc4b1"
+    },
+    {
+      "sourceGameId": 1370,
+      "sourceFactsSha256": "1c9f2cb6c8adfcfc509fa77853645a3f89b9693b140efa7b17e0b450bf10bc98"
+    },
+    {
+      "sourceGameId": 1371,
+      "sourceFactsSha256": "c9f4387ada45ac882a30f2fcc820c82b9df50ee4a23852498a53b829c62cce29"
+    },
+    {
+      "sourceGameId": 1372,
+      "sourceFactsSha256": "a3c3495ad819865ac4b8a47ca3a3b9e7bc84bc724ce0e4e5cceb7bad58995d29"
+    },
+    {
+      "sourceGameId": 1373,
+      "sourceFactsSha256": "e4a6af4202b0b53d7f6cb7d17a016a0de06827357a63819970293435b9f88147"
+    },
+    {
+      "sourceGameId": 1374,
+      "sourceFactsSha256": "3a165652b4105e75eb49c44f45d4eb54b401c8feee64125cf4d5680e2351877f"
+    },
+    {
+      "sourceGameId": 1375,
+      "sourceFactsSha256": "124543ab478b53f74fbed45ae5af9e378489aa6b372497d2f647197e85942499"
+    },
+    {
+      "sourceGameId": 1376,
+      "sourceFactsSha256": "6017ddaebc437ac449c72623e4a96786b275eb42299b6b66aca115fcaafc1a70"
+    },
+    {
+      "sourceGameId": 1377,
+      "sourceFactsSha256": "5d5f57c30c895a306387353fea7759b1c7dfee93bf3346f12391c2d6b8fcefd2"
+    },
+    {
+      "sourceGameId": 1378,
+      "sourceFactsSha256": "22bf4e6a497d952b31bdb9712817fc48529d76d774ca7bd2e81cba9898f88a95"
+    },
+    {
+      "sourceGameId": 1379,
+      "sourceFactsSha256": "06e379df2fdf896027f51eb6027d0ee3275b9656b918bfdc43d487061520ecf7"
+    },
+    {
+      "sourceGameId": 1380,
+      "sourceFactsSha256": "da8d4b4e6b828338093d944aa94c23adf0aeb354b6f197cc6e0bdc4e663073a8"
+    },
+    {
+      "sourceGameId": 1381,
+      "sourceFactsSha256": "066c0d9c66f247293e6a46a7a5e94e684e7ec639db44ce7d53da298b3658d37e"
+    },
+    {
+      "sourceGameId": 1382,
+      "sourceFactsSha256": "f2b05a38a7f6e6f64188c8ebc8cba1d1caddd0f51bc7b2ea13ef5c88ec0d81eb"
+    }
+  ],
+  "incompleteGameIds": [
+    1379
+  ],
+  "pairingsUrl": "https://vietnamchess.vn/index.php/futa7-en",
+  "pairingsFactsSha256": "88b178faaeddfc4d3392fdc0dcad680952ceb976a3fa7e4e20147c533c4061b0",
+  "pairingEvidenceNote": "All Swiss colors, opponents and results agree with the official round tables. Knockout rows may report aggregate match results and are not substituted for classical-game outcomes. The official final report independently confirms the 39-move classical final was drawn."
+}

@@ -1,13 +1,12 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-10-28",
-  "target": "Complete standard-Xiangqi tournament games from 2026 with verified top dedicated-engine participants",
-  "minimumTargetYear": 2026,
+  "reviewedOn": "2026-10-31",
+  "target": "Complete standard-Xiangqi engine match games with both participants established well above human level; recent and moderately older games accepted, including Kaka league testing series",
+  "minimumTargetYear": 2020,
   "selection": {
     "preferredGames": 250,
     "requireFullMainLine": true,
     "requireBothParticipantsToBeEngines": true,
-    "requireVerifiedTournamentAndParticipants": true,
     "allowNewLocallyGeneratedSelfPlay": false,
     "requireSourceAttribution": true,
     "requireLegalReplayFromRecordedStart": true,
@@ -15,8 +14,22 @@
     "allowDocumentedShortTimeControls": true,
     "deduplicateBy": "canonical starting FEN and full main line",
     "startingPositions": "Recorded noninitial positions are permitted and must retain their exact FEN.",
-    "excludeVariants": ["Jieqi", "Banqi", "Crazyhouse Xiangqi", "Fortress Xiangqi"],
-    "doNotInfer": ["hardware", "engine version", "network version", "time control", "exact date", "round", "result"]
+    "excludeVariants": [
+      "Jieqi",
+      "Banqi",
+      "Crazyhouse Xiangqi",
+      "Fortress Xiangqi"
+    ],
+    "doNotInfer": [
+      "hardware",
+      "engine version",
+      "network version",
+      "time control",
+      "exact date",
+      "round",
+      "result"
+    ],
+    "requireVerifiedEventOrMatchSeriesAndParticipants": true
   },
   "sources": [
     {
@@ -56,5 +69,6 @@
       "sourceTimeControl": "40/600",
       "note": "The ZIP contains XQC10total.pgn. No historical games were substituted for the recent collection."
     }
-  ]
+  ],
+  "yearScopeNote": "2020 onward is the working search range following the user's relaxation; years alone do not establish engine strength."
 }

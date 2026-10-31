@@ -33,6 +33,11 @@ with zipfile.ZipFile(a.apk) as z:
             require(not any(source_names.get(g[side],g[side]) in denied for side in ('red','black')),'Excluded source-name match')
         all_games+=games
     require(len({g['id'] for g in all_games})==len(all_games),'Duplicate game IDs')
+    initial='rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w - - 0 1'
+    def game_key(g):
+        fen=' '.join((g.get('startFen') or initial).split()).replace('h','n').replace('H','N').replace('e','b').replace('E','B')
+        return fen,tuple(g['moves'])
+    require(len({game_key(g) for g in all_games})==len(all_games),'Duplicate starting FEN and complete mainline')
     release=z.read('assets/pikafish-release.json');require(release==(ROOT/'app/src/main/assets/pikafish-release.json').read_bytes(),'Engine release metadata changed')
     meta=json.loads(release)
     payload={'lib/arm64-v8a/libpikafish.so':meta['android']['sha256'],'assets/pikafish.nnue':meta['network']['sha256']}

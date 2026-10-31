@@ -17,6 +17,7 @@ public final class PlayerNames {
     private static final String WOMEN_2022="https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result_1028/2022_17wxf__w_ranking.pdf";
     private static final String FUTA_2023="https://vietnamchess.vn/document/2023/futa6-bulletin-full.pdf";
     private static final String FUTA_2009="https://vietnamchess.vn/index.php/chessnews/tournament-news/tournament-international/open-inter-events/puta3";
+    private static final String FUTA_2025="https://vietnamchess.vn/index.php/news-futa7-en?catid=237&id=2380:futa7-day6-en&view=article";
     private static final Map<String,Name> NAMES=new HashMap<>(),EXACT=new HashMap<>();
     private static final class Name {
         final String chinese,readable,aliases,source;final boolean pinyin;
@@ -183,6 +184,25 @@ public final class PlayerNames {
         // this spelling for the Italian participant recorded by WXF in 1999.
         add("余建国","Yu Jianguo","", "https://www.pi.infn.it/~carosi/chess/xqmtb50.pdf");
         EXACT.put("德国 SCHMIDT BRAUNS Joachim",new Name("","Joachim Schmidt-Brauns","SCHMIDT BRAUNS Joachim",NON_CHNVIE,false));
+        // Official 2025 Phuong Trang bilingual final standings and public records.
+        add("陈光日","Tran Quang Nhat","Trần Quang Nhật",FUTA_2025);
+        add("陈清新","Tran Thanh Tan","Trần Thanh Tân",FUTA_2025);
+        add("段德显","Doan Duc Hien","Đoàn Đức Hiền",FUTA_2025);
+        add("武国达","Vu Quoc Dat","Vũ Quốc Đạt",FUTA_2025);
+        add("赵奕帆","Chao I Fan","Triệu Dịch Phàm",FUTA_2025);
+        add("阮陈杜宁","Nguyen Tran Do Ninh","Nguyễn Trần Đỗ Ninh",FUTA_2025);
+        add("华辰昊","Hua Chen Hao","Hoa Thần Hạo",FUTA_2025);
+        add("许文章","Xu Wen Zhang","Hứa Văn Chương",FUTA_2025);
+        add("邓有庄","Dang Huu Trang","Đặng Hữu Trang",FUTA_2025);
+        add("阮英敏","Nguyen Anh Man","Nguyễn Anh Mẫn",FUTA_2025);
+        add("王家瑞","Wang Jia Rui","Vương Gia Thụy",FUTA_2025);
+        add("阮煌林","Nguyen Hoang Lam (M)","Nguyễn Hoàng Lâm (M)",FUTA_2025);
+        add("潘阮公明","Phan Nguyen Cong Minh","Phan Nguyễn Công Minh",FUTA_2025);
+        alias("吳宗翰","吴宗翰");
+        alias("郑彦隆)","郑彦隆");
+        alias("阮煌林 (M)","阮煌林");
+        alias("趙奕帆","赵奕帆");
+        alias("武囯达","武国达");
     }
     private PlayerNames() {}
     private static void add(String chinese,String readable,String aliases,String source){NAMES.put(chinese,new Name(chinese,readable,aliases,source,false));}

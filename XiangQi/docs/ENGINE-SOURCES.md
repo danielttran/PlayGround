@@ -1,13 +1,15 @@
 # Engine collection sources
 
-Reviewed on **2026-10-28**. The [source policy](../data/engine-source-policy.json)
+Reviewed on **2026-10-31**. The [source policy](../data/engine-source-policy.json)
 records inclusion rules and the state of each source. A source lead is not a
 shipped game pack: complete moves and metadata must be inspected first.
 
-The requested built-in collection is now specifically **2026 tournaments with
-verified top dedicated-engine participants**. No qualifying complete-game pack
-has been verified, so this build ships no built-in engine games. Older events,
-new local self-play and unspecified training corpora are not substituted.
+The user now accepts moderately older strong-engine matches as well as recent
+tournaments, and specifically requested Kaka's league. The working search range
+is 2020 onward, with established strength on both sides. No verified Kaka game
+file has been obtained yet. The forum registration request has reached email
+verification; no account or download access is claimed. New local self-play and
+unspecified training corpora are not substituted.
 
 ## Preferred recent source
 
