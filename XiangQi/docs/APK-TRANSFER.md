@@ -42,4 +42,8 @@ phone by file size and SHA-256. No app was installed, no phone security settings
 were changed, and no storage reset, formatting, driver replacement or restart
 was performed.
 
-This is a file-delivery fix; the Android application remains version 0.7.11.
+That earlier file-delivery fix left the Android application at version 0.7.11.
+
+## Latest verified SD-card delivery
+
+On 31 October 2026, version 0.7.13 / code 22 was delivered directly over the authorized USB connection to the same SanDisk SD-card Download folder. The exact file `XiangqiStudy-latest.apk` contains 52,141,633 bytes. Both PC and phone SHA-256 are `6168199a1a71f3e87a397b3c65b086b420b3e0531fe046503faf2588db0ff67a`. A temporary staged copy was verified before replacing the destination. Scanning the final file updated Android's file index, which returned its correct name, size and APK MIME type. The APK was copied, not installed. See [the 0.7.13 audit](AUDIT-0.7.13.md).

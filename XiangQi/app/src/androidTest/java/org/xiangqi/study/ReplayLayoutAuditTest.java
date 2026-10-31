@@ -83,6 +83,36 @@ public final class ReplayLayoutAuditTest extends InstrumentationTestCase {
             assertFalse(hasText(root(),"World Championship masters 1991–2003"));assertFalse(hasText(root(),"Vietnamese masters classical 2009 & 2016"));
         });
     }
+    public void testSourceCorrectionNotesRespectSpoilerSetting()throws Exception{
+        SharedPreferences appearance=activity.getSharedPreferences(StudySettings.PREFERENCES,Context.MODE_PRIVATE);
+        Map<String,?> original=appearance.getAll();
+        try{
+            main(()->{
+                GameRepository.Game corrected=null;
+                for(GameRepository.Game candidate:games())if(candidate.id.equals("wxf-2025-men-r8-g9"))corrected=candidate;
+                assertNotNull("Exercise a real source correction carrying an outcome",corrected);
+                assertTrue(corrected.metadataNote.contains("Black wins"));
+                String note=corrected.metadataNote;
+                appearance.edit().putBoolean("hideResults",true).commit();
+                call("openGame",new Class<?>[]{GameRepository.Game.class,boolean.class},corrected,false);
+                call("gameInformation");
+                AlertDialog hidden=(AlertDialog)get("gameInformationDialog");
+                TextView message=hidden.findViewById(android.R.id.message);
+                assertFalse("Source prose must not bypass hidden recorded results",message.getText().toString().contains(note));
+                assertFalse(message.getText().toString().contains("Black wins"));
+                assertFalse(message.getText().toString().contains("0–1"));
+                hidden.dismiss();
+                appearance.edit().putBoolean("hideResults",false).commit();
+                call("gameInformation");
+                AlertDialog visible=(AlertDialog)get("gameInformationDialog");
+                TextView shown=visible.findViewById(android.R.id.message);
+                assertTrue("Notes remain readable when results are explicitly enabled",shown.getText().toString().contains(note));
+                assertTrue(shown.getText().toString().contains("0–1"));
+                assertEquals("Visibility never changes the recorded result","0-1",corrected.result);
+                visible.dismiss();
+            });
+        }finally{restore(appearance,original);}
+    }
     private GameRepository.Game fixture(String year,String event,String collection){GameRepository.Game game=new GameRepository.Game();game.id="metadata-"+year;game.red="Red";game.black="Black";game.event=event;game.round="Round 1";game.date=year;game.collection=collection;game.result="0-1";game.sourceUrl="";game.startFen="";game.moves.addAll(Arrays.asList("b2e2","b9c7"));return game;}
     private View root(){return activity.getWindow().getDecorView();}
     private boolean hasText(View view,String text){if(view instanceof TextView&&text.equals(((TextView)view).getText().toString()))return true;if(view instanceof ViewGroup){ViewGroup group=(ViewGroup)view;for(int i=0;i<group.getChildCount();i++)if(hasText(group.getChildAt(i),text))return true;}return false;}

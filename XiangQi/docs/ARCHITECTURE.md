@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.12 (version code 21) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.13 (version code 22) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
