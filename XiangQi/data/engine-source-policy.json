@@ -27,7 +27,8 @@
       "time control",
       "exact date",
       "round",
-      "result"
+      "result",
+      "opening-book exit or which moves were played from book"
     ],
     "requireVerifiedEventOrMatchSeriesAndParticipants": true
   },
@@ -42,7 +43,7 @@
     {
       "id": "pikafish-fishtest",
       "url": "https://test.pikafish.org/",
-      "status": "Testing infrastructure confirmed; complete-game export not verified"
+      "status": "Frontend redirects to login with Permission Denied, Please Login; no complete-game export obtained in this session."
     },
     {
       "id": "pxzero",
@@ -68,6 +69,25 @@
       "sourceFormat": "WinBoard SAN-style Xiangqi PGN, not the app's ICCS PGN",
       "sourceTimeControl": "40/600",
       "note": "The ZIP contains XQC10total.pgn. No historical games were substituted for the recent collection."
+    },
+    {
+      "id": "dongping-nnue-search",
+      "url": "https://www.dpxq.com/hldcg/search/",
+      "status": "Landing page public; keyword requests require login because of AI crawler traffic. No recent NNUE complete-game export verified.",
+      "reviewedOn": "2026-10-31",
+      "attemptedTerms": [
+        "皮卡鱼",
+        "旋风",
+        "计算机",
+        "NNUE",
+        "软件"
+      ],
+      "response": "AI爬虫机器人太多了,请先登陆一下棋谱仓库"
+    },
+    {
+      "id": "variant-fishtest-archive",
+      "url": "https://github.com/fairy-stockfish/varfishtest-archive",
+      "status": "Maintainer archive contains 2017-2022 test settings and aggregate results, not an established full-game collection."
     }
   ],
   "yearScopeNote": "2020 onward is the working search range following the user's relaxation; years alone do not establish engine strength."

@@ -7377,7 +7377,7 @@
       "event": "World Championship 2025",
       "round": "Men · Round 8 · Board 11",
       "date": "2025-09-25",
-      "red": "刘嘉",
+      "red": "刘嘉琪",
       "black": "苏俊豪",
       "result": "0-1",
       "timeControl": "3600+30",
@@ -7497,6 +7497,12 @@
         "g1c1",
         "b2b0",
         "e9f9"
+      ],
+      "sourceRed": "刘嘉",
+      "sourceBlack": "苏俊豪",
+      "metadataNote": "Source red-player tag truncates Liu Jiaqi. Official title and reciprocal result-table rows identify Liu Jiaqi (2), Red against Sou Chon Hou (16), Round 8; Black wins.",
+      "metadataEvidenceUrls": [
+        "https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf"
       ]
     },
     {
@@ -9065,7 +9071,7 @@
       "round": "Men · Round 8 · Board 9",
       "date": "2025-09-25",
       "red": "于文彬",
-      "black": "于文彬",
+      "black": "阮日光",
       "result": "0-1",
       "timeControl": "3600+30",
       "sourceTimeControl": "60 分钟+30 秒",
@@ -9211,6 +9217,12 @@
         "e0f0",
         "d4e4",
         "g4h2"
+      ],
+      "sourceRed": "于文彬",
+      "sourceBlack": "于文彬",
+      "metadataNote": "Source black-player tag repeats Red. Official title and reciprocal result-table rows identify Quang Nhat Nguyen (37), Black against Winston Yu (11), Round 8; Black wins. Official roster spelling retained.",
+      "metadataEvidenceUrls": [
+        "https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf"
       ]
     },
     {
@@ -19173,7 +19185,7 @@
       "round": "Men · Round 2 · Board 17",
       "date": "2025-09-22",
       "red": "梅德韦杰夫",
-      "black": "梅德韦杰夫",
+      "black": "纳斯塔西奥",
       "result": "1-0",
       "timeControl": "3600+30",
       "sourceTimeControl": "60 分钟+30 秒",
@@ -19313,6 +19325,12 @@
         "f6f7",
         "d9d8",
         "b6g6"
+      ],
+      "sourceRed": "梅德韦杰夫",
+      "sourceBlack": "梅德韦杰夫",
+      "metadataNote": "Source black-player tag repeats Red. Official title and reciprocal result-table rows identify Davide Nastasio (40), Black against Vladimir Medvedev (42), Round 2; Red wins.",
+      "metadataEvidenceUrls": [
+        "https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf"
       ]
     },
     {

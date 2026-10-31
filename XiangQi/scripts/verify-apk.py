@@ -26,6 +26,7 @@ with zipfile.ZipFile(a.apk) as z:
         require(sha==manifest['assetSha256'],'Pack differs from audited source manifest: '+entry['file'])
         require(len(games)==manifest['games'] and sum(len(g['moves']) for g in games)==manifest.get('halfMoves',manifest.get('plies')),'Game/ply count mismatch')
         for g in games:
+            require(g['red'].strip() and g['black'].strip() and g['red']!=g['black'],'Missing or identical players: '+g['id'])
             require(urlparse(g['sourceUrl']).hostname in ('www.wxf-xiangqi.org','wxf-xiangqi.org','vietnamchess.vn'),'Unexpected game source host')
             require(g['timeControl'] in ('3600+30','4800+30') or g.get('sourceGameType')=='慢棋','Missing classical source evidence')
             require(all(re.fullmatch(r'[a-i][0-9][a-i][0-9]',m) for m in g['moves']),'Non-canonical moves: '+g['id'])

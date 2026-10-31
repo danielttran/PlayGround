@@ -748,7 +748,19 @@
   ],
   "curationPolicy": "data/curation-policy.json",
   "classicalRegulationsUrl": "https://www.wxf-xiangqi.org/images/2025wxf_shanghai/19th_WXF__World_Xiangqi_Championship_Regulations.pdf",
-  "assetSha256": "058befc9c046491eff36c056b0f777d6106e74a950f419e185d423b284bb46a3",
+  "assetSha256": "c9054d099c7fc41321faedf99055d439bd71d7cb11ff8478b8bc405ca197122c",
+  "metadataPolicySha256": "35993807e58888e71dcf3155c1f1ea629245814bcd8d612e1f01df6400915b33",
+  "resultCrossChecks": {
+    "games": 215,
+    "sourceUrl": "https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf",
+    "sourcePdfSha256": "1b099660526f6b1e1ad107a5db9fdba7c8f3781b1eee83b0088a60ecb23167f4",
+    "method": "Both reciprocal opponent/colour cells and cumulative-score differences"
+  },
+  "metadataCorrections": [
+    "wxf-2025-men-r8-g11",
+    "wxf-2025-men-r8-g9",
+    "wxf-2025-men-r2-g17"
+  ],
   "sources": [
     {
       "url": "https://www.wxf-xiangqi.org/index.php?Itemid=101&id=1788&lang=en&option=com_content&view=article",

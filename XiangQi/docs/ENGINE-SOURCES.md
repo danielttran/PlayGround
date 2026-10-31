@@ -25,6 +25,21 @@ are cumulative unbalanced-position tests, not an established 2026 championship.
 
 ## Other leads
 
+- [Dongping's public search](https://www.dpxq.com/hldcg/search/) loads its landing
+  page, but actual keyword requests on 31 October 2026 return
+  `AI爬虫机器人太多了,请先登陆一下棋谱仓库` (too many AI crawlers; please log in).
+  Queries for Pikafish, Cyclone, computer events, NNUE and software events all
+  produced the same gate. No recent NNUE game file or export was obtained.
+  The supplied Gemini claim of an unauthenticated archive is not verified.
+- The official [Pikafish Fishtest](https://test.pikafish.org/) frontend redirects
+  to its login page with “Permission Denied, Please Login.” No public full-game
+  export was available in that session.
+- The [Fairy-Stockfish testing archive](https://github.com/fairy-stockfish/varfishtest-archive)
+  contains test settings and aggregate results from 2017–2022, according to its
+  maintainer's README. It does not establish a collection of full game scores.
+  The separate `variantfishtest` repository is a match runner, not a supplied
+  tournament archive. No local matches were generated as substitutes.
+
 - [Official Pikafish](https://github.com/official-pikafish/Pikafish) links its
   [Fishtest server](https://test.pikafish.org/) as development testing
   infrastructure. A complete-game download has not been verified.
@@ -59,3 +74,14 @@ from the bundled human collection and from each named user import.
 Shorter documented engine time controls are eligible. Human classical-game
 curation rules remain attached to the human collections. Jieqi, Banqi and other
 variants do not enter this standard-Xiangqi collection.
+
+## Opening-book provenance
+
+No current pack carries a verified engine book-exit boundary, and the app does
+not label moves as book moves. A source's explicit per-move book annotations
+or documented forced opening prefix can establish such a boundary; matching
+an opening database or the engine's best move cannot. A future UI can use a
+small Book badge in the move list and an Engine play divider at the first
+calculated move. This is a proposed presentation, not a shipped feature.
+For a score starting at a noninitial FEN, describe the preset starting position
+without inventing the omitted opening moves. Leave unknown book use unknown.

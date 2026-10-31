@@ -17,8 +17,15 @@ public final class NativePositionCases {
         System.out.println(name+"\t"+UciPosition.command(current,startFen,history)+"\t"+String.join(" ",legal)+"\t"+current.toFen());
     }
     private static void custom(String name,String fen) {emit(name,Position.fromFen(fen),fen,Collections.emptyList());}
+    private static void emitGeometry(String name,Position current) {
+        List<String> legal=new ArrayList<>(current.legalMoves());Collections.sort(legal);
+        String[] fields=current.toFen().split(" ");fields[4]="0";fields[5]="1";
+        System.out.println(name+"\tposition fen "+String.join(" ",fields)+"\t"+String.join(" ",legal)+"\t"+current.toFen());
+    }
     public static void main(String[] args) throws Exception {
-        if(args.length!=1)throw new IllegalArgumentException("Usage: NativePositionCases asset-games.tsv (id TAB optional-startFen TAB moves)");
+        if(args.length<1||args.length>2||(args.length==2&&!args[1].equals("--all-plies")))
+            throw new IllegalArgumentException("Usage: NativePositionCases asset-games.tsv [--all-plies] (id TAB optional-startFen TAB moves)");
+        boolean allPlies=args.length==2;
         for(String line:Files.readAllLines(Paths.get(args[0]),StandardCharsets.UTF_8)) {
             if(line.trim().isEmpty())continue;
             String[] fields=line.split("\t",-1);
@@ -27,8 +34,9 @@ public final class NativePositionCases {
             Set<Integer> selected=new HashSet<>(Arrays.asList(0,1,moves.size()/2,moves.size()));
             Position current=fields[1].trim().isEmpty()?Position.initial():Position.fromFen(fields[1]),previous=null;
             for(int ply=0;ply<=moves.size();ply++) {
-                if(selected.contains(ply))emit(fields[0]+"-ply"+ply,current,fields[1],moves.subList(0,ply));
-                if(ply==moves.size()&&previous!=null&&current.legalMoves().isEmpty()&&!selected.contains(ply-1))
+                if(allPlies)emitGeometry(fields[0]+"-ply"+ply,current);
+                else if(selected.contains(ply))emit(fields[0]+"-ply"+ply,current,fields[1],moves.subList(0,ply));
+                if(!allPlies&&ply==moves.size()&&previous!=null&&current.legalMoves().isEmpty()&&!selected.contains(ply-1))
                     emit(fields[0]+"-last-legal-ply"+(ply-1),previous,fields[1],moves.subList(0,ply-1));
                 if(ply<moves.size()){previous=current;current=current.play(moves.get(ply));}
             }

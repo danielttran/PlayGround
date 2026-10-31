@@ -86,6 +86,7 @@ def iso_date(value: str):
 
 def parse_games(source: str, division: str, number: int, url: str, exclusions=None):
     games = []
+    metadata_policy = json.loads((ROOT / 'data/wxf2025-metadata-policy.json').read_text(encoding='utf-8'))
     blocks = re.findall(r"\[DhtmlXQiFrame\](.*?)\[/DhtmlXQiFrame\]", source, re.S)
     for index, block in enumerate(blocks, 1):
         tags = dict(re.findall(r"\[DhtmlXQ_(\w+)\](.*?)\[/DhtmlXQ_\1\]", block, re.S))
@@ -130,12 +131,53 @@ def parse_games(source: str, division: str, number: int, url: str, exclusions=No
             "sourceTitle": title,
             "moves": iccs_moves(tags["movelist"]),
         }
+        correction = metadata_policy['metadataOverrides'].get(game['id'])
+        if correction:
+            if any(game[key] != value for key, value in correction['expected'].items()):
+                raise ValueError(f"Reviewed source metadata changed: {game['id']}")
+            game['sourceRed'], game['sourceBlack'] = red, black
+            game.update(correction['fields'])
+            game['metadataNote'] = correction['note']
+            game['metadataEvidenceUrls'] = [metadata_policy['resultsUrl']]
+        if game['red'] == game['black']:
+            raise ValueError(f"Identical players require source review: {game['id']}")
+        if game['date'] != metadata_policy['roundDates'][str(number)]:
+            raise ValueError(f"Date disagrees with championship schedule: {game['id']}")
         if game["sourceTimeControl"] not in ("60 分钟+30 秒", "60+30"):
             raise ValueError(f"Unverified classical time control: {game['sourceTimeControl']}")
         games.append(game)
     if not games and division == "Men":
         raise ValueError(f"No embedded games: {division} {number}")
     return games
+
+
+def verify_results(games, metadata_policy, curation):
+    """Check all admitted games against both official cumulative-score rows."""
+    rows = metadata_policy['players']
+    if len(rows) != 51 or len({row['number'] for row in rows}) != 51:
+        raise ValueError('Expected 51 unique entrants in official 2025 results')
+    roster = {row['name']: row for row in rows}
+    reverse_alias = {value: key for key, value in curation['aliases'].items()}
+    def points(row, index):
+        if index < 0:
+            return 0
+        cell = row['rounds'][index]
+        if cell is None:
+            raise ValueError('Missing official result cell')
+        return points(row, index - 1) if cell[1] == '-' else int(cell[1].lstrip('+'))
+    for game in games:
+        number = int(re.search(r'-r(\d+)-', game['id'])[1])
+        red, black = (roster[reverse_alias.get(game[side], game[side])] for side in ('red', 'black'))
+        red_cell, black_cell = (row['rounds'][number - 1] for row in (red, black))
+        if (red_cell is None or black_cell is None or red_cell[0] != '*' + str(black['number'])
+                or black_cell[0] != str(red['number'])):
+            raise ValueError(f"Official opponent/colour mismatch: {game['id']}")
+        score = tuple(points(row, number - 1) - points(row, number - 2) for row in (red, black))
+        if {(2, 0): '1-0', (0, 2): '0-1', (1, 1): '1/2-1/2'}.get(score) != game['result']:
+            raise ValueError(f"Official result mismatch: {game['id']}")
+    return {'games': len(games), 'sourceUrl': metadata_policy['resultsUrl'],
+            'sourcePdfSha256': metadata_policy['resultsPdfSha256'],
+            'method': 'Both reciprocal opponent/colour cells and cumulative-score differences'}
 
 
 class Downloader:
@@ -203,6 +245,8 @@ def main():
             game[side] = policy["aliases"].get(game[side], game[side])
         selected.append(game)
     games = selected
+    metadata_raw = (ROOT / 'data/wxf2025-metadata-policy.json').read_bytes()
+    result_check = verify_results(games, json.loads(metadata_raw), policy)
     # The final leads, then requested players, then the remaining archive.
     def priority(game):
         if "Final" in game["round"]:
@@ -230,6 +274,9 @@ def main():
         "curationPolicy": "data/curation-policy.json",
         "classicalRegulationsUrl": "https://www.wxf-xiangqi.org/images/2025wxf_shanghai/19th_WXF__World_Xiangqi_Championship_Regulations.pdf",
         "assetSha256": hashlib.sha256(payload).hexdigest(),
+        "metadataPolicySha256": hashlib.sha256(metadata_raw).hexdigest(),
+        "resultCrossChecks": result_check,
+        "metadataCorrections": [game['id'] for game in games if 'metadataNote' in game],
         "sources": downloader.sources,
         "notation": "ICCS; a0 is Red's bottom-left, i9 is top-right as viewed by Red",
         "rights": "WXF site states All Rights Reserved. These are attributed factual moves and event metadata; no annotations, page design or board code copied. No general redistribution license asserted.",

@@ -92,3 +92,26 @@ materials or external engine assets.
 The downloader is specific to this verified event. Additional tournaments need
 their own source, time-control checks, and replay validation before preloading.
 Users can import additional supported records through Android's document picker.
+
+## Full-library review, 31 October 2026
+
+The 0.7.11 review found three incorrect source player tags in this pack:
+`wxf-2025-men-r2-g17` repeated Vladimir Medvedev as Black instead of Davide
+Nastasio; `wxf-2025-men-r8-g9` repeated Winston Yu as Black instead of Quang
+Nhat Nguyen; and `wxf-2025-men-r8-g11` truncated Liu Jiaqi's name to 刘嘉.
+The game titles and the [official results booklet](https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf),
+men's individual tables on PDF pages 5–8, establish the corrections. Original
+tags, explanatory notes and evidence links remain on the three corrected records.
+No game IDs, moves, results or dates changed.
+
+`data/wxf2025-metadata-policy.json` pins the booklet hash and its 51 men's rows.
+The downloader now checks every admitted game's reciprocal opponent numbers,
+Red asterisk and cumulative-score differences against those rows. All 215
+games agree. It also checks round dates and rejects identical players.
+New source changes affecting a reviewed correction fail pending manual review.
+
+`python scripts/audit-collection-sources.py` reproduces all six human packs
+against their downloaded sources without changing shipped files, checks
+manifest hashes/counts, dates, player fields and full-mainline uniqueness, and
+lists retained uncertainty notes. Reproduction confirms agreement with reviewed
+sources; it does not independently prove every historical source claim.
