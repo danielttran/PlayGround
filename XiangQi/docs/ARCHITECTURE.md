@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.6 (version code 15) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.7 (version code 16) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -209,3 +209,8 @@ See [AUDIT-0.7.3.md](AUDIT-0.7.3.md) for current checks and device-specific resu
 ## Compact record and engine columns (0.7.6)
 
 The flexible lower row contains the recycling record list and, while analysis is enabled, a separately scrolling engine column. Both share the available height instead of reserving a separate analysis panel above the record. Record rows use 28 dp height, 12 sp move text and 2 dp leading cell padding. A separate adapter view type adds a final result row after the source moves regardless of hideResults; variations show an unfinished label and never borrow the source outcome. Library cards show each game's event, round and actual date; built-in multi-year collection labels stay in searchable metadata rather than appearing as another event date. Private import labels are explicitly prefixed Import.
+
+
+## Appearance arrows (0.7.7)
+
+ArrowChoice replaces all four appearance selectors. Only explicit arrow presses notify selection callbacks; construction never clears custom colors. Both directions wrap, update the displayed choice, persist it and refresh the preview. Board and piece arrows retain surface-specific custom-color precedence. A bounded vertical panel pins the proportionally sized board above a weighted controls ScrollView, keeping the preview visible during selection and scrolling. Settings-dialog dismissal clears its field only if the dismissed instance is still current, protecting immediate reopen.

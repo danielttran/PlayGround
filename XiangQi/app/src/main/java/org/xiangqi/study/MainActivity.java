@@ -664,13 +664,13 @@ public final class MainActivity extends Activity {
         LinearLayout body=column();pad(body,18,8,18,12);
         CheckBox hide=new CheckBox(this);hide.setText(R.string.hide_game_results);hide.setTextColor(LIGHT);hide.setChecked(saved.hideResults);
         hide.setContentDescription("Hide game results, including accessibility announcements");body.addView(hide);
-        TextView spoilerNote=text("Only recorded game results are hidden. Engine evaluations stay visible; exported PGN preserves the original result.",12,MUTED);pad(spoilerNote,0,0,0,10);body.addView(spoilerNote);
+        TextView spoilerNote=text("Results stay hidden in the library and game information. Scroll to the end of a record to reveal its result. Engine evaluations stay visible.",12,MUTED);pad(spoilerNote,0,0,0,10);body.addView(spoilerNote);
         Button speed=button(getString(R.string.replay_speed_label,replayDelayLabel()),()->{},false);speed.setContentDescription("Replay speed");speed.setOnClickListener(v->replaySpeed(()->speed.setText(getString(R.string.replay_speed_label,replayDelayLabel()))));body.addView(speed);
         String[] boardIds=AppearancePresets.boardIds(),discIds=AppearancePresets.discIds();
-        PresetSpinner boards=(PresetSpinner)settingChoice(body,"Board style",AppearancePresets.boardLabels(),index(saved.boardStyle,boardIds));
-        Spinner glyphs=settingChoice(body,"Chinese piece characters",new String[]{"Traditional Chinese","Simplified Chinese"},index(saved.glyphStyle,"traditional","simplified"));
-        PresetSpinner discs=(PresetSpinner)settingChoice(body,"Piece finish",AppearancePresets.discLabels(),index(saved.discStyle,discIds));
-        Spinner coordinates=settingChoice(body,"Board coordinates",new String[]{"Off","ICCS · a–i / 0–9","Numeric · 0–8 / 0–9"},index(saved.coordinateStyle,"none","iccs","numeric"));
+        ArrowChoice boards=settingChoice(body,"Board style",AppearancePresets.boardLabels(),index(saved.boardStyle,boardIds));
+        ArrowChoice glyphs=settingChoice(body,"Chinese piece characters",new String[]{"Traditional Chinese","Simplified Chinese"},index(saved.glyphStyle,"traditional","simplified"));
+        ArrowChoice discs=settingChoice(body,"Piece finish",AppearancePresets.discLabels(),index(saved.discStyle,discIds));
+        ArrowChoice coordinates=settingChoice(body,"Board coordinates",new String[]{"Off","ICCS · a–i / 0–9","Numeric · 0–8 / 0–9"},index(saved.coordinateStyle,"none","iccs","numeric"));
         TextView previewLabel=text("Live board preview",13,ACCENT);pad(previewLabel,0,12,0,5);body.addView(previewLabel);
         BoardView preview=new BoardView(this);preview.setPosition(library||positions.isEmpty()?Position.initial():positions.get(ply).copy(),"",false);
         preview.setAppearance(saved.boardStyle,saved.glyphStyle,saved.discStyle);preview.setCoordinates(saved.coordinateStyle);preview.setCustomColors(saved.boardColor,saved.redBackground,saved.blackBackground);body.addView(preview,new LinearLayout.LayoutParams(-1,-2));
@@ -688,56 +688,44 @@ public final class MainActivity extends Activity {
             StudySettings s=StudySettings.load(this);preview.setAppearance(s.boardStyle,s.glyphStyle,s.discStyle);preview.setCoordinates(s.coordinateStyle);preview.setCustomColors(s.boardColor,s.redBackground,s.blackBackground);
             if(!library||wasHidden!=s.hideResults)applyAppearance();
         };
-        AdapterView.OnItemSelectedListener listener=new AdapterView.OnItemSelectedListener(){public void onItemSelected(AdapterView<?> parent,View view,int position,long id){changed.run();}public void onNothingSelected(AdapterView<?> parent){}};
+
         boards.onPresetSelected(position->{StudySettings.selectBoardPreset(this,boardIds[position]);changed.run();});
         discs.onPresetSelected(position->{StudySettings.selectDiscPreset(this,discIds[position]);changed.run();});
-        glyphs.setOnItemSelectedListener(listener);coordinates.setOnItemSelectedListener(listener);hide.setOnCheckedChangeListener((button,checked)->changed.run());
-        ScrollView scroll=new ScrollView(this);scroll.addView(body);
-        settingsDialog=dialog("Study settings").setView(scroll).setPositiveButton("Done",null)
+        glyphs.onPresetSelected(position->changed.run());coordinates.onPresetSelected(position->changed.run());hide.setOnCheckedChangeListener((button,checked)->changed.run());
+        body.removeView(hide);body.removeView(spoilerNote);body.removeView(speed);body.addView(speed);body.addView(hide);body.addView(spoilerNote);
+        body.removeView(previewLabel);body.removeView(preview);
+        int available=Math.max(dp(240),getResources().getDisplayMetrics().heightPixels-dp(180));
+        int previewWidth=Math.min(dp(220),Math.min(getResources().getDisplayMetrics().widthPixels-dp(80),(int)(available*.35f/1.10f)));
+        LinearLayout panel=new LinearLayout(this){@Override protected void onMeasure(int width,int height){int cap=MeasureSpec.getMode(height)==MeasureSpec.UNSPECIFIED?available:Math.min(available,MeasureSpec.getSize(height));super.onMeasure(width,MeasureSpec.makeMeasureSpec(cap,MeasureSpec.EXACTLY));}};panel.setOrientation(LinearLayout.VERTICAL);pad(panel,12,0,12,0);panel.addView(previewLabel);
+        LinearLayout.LayoutParams previewSize=new LinearLayout.LayoutParams(previewWidth,-2);previewSize.gravity=Gravity.CENTER_HORIZONTAL;panel.addView(preview,previewSize);
+        ScrollView scroll=new ScrollView(this);scroll.addView(body);panel.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
+        settingsDialog=dialog("Study settings").setView(panel).setPositiveButton("Done",null)
             .setNeutralButton("Engine settings",(d,w)->{
                 engineSettingsDialog=EngineSettings.show(this,()->{
                 cancelAnalysis();resumeAnalysis();
                 });engineSettingsDialog.setOnDismissListener(closed->engineSettingsDialog=null);
             }).create();
-        settingsDialog.setOnDismissListener(d->{if(presetDialog!=null)presetDialog.dismiss();settingsDialog=null;});settingsDialog.show();
+        final AlertDialog shownSettings=settingsDialog;shownSettings.setOnDismissListener(d->{if(settingsDialog==shownSettings){if(presetDialog!=null)presetDialog.dismiss();settingsDialog=null;}});shownSettings.show();
     }
     private void customColor(String title,String surface,int initial,Runnable changed) {
         colorDialog=ColorPickerDialog.show(this,title,initial,color->{StudySettings.setCustomColor(this,surface,color);changed.run();});
         colorDialog.setOnDismissListener(dialog->colorDialog=null);
     }
-    private Spinner settingChoice(LinearLayout body,String label,String[] choices,int selected) {
-        TextView title=text(label,13,ACCENT);pad(title,0,8,0,0);body.addView(title);
-        Spinner spinner=("Board style".equals(label)||"Piece finish".equals(label))?new PresetSpinner(label,choices):new Spinner(this);spinner.setContentDescription(label);
-        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,choices){
-            @Override public View getView(int position,View convert,ViewGroup parent){TextView view=(TextView)super.getView(position,convert,parent);view.setTextColor(LIGHT);return view;}
-        });
-        spinner.setSelection(selected);body.addView(spinner,new LinearLayout.LayoutParams(-1,dp(48)));return spinner;
+    private ArrowChoice settingChoice(LinearLayout body,String label,String[] choices,int selected){
+        ArrowChoice choice=new ArrowChoice(label,choices,selected);body.addView(choice,new LinearLayout.LayoutParams(-1,dp(56)));return choice;
     }
-    /** A real user choice must fire even when a custom color covers that same preset. */
-    private final class PresetSpinner extends Spinner {
-        private final String title;private final String[] labels;
-        private int observed;private java.util.function.IntConsumer chosen;
-        PresetSpinner(String title,String[] labels){super(MainActivity.this,Spinner.MODE_DIALOG);this.title=title;this.labels=labels;}
-        void onPresetSelected(java.util.function.IntConsumer listener){
-            chosen=listener;observed=getSelectedItemPosition();
-            setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-                public void onItemSelected(AdapterView<?> parent,View view,int position,long id){
-                    if(position!=observed){observed=position;chosen.accept(position);}
-                }
-                public void onNothingSelected(AdapterView<?> parent){}
-            });
+    /** Only explicit arrow presses change settings; construction preserves custom colors. */
+    private final class ArrowChoice extends LinearLayout {
+        private final String[] choices;private final TextView value;private int selected;private java.util.function.IntConsumer chosen;
+        ArrowChoice(String label,String[] choices,int selected){
+            super(MainActivity.this);this.choices=choices;this.selected=selected;setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setContentDescription(label);
+            Button previous=button("‹",()->step(-1),false);previous.setContentDescription("Previous "+label);previous.setPadding(0,0,0,0);addView(previous,new LinearLayout.LayoutParams(dp(48),dp(48)));
+            LinearLayout names=column();TextView title=text(label,11,ACCENT);title.setGravity(Gravity.CENTER);names.addView(title);value=text(choices[selected],14,LIGHT);value.setGravity(Gravity.CENTER);value.setMaxLines(2);value.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);names.addView(value);addView(names,new LinearLayout.LayoutParams(0,-2,1));
+            Button next=button("›",()->step(1),false);next.setContentDescription("Next "+label);next.setPadding(0,0,0,0);addView(next,new LinearLayout.LayoutParams(dp(48),dp(48)));
         }
-        @android.annotation.SuppressLint("ClickableViewAccessibility") // Spinner.super would open a second native selector; this override handles accessibility clicks itself.
-        @Override public boolean performClick(){
-            if(!isEnabled())return false;
-            playSoundEffect(SoundEffectConstants.CLICK);sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent.TYPE_VIEW_CLICKED);
-            if(presetDialog!=null)presetDialog.dismiss();
-            presetDialog=dialog(title).setSingleChoiceItems(labels,getSelectedItemPosition(),(selection,position)->{
-                // Record before setSelection's deferred callback to avoid applying twice.
-                observed=position;setSelection(position);if(chosen!=null)chosen.accept(position);selection.dismiss();
-            }).setNegativeButton("Cancel",null).create();
-            presetDialog.setOnDismissListener(closed->presetDialog=null);presetDialog.show();return true;
-        }
+        int getSelectedItemPosition(){return selected;}
+        void onPresetSelected(java.util.function.IntConsumer listener){chosen=listener;}
+        private void step(int direction){selected=Math.floorMod(selected+direction,choices.length);value.setText(choices[selected]);if(chosen!=null)chosen.accept(selected);}
     }
     private static int index(String selected,String... choices){for(int i=0;i<choices.length;i++)if(choices[i].equals(selected))return i;return 0;}
 
