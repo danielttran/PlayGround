@@ -1,6 +1,7 @@
 package org.xiangqi.study;
 import android.app.*;
 import android.content.*;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.test.InstrumentationTestCase;
 import android.view.*;
@@ -10,13 +11,14 @@ import java.lang.reflect.*;
 import java.util.*;
 
 public final class AppearanceArrowTest extends InstrumentationTestCase {
+    private Configuration originalConfiguration;
     private Activity activity;private SharedPreferences appearance,study;private Map<String,?> oldAppearance,oldStudy;
     protected void setUp()throws Exception{
         super.setUp();Context c=getInstrumentation().getTargetContext();appearance=c.getSharedPreferences("appearance",0);study=c.getSharedPreferences("study",0);oldAppearance=appearance.getAll();oldStudy=study.getAll();study.edit().clear().commit();appearance.edit().clear().putString("board","moss").putString("disc","cream").putInt("boardColor",0xff123456).putInt("redBackground",0xff654321).commit();
         activity=getInstrumentation().startActivitySync(new Intent(c,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
-        long end=android.os.SystemClock.uptimeMillis()+15000;while(android.os.SystemClock.uptimeMillis()<end){boolean[] loaded={false};main(()->loaded[0]=(Boolean)get("loaded"));if(loaded[0])break;Thread.sleep(40);}UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);main(()->call("settings"));getInstrumentation().waitForIdleSync();
+        long end=android.os.SystemClock.uptimeMillis()+15000;while(android.os.SystemClock.uptimeMillis()<end){boolean[] loaded={false};main(()->loaded[0]=(Boolean)get("loaded"));if(loaded[0])break;Thread.sleep(40);}originalConfiguration=new Configuration(activity.getResources().getConfiguration());UiTestActions.awaitLibrarySearch(getInstrumentation(),activity);main(()->call("settings"));getInstrumentation().waitForIdleSync();
     }
-    protected void tearDown()throws Exception{if(activity!=null)main(activity::finish);getInstrumentation().waitForIdleSync();restore(appearance,oldAppearance);restore(study,oldStudy);super.tearDown();}
+    protected void tearDown()throws Exception{if(activity!=null)main(()->{if(originalConfiguration!=null)activity.getResources().updateConfiguration(originalConfiguration,activity.getResources().getDisplayMetrics());activity.finish();});getInstrumentation().waitForIdleSync();restore(appearance,oldAppearance);restore(study,oldStudy);super.tearDown();}
     public void testArrowsCycleLiveAndKeepThePreviewVisible()throws Exception{
         main(()->{
             assertNull(find(dialogRoot(),Spinner.class));BoardView preview=(BoardView)find(dialogRoot(),BoardView.class);assertEquals(0xff123456,preview.getBoardColor());assertEquals(Integer.valueOf(0xff123456),StudySettings.load(activity).boardColor);
@@ -33,6 +35,34 @@ public final class AppearanceArrowTest extends InstrumentationTestCase {
     public void testReopeningKeepsChoicesAndDoesNotEraseCustomColors()throws Exception{
         main(()->{press("Next Board style");press("Next Piece finish");press("Next Board coordinates");StudySettings.setCustomColor(activity,"boardColor",0xff234567);((AlertDialog)get("settingsDialog")).dismiss();call("settings");});getInstrumentation().waitForIdleSync();main(()->{assertEquals(Integer.valueOf(0xff234567),StudySettings.load(activity).boardColor);assertEquals(0xff234567,((BoardView)find(dialogRoot(),BoardView.class)).getBoardColor());assertEquals("iccs",field(find(dialogRoot(),BoardView.class),"coordinateStyle"));});
     }
+    public void testLargeFontsKeepTheCurrentChoiceInsideItsRow()throws Exception{
+        main(()->{
+            Configuration big=new Configuration(activity.getResources().getConfiguration());big.fontScale=2f;activity.getResources().updateConfiguration(big,activity.getResources().getDisplayMetrics());
+            ((AlertDialog)get("settingsDialog")).dismiss();call("settings");
+            String[] labels=AppearancePresets.boardLabels(),ids=AppearancePresets.boardIds();int target=0;for(int i=1;i<labels.length;i++)if(labels[i].length()>labels[target].length())target=i;
+            int current=Arrays.asList(ids).indexOf(StudySettings.load(activity).boardStyle);for(int i=0;i<Math.floorMod(target-current,ids.length);i++)press("Next Board style");
+        });getInstrumentation().waitForIdleSync();main(()->{ViewGroup row=(ViewGroup)findDescription(dialogRoot(),"Board style");View names=row.getChildAt(1);TextView value=(TextView)((ViewGroup)names).getChildAt(1);assertTrue("Large choice text must fit completely instead of being clipped",value.getHeight()-value.getCompoundPaddingTop()-value.getCompoundPaddingBottom()>=value.getLayout().getHeight());});
+    }
+    public void testReopeningColorDialogKeepsTheCurrentWindowTracked()throws Exception{
+        main(()->{color();((AlertDialog)get("colorDialog")).dismiss();color();});getInstrumentation().waitForIdleSync();main(()->{AlertDialog current=(AlertDialog)get("colorDialog");assertNotNull("Old color-dialog dismissal must not clear the new window",current);assertTrue(current.isShowing());});finishWithDialog("colorDialog");
+    }
+    public void testReopeningEngineSettingsKeepsTheCurrentWindowTracked()throws Exception{
+        main(()->((AlertDialog)get("settingsDialog")).getButton(AlertDialog.BUTTON_NEUTRAL).performClick());getInstrumentation().waitForIdleSync();main(()->{((AlertDialog)get("engineSettingsDialog")).dismiss();call("settings");((AlertDialog)get("settingsDialog")).getButton(AlertDialog.BUTTON_NEUTRAL).performClick();});getInstrumentation().waitForIdleSync();main(()->{AlertDialog current=(AlertDialog)get("engineSettingsDialog");assertNotNull("Old engine-dialog dismissal must not clear the new window",current);assertTrue(current.isShowing());});finishWithDialog("engineSettingsDialog");
+    }
+    public void testReplayDialogsKeepTheNewWindowTrackedWhenReopened()throws Exception{
+        main(()->{((AlertDialog)get("settingsDialog")).dismiss();try{Method m=MainActivity.class.getDeclaredMethod("openGame",GameRepository.Game.class,boolean.class);m.setAccessible(true);m.invoke(activity,((List<GameRepository.Game>)get("games")).get(0),false);}catch(Exception e){throw new RuntimeException(e);}});getInstrumentation().waitForIdleSync();
+        String[] fields={"gameInformationDialog","goToDialog","playSideDialog","replaySpeedDialog"};
+        for(String name:fields){main(()->{openReplayDialog(name);((AlertDialog)get(name)).dismiss();openReplayDialog(name);});getInstrumentation().waitForIdleSync();main(()->{AlertDialog current=(AlertDialog)get(name);assertNotNull("Old dismissal must not clear "+name,current);assertTrue(current.isShowing());current.dismiss();});getInstrumentation().waitForIdleSync();}
+    }
+    public void testShortSettingsPanelKeepsPreviewAndUsableControls()throws Exception{
+        main(()->{View preview=find(dialogRoot(),BoardView.class);View panel=(View)preview.getParent();float density=activity.getResources().getDisplayMetrics().density;panel.measure(View.MeasureSpec.makeMeasureSpec(Math.round(320*density),View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(Math.round(160*density),View.MeasureSpec.EXACTLY));ScrollView controls=(ScrollView)find(panel,ScrollView.class);assertTrue("A short window must retain at least a full arrow touch target",controls.getMeasuredHeight()>=Math.round(48*density));assertTrue("The preview should shrink to fit with the controls",preview.getMeasuredHeight()>0);});
+    }
+
+    private void finishWithDialog(String name)throws Exception{AlertDialog[] window={null};main(()->{window[0]=(AlertDialog)get(name);activity.finish();});long end=android.os.SystemClock.uptimeMillis()+5000;while(!activity.isDestroyed()&&android.os.SystemClock.uptimeMillis()<end)Thread.sleep(25);assertTrue(activity.isDestroyed());getInstrumentation().waitForIdleSync();main(()->assertFalse("Activity destruction must dismiss "+name,window[0].isShowing()));}
+    private void openReplayDialog(String name){if(name.equals("replaySpeedDialog")){try{Method m=MainActivity.class.getDeclaredMethod("replaySpeed",Runnable.class);m.setAccessible(true);m.invoke(activity,(Object)null);}catch(Exception e){throw new RuntimeException(e);}}else call(name.equals("gameInformationDialog")?"gameInformation":name.equals("goToDialog")?"goToMove":"chooseEngineSide");}
+
+    private void color(){try{Method m=MainActivity.class.getDeclaredMethod("customColor",String.class,String.class,int.class,Runnable.class);m.setAccessible(true);m.invoke(activity,"Board color","boardColor",0xff123456,(Runnable)()->{});}catch(Exception e){throw new RuntimeException(e);}}
+
     private void press(String description){View v=findDescription(dialogRoot(),description);assertNotNull(description,v);assertTrue(v.performClick());}
     private Rect bounds(View v){Rect r=new Rect();v.getGlobalVisibleRect(r);return r;}
     private View dialogRoot(){return ((AlertDialog)get("settingsDialog")).getWindow().getDecorView();}

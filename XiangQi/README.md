@@ -1,6 +1,6 @@
 # Xiangqi Study
 
-A native Android app for replaying Xiangqi games, exploring alternatives, and analyzing positions offline. Version **0.7.7** replaces appearance dropdowns with left/right arrow selectors for boards, Chinese character styles, piece finishes and coordinates. The preview stays visible above the scrolling controls and updates on every choice. The preload remains **428 men's games / 36,227 half-moves**.
+A native Android app for replaying Xiangqi games, exploring alternatives, and analyzing positions offline. Version **0.7.8** fixes clipped appearance labels at large font sizes, keeps controls usable in short settings windows, and protects dialog tracking during rapid reopening. Appearance arrows still update the pinned preview immediately. The preload remains **428 men's games / 36,227 half-moves**.
 
 The Engine tab is ready for verified tournament packs and imported engine games. **No built-in engine games ship yet:** a qualifying 2026 tournament with top engines and accessible complete records has not been verified. The inspected ranking-test thread is not established as a tournament archive. See [engine source research](docs/ENGINE-SOURCES.md).
 
@@ -46,7 +46,7 @@ The delivery file is **`dist/XiangqiStudy-latest.apk`**. Copy it to the phone, o
 adb install -r dist/XiangqiStudy-latest.apk
 ```
 
-The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. Each verified delivery atomically replaces the latest APK, then removes older Xiangqi Study APKs from `dist`. Portable audit APKs stay under `test-results/apk-audit` and are not delivered as phone builds. See [the 0.7.7 audit](docs/AUDIT-0.7.7.md) for the exact checks performed and their device coverage.
+The app's minimum Android version is 8.0/API 26; native Pikafish requires ARM64 and Android 10/API 29 or newer. Android 12/API 31 meets that requirement. Each verified delivery atomically replaces the latest APK, then removes older Xiangqi Study APKs from `dist`. Portable audit APKs stay under `test-results/apk-audit` and are not delivered as phone builds. See [the 0.7.8 audit](docs/AUDIT-0.7.8.md) for the exact checks performed and their device coverage.
 
 ## Build and check
 
@@ -71,7 +71,7 @@ python scripts/test-pikafish.py --engine C:\path\to\Pikafish-Windows-x86-64-univ
 
 Place the matching official `pikafish.nnue` beside that executable, or pass `--network`. This check sends the same UCI initialization/history commands and parses the actual engine output with the production Java parser; it does not execute Android code.
 
-See [the 0.7.7 audit](docs/AUDIT-0.7.7.md) for current validation and known limits. The [0.7.4 collection audit](docs/AUDIT-0.7.4.md) and [Vietnamese collection screenshot](screenshots/074-vietnamese-masters.png) describe the unchanged corpus. See the [0.7.3 screenshots](docs/AUDIT-0.7.3.md#screenshots) for the unchanged replay layout and direct variation controls. The [0.7.3 audit](docs/AUDIT-0.7.3.md), [0.7.2 audit](docs/AUDIT-0.7.2.md), [0.7.1 audit](docs/AUDIT-0.7.1.md), [0.7 audit](docs/AUDIT-0.7.md), [0.6 audit](docs/AUDIT-0.6.md), [0.5.2 audit](docs/AUDIT-0.5.2.md), [0.5.1 audit](docs/AUDIT-0.5.1.md), [0.5 audit](docs/AUDIT-0.5.md), [0.4 audit](docs/AUDIT-0.4.md), [0.3 audit](docs/AUDIT-0.3.md), [0.2 audit](docs/AUDIT.md) and [initial 0.1 validation](docs/VALIDATION.md) remain historical evidence and do not describe the current APK.
+See [the 0.7.8 audit](docs/AUDIT-0.7.8.md) for current validation and known limits. The [0.7.4 collection audit](docs/AUDIT-0.7.4.md) and [Vietnamese collection screenshot](screenshots/074-vietnamese-masters.png) describe the unchanged corpus. See the [0.7.3 screenshots](docs/AUDIT-0.7.3.md#screenshots) for the unchanged replay layout and direct variation controls. The [0.7.3 audit](docs/AUDIT-0.7.3.md), [0.7.2 audit](docs/AUDIT-0.7.2.md), [0.7.1 audit](docs/AUDIT-0.7.1.md), [0.7 audit](docs/AUDIT-0.7.md), [0.6 audit](docs/AUDIT-0.6.md), [0.5.2 audit](docs/AUDIT-0.5.2.md), [0.5.1 audit](docs/AUDIT-0.5.1.md), [0.5 audit](docs/AUDIT-0.5.md), [0.4 audit](docs/AUDIT-0.4.md), [0.3 audit](docs/AUDIT-0.3.md), [0.2 audit](docs/AUDIT.md) and [initial 0.1 validation](docs/VALIDATION.md) remain historical evidence and do not describe the current APK.
 
 ## Import formats
 

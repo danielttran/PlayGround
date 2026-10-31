@@ -1,6 +1,6 @@
 # Architecture
 
-Xiangqi Study 0.7.7 (version code 16) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
+Xiangqi Study 0.7.8 (version code 17) is a Java Android application targeting API 35, with minimum API 26. It uses Android framework widgets and a custom Canvas board; no web view or remote service is required. The Gradle wrapper is pinned to 8.11.1 and the Android Gradle Plugin to 8.9.3.
 
 ## UI and study state
 
@@ -214,3 +214,8 @@ The flexible lower row contains the recycling record list and, while analysis is
 ## Appearance arrows (0.7.7)
 
 ArrowChoice replaces all four appearance selectors. Only explicit arrow presses notify selection callbacks; construction never clears custom colors. Both directions wrap, update the displayed choice, persist it and refresh the preview. Board and piece arrows retain surface-specific custom-color precedence. A bounded vertical panel pins the proportionally sized board above a weighted controls ScrollView, keeping the preview visible during selection and scrolling. Settings-dialog dismissal clears its field only if the dismissed instance is still current, protecting immediate reopen.
+
+
+## Appearance and dialog audit (0.7.8)
+
+Arrow rows retain a 56 dp minimum and 48 dp buttons but grow with their text instead of imposing a fixed height. The preview is additionally bounded by the actual measured panel dimensions, reserving 72 dp for scrollable controls; in extremely short windows it yields its space to the controls. Dialog dismissal clears color, engine settings, game information, go-to, engine-side and replay-speed fields only when that instance is still current.

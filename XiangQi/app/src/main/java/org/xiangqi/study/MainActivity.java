@@ -373,7 +373,7 @@ public final class MainActivity extends Activity {
         }
     }
 
-    private void gameInformation(){String info="Red: "+PlayerNames.display(game.red)+"\nBlack: "+PlayerNames.display(game.black)+"\n\n"+replayEvent()+(game.date.isEmpty()?"":"\n"+game.date);AlertDialog.Builder details=dialog("Game information").setMessage(info).setPositiveButton("Close",null);Uri source=Uri.parse(game.sourceUrl==null?"":game.sourceUrl);if("https".equalsIgnoreCase(source.getScheme())||"http".equalsIgnoreCase(source.getScheme()))details.setNeutralButton("View source",(d,w)->openSource(game.sourceUrl));gameInformationDialog=details.create();gameInformationDialog.setOnDismissListener(d->gameInformationDialog=null);gameInformationDialog.show();}
+    private void gameInformation(){String info="Red: "+PlayerNames.display(game.red)+"\nBlack: "+PlayerNames.display(game.black)+"\n\n"+replayEvent()+(game.date.isEmpty()?"":"\n"+game.date);AlertDialog.Builder details=dialog("Game information").setMessage(info).setPositiveButton("Close",null);Uri source=Uri.parse(game.sourceUrl==null?"":game.sourceUrl);if("https".equalsIgnoreCase(source.getScheme())||"http".equalsIgnoreCase(source.getScheme()))details.setNeutralButton("View source",(d,w)->openSource(game.sourceUrl));gameInformationDialog=details.create();gameInformationDialog.setOnDismissListener(d->{if(gameInformationDialog==d)gameInformationDialog=null;});gameInformationDialog.show();}
     private Button skipGameButton(boolean previous){Button control=button("",()->navigateGame(previous?-1:1),false);control.setForeground(new SkipGameIcon(previous));control.setForegroundGravity(Gravity.CENTER);return control;}
     private final class SkipGameIcon extends Drawable {
         private final boolean previous;private final Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);private final Path triangle=new Path();private int alpha=255;
@@ -458,7 +458,7 @@ public final class MainActivity extends Activity {
         seconds.setRawInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
         seconds.setContentDescription("Seconds between replay moves");seconds.setFilters(new InputFilter[]{new InputFilter.LengthFilter(7)});seconds.setText(String.valueOf(replayDelay()/1000.0));seconds.selectAll();body.addView(seconds);
         replaySpeedDialog=dialog("Replay speed").setView(body).setNegativeButton("Cancel",null).setPositiveButton("Save",null).create();
-        final AlertDialog shown=replaySpeedDialog;shown.setOnDismissListener(d->replaySpeedDialog=null);shown.show();shown.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
+        final AlertDialog shown=replaySpeedDialog;shown.setOnDismissListener(d->{if(replaySpeedDialog==d)replaySpeedDialog=null;});shown.show();shown.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
             try{
                 String raw=seconds.getText().toString().trim();StringBuilder normalized=new StringBuilder();
                 for(int i=0;i<raw.length();i++){char c=raw.charAt(i);int digit=Character.digit(c,10);normalized.append(digit>=0?(char)('0'+digit):c==','||c=='\u066b'?'.':c);}
@@ -529,7 +529,7 @@ public final class MainActivity extends Activity {
         number.setFilters(new android.text.InputFilter[]{new android.text.InputFilter.LengthFilter(7)});number.setContentDescription("Half-move number");
         number.setHint(getString(R.string.position_hint,workingMoves.size()));number.setText(String.valueOf(ply));number.selectAll();body.addView(number);
         goToDialog=dialog("Go to position").setView(body).setPositiveButton("Go",null).setNegativeButton("Cancel",null).create();
-        goToDialog.setOnDismissListener(d->goToDialog=null);goToDialog.show();
+        goToDialog.setOnDismissListener(d->{if(goToDialog==d)goToDialog=null;});goToDialog.show();
         goToDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
             try{int target=Integer.parseInt(number.getText().toString().trim());if(target<0||target>workingMoves.size())throw new NumberFormatException();navigate(target);goToDialog.dismiss();}
             catch(NumberFormatException invalid){number.setError(getString(R.string.position_invalid,workingMoves.size()));}
@@ -539,7 +539,7 @@ public final class MainActivity extends Activity {
         stopAutoplay();final GameRepository.Game selectedGame=game;final int selectedPly=ply;final Position selectedPosition=positions.get(ply);
         playSideDialog=dialog("Play against engine").setMessage("Start from the current position. Choose your side.\n\nThe computer uses the time-per-position setting, or 3 seconds per move when analysis is untimed. Your recorded game is preserved.")
             .setPositiveButton("Play as Red",(d,w)->{if(activeReplayPosition(selectedGame,selectedPly,selectedPosition))startEngineGame(true);}).setNegativeButton("Play as Black",(d,w)->{if(activeReplayPosition(selectedGame,selectedPly,selectedPosition))startEngineGame(false);}).setNeutralButton("Cancel",null).create();
-        playSideDialog.setOnDismissListener(d->playSideDialog=null);playSideDialog.show();
+        playSideDialog.setOnDismissListener(d->{if(playSideDialog==d)playSideDialog=null;});playSideDialog.show();
     }
     private void startEngineGame(boolean red){
         stopAutoplay();cancelGameSearch(true);cancelAnalysis();
@@ -696,29 +696,33 @@ public final class MainActivity extends Activity {
         body.removeView(previewLabel);body.removeView(preview);
         int available=Math.max(dp(240),getResources().getDisplayMetrics().heightPixels-dp(180));
         int previewWidth=Math.min(dp(220),Math.min(getResources().getDisplayMetrics().widthPixels-dp(80),(int)(available*.35f/1.10f)));
-        LinearLayout panel=new LinearLayout(this){@Override protected void onMeasure(int width,int height){int cap=MeasureSpec.getMode(height)==MeasureSpec.UNSPECIFIED?available:Math.min(available,MeasureSpec.getSize(height));super.onMeasure(width,MeasureSpec.makeMeasureSpec(cap,MeasureSpec.EXACTLY));}};panel.setOrientation(LinearLayout.VERTICAL);pad(panel,12,0,12,0);panel.addView(previewLabel);
+        LinearLayout panel=new LinearLayout(this){@Override protected void onMeasure(int width,int height){int cap=MeasureSpec.getMode(height)==MeasureSpec.UNSPECIFIED?available:Math.min(available,MeasureSpec.getSize(height));
+            previewLabel.measure(width,MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED));
+            int boardWidth=Math.max(0,Math.min(previewWidth,Math.min(MeasureSpec.getSize(width)-getPaddingLeft()-getPaddingRight(),(int)((cap-previewLabel.getMeasuredHeight()-dp(72))/1.10f))));
+            boolean showPreview=boardWidth>=dp(32);previewLabel.setVisibility(showPreview?VISIBLE:GONE);preview.setVisibility(showPreview?VISIBLE:GONE);preview.getLayoutParams().width=boardWidth;
+            super.onMeasure(width,MeasureSpec.makeMeasureSpec(cap,MeasureSpec.EXACTLY));}};panel.setOrientation(LinearLayout.VERTICAL);pad(panel,12,0,12,0);panel.addView(previewLabel);
         LinearLayout.LayoutParams previewSize=new LinearLayout.LayoutParams(previewWidth,-2);previewSize.gravity=Gravity.CENTER_HORIZONTAL;panel.addView(preview,previewSize);
         ScrollView scroll=new ScrollView(this);scroll.addView(body);panel.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
         settingsDialog=dialog("Study settings").setView(panel).setPositiveButton("Done",null)
             .setNeutralButton("Engine settings",(d,w)->{
                 engineSettingsDialog=EngineSettings.show(this,()->{
                 cancelAnalysis();resumeAnalysis();
-                });engineSettingsDialog.setOnDismissListener(closed->engineSettingsDialog=null);
+                });engineSettingsDialog.setOnDismissListener(closed->{if(engineSettingsDialog==closed)engineSettingsDialog=null;});
             }).create();
         final AlertDialog shownSettings=settingsDialog;shownSettings.setOnDismissListener(d->{if(settingsDialog==shownSettings){if(presetDialog!=null)presetDialog.dismiss();settingsDialog=null;}});shownSettings.show();
     }
     private void customColor(String title,String surface,int initial,Runnable changed) {
         colorDialog=ColorPickerDialog.show(this,title,initial,color->{StudySettings.setCustomColor(this,surface,color);changed.run();});
-        colorDialog.setOnDismissListener(dialog->colorDialog=null);
+        colorDialog.setOnDismissListener(dialog->{if(colorDialog==dialog)colorDialog=null;});
     }
     private ArrowChoice settingChoice(LinearLayout body,String label,String[] choices,int selected){
-        ArrowChoice choice=new ArrowChoice(label,choices,selected);body.addView(choice,new LinearLayout.LayoutParams(-1,dp(56)));return choice;
+        ArrowChoice choice=new ArrowChoice(label,choices,selected);body.addView(choice,new LinearLayout.LayoutParams(-1,-2));return choice;
     }
     /** Only explicit arrow presses change settings; construction preserves custom colors. */
     private final class ArrowChoice extends LinearLayout {
         private final String[] choices;private final TextView value;private int selected;private java.util.function.IntConsumer chosen;
         ArrowChoice(String label,String[] choices,int selected){
-            super(MainActivity.this);this.choices=choices;this.selected=selected;setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setContentDescription(label);
+            super(MainActivity.this);this.choices=choices;this.selected=selected;setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setMinimumHeight(dp(56));pad(this,0,4,0,4);setContentDescription(label);
             Button previous=button("‹",()->step(-1),false);previous.setContentDescription("Previous "+label);previous.setPadding(0,0,0,0);addView(previous,new LinearLayout.LayoutParams(dp(48),dp(48)));
             LinearLayout names=column();TextView title=text(label,11,ACCENT);title.setGravity(Gravity.CENTER);names.addView(title);value=text(choices[selected],14,LIGHT);value.setGravity(Gravity.CENTER);value.setMaxLines(2);value.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);names.addView(value);addView(names,new LinearLayout.LayoutParams(0,-2,1));
             Button next=button("›",()->step(1),false);next.setContentDescription("Next "+label);next.setPadding(0,0,0,0);addView(next,new LinearLayout.LayoutParams(dp(48),dp(48)));
