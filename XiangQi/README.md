@@ -1,6 +1,8 @@
 # Xiangqi Study
 
-A native Android app for playing Xiangqi, browsing an offline database, and reviewing games with Pikafish. Version **0.8.0** adds **Play / Database / Options**, 100 computer difficulty levels, resumable personal games, Undo, Surrender and maximum-strength two-second hints. Played games are saved in a private SQLite database and reviewed only after completion. The existing **676 human games and 120 engine games / 76,445 half-moves**, including Gemini's annotations and tactical collection, are preserved.
+A native Android app for playing Xiangqi, browsing an offline database, and reviewing games with Pikafish. Version **0.8.1** hardens the **Play / Database / Options** flows added in 0.8.0: 100 computer difficulty levels, resumable personal games, Undo, Surrender and maximum-strength two-second hints. Played games are saved in a private SQLite database and reviewed only after completion. The existing **676 human games and 120 engine games / 76,445 half-moves**, including Gemini's annotations and tactical collection, are preserved.
+
+The [0.8.1 audit](docs/AUDIT-0.8.1.md) fixes collection search persistence, import-return selection, deleted-game return actions, recreation of completed games and games started from a source position, invalid-position launch recovery, and compatibility with older pinned shortcuts.
 
 **Play** starts a standard game or resumes an unfinished one. Choose Red, Black or Random. **Database** separates My Games, Human, Engine and named Imports; played games can be deleted with Undo. **Options** sets the difficulty for new games and the board's appearance. See [playing and review behavior](docs/PLAY-FLOW.md).
 

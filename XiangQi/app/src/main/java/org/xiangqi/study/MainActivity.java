@@ -99,7 +99,13 @@ public final class MainActivity extends Activity {
     }};
 
     @Override public void onCreate(Bundle state) {
-        super.onCreate(state); prefs=getSharedPreferences("study",MODE_PRIVATE); repository=new GameRepository(this);
+        super.onCreate(state);
+        // Preserve home-screen shortcuts pinned before HomeActivity became the
+        // launcher. Explicit internal viewer/import intents keep their old route.
+        if(Intent.ACTION_MAIN.equals(getIntent().getAction())&&getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)){
+            startActivity(new Intent(this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));finish();return;
+        }
+        prefs=getSharedPreferences("study",MODE_PRIVATE); repository=new GameRepository(this);
         restoreLibrarySelection();
         if(state!=null){pendingImportName=state.getString("pendingImportName","Imported games");pendingImportEngine=state.getBoolean("pendingImportEngine",false);restoredImportDraft=state.getBundle("importDraft");}
         flipped=prefs.getBoolean("flipped",false);

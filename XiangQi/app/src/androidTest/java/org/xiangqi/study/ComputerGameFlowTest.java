@@ -16,8 +16,9 @@ import java.util.function.BooleanSupplier;
 public final class ComputerGameFlowTest extends InstrumentationTestCase {
     private HomeActivity activity;private ComputerGameStore store;private ComputerGameStore.SavedGame fixture;
     private SharedPreferences preferences;private Map<String,?> previous;private CountDownLatch unblock;
+    private SharedPreferences studyPreferences;private Map<String,?> previousStudy;
     @Override protected void setUp()throws Exception{
-        super.setUp();dismissEmulatorBootDialog();Context c=getInstrumentation().getTargetContext();preferences=c.getSharedPreferences("home",0);previous=preferences.getAll();preferences.edit().clear().putString("screen","play").commit();store=ComputerGameStore.get(c);
+        super.setUp();dismissEmulatorBootDialog();Context c=getInstrumentation().getTargetContext();studyPreferences=c.getSharedPreferences("study",0);previousStudy=studyPreferences.getAll();preferences=c.getSharedPreferences("home",0);previous=preferences.getAll();preferences.edit().clear().putString("screen","play").commit();store=ComputerGameStore.get(c);store.getWritableDatabase().delete("games","id LIKE ?",new String[]{"played-audit-%"});
         activity=(HomeActivity)getInstrumentation().startActivitySync(new Intent(c,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
         await(()->Boolean.TRUE.equals(get("ready")),20000,"Home did not load");fixture=new ComputerGameStore.SavedGame();fixture.id="played-audit-"+UUID.randomUUID();store.save(fixture);
     }
@@ -25,7 +26,7 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
         ComputerReview.pause();if(unblock!=null)unblock.countDown();if(activity!=null&&!activity.isDestroyed())main(activity::finish);getInstrumentation().waitForIdleSync();
         Field f=HomeActivity.class.getDeclaredField("IO");f.setAccessible(true);((ExecutorService)f.get(null)).submit(()->{}).get(15,TimeUnit.SECONDS);
         if(fixture!=null)store.getWritableDatabase().delete("games","id=?",new String[]{fixture.id});
-        SharedPreferences.Editor e=preferences.edit().clear();for(Map.Entry<String,?> v:previous.entrySet()){Object x=v.getValue();if(x instanceof String)e.putString(v.getKey(),(String)x);else if(x instanceof Integer)e.putInt(v.getKey(),(Integer)x);else if(x instanceof Long)e.putLong(v.getKey(),(Long)x);else if(x instanceof Boolean)e.putBoolean(v.getKey(),(Boolean)x);}e.commit();super.tearDown();
+        restorePreferences(preferences,previous);restorePreferences(studyPreferences,previousStudy);super.tearDown();
     }
     public void testPersonalPersistenceReviewGateDeletionAndUndoRevision()throws Exception{
         fixture.moves.addAll(Arrays.asList("b2e2","b9c7"));store.save(fixture);
@@ -74,6 +75,75 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
         android.app.Activity replacement=monitor.waitForActivityWithTimeout(15000);getInstrumentation().removeMonitor(monitor);assertNotNull("Home did not recreate",replacement);activity=(HomeActivity)replacement;
         await(()->Boolean.TRUE.equals(get("ready")),20000,"Recreated app did not load");assertEquals(fixture.id,current().id);assertEquals(0,current().moves.size());assertEquals(Boolean.TRUE,get("playing"));
     }
+    public void testCollectionPreferencesDoNotDependOnLastImport()throws Exception{
+        main(()->{set("collection","human");set("importId","batch-a");set("query","Lai");set("order","oldest");call("saveScope");
+            set("collection","imports");set("importId","batch-b");set("query","Engine");set("order","newest");call("saveScope");
+            set("collection","human");call("loadScope");assertEquals("Human search must survive selecting another import","Lai",get("query"));assertEquals("oldest",get("order"));});
+    }
+    public void testPendingSearchSurvivesLeavingDatabase()throws Exception{
+        main(()->{set("collection","human");call("loadScope");call("showScreen",new Class<?>[]{String.class},"database");
+            EditText search=(EditText)findDescription(activity.getWindow().getDecorView(),"Database search");assertNotNull(search);search.setText("Lai");
+            call("showScreen",new Class<?>[]{String.class},"options");call("loadScope");assertEquals("A pending debounce must not lose the last typed search","Lai",get("query"));});
+    }
+    public void testFinishedScreenSurvivesRecreation()throws Exception{
+        fixture.result="0-1";fixture.reason="Surrender";store.save(fixture);
+        main(()->{set("current",fixture);set("resultScreen",true);set("playing",false);call("showScreen",new Class<?>[]{String.class},"play");});
+        recreateHome();assertEquals(Boolean.TRUE,get("resultScreen"));assertNotNull(current());assertEquals(fixture.id,current().id);assertTrue(current().finished());
+        main(()->assertTrue(visible(activity.getWindow().getDecorView()).contains("Game finished")));
+    }
+    public void testDeletingReviewedGameInvalidatesReturnButtonAndUndoRestoresIt()throws Exception{
+        fixture.result="0-1";store.save(fixture);SharedPreferences study=activity.getSharedPreferences("study",0);String old=study.getString("lastGame",null);study.edit().putString("lastGame",fixture.id).commit();
+        try{
+            main(()->{set("personal",new ArrayList<>(Collections.singletonList(fixture)));set("collection","personal");call("showScreen",new Class<?>[]{String.class},"database");assertTrue(visible(activity.getWindow().getDecorView()).contains("Return to current game"));call("delete",new Class<?>[]{String.class},fixture.id);});
+            await(()->fixture.id.equals(get("deletedId")),5000,"Delete did not complete");
+            main(()->{assertFalse("Deleted records must not remain the return target",visible(activity.getWindow().getDecorView()).contains("Return to current game"));View undo=findText(activity.getWindow().getDecorView(),"Undo");assertNotNull(undo);undo.performClick();});
+            await(()->"".equals(get("deletedId")),5000,"Undo did not complete");assertNotNull(store.load(fixture.id));
+            main(()->assertTrue("Restored records must again be valid return targets",visible(activity.getWindow().getDecorView()).contains("Return to current game")));
+        }finally{SharedPreferences.Editor e=study.edit();if(old==null)e.remove("lastGame");else e.putString("lastGame",old);e.commit();}
+    }
+    public void testMalformedStartingFenShowsErrorInsteadOfCrashing()throws Exception{
+        Context c=getInstrumentation().getTargetContext();activity=(HomeActivity)getInstrumentation().startActivitySync(new Intent(c,HomeActivity.class).putExtra(HomeActivity.START_FEN,"9/9").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        await(()->Boolean.TRUE.equals(get("ready")),20000,"Invalid-position launch did not recover");assertEquals(Boolean.FALSE,get("playing"));assertEquals(Boolean.FALSE,get("setup"));
+        main(()->{AlertDialog error=(AlertDialog)get("dialog");assertNotNull(error);assertTrue(error.isShowing());assertTrue(visible(error.getWindow().getDecorView()).contains("Could not open position"));error.dismiss();});
+    }
+    public void testSourcePositionLaunchIsNotReappliedOnRotation()throws Exception{
+        String fen=Position.initial().play("b2e2").toFen();fixture.startFen=fen;fixture.humanRed=false;store.save(fixture);Context c=getInstrumentation().getTargetContext();
+        activity=(HomeActivity)getInstrumentation().startActivitySync(new Intent(c,HomeActivity.class).putExtra(HomeActivity.START_FEN,fen).putExtra(HomeActivity.SOURCE_TITLE,"Audit source position").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        await(()->Boolean.TRUE.equals(get("ready")),20000,"Source setup did not load");assertEquals(Boolean.TRUE,get("setup"));showFixture();recreateHome();
+        assertEquals(Boolean.TRUE,get("playing"));assertEquals("Rotation must resume rather than reopen setup",Boolean.FALSE,get("setup"));assertEquals(fixture.id,current().id);assertEquals(fen,current().startFen);
+    }
+    public void testImportDestinationSurvivesReturnFromViewerAndSourceReload()throws Exception{
+        main(()->{set("collection","human");call("loadScope");call("showScreen",new Class<?>[]{String.class},"database");});
+        studyPreferences.edit().putBoolean("analysisEnabled",false).commit();String id=((GameRepository.Game)((List<?>)get("sources")).get(0)).id;
+        Activity viewer=getInstrumentation().startActivitySync(new Intent(activity,MainActivity.class).putExtra(HomeActivity.FROM_HOME,true).putExtra(HomeActivity.SOURCE_ID,id).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        try{
+            Field loaded=MainActivity.class.getDeclaredField("loaded");loaded.setAccessible(true);await(()->{try{return loaded.getBoolean(viewer);}catch(Exception e){throw new AssertionError(e);}},20000,"Viewer did not load");
+            main(()->{set("importVersion",-1L);preferences.edit().putString("collection","imports").putString("importId","audit-new-import").commit();viewer.finish();});
+            await(()->Boolean.TRUE.equals(get("foreground")),10000,"Home did not return to foreground");
+            main(()->{assertEquals("imports",get("collection"));assertEquals("audit-new-import",get("importId"));assertEquals("Returning must not overwrite the importer's destination","imports",preferences.getString("collection",""));});
+        }finally{if(!viewer.isDestroyed())main(viewer::finish);}
+    }
+    public void testDetachedDatabaseWidgetsCannotChangeAnotherScreen()throws Exception{
+        main(()->{set("collection","human");call("loadScope");call("showScreen",new Class<?>[]{String.class},"database");
+            EditText staleSearch=(EditText)findDescription(activity.getWindow().getDecorView(),"Database search");Spinner staleSort=(Spinner)findDescription(activity.getWindow().getDecorView(),"Database sort order");assertNotNull(staleSearch);assertNotNull(staleSort);
+            android.widget.AdapterView.OnItemSelectedListener selection=staleSort.getOnItemSelectedListener();call("showScreen",new Class<?>[]{String.class},"options");set("query","current query");set("order","newest");
+            staleSearch.setText("stale query");selection.onItemSelected(staleSort,null,1,0);assertEquals("current query",get("query"));assertEquals("newest",get("order"));assertEquals("options",get("screen"));
+        });
+    }
+    public void testLegacyPinnedLauncherStillReachesHome()throws Exception{
+        Context c=getInstrumentation().getTargetContext();assertTrue("Older pinned shortcuts must remain launchable",c.getPackageManager().getActivityInfo(new ComponentName(c,MainActivity.class),0).exported);
+        android.app.Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(HomeActivity.class.getName(),null,false);
+        Activity legacy=getInstrumentation().startActivitySync(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER).setClass(c,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        Activity replacement=monitor.waitForActivityWithTimeout(15000);getInstrumentation().removeMonitor(monitor);assertNotNull("Legacy shortcut did not reach Play / Database / Options",replacement);activity=(HomeActivity)replacement;
+        await(()->Boolean.TRUE.equals(get("ready")),20000,"Home did not load after legacy shortcut");assertTrue(legacy.isFinishing()||legacy.isDestroyed());
+    }
+    @SuppressWarnings("unchecked") private static void restorePreferences(SharedPreferences p,Map<String,?> values){SharedPreferences.Editor e=p.edit().clear();for(Map.Entry<String,?> v:values.entrySet()){Object x=v.getValue();if(x instanceof String)e.putString(v.getKey(),(String)x);else if(x instanceof Integer)e.putInt(v.getKey(),(Integer)x);else if(x instanceof Long)e.putLong(v.getKey(),(Long)x);else if(x instanceof Boolean)e.putBoolean(v.getKey(),(Boolean)x);else if(x instanceof Float)e.putFloat(v.getKey(),(Float)x);else if(x instanceof Set)e.putStringSet(v.getKey(),new HashSet<>((Set<String>)x));}e.commit();}
+    private void recreateHome()throws Exception{
+        android.app.Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(HomeActivity.class.getName(),null,false);main(activity::recreate);
+        android.app.Activity replacement=monitor.waitForActivityWithTimeout(15000);getInstrumentation().removeMonitor(monitor);assertNotNull(replacement);activity=(HomeActivity)replacement;await(()->Boolean.TRUE.equals(get("ready")),20000,"Recreated Home did not load");
+    }
+    private static View findDescription(View v,String description){if(description.contentEquals(v.getContentDescription()==null?"":v.getContentDescription()))return v;if(v instanceof ViewGroup){ViewGroup g=(ViewGroup)v;for(int i=0;i<g.getChildCount();i++){View found=findDescription(g.getChildAt(i),description);if(found!=null)return found;}}return null;}
+    private static View findText(View v,String text){if(v instanceof TextView&&text.contentEquals(((TextView)v).getText()))return v;if(v instanceof ViewGroup){ViewGroup g=(ViewGroup)v;for(int i=0;i<g.getChildCount();i++){View found=findText(g.getChildAt(i),text);if(found!=null)return found;}}return null;}
     private void screenshot(String name)throws Exception{
         getInstrumentation().waitForIdleSync();CountDownLatch drawn=new CountDownLatch(1);main(()->activity.getWindow().getDecorView().postOnAnimation(()->activity.getWindow().getDecorView().postOnAnimation(drawn::countDown)));assertTrue("Screen did not draw",drawn.await(5,TimeUnit.SECONDS));
         Thread.sleep(300);android.view.accessibility.AccessibilityNodeInfo active=getInstrumentation().getUiAutomation().getRootInActiveWindow();assertNotNull(active);assertEquals("A system overlay invalidates a UI screenshot","org.xiangqi.study",String.valueOf(active.getPackageName()));
@@ -91,7 +161,7 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
     private void set(String name,Object value){try{Field f=HomeActivity.class.getDeclaredField(name);f.setAccessible(true);f.set(activity,value);}catch(Exception e){throw new AssertionError(e);}}
     private void call(String name){call(name,new Class<?>[0]);}
     private void call(String name,Class<?>[] types,Object... args){try{Method m=HomeActivity.class.getDeclaredMethod(name,types);m.setAccessible(true);m.invoke(activity,args);}catch(Exception e){throw new AssertionError(e);}}
-    private void main(Runnable r){getInstrumentation().runOnMainSync(r);getInstrumentation().waitForIdleSync();}
+    private void main(Runnable r){java.util.concurrent.atomic.AtomicReference<Throwable> failure=new java.util.concurrent.atomic.AtomicReference<>();getInstrumentation().runOnMainSync(()->{try{r.run();}catch(Throwable e){failure.set(e);}});getInstrumentation().waitForIdleSync();Throwable e=failure.get();if(e instanceof AssertionError)throw (AssertionError)e;if(e!=null)throw new AssertionError(e);}
     private void await(BooleanSupplier check,long millis,String message)throws Exception{long until=SystemClock.uptimeMillis()+millis;while(SystemClock.uptimeMillis()<until){if(check.getAsBoolean())return;Thread.sleep(40);}fail(message);}
     private static String visible(View v){if(v.getVisibility()!=View.VISIBLE)return "";StringBuilder s=new StringBuilder();if(v instanceof TextView)s.append(((TextView)v).getText()).append(' ');if(v instanceof ViewGroup){ViewGroup g=(ViewGroup)v;for(int i=0;i<g.getChildCount();i++)s.append(visible(g.getChildAt(i)));}return s.toString();}
 }
