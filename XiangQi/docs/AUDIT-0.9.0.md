@@ -23,6 +23,14 @@ Inspected native emulator captures: [New game](../screenshots/new-game-0.9.0.png
 
 The native delivery gate is `scripts/build.ps1 -Check`: clean assembly, lint, test-APK assembly, latest official engine/network verification, game-pack hashes, notices and APK signature. It replaces only the verified latest APK and removes older delivery APKs. Installation uses `adb install -r` on the connected Moto so personal games and settings remain installed. Native phone checks supplement the portable Android 12 emulator audit.
 
+## Moto delivery verified
+
+- Code commit: `15a32692c60fb34ad4104ed088a3045efbdfa982`. Native clean build and lint passed: **0 errors / 14 warnings**. APK v2 signature, ARM64 payload, latest stable Pikafish **2026-09-06** and matching NNUE passed verification.
+- Moto g stylus (2022), Android 12: **6 tests passed in 374.659 seconds**. Actual ARM64 Pikafish completed **168 recorded/custom/check/variation positions**, including blank/null starting histories and historical repetition context. Untimed cancellation, maximum-strength Hint, new-game orientation/recreation, advice alignment/variation return and the rendered screens passed.
+- No new phone crash-buffer entries followed the audit start. The temporary USB keep-awake setting was restored to its original value, and the normal launcher opened successfully.
+- Delivered version **0.9.0 / code 28**, **52,388,580 bytes**, SHA-256 `f12529da92b26df4a4c335594a2d6bab52828d220fa6017e9e5a741801eb3138`. The installed base APK and the backup in **SanDisk SD card / Download / XiangqiStudy-latest.apk** both match this hash. Dist contains only the latest delivery APK.
+- Detailed phone reports, captures and delivery proof are retained locally under `test-results/ui-0.9.0-*` and `test-results/phone-0.9.0-*`. The documentation follow-up changes no application code or APK inputs.
+
 ## Limits
 
 The 1–100 levels remain uncalibrated difficulty settings. The actual packaged Pikafish 2026-09-06 UCI option list was queried; it exposes no Skill Level, UCI_Elo or UCI_LimitStrength setting. Automatic review remains a resumable two-second-per-position estimate; missing advice can still be preparing. Casual repetition rules are not a complete WXF tournament arbiter. Passing the covered checks does not prove the absence of every possible bug.
