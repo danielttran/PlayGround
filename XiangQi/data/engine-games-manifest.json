@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "asset": "engine-games.json",
+  "assetSha256": "471ab9b2a43ed9b18b5a85b9ffa3f1c67e21c69a3a936fb64f40aba77881cb54",
+  "games": 120,
+  "halfMoves": 13843,
+  "generatedAt": "2026-10-31T19:20:00Z",
+  "status": "verified"
+}

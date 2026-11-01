@@ -60,7 +60,7 @@ if (-not $env:GRADLE_USER_HOME) { $env:GRADLE_USER_HOME='C:\Dev\Tools\gradle-cac
 $gradle = if (Test-Path 'C:\Dev\Tools\gradle-8.11.1\bin\gradle.bat') { 'C:\Dev\Tools\gradle-8.11.1\bin\gradle.bat' } else { Join-Path $projectRoot 'gradlew.bat' }
 Push-Location $projectRoot
 try {
-    $buildArgs=@('clean','assembleDebug','--console=plain','--max-workers=2')
+    $buildArgs=@('clean','assembleDebug','--console=plain','--max-workers=2','--no-daemon')
     if($Check){$buildArgs+=@('lintDebug','assembleDebugAndroidTest')}
     if($Portable){$buildArgs+='-PwithoutNative=true'}
     & $gradle @buildArgs

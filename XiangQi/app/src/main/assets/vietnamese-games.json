@@ -93,7 +93,26 @@
         "f3e3",
         "e4b4",
         "b5c5"
-      ]
+      ],
+      "annotations": {
+        "34": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.41). Pikafish preferred Advisor e8–d9 (-1.24)."
+        },
+        "40": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.99). Pikafish preferred Cannon i0–i5 (-1.85)."
+        },
+        "41": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.94). Pikafish preferred Soldier g5–f5 (+2.99)."
+        },
+        "62": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.58). Pikafish preferred Cannon a3–d3 (-2.18)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 17."
     },
     {
       "id": "vietnam-futa-2023-1470",
@@ -171,7 +190,26 @@
         "e8f9",
         "f6f4",
         "d9e8"
-      ]
+      ],
+      "annotations": {
+        "20": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.02). Pikafish preferred Horse g7–f9 (-1.22)."
+        },
+        "24": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.61). Pikafish preferred Chariot g9–g7 (-2.13)."
+        },
+        "27": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.90). Pikafish preferred Cannon a2–e2 (+3.79)."
+        },
+        "45": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.42). Pikafish preferred Soldier i3–i4 (+3.56)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 14."
     },
     {
       "id": "vietnam-futa-2023-1466",
@@ -237,7 +275,26 @@
         "g3g5",
         "c6c7",
         "f4g4"
-      ]
+      ],
+      "annotations": {
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.03). Pikafish preferred Horse c2–d4 (+0.49)."
+        },
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.23). Pikafish preferred Horse h5–i3 (+1.03)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.91). Pikafish preferred Horse c2–d4 (-0.38)."
+        },
+        "43": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.91). Pikafish preferred Elephant g0–i2 (-2.64)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 11."
     },
     {
       "id": "vietnam-futa-2023-1463",
@@ -312,7 +369,26 @@
         "f2e2",
         "f0c0",
         "d4d5"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.20). Pikafish preferred Soldier e3–e4 (+0.82)."
+        },
+        "27": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.19). Pikafish preferred Elephant g0–i2 (+1.15)."
+        },
+        "44": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.76). Pikafish preferred Cannon g0–g4 (-3.80)."
+        },
+        "52": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-7.21). Pikafish preferred Cannon f0–f7 (-6.19)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 13."
     },
     {
       "id": "vietnam-wxf-2022-1208-g2",
@@ -381,7 +457,26 @@
         "d2d5",
         "c7d5"
       ],
-      "dateNote": "Official championship schedule places men's Round 9 on 28 October. Source record incorrectly says 27 October; original sourceDate retained. Evidence: https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result/2022_17th_wxc_competition_schedule_20221019.pdf"
+      "dateNote": "Official championship schedule places men's Round 9 on 28 October. Source record incorrectly says 27 October; original sourceDate retained. Evidence: https://www.wxf-xiangqi.org/images/2022_Sarawak_17wxc_pairing_result/2022_17th_wxc_competition_schedule_20221019.pdf",
+      "annotations": {
+        "19": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.12). Pikafish preferred Horse f1–h2 (+0.77)."
+        },
+        "28": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.40). Pikafish preferred Cannon h7–g7 (-0.50)."
+        },
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.68). Pikafish preferred Chariot b5–g5 (-1.47)."
+        },
+        "37": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.96). Pikafish preferred Chariot d4–e4 (+2.47)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "vietnam-wxf-2022-1206-g3",
@@ -478,7 +573,26 @@
         "d8b7",
         "e9d9",
         "h8h6"
-      ]
+      ],
+      "annotations": {
+        "37": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.01). Pikafish preferred Horse c6–a7 (+1.12)."
+        },
+        "48": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.71). Pikafish preferred Horse a8–b6 (-0.09)."
+        },
+        "54": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.11). Pikafish preferred Advisor d9–e8 (-0.03)."
+        },
+        "64": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.89). Pikafish preferred Chariot c2–b2 (-3.15)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 17."
     },
     {
       "id": "vietnam-wxf-2022-1204-g5",
@@ -568,7 +682,22 @@
         "d4e2",
         "d5c7",
         "e6d6"
-      ]
+      ],
+      "annotations": {
+        "47": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.01). Pikafish preferred Soldier e5–d5 (-0.79)."
+        },
+        "57": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.57). Pikafish preferred Elephant e2–g0 (-2.90)."
+        },
+        "61": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.05). Pikafish preferred Cannon c2–c3 (-3.17)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 16."
     },
     {
       "id": "vietnam-wxf-2022-1204-g2",
@@ -681,7 +810,26 @@
         "d2e2",
         "d6e6",
         "e2d2"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.69). Pikafish preferred Soldier b5–c5 (+1.93)."
+        },
+        "45": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.71). Pikafish preferred Chariot f4–g4 (+2.46)."
+        },
+        "51": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.88). Pikafish preferred Chariot f4–h4 (+2.03)."
+        },
+        "55": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.13). Pikafish preferred Cannon b2–b9 (+0.96)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "vietnam-wxf-2022-1201-g4",
@@ -834,7 +982,26 @@
         "d5d6",
         "d7e7",
         "d6e6"
-      ]
+      ],
+      "annotations": {
+        "113": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (0.00). Pikafish preferred Horse b4–c6 (+1.91)."
+        },
+        "122": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-8.20). Pikafish preferred Chariot e2–f2 (-3.78)."
+        },
+        "123": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+6.14). Pikafish preferred Horse c6–b8 (+8.20)."
+        },
+        "124": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot e2–d2 (-6.14)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 31."
     },
     {
       "id": "vietnam-wxf-2022-1201-g3",
@@ -977,7 +1144,26 @@
         "f5h4",
         "i0i3",
         "a3a4"
-      ]
+      ],
+      "annotations": {
+        "22": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.93). Pikafish preferred Cannon h3–h4 (+0.26)."
+        },
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.54). Pikafish preferred Horse b9–c7 (-1.43)."
+        },
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.89). Pikafish preferred Horse f4–e6 (+2.23)."
+        },
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.76). Pikafish preferred Cannon c0–c4 (-0.89)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "vietnam-wxf-2022-1199-g4",
@@ -1172,7 +1358,26 @@
         "a9a3",
         "d3a3",
         "f2e1"
-      ]
+      ],
+      "annotations": {
+        "67": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.32). Pikafish preferred Chariot h4–d4 (-0.49)."
+        },
+        "85": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.12). Pikafish preferred Chariot b0–b4 (-0.48)."
+        },
+        "113": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.70). Pikafish preferred Cannon f1–c1 (-0.74)."
+        },
+        "114": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.64). Pikafish preferred Pawn e3–e2 (+1.70)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "vietnam-wxf-2022-1193-g2",
@@ -1360,7 +1565,26 @@
         "c5b7",
         "d8e8",
         "d7e8"
-      ]
+      ],
+      "annotations": {
+        "39": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.26). Pikafish preferred Soldier c4–c5 (+1.38)."
+        },
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.47). Pikafish preferred Horse f5–h6 (-0.26)."
+        },
+        "103": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.49). Pikafish preferred Horse i7–h9 (+1.53)."
+        },
+        "104": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.71). Pikafish preferred Horse f6–h7 (-0.49)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "vietnam-wxf-2022-1191-g4",
@@ -1440,7 +1664,22 @@
         "e4d4",
         "c1h1",
         "c6h6"
-      ]
+      ],
+      "annotations": {
+        "51": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.19). Pikafish preferred Chariot c1–g1 (-0.34)."
+        },
+        "53": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.26). Pikafish preferred Cannon c4–c2 (-2.58)."
+        },
+        "54": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+3.27). Pikafish preferred Cannon h4–h1 (+4.26)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 13."
     },
     {
       "id": "vietnam-wxf-2022-1191-g1",
@@ -1528,7 +1767,26 @@
         "e3e4",
         "c4c5",
         "e4e5"
-      ]
+      ],
+      "annotations": {
+        "18": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.06). Pikafish preferred Chariot g0–g1 (+0.40)."
+        },
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.77). Pikafish preferred Cannon g7–g5 (-1.14)."
+        },
+        "32": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.52). Pikafish preferred Horse c7–e8 (-1.58)."
+        },
+        "43": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.51). Pikafish preferred Chariot b7–d7 (+4.77)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "vietnam-wxf-2022-1189-g8",
@@ -1637,7 +1895,22 @@
         "d5e5",
         "h5e5",
         "g4g5"
-      ]
+      ],
+      "annotations": {
+        "19": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.38). Pikafish preferred Chariot h0–h6 (+0.32)."
+        },
+        "22": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.50). Pikafish preferred Cannon h7–h6 (+0.29)."
+        },
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.47). Pikafish preferred Horse c7–d5 (+1.67)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "vietnam-wxf-2022-1189-g5",
@@ -1828,7 +2101,26 @@
         "e1f2",
         "f7e7",
         "e0d0"
-      ]
+      ],
+      "annotations": {
+        "27": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (0.00). Pikafish preferred Horse d4–b5 (+0.76)."
+        },
+        "56": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.38). Pikafish preferred Elephant c9–a7 (-0.70)."
+        },
+        "93": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.58). Pikafish preferred Chariot f6–i6 (+3.20)."
+        },
+        "158": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.30). Pikafish preferred Chariot g7–e7 (-4.91)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 41."
     },
     {
       "id": "vietnam-wxf-2022-1188-g1",
@@ -1928,7 +2220,26 @@
         "d2d3",
         "e3g2",
         "b3b2"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.61). Pikafish preferred Soldier g4–g5 (-0.49)."
+        },
+        "27": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.58). Pikafish preferred Soldier h5–h6 (-2.76)."
+        },
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.69). Pikafish preferred Horse g2–f4 (-3.23)."
+        },
+        "63": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.75). Pikafish preferred Cannon c6–c3 (-5.19)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 18."
     },
     {
       "id": "vietnam-wxf-2022-1182-g2",
@@ -2012,7 +2323,26 @@
         "b1b3",
         "h6h3",
         "b3e3"
-      ]
+      ],
+      "annotations": {
+        "34": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+3.04). Pikafish preferred Advisor d9–e8 (+4.29)."
+        },
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+2.24). Pikafish preferred Pawn c5–c4 (+3.46)."
+        },
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.45). Pikafish preferred Chariot a0–a2 (-2.43)."
+        },
+        "57": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-8.11). Pikafish preferred Chariot a0–a2 (-5.83)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 14."
     }
   ]
 }

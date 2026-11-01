@@ -15,6 +15,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.*;
 import android.text.*;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.*;
 import android.widget.*;
 import org.json.JSONArray;
@@ -290,7 +292,8 @@ public final class MainActivity extends Activity {
             clock.setText(timeControl(game.timeControl));clock.setVisibility(game.timeControl.isEmpty()?View.GONE:View.VISIBLE);
             provenance.setText("accounts_unverified".equals(game.engineIdentity)?"Engine-named accounts · unverified":"Source-labelled engine match");
             provenance.setVisibility(game.engineGame&&!game.engineIdentity.isEmpty()?View.VISIBLE:View.GONE);
-            details.setText(getResources().getQuantityString(R.plurals.library_game_details,game.moves.size(),game.date.isEmpty()?"Undated":game.date,game.moves.size(),game.imported?" · Imported · "+(game.engineGame?"Engine":"Human"):game.engineGame?" · Engine game":""));
+            String notes=game.moveComments.isEmpty()?"":" · 💬 "+game.moveComments.size()+" notes";
+            details.setText(getResources().getQuantityString(R.plurals.library_game_details,game.moves.size(),game.date.isEmpty()?"Undated":game.date,game.moves.size(),game.imported?" · Imported · "+(game.engineGame?"Engine":"Human"):game.engineGame?" · Engine game":"")+notes);
             boolean variation=prefs.getBoolean("exploring:"+game.id,false);int resume=variation?prefs.getInt("variationPly:"+game.id,0):Math.min(game.moves.size(),prefs.getInt("ply:"+game.id,0));
             action.setText(variation?getString(R.string.library_resume_variation,(resume+1)/2):resume>0?getString(R.string.library_resume_move,(resume+1)/2):getString(R.string.library_open_game));
             setContentDescription("Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+". "+game.event+", "+game.round+(libraryHideResults?"":", result "+displayResult(game.result))+". "+(game.engineGame?"Engine game. ":"Human game. ")+"Open game.");
@@ -351,8 +354,10 @@ public final class MainActivity extends Activity {
         Button previousMove=button("‹",()->navigate(ply-1),false);previousMove.setContentDescription("Previous move");controls.addView(weight(previousMove,1));
         Button nextMove=button("›",()->navigate(ply+1),false);nextMove.setContentDescription("Next move");controls.addView(weight(nextMove,1));content.addView(controls,new LinearLayout.LayoutParams(-1,dp(48)));
         for(int i=0;i<controls.getChildCount();i++){LinearLayout.LayoutParams spacing=(LinearLayout.LayoutParams)controls.getChildAt(i).getLayoutParams();spacing.topMargin=0;spacing.bottomMargin=0;}
-        replayContextRow=row();variationLabel=text("",12,ACCENT);variationLabel.setMaxLines(2);variationLabel.setEllipsize(TextUtils.TruncateAt.END);replayContextRow.addView(variationLabel,new LinearLayout.LayoutParams(0,-2,1));
-        exploreButton=button("Return to recorded game",()->{if(vsEngine)stopEngineGame();else toggleExplore();},false);exploreButton.setTextSize(11);exploreButton.setSingleLine(true);exploreButton.setPadding(dp(4),0,dp(4),0);exploreButton.setMinHeight(dp(32));exploreButton.setMinimumHeight(dp(32));replayContextRow.addView(exploreButton,new LinearLayout.LayoutParams(dp(146),dp(32)));content.addView(replayContextRow,new LinearLayout.LayoutParams(-1,dp(36)));
+        replayContextRow=row();replayContextRow.setBackground(shape(SURFACE,0,6));pad(replayContextRow,8,4,8,4);
+        variationLabel=text("",12,ACCENT);variationLabel.setMaxLines(3);variationLabel.setEllipsize(TextUtils.TruncateAt.END);replayContextRow.addView(variationLabel,new LinearLayout.LayoutParams(0,-2,1));
+        exploreButton=button("Return to recorded game",()->{if(vsEngine)stopEngineGame();else toggleExplore();},false);exploreButton.setTextSize(11);exploreButton.setSingleLine(true);exploreButton.setPadding(dp(4),0,dp(4),0);exploreButton.setMinHeight(dp(32));exploreButton.setMinimumHeight(dp(32));replayContextRow.addView(exploreButton,new LinearLayout.LayoutParams(dp(146),dp(32)));
+        LinearLayout.LayoutParams contextParams=new LinearLayout.LayoutParams(-1,-2);contextParams.topMargin=dp(2);contextParams.bottomMargin=dp(4);content.addView(replayContextRow,contextParams);
         movePanels=row();movePanels.setBaselineAligned(false);movePanels.setGravity(Gravity.TOP);content.addView(movePanels,new LinearLayout.LayoutParams(-1,0,1));
         LinearLayout recordBox=column();movePanels.addView(recordBox,new LinearLayout.LayoutParams(0,-1,1));
         TextView movesTitle=text("RECORD · RED / BLACK",10,MUTED);pad(movesTitle,2,2,2,2);recordBox.addView(movesTitle);
@@ -401,11 +406,73 @@ public final class MainActivity extends Activity {
         board.setContentDescription(board.getContentDescription()+" Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+".");
         analysisBox.setVisibility(analysisEnabled&&!vsEngine?View.VISIBLE:View.GONE);
         exploreButton.setText(vsEngine?"Stop playing":"Return to recorded game");
-        exploreButton.setVisibility(exploring||vsEngine?View.VISIBLE:View.GONE);
-        replayContextRow.setVisibility(exploring||vsEngine?View.VISIBLE:View.GONE);variationLabel.setVisibility(exploring||vsEngine?View.VISIBLE:View.GONE);
-        variationLabel.setText(vsEngine?"Playing as "+(humanRed?"Red":"Black")+" · "+(engineThinking?"engine thinking…":p.legalMoves().isEmpty()?"game over":"your move") :exploring?"Exploring a variation · Legal moves…":"");
-        variationLabel.setOnClickListener(exploring?v->legalMoves():null);
-        variationLabel.setContentDescription(exploring?"Explore mode. Open legal moves list.":variationLabel.getText());
+        if(exploring||vsEngine){
+            exploreButton.setVisibility(View.VISIBLE);
+            replayContextRow.setVisibility(View.VISIBLE);variationLabel.setVisibility(View.VISIBLE);
+            variationLabel.setText(vsEngine?"Playing as "+(humanRed?"Red":"Black")+" · "+(engineThinking?"engine thinking…":p.legalMoves().isEmpty()?"game over":"your move") :exploring?"Exploring a variation · Legal moves…":"");
+            variationLabel.setTextColor(ACCENT);
+            variationLabel.setOnClickListener(exploring?v->legalMoves():null);
+            variationLabel.setContentDescription(exploring?"Explore mode. Open legal moves list.":variationLabel.getText());
+        } else {
+            exploreButton.setVisibility(View.GONE);
+            variationLabel.setOnClickListener(null);
+            replayContextRow.setVisibility(View.VISIBLE);variationLabel.setVisibility(View.VISIBLE);
+            String comment=game.moveComments.get(ply);
+            String glyph=game.moveGlyphs.get(ply);
+            if(game.engineGame){
+                variationLabel.setOnClickListener(null);
+                if(ply>0&&ply<=game.bookPlies){
+                    variationLabel.setText("📖 Opening book · move "+((ply+1)/2)+" of "+(game.bookPlies/2));
+                    variationLabel.setTextColor(0xff80deea);
+                } else if(ply>game.bookPlies){
+                    variationLabel.setText("⚡ Engine play · "+(p.redToMove?game.red:game.black));
+                    variationLabel.setTextColor(ACCENT);
+                } else {
+                    variationLabel.setText("Starting position · "+game.event.replaceAll(" \\(Match.*",""));
+                    variationLabel.setTextColor(MUTED);
+                }
+            } else if(!game.moveComments.isEmpty()){
+                List<Integer> notePlies=new ArrayList<>(game.moveComments.keySet());
+                Collections.sort(notePlies);
+                int nextTarget=-1;
+                for(int pNum:notePlies){if(pNum>ply){nextTarget=pNum;break;}}
+                if(nextTarget==-1&&!notePlies.isEmpty())nextTarget=notePlies.get(0);
+                final int jumpTo=nextTarget;
+                variationLabel.setOnClickListener(v->navigate(jumpTo));
+                if(comment!=null&&!comment.isEmpty()){
+                    String prefix=(glyph!=null&&!glyph.isEmpty()?glyph+" ":"");
+                    String suffix="  [Tap: next note ›]";
+                    SpannableString span=new SpannableString(prefix+comment+suffix);
+                    int color=glyph!=null&&glyph.contains("??")?0xffff4d4d:glyph!=null&&glyph.contains("?")?0xffff9800:ACCENT;
+                    span.setSpan(new ForegroundColorSpan(color),0,Math.min(span.length(),prefix.length()+18),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    span.setSpan(new StyleSpan(Typeface.BOLD),0,Math.min(span.length(),prefix.length()+18),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    span.setSpan(new ForegroundColorSpan(0xff80deea),span.length()-suffix.length(),span.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    variationLabel.setText(span);
+                } else {
+                    StringBuilder sb=new StringBuilder();
+                    sb.append("💬 Pikafish: ").append(game.moveComments.size()).append(" notes (m.");
+                    for(int i=0;i<notePlies.size();i++){
+                        int pNum=notePlies.get(i);String g=game.moveGlyphs.get(pNum);
+                        if(i>0)sb.append(",");
+                        sb.append((pNum+1)/2).append(g!=null?g:"");
+                    }
+                    sb.append(") · Tap to jump to m.").append((jumpTo+1)/2).append(" ›");
+                    SpannableString span=new SpannableString(sb.toString());
+                    int tapIdx=sb.indexOf("Tap to jump");
+                    if(tapIdx>=0)span.setSpan(new ForegroundColorSpan(0xff80deea),tapIdx,sb.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    variationLabel.setText(span);
+                }
+            } else {
+                variationLabel.setOnClickListener(null);
+                if(!game.summary.isEmpty()){
+                    variationLabel.setText(game.summary);
+                } else {
+                    variationLabel.setText("Move "+((ply+1)/2)+" · Master classical record");
+                }
+                variationLabel.setTextColor(MUTED);
+            }
+            variationLabel.setContentDescription(variationLabel.getText());
+        }
         refreshGameNavigation();
         renderMoves(); saveState();
     }
@@ -438,7 +505,33 @@ public final class MainActivity extends Activity {
         MoveRecordRow(){super(MainActivity.this);setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setLayoutParams(new AbsListView.LayoutParams(-1,dp(28)));number=text("",10,MUTED);number.setSingleLine(true);number.setGravity(Gravity.CENTER_VERTICAL);addView(number,new LinearLayout.LayoutParams(dp(30),-1));red=cell();black=cell();addView(red,new LinearLayout.LayoutParams(0,-1,1));addView(black,new LinearLayout.LayoutParams(0,-1,1));}
         private TextView cell(){TextView label=text("",12,LIGHT);label.setSingleLine(true);label.setGravity(Gravity.CENTER_VERTICAL);label.setTypeface(Typeface.MONOSPACE,Typeface.NORMAL);pad(label,2,0,1,0);return label;}
         void bind(int row){number.setText(getString(R.string.move_record_number,row+1));bindCell(red,row*2-(positions.get(0).redToMove?0:1));bindCell(black,row*2+1-(positions.get(0).redToMove?0:1));}
-        private void bindCell(TextView label,int index){boolean valid=index>=0&&index<workingMoves.size();label.setText(valid?pretty(workingMoves.get(index)):"");label.setFocusable(valid);label.setContentDescription(valid?"After half-move "+(index+1)+", "+workingMoves.get(index):"");label.setOnClickListener(valid?v->navigate(index+1):null);label.setBackground(valid&&ply==index+1?shape(SURFACE,0,8):null);}
+        private void bindCell(TextView label,int index){
+            boolean valid=index>=0&&index<workingMoves.size();
+            if(!valid){label.setText("");label.setFocusable(false);label.setContentDescription("");label.setOnClickListener(null);label.setBackground(null);return;}
+            String base=pretty(workingMoves.get(index));
+            int plyNum=index+1;
+            String glyph=game.moveGlyphs.get(plyNum);
+            boolean isBook=game.engineGame&&index<game.bookPlies;
+            if(glyph!=null&&!glyph.isEmpty()){
+                String full=base+" "+glyph;
+                SpannableString span=new SpannableString(full);
+                int color=glyph.contains("??")?0xffff4d4d:glyph.contains("?")?0xffff9800:glyph.contains("!")?0xff00e676:0xffffeb3b;
+                span.setSpan(new ForegroundColorSpan(color),base.length()+1,full.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StyleSpan(Typeface.BOLD),base.length()+1,full.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                label.setText(span);
+            } else if(isBook){
+                String full=base+" 📖";
+                SpannableString span=new SpannableString(full);
+                span.setSpan(new ForegroundColorSpan(0xff80deea),base.length()+1,full.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                label.setText(span);
+            } else {
+                label.setText(base);
+            }
+            label.setFocusable(true);
+            label.setContentDescription("After half-move "+plyNum+", "+workingMoves.get(index)+(isBook?" (opening book)":"")+(glyph!=null?" "+glyph:""));
+            label.setOnClickListener(v->navigate(plyNum));
+            label.setBackground(ply==plyNum?shape(SURFACE,0,8):null);
+        }
     }
 
     private void navigate(int target) { stopAutoplay();cancelGameSearch(true); moveTo(target); }

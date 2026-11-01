@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "collection": "Selected classical master games",
   "asset": "master-classics.json",
-  "assetSha256": "b4ec6d47b438ea2ef8b6754dff3c81a70c1502c99e9c1b84e10b0b38f907e7f8",
+  "assetSha256": "030fa2861628a4ff2443500a893dace0ea3971a5a9e40c66d9910a1d8cea0ad8",
   "games": 100,
   "halfMoves": 12146,
   "sourceRepository": "https://github.com/chasoft/community-xiangqi-games-database",

@@ -121,7 +121,26 @@
         "b5e5",
         "e0d0",
         "i6i5"
-      ]
+      ],
+      "annotations": {
+        "75": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.22). Pikafish preferred Cannon e2–f2 (-0.84)."
+        },
+        "93": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot d6–d3 (-3.49)."
+        },
+        "95": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot d6–d4 (-4.00)."
+        },
+        "97": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot d6–d3 (-3.63)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 27."
     },
     {
       "id": "wxf-2025-men-r7-g3",
@@ -200,7 +219,22 @@
         "c3c0",
         "d0d1",
         "e5d5"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.38). Pikafish preferred Chariot h4–f4 (-0.69)."
+        },
+        "43": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.23). Pikafish preferred Chariot h4–f4 (-3.40)."
+        },
+        "57": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.13). Pikafish preferred Cannon e3–e6 (-4.13)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 16."
     },
     {
       "id": "wxf-2025-men-r8-g2",
@@ -268,7 +302,26 @@
         "d4e6",
         "h7e7",
         "c0e2"
-      ]
+      ],
+      "annotations": {
+        "9": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.14). Pikafish preferred Soldier c3–c4 (+0.49)."
+        },
+        "29": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.03). Pikafish preferred Cannon b2–b3 (+0.86)."
+        },
+        "35": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (0.00). Pikafish preferred Chariot c4–g4 (+0.30)."
+        },
+        "36": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.29). Pikafish preferred Chariot a9–c9 (0.00)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r5-g2",
@@ -335,7 +388,26 @@
         "e8d9",
         "c1f1",
         "g3g0"
-      ]
+      ],
+      "annotations": {
+        "15": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.10). Pikafish preferred Chariot a1–d1 (+0.16)."
+        },
+        "19": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.87). Pikafish preferred Soldier e5–f5 (-1.06)."
+        },
+        "44": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+3.12). Pikafish preferred Chariot h4–f4 (+4.96)."
+        },
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.53). Pikafish preferred Cannon f2–e2 (-3.12)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 13."
     },
     {
       "id": "wxf-2025-men-r6-g1",
@@ -392,7 +464,26 @@
         "i3h1",
         "c0e2",
         "a7e7"
-      ]
+      ],
+      "annotations": {
+        "8": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.35). Pikafish preferred Advisor f9–e8 (-0.10)."
+        },
+        "9": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.09). Pikafish preferred Chariot h8–b8 (+0.35)."
+        },
+        "21": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.08). Pikafish preferred Soldier c5–c6 (+0.39)."
+        },
+        "24": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.68). Pikafish preferred Horse c7–a8 (-0.15)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r3-g8",
@@ -541,7 +632,26 @@
         "f0f1",
         "e1e0",
         "f2e2"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.43). Pikafish preferred Cannon h2–i2 (+0.83)."
+        },
+        "39": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.00). Pikafish preferred Cannon i6–g6 (+0.03)."
+        },
+        "127": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.72). Pikafish preferred Soldier g7–f7 (-3.65)."
+        },
+        "131": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot h9–h1 (-5.38)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 33."
     },
     {
       "id": "wxf-2025-men-r4-g3",
@@ -755,7 +865,26 @@
         "e0e1",
         "f8f9",
         "e6e5"
-      ]
+      ],
+      "annotations": {
+        "145": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.75). Pikafish preferred General f0–e0 (+3.23)."
+        },
+        "162": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.70). Pikafish preferred Chariot d5–d6 (-0.48)."
+        },
+        "163": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.48). Pikafish preferred Horse g7–e6 (+3.70)."
+        },
+        "198": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.86). Pikafish preferred Elephant c5–a7 (-1.43)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 49."
     },
     {
       "id": "wxf-2025-men-r1-g18",
@@ -812,7 +941,26 @@
         "i0i1",
         "e1e2",
         "f0e0"
-      ]
+      ],
+      "annotations": {
+        "19": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.89). Pikafish preferred Chariot f4–f2 (-0.07)."
+        },
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.55). Pikafish preferred Horse g2–e1 (-1.89)."
+        },
+        "25": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.83). Pikafish preferred Chariot d4–f4 (-2.16)."
+        },
+        "37": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Cannon d2–g2 (-7.84)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 10."
     },
     {
       "id": "wxf-2025-men-r2-g5",
@@ -1011,7 +1159,18 @@
         "g1g5",
         "h5g5",
         "e7g5"
-      ]
+      ],
+      "annotations": {
+        "28": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.09). Pikafish preferred Chariot e5–i5 (+0.17)."
+        },
+        "137": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.04). Pikafish preferred Cannon e5–e3 (+0.36)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r9-g3",
@@ -1128,7 +1287,26 @@
         "e6c5",
         "i3i4",
         "c5a4"
-      ]
+      ],
+      "annotations": {
+        "27": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.16). Pikafish preferred Chariot d6–g6 (+1.42)."
+        },
+        "41": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.53). Pikafish preferred Elephant g0–e2 (-0.46)."
+        },
+        "63": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.74). Pikafish preferred Horse d1–f2 (-1.42)."
+        },
+        "85": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.95). Pikafish preferred Chariot e4–c4 (-2.78)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 25."
     },
     {
       "id": "wxf-2025-men-r7-g4",
@@ -1219,7 +1397,26 @@
         "d4d8",
         "c1e2",
         "f3d4"
-      ]
+      ],
+      "annotations": {
+        "22": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.79). Pikafish preferred Horse c7–d5 (-0.02)."
+        },
+        "27": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.68). Pikafish preferred Cannon f5–b5 (+0.18)."
+        },
+        "35": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.54). Pikafish preferred Horse g2–e3 (-0.94)."
+        },
+        "44": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.41). Pikafish preferred Horse c7–e6 (+1.22)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r8-g7",
@@ -1292,7 +1489,22 @@
         "f7c7",
         "a2a8",
         "a7b5"
-      ]
+      ],
+      "annotations": {
+        "27": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.08). Pikafish preferred Horse a6–c7 (+0.96)."
+        },
+        "52": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.43). Pikafish preferred Cannon b8–b6 (-0.09)."
+        },
+        "56": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.31). Pikafish preferred Cannon b8–b6 (-2.90)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 14."
     },
     {
       "id": "wxf-2025-men-r5-g1",
@@ -1363,7 +1575,26 @@
         "g3g0",
         "d0d1",
         "f3d3"
-      ]
+      ],
+      "annotations": {
+        "34": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.50). Pikafish preferred Cannon b6–d6 (+1.55)."
+        },
+        "43": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.00). Pikafish preferred Chariot d8–d9 (-1.63)."
+        },
+        "45": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.89). Pikafish preferred Chariot f8–f6 (-4.23)."
+        },
+        "49": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.55). Pikafish preferred Soldier c3–c4 (-4.89)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 14."
     },
     {
       "id": "wxf-2025-men-r6-g2",
@@ -1439,7 +1670,22 @@
         "c8b6",
         "d8b8",
         "b6d5"
-      ]
+      ],
+      "annotations": {
+        "17": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.04). Pikafish preferred Cannon b1–d1 (+0.59)."
+        },
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.81). Pikafish preferred Chariot d3–c3 (-0.39)."
+        },
+        "52": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.45). Pikafish preferred Horse i7–h5 (-3.27)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 15."
     },
     {
       "id": "wxf-2025-men-r3-g2",
@@ -1534,7 +1780,26 @@
         "f9e8",
         "b7b2",
         "e9f9"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.65). Pikafish preferred Chariot h9–h5 (+0.10)."
+        },
+        "49": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.56). Pikafish preferred Chariot f8–g8 (+0.41)."
+        },
+        "50": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.37). Pikafish preferred Cannon g9–i9 (+0.56)."
+        },
+        "67": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.86). Pikafish preferred Chariot g8–f8 (-0.22)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 20."
     },
     {
       "id": "wxf-2025-men-r4-g1",
@@ -1646,7 +1911,26 @@
         "c6d6",
         "d7e7",
         "b8b5"
-      ]
+      ],
+      "annotations": {
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.48). Pikafish preferred Chariot g5–g3 (+0.26)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.71). Pikafish preferred Cannon g7–d7 (-1.43)."
+        },
+        "66": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.47). Pikafish preferred General e9–f9 (-3.30)."
+        },
+        "92": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-9.24). Pikafish preferred Chariot d7–d3 (-4.62)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 24."
     },
     {
       "id": "wxf-2025-men-r1-g13",
@@ -1707,7 +1991,22 @@
         "g2g3",
         "a3g3",
         "h5g3"
-      ]
+      ],
+      "annotations": {
+        "29": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.14). Pikafish preferred Chariot c4–c7 (-0.44)."
+        },
+        "32": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.31). Pikafish preferred Pawn g6–g5 (+3.09)."
+        },
+        "37": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.78). Pikafish preferred Cannon h4–b4 (-2.29)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 11."
     },
     {
       "id": "wxf-2025-men-r2-g8",
@@ -1783,7 +2082,26 @@
         "c9c3",
         "b2b1",
         "e3e4"
-      ]
+      ],
+      "annotations": {
+        "22": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.23). Pikafish preferred Horse c7–d5 (-0.15)."
+        },
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.85). Pikafish preferred Elephant g9–e7 (-0.88)."
+        },
+        "38": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.83). Pikafish preferred Cannon b3–c3 (-2.14)."
+        },
+        "42": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.25). Pikafish preferred Horse g7–e6 (-3.16)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 15."
     },
     {
       "id": "wxf-2025-men-r7-g5",
@@ -1905,7 +2223,22 @@
         "e4c3",
         "e2f2",
         "f0e1"
-      ]
+      ],
+      "annotations": {
+        "17": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.25). Pikafish preferred Horse h4–f3 (+0.37)."
+        },
+        "91": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.13). Pikafish preferred Horse e7–d5 (-0.17)."
+        },
+        "92": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.16). Pikafish preferred Horse b1–c3 (+1.13)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r8-g5",
@@ -1987,7 +2320,26 @@
         "b9b5",
         "a5a7",
         "g7g8"
-      ]
+      ],
+      "annotations": {
+        "28": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.72). Pikafish preferred Horse g7–i6 (-0.72)."
+        },
+        "33": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.75). Pikafish preferred Horse d4–f5 (+1.68)."
+        },
+        "42": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.64). Pikafish preferred Cannon d5–d0 (-2.37)."
+        },
+        "44": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.76). Pikafish preferred Cannon f7–h7 (-3.64)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 16."
     },
     {
       "id": "wxf-2025-men-r5-g8",
@@ -2117,7 +2469,22 @@
         "g6i5",
         "i3h5",
         "e2c4"
-      ]
+      ],
+      "annotations": {
+        "24": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (0.00). Pikafish preferred Chariot b6–d6 (+0.69)."
+        },
+        "89": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.98). Pikafish preferred Horse f4–g2 (-0.22)."
+        },
+        "90": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.22). Pikafish preferred Pawn d3–d2 (+0.98)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r6-g10",
@@ -2309,7 +2676,26 @@
         "f7f8",
         "f5g7",
         "f8f9"
-      ]
+      ],
+      "annotations": {
+        "46": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.69). Pikafish preferred Pawn c6–c5 (-0.42)."
+        },
+        "67": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.04). Pikafish preferred Horse e6–c7 (+2.30)."
+        },
+        "130": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.40). Pikafish preferred Horse e5–c6 (-0.27)."
+        },
+        "172": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-10.64). Pikafish preferred Horse e3–d5 (-5.76)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 44."
     },
     {
       "id": "wxf-2025-men-r3-g1",
@@ -2363,7 +2749,22 @@
         "h8f7",
         "e9e8",
         "b0d0"
-      ]
+      ],
+      "annotations": {
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.91). Pikafish preferred Cannon e4–h4 (-0.02)."
+        },
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.43). Pikafish preferred Horse g7–e8 (-0.93)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.93). Pikafish preferred Advisor d9–e8 (-2.63)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 9."
     },
     {
       "id": "wxf-2025-men-r4-g8",
@@ -2465,7 +2866,26 @@
         "c3c4",
         "i4h4",
         "d0e1"
-      ]
+      ],
+      "annotations": {
+        "32": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.70). Pikafish preferred Horse b5–a3 (-0.22)."
+        },
+        "33": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.25). Pikafish preferred Horse d5–f6 (+0.70)."
+        },
+        "40": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.17). Pikafish preferred Cannon i5–g5 (-0.47)."
+        },
+        "41": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.52). Pikafish preferred Cannon g5–g6 (+1.17)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r1-g4",
@@ -2542,7 +2962,26 @@
         "f3g1",
         "f0f1",
         "g1i2"
-      ]
+      ],
+      "annotations": {
+        "28": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.12). Pikafish preferred Elephant c9–e7 (+2.12)."
+        },
+        "39": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.12). Pikafish preferred Chariot f3–f8 (+1.31)."
+        },
+        "40": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.31). Pikafish preferred Chariot a9–a7 (-0.12)."
+        },
+        "43": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.70). Pikafish preferred Chariot g9–i9 (+1.31)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 15."
     },
     {
       "id": "wxf-2025-men-r2-g11",
@@ -2612,7 +3051,26 @@
         "g2h4",
         "h7h5",
         "i3i4"
-      ]
+      ],
+      "annotations": {
+        "22": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.61). Pikafish preferred Elephant c9–a7 (-0.97)."
+        },
+        "27": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.29). Pikafish preferred Cannon e6–d6 (+1.72)."
+        },
+        "28": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.37). Pikafish preferred Horse g7–e6 (-0.29)."
+        },
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.98). Pikafish preferred Horse g7–e6 (-1.11)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 13."
     },
     {
       "id": "wxf-2025-men-r7-g2",
@@ -2735,7 +3193,26 @@
         "c7e6",
         "i5a5",
         "b4g4"
-      ]
+      ],
+      "annotations": {
+        "39": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.53). Pikafish preferred Cannon c6–i6 (-0.11)."
+        },
+        "71": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.85). Pikafish preferred Cannon h4–h3 (-0.34)."
+        },
+        "87": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.21). Pikafish preferred Cannon b5–f5 (-0.85)."
+        },
+        "88": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.94). Pikafish preferred Horse b6–d5 (+2.21)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 27."
     },
     {
       "id": "wxf-2025-men-r8-g1",
@@ -2799,7 +3276,22 @@
         "a4a5",
         "e5a5",
         "h0h6"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.57). Pikafish preferred Chariot i9–f9 (-0.64)."
+        },
+        "31": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.40). Pikafish preferred Cannon e2–c2 (+1.57)."
+        },
+        "33": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.25). Pikafish preferred Cannon d2–c2 (+0.96)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r5-g5",
@@ -2888,7 +3380,26 @@
         "e1b1",
         "b4a2",
         "b1a1"
-      ]
+      ],
+      "annotations": {
+        "49": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.94). Pikafish preferred Horse f4–h5 (-0.94)."
+        },
+        "61": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.79). Pikafish preferred Horse e6–c7 (-1.76)."
+        },
+        "67": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.75). Pikafish preferred Soldier e5–e6 (-2.04)."
+        },
+        "73": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-8.04). Pikafish preferred Horse b4–c2 (-6.39)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 18."
     },
     {
       "id": "wxf-2025-men-r3-g7",
@@ -3012,7 +3523,26 @@
         "d8e8",
         "e9d9",
         "h4f5"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.31). Pikafish preferred Horse d8–b7 (+2.58)."
+        },
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.92). Pikafish preferred Chariot i9–g9 (-1.01)."
+        },
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.62). Pikafish preferred Chariot i9–h9 (-2.39)."
+        },
+        "68": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.82). Pikafish preferred Cannon f8–e8 (-3.05)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 27."
     },
     {
       "id": "wxf-2025-men-r4-g4",
@@ -3074,7 +3604,26 @@
         "a6c6",
         "c7a8",
         "c6a6"
-      ]
+      ],
+      "annotations": {
+        "11": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.24). Pikafish preferred Cannon b2–c2 (+0.53)."
+        },
+        "16": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.30). Pikafish preferred Pawn g6–g5 (+0.01)."
+        },
+        "18": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.54). Pikafish preferred Pawn g6–g5 (-0.01)."
+        },
+        "25": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.08). Pikafish preferred Chariot h0–h9 (+0.57)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r1-g11",
@@ -3148,7 +3697,26 @@
         "i2i6",
         "e3i3",
         "i6e6"
-      ]
+      ],
+      "annotations": {
+        "24": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.20). Pikafish preferred Pawn c6–c5 (-0.96)."
+        },
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.14). Pikafish preferred Soldier e5–f5 (+2.59)."
+        },
+        "30": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.81). Pikafish preferred Horse a7–c8 (-1.14)."
+        },
+        "34": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.68). Pikafish preferred General e9–f9 (-2.66)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 14."
     },
     {
       "id": "wxf-2025-men-r9-g1",
@@ -3214,7 +3782,26 @@
         "e2c4",
         "i6d6",
         "c4e2"
-      ]
+      ],
+      "annotations": {
+        "35": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.04). Pikafish preferred Cannon i6–e6 (+0.31)."
+        },
+        "41": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.67). Pikafish preferred Cannon b6–b0 (-0.17)."
+        },
+        "44": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.57). Pikafish preferred Cannon d7–b7 (+0.97)."
+        },
+        "50": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.20). Pikafish preferred Cannon h9–h1 (+0.61)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g1",
@@ -3306,7 +3893,26 @@
         "h4g6",
         "f5h6",
         "g6e5"
-      ]
+      ],
+      "annotations": {
+        "10": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.50). Pikafish preferred Chariot h9–h5 (-0.25)."
+        },
+        "13": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.02). Pikafish preferred Chariot i0–i1 (+0.50)."
+        },
+        "37": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.34). Pikafish preferred Advisor f0–e1 (+0.65)."
+        },
+        "49": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.40). Pikafish preferred Cannon a6–a4 (+0.61)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r3-g4",
@@ -3382,7 +3988,22 @@
         "c4d6",
         "b5c5",
         "d5f6"
-      ]
+      ],
+      "annotations": {
+        "28": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.19). Pikafish preferred Cannon h5–h8 (-1.20)."
+        },
+        "34": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.29). Pikafish preferred Horse d4–f3 (-3.21)."
+        },
+        "60": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-14.01). Pikafish preferred Chariot b5–d5 (-6.50)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 15."
     },
     {
       "id": "wxf-2025-men-r4-g2",
@@ -3472,7 +4093,26 @@
         "g6g8",
         "e8e9",
         "g8d8"
-      ]
+      ],
+      "annotations": {
+        "28": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.14). Pikafish preferred Horse g7–e6 (-0.10)."
+        },
+        "68": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.54). Pikafish preferred Cannon c8–c0 (-4.67)."
+        },
+        "70": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.63). Pikafish preferred Chariot a3–a0 (-4.75)."
+        },
+        "72": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-10.92). Pikafish preferred General e8–e9 (-6.62)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 18."
     },
     {
       "id": "wxf-2025-men-r2-g2",
@@ -3547,7 +4187,26 @@
         "f5d4",
         "e2f2",
         "d0f0"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.61). Pikafish preferred Chariot g4–e4 (-2.75)."
+        },
+        "51": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-8.83). Pikafish preferred Elephant g0–e2 (-6.97)."
+        },
+        "57": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-11.94). Pikafish preferred General e1–f1 (-10.06)."
+        },
+        "59": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Horse f4–d3 (-14.54)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 15."
     },
     {
       "id": "wxf-2025-men-r9-g10",
@@ -3655,7 +4314,26 @@
         "b5d5",
         "b3b5",
         "d6d7"
-      ]
+      ],
+      "annotations": {
+        "36": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.37). Pikafish preferred Pawn e6–e5 (-0.28)."
+        },
+        "42": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.61). Pikafish preferred Horse h5–i3 (-0.63)."
+        },
+        "90": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-8.06). Pikafish preferred Elephant a7–c5 (-2.81)."
+        },
+        "92": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot b3–b0 (-8.06)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 23."
     },
     {
       "id": "wxf-2025-men-r9-g11",
@@ -3738,7 +4416,26 @@
         "a3c2",
         "c6d8",
         "c2d4"
-      ]
+      ],
+      "annotations": {
+        "20": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.58). Pikafish preferred Cannon h1–h6 (+0.07)."
+        },
+        "30": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.73). Pikafish preferred Horse c7–b5 (-0.42)."
+        },
+        "31": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.30). Pikafish preferred Soldier i3–i4 (+0.73)."
+        },
+        "35": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.11). Pikafish preferred Chariot c4–h4 (+0.36)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r9-g12",
@@ -3813,7 +4510,26 @@
         "g1f1",
         "b5d5",
         "e8d9"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.11). Pikafish preferred Horse g2–e1 (+0.96)."
+        },
+        "42": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.98). Pikafish preferred Chariot d2–d3 (-0.83)."
+        },
+        "46": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.85). Pikafish preferred Cannon i3–i0 (-2.74)."
+        },
+        "60": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.46). Pikafish preferred Chariot f1–f7 (-4.46)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 15."
     },
     {
       "id": "wxf-2025-men-r9-g13",
@@ -3872,7 +4588,26 @@
         "a3a4",
         "i0f0",
         "a4g4"
-      ]
+      ],
+      "annotations": {
+        "7": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.40). Pikafish preferred Chariot i0–i1 (+0.10)."
+        },
+        "18": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.13). Pikafish preferred Horse d8–f7 (+0.29)."
+        },
+        "20": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.55). Pikafish preferred Horse h5–g3 (-0.16)."
+        },
+        "25": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.19). Pikafish preferred Horse g2–f4 (+0.64)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r9-g14",
@@ -3970,7 +4705,26 @@
         "e2i2",
         "f4g4",
         "a4a5"
-      ]
+      ],
+      "annotations": {
+        "24": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.17). Pikafish preferred Pawn c5–c4 (-0.05)."
+        },
+        "34": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.57). Pikafish preferred Chariot g1–g3 (-1.23)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.30). Pikafish preferred Cannon a2–f2 (+2.24)."
+        },
+        "68": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.28). Pikafish preferred Chariot a9–d9 (+1.52)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r9-g15",
@@ -4026,7 +4780,26 @@
         "e2d2",
         "d7d2",
         "e1d2"
-      ]
+      ],
+      "annotations": {
+        "14": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.74). Pikafish preferred Pawn a6–a5 (0.00)."
+        },
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.56). Pikafish preferred Cannon h7–h8 (-4.92)."
+        },
+        "31": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+4.80). Pikafish preferred Chariot h6–d6 (+6.56)."
+        },
+        "34": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-8.35). Pikafish preferred Chariot h9–h0 (-4.94)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 10."
     },
     {
       "id": "wxf-2025-men-r9-g16",
@@ -4114,7 +4887,26 @@
         "f2d2",
         "d8d7",
         "h0h4"
-      ]
+      ],
+      "annotations": {
+        "52": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-7.04). Pikafish preferred Chariot c5–c7 (-4.28)."
+        },
+        "63": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+9.25). Pikafish preferred Horse e4–f6 (+12.22)."
+        },
+        "67": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+7.24). Pikafish preferred Chariot h6–h8 (+10.34)."
+        },
+        "68": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-9.76). Pikafish preferred General e8–d8 (-7.24)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 18."
     },
     {
       "id": "wxf-2025-men-r9-g17",
@@ -4177,7 +4969,26 @@
         "b7b0",
         "c0e2",
         "e3e2"
-      ]
+      ],
+      "annotations": {
+        "25": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.30). Pikafish preferred Cannon b2–c2 (-0.11)."
+        },
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.64). Pikafish preferred Cannon b2–c2 (-0.90)."
+        },
+        "41": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.08). Pikafish preferred Cannon f4–f2 (-3.97)."
+        },
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.76). Pikafish preferred Horse a2–c1 (-4.47)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 12."
     },
     {
       "id": "wxf-2025-men-r9-g18",
@@ -4356,7 +5167,26 @@
         "a1c2",
         "d0d1",
         "e3e0"
-      ]
+      ],
+      "annotations": {
+        "70": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.76). Pikafish preferred Advisor e8–f7 (0.00)."
+        },
+        "78": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.94). Pikafish preferred Advisor e8–f9 (0.00)."
+        },
+        "148": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+1.94). Pikafish preferred Horse d3–b4 (+5.23)."
+        },
+        "161": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Cannon c2–c1 (-3.04)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 41."
     },
     {
       "id": "wxf-2025-men-r9-g19",
@@ -4433,7 +5263,26 @@
         "b7e7",
         "e5i5",
         "i6i5"
-      ]
+      ],
+      "annotations": {
+        "16": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.22). Pikafish preferred Chariot a9–b9 (-0.29)."
+        },
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.74). Pikafish preferred Cannon e6–e8 (+1.43)."
+        },
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.19). Pikafish preferred Chariot d1–d6 (-0.18)."
+        },
+        "45": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-1.69). Pikafish preferred Chariot g5–d5 (+2.30)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 23."
     },
     {
       "id": "wxf-2025-men-r9-g2",
@@ -4505,7 +5354,26 @@
         "g8e7",
         "d9e9",
         "e7f9"
-      ]
+      ],
+      "annotations": {
+        "26": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.50). Pikafish preferred Advisor d9–e8 (+0.07)."
+        },
+        "28": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.72). Pikafish preferred Pawn c6–c5 (-1.09)."
+        },
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.45). Pikafish preferred Chariot b0–b4 (+2.72)."
+        },
+        "40": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.33). Pikafish preferred Cannon b7–b5 (-3.52)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 14."
     },
     {
       "id": "wxf-2025-men-r9-g20",
@@ -4597,7 +5465,26 @@
         "i2i5",
         "d5i5",
         "i4i5"
-      ]
+      ],
+      "annotations": {
+        "12": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.95). Pikafish preferred Pawn c6–c5 (-0.01)."
+        },
+        "24": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.47). Pikafish preferred Chariot e3–e2 (-0.12)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.32). Pikafish preferred Cannon e3–e5 (-1.32)."
+        },
+        "42": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.98). Pikafish preferred Chariot b3–e3 (-4.12)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 19."
     },
     {
       "id": "wxf-2025-men-r9-g21",
@@ -4682,7 +5569,26 @@
         "b3a1",
         "e2d4",
         "a1c0"
-      ]
+      ],
+      "annotations": {
+        "27": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.41). Pikafish preferred Soldier c4–c5 (-1.78)."
+        },
+        "46": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+2.08). Pikafish preferred Chariot h2–b2 (+4.12)."
+        },
+        "61": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.51). Pikafish preferred Chariot f6–f4 (-1.57)."
+        },
+        "65": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.10). Pikafish preferred Chariot f2–c2 (-2.24)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 17."
     },
     {
       "id": "wxf-2025-men-r9-g22",
@@ -4809,7 +5715,26 @@
         "g1g2",
         "g4e2",
         "g2e2"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.73). Pikafish preferred Horse g2–i3 (+0.24)."
+        },
+        "41": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.25). Pikafish preferred Chariot g6–f6 (-3.10)."
+        },
+        "101": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-8.56). Pikafish preferred Chariot b4–e4 (-6.05)."
+        },
+        "105": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Elephant i2–g0 (-9.14)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 28."
     },
     {
       "id": "wxf-2025-men-r9-g23",
@@ -4926,7 +5851,26 @@
         "d6g6",
         "g7h9",
         "d3c5"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake (⚡ Turning point). Loses the initiative (-1.49). Pikafish preferred Elephant c0–e2 (+0.51)."
+        },
+        "34": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.35). Pikafish preferred Cannon h5–d5 (+2.80)."
+        },
+        "35": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.33). Pikafish preferred Cannon b2–e2 (-0.35)."
+        },
+        "96": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+5.10). Pikafish preferred Chariot d6–e6 (+6.97)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 11."
     },
     {
       "id": "wxf-2025-men-r9-g4",
@@ -5021,7 +5965,26 @@
         "b2a2",
         "a9a4",
         "e8d7"
-      ]
+      ],
+      "annotations": {
+        "47": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.41). Pikafish preferred Cannon e2–h2 (+1.44)."
+        },
+        "77": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.76). Pikafish preferred Horse a2–b0 (-0.23)."
+        },
+        "78": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.25). Pikafish preferred Pawn a4–a3 (+1.76)."
+        },
+        "79": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.65). Pikafish preferred Cannon a3–b3 (-0.25)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 20."
     },
     {
       "id": "wxf-2025-men-r9-g5",
@@ -5119,7 +6082,22 @@
         "d6d8",
         "d9d8",
         "d7b8"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.18). Pikafish preferred Horse i1–h3 (+0.13)."
+        },
+        "31": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.76). Pikafish preferred Soldier c3–c4 (-0.15)."
+        },
+        "72": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.01). Pikafish preferred Horse g3–h1 (+0.20)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r9-g6",
@@ -5210,7 +6188,26 @@
         "e7g5",
         "f8f5",
         "e5e4"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.60). Pikafish preferred Chariot b3–b7 (+1.16)."
+        },
+        "49": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.34). Pikafish preferred Soldier g3–g4 (-1.62)."
+        },
+        "61": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.25). Pikafish preferred Cannon g5–e5 (-4.07)."
+        },
+        "62": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+4.56). Pikafish preferred Horse e4–c3 (+6.25)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 19."
     },
     {
       "id": "wxf-2025-men-r9-g7",
@@ -5332,7 +6329,26 @@
         "g9f9",
         "f4f7",
         "g8h6"
-      ]
+      ],
+      "annotations": {
+        "70": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.30). Pikafish preferred Chariot b5–f5 (-2.33)."
+        },
+        "71": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+1.55). Pikafish preferred Chariot e6–e5 (+5.30)."
+        },
+        "82": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.70). Pikafish preferred Chariot f5–g5 (-2.16)."
+        },
+        "106": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Cannon b5–b8 (-4.82)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 26."
     },
     {
       "id": "wxf-2025-men-r9-g8",
@@ -5407,7 +6423,26 @@
         "g7f5",
         "f2f5",
         "b5f5"
-      ]
+      ],
+      "annotations": {
+        "17": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.32). Pikafish preferred Chariot i0–i3 (-0.53)."
+        },
+        "18": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.98). Pikafish preferred Pawn c6–c5 (+2.32)."
+        },
+        "31": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.84). Pikafish preferred Soldier c4–c5 (-1.06)."
+        },
+        "44": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.55). Pikafish preferred Chariot h3–g3 (+1.49)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 15."
     },
     {
       "id": "wxf-2025-men-r9-g9",
@@ -5558,7 +6593,26 @@
         "c6d4",
         "d6e4",
         "c7d5"
-      ]
+      ],
+      "annotations": {
+        "44": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.28). Pikafish preferred Horse c2–e3 (-1.00)."
+        },
+        "47": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.87). Pikafish preferred Chariot c6–f6 (+2.62)."
+        },
+        "48": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.59). Pikafish preferred Cannon a3–e3 (-0.87)."
+        },
+        "61": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.80). Pikafish preferred Horse a2–b4 (+1.76)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g10",
@@ -5638,7 +6692,26 @@
         "e1d2",
         "d1f1",
         "c8a7"
-      ]
+      ],
+      "annotations": {
+        "36": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.89). Pikafish preferred Chariot a9–c9 (-0.09)."
+        },
+        "46": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.51). Pikafish preferred Cannon i3–i1 (-0.45)."
+        },
+        "48": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.21). Pikafish preferred Cannon b7–a7 (-1.81)."
+        },
+        "64": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.11). Pikafish preferred Chariot d1–h1 (-4.11)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 16."
     },
     {
       "id": "wxf-2025-men-r7-g11",
@@ -5796,7 +6869,26 @@
         "f6e6",
         "e8f8",
         "e6f6"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.01). Pikafish preferred Cannon e2–e6 (+0.04)."
+        },
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.47). Pikafish preferred Cannon c2–d2 (-2.90)."
+        },
+        "48": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+4.05). Pikafish preferred Cannon b8–b0 (+5.55)."
+        },
+        "100": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.16). Pikafish preferred Chariot i3–g3 (+3.20)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g12",
@@ -5851,7 +6943,26 @@
         "h9h6",
         "e6e7",
         "g9e7"
-      ]
+      ],
+      "annotations": {
+        "13": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.05). Pikafish preferred Cannon e2–e6 (+0.29)."
+        },
+        "24": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.37). Pikafish preferred Chariot d2–d1 (-0.05)."
+        },
+        "29": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.09). Pikafish preferred Chariot e4–b4 (+0.30)."
+        },
+        "30": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.19). Pikafish preferred Horse c3–e2 (+0.09)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g13",
@@ -5924,7 +7035,26 @@
         "b3b1",
         "g4i2",
         "b1f1"
-      ]
+      ],
+      "annotations": {
+        "41": {
+          "glyph": "?",
+          "comment": "Mistake (⚡ Turning point). Loses the initiative (-1.53). Pikafish preferred Chariot d4–d3 (+0.66)."
+        },
+        "51": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.11). Pikafish preferred Chariot a0–a1 (-3.18)."
+        },
+        "57": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-8.48). Pikafish preferred Chariot i1–i0 (-6.44)."
+        },
+        "58": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+5.84). Pikafish preferred Cannon i0–f0 (+8.48)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 21."
     },
     {
       "id": "wxf-2025-men-r7-g14",
@@ -6002,7 +7132,26 @@
         "i6i9",
         "d9d8",
         "i9i8"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.47). Pikafish preferred Horse a7–c6 (-0.26)."
+        },
+        "43": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.57). Pikafish preferred Horse d5–c7 (+2.83)."
+        },
+        "44": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.19). Pikafish preferred Cannon g5–g7 (-1.57)."
+        },
+        "58": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.51). Pikafish preferred Elephant e7–g5 (-3.71)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 15."
     },
     {
       "id": "wxf-2025-men-r7-g15",
@@ -6124,7 +7273,26 @@
         "c4d6",
         "b5b8",
         "c0b0"
-      ]
+      ],
+      "annotations": {
+        "58": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (0.00). Pikafish preferred Chariot a9–a2 (+1.74)."
+        },
+        "59": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.46). Pikafish preferred Elephant g0–e2 (0.00)."
+        },
+        "64": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.11). Pikafish preferred Cannon a0–a4 (+2.23)."
+        },
+        "94": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.80). Pikafish preferred Chariot f5–e5 (-0.09)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 26."
     },
     {
       "id": "wxf-2025-men-r7-g16",
@@ -6210,7 +7378,26 @@
         "c6c9",
         "d3d9",
         "c9d9"
-      ]
+      ],
+      "annotations": {
+        "20": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.05). Pikafish preferred Advisor d9–e8 (-0.36)."
+        },
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.69). Pikafish preferred Chariot b4–b5 (+1.05)."
+        },
+        "23": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.29). Pikafish preferred Chariot a4–d4 (-0.31)."
+        },
+        "24": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.07). Pikafish preferred Horse b5–c3 (+1.29)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g17",
@@ -6347,7 +7534,26 @@
         "i7h7",
         "h6i6",
         "h7i7"
-      ]
+      ],
+      "annotations": {
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.80). Pikafish preferred Chariot d4–d6 (-1.23)."
+        },
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.70). Pikafish preferred Chariot e4–d4 (+2.80)."
+        },
+        "61": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.44). Pikafish preferred Advisor e1–f2 (+1.20)."
+        },
+        "90": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.21). Pikafish preferred Cannon c2–e2 (+1.98)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g18",
@@ -6445,7 +7651,26 @@
         "c9c8",
         "d8d9",
         "b8b2"
-      ]
+      ],
+      "annotations": {
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.01). Pikafish preferred Chariot b1–b5 (-1.25)."
+        },
+        "41": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.23). Pikafish preferred Cannon f2–f5 (+3.01)."
+        },
+        "46": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.52). Pikafish preferred Cannon i7–f7 (-2.71)."
+        },
+        "74": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.80). Pikafish preferred Horse c7–b9 (-4.87)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 20."
     },
     {
       "id": "wxf-2025-men-r7-g19",
@@ -6576,7 +7801,26 @@
         "e4c5",
         "b6a6",
         "c5d3"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-3.73). Pikafish preferred Horse c3–e4 (+1.65)."
+        },
+        "105": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.81). Pikafish preferred Chariot e6–g6 (-3.79)."
+        },
+        "113": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-7.75). Pikafish preferred Chariot c6–i6 (-6.29)."
+        },
+        "115": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot c6–c5 (-7.81)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 17."
     },
     {
       "id": "wxf-2025-men-r7-g20",
@@ -6647,7 +7891,26 @@
         "e8d8",
         "e3c2",
         "e4c3"
-      ]
+      ],
+      "annotations": {
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.69). Pikafish preferred Chariot b3–b4 (+2.22)."
+        },
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.07). Pikafish preferred Horse c2–e3 (-0.69)."
+        },
+        "36": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.32). Pikafish preferred Horse c7–d5 (+1.92)."
+        },
+        "44": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.08). Pikafish preferred Elephant g9–e7 (+1.56)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g22",
@@ -6744,7 +8007,26 @@
         "f6f4",
         "e4c5",
         "f4f6"
-      ]
+      ],
+      "annotations": {
+        "48": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.02). Pikafish preferred Cannon e7–e6 (-1.12)."
+        },
+        "51": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.42). Pikafish preferred Horse a7–c8 (+3.67)."
+        },
+        "52": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.33). Pikafish preferred Cannon e7–b7 (-1.42)."
+        },
+        "61": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.05). Pikafish preferred Chariot g6–h6 (+3.02)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g23",
@@ -6823,7 +8105,26 @@
         "c6h6",
         "f8f7",
         "g9e7"
-      ]
+      ],
+      "annotations": {
+        "49": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.10). Pikafish preferred Soldier g4–g5 (+0.22)."
+        },
+        "50": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-1.30). Pikafish preferred Horse f5–h6 (+4.10)."
+        },
+        "57": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.30). Pikafish preferred Chariot a7–a8 (+5.43)."
+        },
+        "63": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.16). Pikafish preferred Horse g2–i1 (-2.08)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 25."
     },
     {
       "id": "wxf-2025-men-r7-g24",
@@ -6888,7 +8189,26 @@
         "c7d9",
         "b7b9",
         "d6d2"
-      ]
+      ],
+      "annotations": {
+        "22": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-1.73). Pikafish preferred Cannon b3–b4 (+0.89)."
+        },
+        "26": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.98). Pikafish preferred Chariot d9–d5 (-0.62)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.98). Pikafish preferred Cannon b3–i3 (-2.85)."
+        },
+        "48": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-7.66). Pikafish preferred Cannon b9–d9 (-6.50)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 11."
     },
     {
       "id": "wxf-2025-men-r7-g7",
@@ -7015,7 +8335,26 @@
         "h4h3",
         "e0d0",
         "f4f1"
-      ]
+      ],
+      "annotations": {
+        "32": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.65). Pikafish preferred Advisor d9–e8 (+1.65)."
+        },
+        "42": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.03). Pikafish preferred Horse e8–d6 (+1.13)."
+        },
+        "43": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.93). Pikafish preferred Soldier g6–g7 (+0.03)."
+        },
+        "47": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.97). Pikafish preferred Chariot f4–g4 (-1.50)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 28."
     },
     {
       "id": "wxf-2025-men-r7-g8",
@@ -7083,7 +8422,26 @@
         "f2g2",
         "b5f5",
         "g2f2"
-      ]
+      ],
+      "annotations": {
+        "7": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.48). Pikafish preferred Chariot i0–i1 (-0.02)."
+        },
+        "8": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.39). Pikafish preferred Horse g7–h5 (+0.48)."
+        },
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.44). Pikafish preferred Horse b9–d8 (+0.24)."
+        },
+        "32": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.86). Pikafish preferred Cannon b7–b6 (-0.47)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r7-g9",
@@ -7178,7 +8536,26 @@
         "d7f8",
         "e3e4",
         "e5g6"
-      ]
+      ],
+      "annotations": {
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.15). Pikafish preferred Horse c7–d5 (+0.84)."
+        },
+        "28": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.93). Pikafish preferred Horse i7–g6 (+0.09)."
+        },
+        "44": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.21). Pikafish preferred Pawn c3–d3 (-0.16)."
+        },
+        "45": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.43). Pikafish preferred Soldier g6–g7 (+1.21)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r8-g11",
@@ -7311,7 +8688,26 @@
       "metadataNote": "Source red-player tag truncates Liu Jiaqi. Official title and reciprocal result-table rows identify Liu Jiaqi (2), Red against Sou Chon Hou (16), Round 8; Black wins.",
       "metadataEvidenceUrls": [
         "https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.58). Pikafish preferred Chariot g4–d4 (-0.10)."
+        },
+        "39": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.03). Pikafish preferred Chariot g2–g3 (-1.02)."
+        },
+        "61": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.64). Pikafish preferred Chariot g9–g3 (+0.23)."
+        },
+        "81": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.93). Pikafish preferred General e0–e1 (-3.87)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 28."
     },
     {
       "id": "wxf-2025-men-r8-g12",
@@ -7430,7 +8826,26 @@
         "c1c0",
         "f0f1",
         "c2e3"
-      ]
+      ],
+      "annotations": {
+        "66": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.34). Pikafish preferred Chariot b6–h6 (+3.07)."
+        },
+        "73": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.26). Pikafish preferred General f0–e0 (0.00)."
+        },
+        "84": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-300.00). Pikafish preferred Horse a3–c2 (+4.55)."
+        },
+        "86": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-300.00). Pikafish preferred Horse a3–c2 (+4.29)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 42."
     },
     {
       "id": "wxf-2025-men-r8-g13",
@@ -7598,7 +9013,26 @@
         "f6f7",
         "d7d9",
         "e5g6"
-      ]
+      ],
+      "annotations": {
+        "65": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.62). Pikafish preferred Chariot b6–g6 (+2.07)."
+        },
+        "70": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-2.56). Pikafish preferred Horse c5–d3 (+1.31)."
+        },
+        "82": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.27). Pikafish preferred Chariot f8–f6 (-0.51)."
+        },
+        "87": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.29). Pikafish preferred Soldier g5–f5 (+3.74)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 35."
     },
     {
       "id": "wxf-2025-men-r8-g14",
@@ -7658,7 +9092,26 @@
         "h4f5",
         "g7g8",
         "c2d4"
-      ]
+      ],
+      "annotations": {
+        "6": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.78). Pikafish preferred Horse h9–g7 (-0.33)."
+        },
+        "14": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-1.14). Pikafish preferred Cannon b7–b5 (-0.66)."
+        },
+        "20": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.53). Pikafish preferred Chariot a9–d9 (-0.77)."
+        },
+        "25": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.01). Pikafish preferred Chariot b5–a5 (+2.56)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r8-g15",
@@ -7781,7 +9234,26 @@
         "e7c5",
         "a7c6",
         "f8f2"
-      ]
+      ],
+      "annotations": {
+        "18": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.24). Pikafish preferred Cannon b7–b3 (+0.32)."
+        },
+        "51": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-1.33). Pikafish preferred Horse h5–g3 (-0.74)."
+        },
+        "52": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.76). Pikafish preferred Cannon e3–a3 (+1.33)."
+        },
+        "58": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.77). Pikafish preferred Chariot b3–h3 (+1.44)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r8-g16",
@@ -7864,7 +9336,26 @@
         "e6d6",
         "e3e4",
         "d6e6"
-      ]
+      ],
+      "annotations": {
+        "18": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.93). Pikafish preferred Horse h5–g3 (-0.92)."
+        },
+        "35": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.50). Pikafish preferred Soldier c5–d5 (+2.81)."
+        },
+        "57": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.87). Pikafish preferred Chariot b9–b4 (-0.12)."
+        },
+        "58": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.01). Pikafish preferred Pawn e5–e4 (+3.87)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r8-g17",
@@ -7944,7 +9435,26 @@
         "a6a9",
         "c9e7",
         "c0b0"
-      ]
+      ],
+      "annotations": {
+        "36": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.06). Pikafish preferred Chariot g4–d4 (+2.20)."
+        },
+        "38": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-1.86). Pikafish preferred Advisor d9–e8 (+1.35)."
+        },
+        "44": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.57). Pikafish preferred Cannon g5–g0 (-1.73)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.16). Pikafish preferred Horse a7–c6 (-4.93)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 19."
     },
     {
       "id": "wxf-2025-men-r8-g18",
@@ -8001,7 +9511,26 @@
         "g5e6",
         "f8h8",
         "a7g7"
-      ]
+      ],
+      "annotations": {
+        "17": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.50). Pikafish preferred Horse g2–f4 (-0.57)."
+        },
+        "25": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.22). Pikafish preferred Elephant g0–i2 (-2.59)."
+        },
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.89). Pikafish preferred Cannon f7–e7 (-2.11)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.45). Pikafish preferred Cannon f8–h8 (-2.78)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 10."
     },
     {
       "id": "wxf-2025-men-r8-g19",
@@ -8123,7 +9652,26 @@
         "c8d6",
         "e8e9",
         "d6e4"
-      ]
+      ],
+      "annotations": {
+        "75": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.98). Pikafish preferred Elephant c4–a2 (+2.00)."
+        },
+        "84": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.02). Pikafish preferred Cannon a4–a2 (-0.70)."
+        },
+        "97": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.84). Pikafish preferred Horse b4–d5 (+2.69)."
+        },
+        "102": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.04). Pikafish preferred Cannon e4–f4 (-2.28)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 26."
     },
     {
       "id": "wxf-2025-men-r8-g20",
@@ -8271,7 +9819,26 @@
         "d7d8",
         "f8f9",
         "d8e8"
-      ]
+      ],
+      "annotations": {
+        "63": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+4.57). Pikafish preferred Horse d4–c2 (+6.14)."
+        },
+        "66": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.69). Pikafish preferred Chariot d7–d3 (-5.12)."
+        },
+        "111": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+5.46). Pikafish preferred Horse d5–e7 (+7.02)."
+        },
+        "114": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-7.76). Pikafish preferred Chariot h7–d7 (-6.43)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 33."
     },
     {
       "id": "wxf-2025-men-r8-g21",
@@ -8393,7 +9960,26 @@
         "d7e7",
         "e8f8",
         "e2g2"
-      ]
+      ],
+      "annotations": {
+        "34": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.70). Pikafish preferred Chariot g4–g5 (-2.72)."
+        },
+        "39": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+5.85). Pikafish preferred Cannon g2–g6 (+6.88)."
+        },
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+5.06). Pikafish preferred Chariot d6–a6 (+6.26)."
+        },
+        "86": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.59). Pikafish preferred Elephant e7–c9 (-5.30)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 26."
     },
     {
       "id": "wxf-2025-men-r8-g22",
@@ -8500,7 +10086,26 @@
         "h1h0",
         "f6f0",
         "e7g5"
-      ]
+      ],
+      "annotations": {
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.37). Pikafish preferred Soldier c4–c5 (+0.33)."
+        },
+        "31": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.08). Pikafish preferred Chariot f4–e4 (-1.39)."
+        },
+        "83": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.82). Pikafish preferred Cannon f6–f0 (-4.53)."
+        },
+        "91": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-12.04). Pikafish preferred Advisor e1–f0 (-6.92)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 23."
     },
     {
       "id": "wxf-2025-men-r8-g24",
@@ -8587,7 +10192,26 @@
         "c0c3",
         "g4g3",
         "c3c4"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.71). Pikafish preferred Horse b4–c6 (+2.77)."
+        },
+        "34": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.32). Pikafish preferred Horse i2–g1 (-0.97)."
+        },
+        "43": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.18). Pikafish preferred Chariot f4–d4 (+1.94)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.33). Pikafish preferred Cannon a7–d7 (0.00)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r8-g3",
@@ -8664,7 +10288,26 @@
         "e6g5",
         "g0i2",
         "e9f9"
-      ]
+      ],
+      "annotations": {
+        "25": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.32). Pikafish preferred Soldier e3–e4 (-0.33)."
+        },
+        "48": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+2.08). Pikafish preferred Cannon h2–h3 (+4.60)."
+        },
+        "53": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.13). Pikafish preferred Chariot c9–c8 (-2.38)."
+        },
+        "57": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.53). Pikafish preferred Horse g4–h6 (-4.75)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 15."
     },
     {
       "id": "wxf-2025-men-r8-g4",
@@ -8744,7 +10387,26 @@
         "h4h8",
         "f6e4",
         "h8h4"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.30). Pikafish preferred Chariot d6–e6 (+1.09)."
+        },
+        "36": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.01). Pikafish preferred Pawn g4–g3 (-1.22)."
+        },
+        "42": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.69). Pikafish preferred Chariot c8–b8 (-1.27)."
+        },
+        "52": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.61). Pikafish preferred Chariot g8–g3 (-3.39)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 16."
     },
     {
       "id": "wxf-2025-men-r8-g6",
@@ -8804,7 +10466,26 @@
         "d0e1",
         "c5c1",
         "b9d9"
-      ]
+      ],
+      "annotations": {
+        "29": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.03). Pikafish preferred Chariot h7–h4 (-0.31)."
+        },
+        "34": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.35). Pikafish preferred Chariot c5–d5 (+0.95)."
+        },
+        "42": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.83). Pikafish preferred Horse d5–f4 (-2.42)."
+        },
+        "44": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-7.46). Pikafish preferred Horse d5–f4 (-3.81)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 11."
     },
     {
       "id": "wxf-2025-men-r8-g8",
@@ -8871,7 +10552,26 @@
         "e9d9",
         "f5g5",
         "e7g5"
-      ]
+      ],
+      "annotations": {
+        "11": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.01). Pikafish preferred Chariot h6–g6 (+0.25)."
+        },
+        "27": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.10). Pikafish preferred Cannon e6–a6 (+0.41)."
+        },
+        "29": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.07). Pikafish preferred Cannon e6–a6 (+0.20)."
+        },
+        "43": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.05). Pikafish preferred Horse g2–e3 (+0.15)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r8-g9",
@@ -9031,7 +10731,26 @@
       "metadataNote": "Source black-player tag repeats Red. Official title and reciprocal result-table rows identify Quang Nhat Nguyen (37), Black against Winston Yu (11), Round 8; Black wins. Official roster spelling retained.",
       "metadataEvidenceUrls": [
         "https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf"
-      ]
+      ],
+      "annotations": {
+        "119": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.86). Pikafish preferred Advisor e1–f2 (-1.04)."
+        },
+        "123": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.18). Pikafish preferred Cannon i3–i6 (-1.97)."
+        },
+        "128": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.37). Pikafish preferred Cannon e7–d7 (+3.07)."
+        },
+        "133": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.05). Pikafish preferred Horse g4–f2 (-2.33)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 34."
     },
     {
       "id": "wxf-2025-men-r5-g10",
@@ -9097,7 +10816,26 @@
         "e4e5",
         "d9e8",
         "h8h3"
-      ]
+      ],
+      "annotations": {
+        "18": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.78). Pikafish preferred Chariot i9–h9 (-0.64)."
+        },
+        "26": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.54). Pikafish preferred Pawn g5–g4 (-1.50)."
+        },
+        "36": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.86). Pikafish preferred Pawn e4–d4 (-4.99)."
+        },
+        "51": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+5.62). Pikafish preferred Soldier g5–f5 (+6.55)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 12."
     },
     {
       "id": "wxf-2025-men-r5-g11",
@@ -9172,7 +10910,26 @@
         "e4g5",
         "e6g6",
         "c5e7"
-      ]
+      ],
+      "annotations": {
+        "14": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.08). Pikafish preferred Pawn g6–g5 (-0.25)."
+        },
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.59). Pikafish preferred Pawn e6–e5 (-0.40)."
+        },
+        "31": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.25). Pikafish preferred Soldier g4–g5 (+1.26)."
+        },
+        "40": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.62). Pikafish preferred Chariot f9–i9 (+1.51)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r5-g12",
@@ -9245,7 +11002,26 @@
         "f1f0",
         "e0e1",
         "d4c2"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.85). Pikafish preferred Elephant c0–e2 (-1.79)."
+        },
+        "37": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.28). Pikafish preferred Elephant g0–e2 (-2.22)."
+        },
+        "51": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.07). Pikafish preferred Advisor e1–d0 (-4.56)."
+        },
+        "53": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Horse i2–g1 (-7.04)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 14."
     },
     {
       "id": "wxf-2025-men-r5-g13",
@@ -9355,7 +11131,26 @@
         "f2e2",
         "e9f9",
         "a4a5"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.88). Pikafish preferred Cannon e7–a7 (-0.60)."
+        },
+        "31": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (0.00). Pikafish preferred Chariot f3–f8 (+2.88)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.24). Pikafish preferred Cannon h4–e4 (-2.33)."
+        },
+        "56": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.73). Pikafish preferred General d9–e9 (-3.98)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 23."
     },
     {
       "id": "wxf-2025-men-r5-g14",
@@ -9473,7 +11268,26 @@
         "h8g6",
         "f8f9",
         "g6e5"
-      ]
+      ],
+      "annotations": {
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.34). Pikafish preferred Horse b3–d4 (+3.45)."
+        },
+        "66": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.46). Pikafish preferred General e8–e9 (-2.65)."
+        },
+        "67": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+3.12). Pikafish preferred Chariot c6–c8 (+6.46)."
+        },
+        "92": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.98). Pikafish preferred Cannon f7–g7 (-0.81)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 25."
     },
     {
       "id": "wxf-2025-men-r5-g15",
@@ -9594,7 +11408,26 @@
         "d3d5",
         "a6a7",
         "d5e5"
-      ]
+      ],
+      "annotations": {
+        "13": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.34). Pikafish preferred Chariot g4–h4 (-0.10)."
+        },
+        "56": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.59). Pikafish preferred Chariot d3–c3 (-0.53)."
+        },
+        "71": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.49). Pikafish preferred Soldier c6–c7 (+2.73)."
+        },
+        "89": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.61). Pikafish preferred Chariot d7–d6 (+3.67)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r5-g16",
@@ -9706,7 +11539,26 @@
         "h8f8",
         "h7h8",
         "f8f4"
-      ]
+      ],
+      "annotations": {
+        "80": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.56). Pikafish preferred Cannon a8–a3 (-0.28)."
+        },
+        "92": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.73). Pikafish preferred Cannon f7–f6 (-0.96)."
+        },
+        "95": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.00). Pikafish preferred Cannon h8–h9 (+3.17)."
+        },
+        "96": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.15). Pikafish preferred Cannon g7–g6 (-1.00)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 24."
     },
     {
       "id": "wxf-2025-men-r5-g17",
@@ -9842,7 +11694,26 @@
         "e0f0",
         "a3f3",
         "f0e0"
-      ]
+      ],
+      "annotations": {
+        "34": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.02). Pikafish preferred Pawn a6–a5 (+1.44)."
+        },
+        "51": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.13). Pikafish preferred Cannon c2–b2 (+0.85)."
+        },
+        "72": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-3.05). Pikafish preferred Cannon e7–e3 (+0.95)."
+        },
+        "91": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.35). Pikafish preferred Advisor e1–f2 (+2.19)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r5-g18",
@@ -9903,7 +11774,26 @@
         "h1h0",
         "e1f0",
         "f1d2"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.86). Pikafish preferred Soldier e4–e5 (+0.09)."
+        },
+        "27": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.93). Pikafish preferred Chariot f6–f1 (-2.56)."
+        },
+        "31": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.29). Pikafish preferred Soldier d5–c5 (-3.50)."
+        },
+        "37": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-7.44). Pikafish preferred Horse e3–g2 (-6.28)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 11."
     },
     {
       "id": "wxf-2025-men-r5-g19",
@@ -9969,7 +11859,26 @@
         "b9a9",
         "e6d6",
         "a2b4"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.94). Pikafish preferred Cannon e6–e5 (+2.01)."
+        },
+        "24": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.29). Pikafish preferred Cannon b7–b5 (-0.94)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.54). Pikafish preferred Horse c7–d5 (-2.61)."
+        },
+        "34": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.55). Pikafish preferred Chariot e6–c6 (-4.42)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 12."
     },
     {
       "id": "wxf-2025-men-r5-g20",
@@ -10053,7 +11962,26 @@
         "a9c9",
         "b4b8",
         "f6e6"
-      ]
+      ],
+      "annotations": {
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.91). Pikafish preferred Cannon a7–a3 (-1.46)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.49). Pikafish preferred Horse d4–f5 (+2.91)."
+        },
+        "58": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.63). Pikafish preferred Chariot e4–h4 (-1.01)."
+        },
+        "66": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-8.47). Pikafish preferred Chariot b4–b9 (-5.33)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 17."
     },
     {
       "id": "wxf-2025-men-r5-g21",
@@ -10110,7 +12038,26 @@
         "g0d0",
         "e1f0",
         "d0a0"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.20). Pikafish preferred Chariot e4–h4 (-2.91)."
+        },
+        "37": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-10.16). Pikafish preferred General f0–f1 (-5.36)."
+        },
+        "38": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+7.11). Pikafish preferred Cannon g0–d0 (+10.16)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-8.72). Pikafish preferred Chariot e4–h4 (-7.11)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 10."
     },
     {
       "id": "wxf-2025-men-r5-g22",
@@ -10258,7 +12205,26 @@
         "d0e1",
         "d6b6",
         "f3d3"
-      ]
+      ],
+      "annotations": {
+        "22": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.11). Pikafish preferred Cannon b7–b5 (-0.85)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.46). Pikafish preferred Soldier c3–c4 (+1.80)."
+        },
+        "42": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.92). Pikafish preferred Chariot d4–d5 (-0.34)."
+        },
+        "113": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+2.89). Pikafish preferred Chariot h5–h9 (+4.42)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 33."
     },
     {
       "id": "wxf-2025-men-r5-g23",
@@ -10355,7 +12321,26 @@
         "e3g2",
         "c3c7",
         "g0g1"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.74). Pikafish preferred Chariot d7–d3 (+0.20)."
+        },
+        "58": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.34). Pikafish preferred Cannon i0–i2 (+2.26)."
+        },
+        "59": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.81). Pikafish preferred Cannon i9–i5 (-0.34)."
+        },
+        "79": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot c8–c7 (-5.95)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 20."
     },
     {
       "id": "wxf-2025-men-r5-g24",
@@ -10428,7 +12413,26 @@
         "d4e2",
         "e4e3",
         "e2g1"
-      ]
+      ],
+      "annotations": {
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.04). Pikafish preferred Cannon e2–e6 (+2.02)."
+        },
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.24). Pikafish preferred Horse g6–f4 (-0.93)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.26). Pikafish preferred Elephant e7–c9 (+1.67)."
+        },
+        "53": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.21). Pikafish preferred Chariot f3–h3 (-2.66)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 14."
     },
     {
       "id": "wxf-2025-men-r5-g25",
@@ -10539,7 +12543,26 @@
         "c1a0",
         "f0e0",
         "a0c1"
-      ]
+      ],
+      "annotations": {
+        "22": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.50). Pikafish preferred Pawn c6–c5 (+0.21)."
+        },
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.27). Pikafish preferred Cannon b2–e2 (+2.09)."
+        },
+        "45": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.91). Pikafish preferred Cannon c6–i6 (-1.26)."
+        },
+        "91": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-8.80). Pikafish preferred General e0–e1 (-6.80)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 24."
     },
     {
       "id": "wxf-2025-men-r5-g3",
@@ -10631,7 +12654,26 @@
         "g6e5",
         "c4c3",
         "f7f6"
-      ]
+      ],
+      "annotations": {
+        "27": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.76). Pikafish preferred Chariot h3–h2 (-1.33)."
+        },
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.47). Pikafish preferred Advisor d9–e8 (+2.83)."
+        },
+        "52": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.74). Pikafish preferred Pawn c4–c3 (-0.49)."
+        },
+        "53": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.70). Pikafish preferred Horse e5–c6 (+2.74)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 19."
     },
     {
       "id": "wxf-2025-men-r5-g4",
@@ -10743,7 +12785,22 @@
         "e3f3",
         "f9e9",
         "f3f5"
-      ]
+      ],
+      "annotations": {
+        "90": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.82). Pikafish preferred Chariot f4–f5 (-0.63)."
+        },
+        "96": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.37). Pikafish preferred Horse g5–f7 (-1.39)."
+        },
+        "97": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.99). Pikafish preferred Chariot f3–b3 (+2.37)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 24."
     },
     {
       "id": "wxf-2025-men-r5-g6",
@@ -10799,7 +12856,26 @@
         "e4e5",
         "c8d8",
         "f2f8"
-      ]
+      ],
+      "annotations": {
+        "20": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.75). Pikafish preferred Horse d8–f7 (-1.53)."
+        },
+        "26": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.92). Pikafish preferred Cannon b8–b2 (-1.55)."
+        },
+        "28": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.41). Pikafish preferred Horse d8–b9 (-3.14)."
+        },
+        "32": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.00). Pikafish preferred Cannon h2–h5 (-3.99)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 10."
     },
     {
       "id": "wxf-2025-men-r5-g7",
@@ -10878,7 +12954,26 @@
         "b0f0",
         "f5f2",
         "h1e1"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.44). Pikafish preferred Cannon e2–f2 (-0.44)."
+        },
+        "37": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.51). Pikafish preferred Chariot b0–b2 (-1.34)."
+        },
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.51). Pikafish preferred Cannon h2–h9 (-0.97)."
+        },
+        "63": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-9.13). Pikafish preferred Cannon g0–g1 (-6.88)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 16."
     },
     {
       "id": "wxf-2025-men-r5-g9",
@@ -11014,7 +13109,26 @@
         "h5g7",
         "f5f4",
         "g7e6"
-      ]
+      ],
+      "annotations": {
+        "59": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.53). Pikafish preferred Soldier d5–d6 (+1.70)."
+        },
+        "76": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.51). Pikafish preferred Elephant e7–g9 (-1.50)."
+        },
+        "114": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.21). Pikafish preferred Elephant c9–e7 (-3.44)."
+        },
+        "120": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.60). Pikafish preferred Cannon f5–i5 (-4.04)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 30."
     },
     {
       "id": "wxf-2025-men-r6-g11",
@@ -11175,7 +13289,26 @@
         "g5f7",
         "d6e6",
         "e9d9"
-      ]
+      ],
+      "annotations": {
+        "49": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.85). Pikafish preferred Horse c2–b4 (-0.38)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.17). Pikafish preferred Pawn c6–c5 (+1.85)."
+        },
+        "55": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.13). Pikafish preferred Horse c2–d4 (-0.87)."
+        },
+        "58": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.51). Pikafish preferred Horse e6–g5 (+2.52)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r6-g12",
@@ -11243,7 +13376,26 @@
         "f0e0",
         "h7c7",
         "d0e1"
-      ]
+      ],
+      "annotations": {
+        "20": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.95). Pikafish preferred Horse c7–e8 (-0.41)."
+        },
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.10). Pikafish preferred Chariot g2–g0 (-3.02)."
+        },
+        "34": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.25). Pikafish preferred Pawn e6–e5 (-4.26)."
+        },
+        "40": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-6.54). Pikafish preferred Cannon h7–h4 (-5.37)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 13."
     },
     {
       "id": "wxf-2025-men-r6-g13",
@@ -11317,7 +13469,26 @@
         "i5e5",
         "f5e5",
         "g4f4"
-      ]
+      ],
+      "annotations": {
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.37). Pikafish preferred Cannon h5–d5 (-0.40)."
+        },
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.85). Pikafish preferred Horse a7–b5 (-2.38)."
+        },
+        "42": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.83). Pikafish preferred Cannon d4–d3 (-3.80)."
+        },
+        "52": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-7.00). Pikafish preferred Cannon e5–e3 (-5.70)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 14."
     },
     {
       "id": "wxf-2025-men-r6-g14",
@@ -11439,7 +13610,26 @@
         "g7g8",
         "f8f7",
         "e9e8"
-      ]
+      ],
+      "annotations": {
+        "83": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.15). Pikafish preferred Soldier i6–h6 (-0.42)."
+        },
+        "100": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.59). Pikafish preferred Chariot b2–b0 (+0.17)."
+        },
+        "101": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.29). Pikafish preferred Chariot d9–e9 (+2.59)."
+        },
+        "102": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.84). Pikafish preferred General f8–e8 (+0.29)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 26."
     },
     {
       "id": "wxf-2025-men-r6-g15",
@@ -11553,7 +13743,26 @@
         "c9c7",
         "b2b8",
         "a9g9"
-      ]
+      ],
+      "annotations": {
+        "48": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.38). Pikafish preferred Chariot h7–g7 (-0.41)."
+        },
+        "53": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+2.52). Pikafish preferred Cannon h4–e4 (+4.38)."
+        },
+        "54": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.21). Pikafish preferred Chariot d5–g5 (-2.52)."
+        },
+        "85": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-300.00). Pikafish preferred Horse g2–f4 (+5.32)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 43."
     },
     {
       "id": "wxf-2025-men-r6-g16",
@@ -11660,7 +13869,26 @@
         "i6i5",
         "c6d6",
         "g5e4"
-      ]
+      ],
+      "annotations": {
+        "46": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.19). Pikafish preferred Horse a7–c6 (+0.07)."
+        },
+        "57": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.52). Pikafish preferred Chariot h0–h4 (-0.49)."
+        },
+        "63": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.33). Pikafish preferred Chariot d3–h3 (-0.79)."
+        },
+        "65": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.15). Pikafish preferred Chariot d3–f3 (-1.58)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 23."
     },
     {
       "id": "wxf-2025-men-r6-g17",
@@ -11764,7 +13992,26 @@
         "f6g6",
         "f9e9",
         "g6g7"
-      ]
+      ],
+      "annotations": {
+        "82": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.97). Pikafish preferred Horse a4–b2 (-1.64)."
+        },
+        "83": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.89). Pikafish preferred Horse h8–g6 (+2.97)."
+        },
+        "86": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.44). Pikafish preferred Horse a4–c3 (-1.89)."
+        },
+        "88": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.67). Pikafish preferred Horse a4–c3 (-4.84)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 22."
     },
     {
       "id": "wxf-2025-men-r6-g18",
@@ -11893,7 +14140,26 @@
         "b7b8",
         "b3b1",
         "b8f8"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.40). Pikafish preferred Chariot d4–d5 (-0.61)."
+        },
+        "56": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+2.04). Pikafish preferred Chariot a6–a5 (+3.77)."
+        },
+        "57": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.69). Pikafish preferred Soldier g3–g4 (-2.04)."
+        },
+        "68": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+6.00). Pikafish preferred Cannon f7–f1 (+7.50)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 28."
     },
     {
       "id": "wxf-2025-men-r6-g19",
@@ -11977,7 +14243,26 @@
         "f2f6",
         "i4h4",
         "e5g6"
-      ]
+      ],
+      "annotations": {
+        "19": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.17). Pikafish preferred Soldier c3–c4 (+1.16)."
+        },
+        "36": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.13). Pikafish preferred Pawn c4–c3 (-0.17)."
+        },
+        "38": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.76). Pikafish preferred Horse g7–h5 (-1.13)."
+        },
+        "54": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.55). Pikafish preferred Pawn e5–e4 (-4.35)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 17."
     },
     {
       "id": "wxf-2025-men-r6-g20",
@@ -12032,7 +14317,26 @@
         "d3f2",
         "e0d0",
         "e4d4"
-      ]
+      ],
+      "annotations": {
+        "27": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-1.66). Pikafish preferred Chariot h5–d5 (+1.02)."
+        },
+        "31": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.55). Pikafish preferred Horse c2–d4 (-0.62)."
+        },
+        "32": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.27). Pikafish preferred Pawn c6–c5 (+2.55)."
+        },
+        "38": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.80). Pikafish preferred Cannon d7–d9 (-0.35)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 14."
     },
     {
       "id": "wxf-2025-men-r6-g22",
@@ -12087,7 +14391,26 @@
         "b8b9",
         "g7g9",
         "e7g9"
-      ]
+      ],
+      "annotations": {
+        "22": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Horse h5–i7 (0.00)."
+        },
+        "24": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot h9–h5 (+0.27)."
+        },
+        "30": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-5.22). Pikafish preferred Elephant c9–e7 (+0.69)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+5.46). Pikafish preferred Horse e6–c7 (+7.28)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r6-g23",
@@ -12175,7 +14498,26 @@
         "g7f9",
         "d8e8",
         "f7e7"
-      ]
+      ],
+      "annotations": {
+        "12": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.56). Pikafish preferred Pawn e6–e5 (+0.05)."
+        },
+        "14": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.35). Pikafish preferred Horse c7–e8 (-1.57)."
+        },
+        "57": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+5.93). Pikafish preferred Horse g7–e6 (+7.77)."
+        },
+        "70": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot h1–h0 (-8.15)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 18."
     },
     {
       "id": "wxf-2025-men-r6-g25",
@@ -12253,7 +14595,26 @@
         "b6d6",
         "i7i3",
         "h6g8"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.21). Pikafish preferred Horse d8–c6 (+0.10)."
+        },
+        "34": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.53). Pikafish preferred Horse f5–d4 (-2.50)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.73). Pikafish preferred Chariot a0–d0 (+2.67)."
+        },
+        "44": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.03). Pikafish preferred Chariot h5–g5 (-1.33)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 15."
     },
     {
       "id": "wxf-2025-men-r6-g3",
@@ -12391,7 +14752,26 @@
         "e6d6",
         "f9f8",
         "d6d8"
-      ]
+      ],
+      "annotations": {
+        "68": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.18). Pikafish preferred Elephant e7–c5 (-3.33)."
+        },
+        "75": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+4.55). Pikafish preferred Cannon b7–b8 (+5.37)."
+        },
+        "81": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+3.42). Pikafish preferred Cannon a8–c8 (+4.22)."
+        },
+        "82": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.60). Pikafish preferred Chariot b6–c6 (-3.42)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 30."
     },
     {
       "id": "wxf-2025-men-r6-g4",
@@ -12524,7 +14904,26 @@
         "e7c5",
         "i6e6",
         "e9d9"
-      ]
+      ],
+      "annotations": {
+        "31": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.63). Pikafish preferred Cannon g6–g9 (-0.85)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.39). Pikafish preferred Chariot d8–d4 (+2.63)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.43). Pikafish preferred Chariot h1–f1 (-1.47)."
+        },
+        "113": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.79). Pikafish preferred Chariot i6–b6 (-3.49)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 29."
     },
     {
       "id": "wxf-2025-men-r6-g5",
@@ -12786,7 +15185,26 @@
         "e0f0",
         "i4f4",
         "c3e3"
-      ]
+      ],
+      "annotations": {
+        "151": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-300.00). Pikafish preferred Chariot b8–b3 (+1.35)."
+        },
+        "175": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot b9–b3 (+0.26)."
+        },
+        "177": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot b8–b3 (+0.23)."
+        },
+        "205": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot g8–d8 (-0.01)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 76."
     },
     {
       "id": "wxf-2025-men-r6-g6",
@@ -12875,7 +15293,26 @@
         "f4g6",
         "h4h6",
         "g6h8"
-      ]
+      ],
+      "annotations": {
+        "20": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.88). Pikafish preferred Chariot a9–a6 (-0.28)."
+        },
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.21). Pikafish preferred Soldier c3–c4 (+1.88)."
+        },
+        "57": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.54). Pikafish preferred General d0–e0 (-2.66)."
+        },
+        "73": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.95). Pikafish preferred Cannon h4–h9 (-4.29)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 18."
     },
     {
       "id": "wxf-2025-men-r6-g7",
@@ -12938,7 +15375,26 @@
         "c4d4",
         "d0c0",
         "g5g4"
-      ]
+      ],
+      "annotations": {
+        "14": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.41). Pikafish preferred Horse b9–d8 (+0.01)."
+        },
+        "15": {
+          "glyph": "?",
+          "comment": "Mistake (⚡ Turning point). Loses the initiative (-1.76). Pikafish preferred Chariot h0–h9 (+0.41)."
+        },
+        "24": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.19). Pikafish preferred Chariot a9–b9 (+1.81)."
+        },
+        "25": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-1.73). Pikafish preferred Horse h0–g2 (-1.19)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 8."
     },
     {
       "id": "wxf-2025-men-r6-g8",
@@ -13012,7 +15468,22 @@
         "f4d5",
         "c3d3",
         "d5b6"
-      ]
+      ],
+      "annotations": {
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.20). Pikafish preferred Chariot d6–d1 (-0.95)."
+        },
+        "50": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.54). Pikafish preferred Chariot b3–b6 (-1.89)."
+        },
+        "56": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.90). Pikafish preferred Elephant e7–g9 (-2.07)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 14."
     },
     {
       "id": "wxf-2025-men-r6-g9",
@@ -13222,7 +15693,22 @@
         "f7f8",
         "f9e9",
         "f8e8"
-      ]
+      ],
+      "annotations": {
+        "46": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.13). Pikafish preferred Horse f3–e1 (-0.33)."
+        },
+        "47": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.13). Pikafish preferred Soldier g4–g5 (+1.13)."
+        },
+        "192": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.19). Pikafish preferred General f9–e9 (-0.72)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 48."
     },
     {
       "id": "wxf-2025-men-r3-g10",
@@ -13297,7 +15783,22 @@
         "g5e4",
         "d2h2",
         "d3d1"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.86). Pikafish preferred Cannon e6–e4 (+0.12)."
+        },
+        "29": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-6.07). Pikafish preferred Elephant c0–e2 (-2.35)."
+        },
+        "59": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred General e0–d0 (-6.89)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 15."
     },
     {
       "id": "wxf-2025-men-r3-g11",
@@ -13359,7 +15860,26 @@
         "h6h5",
         "g9e7",
         "c2d4"
-      ]
+      ],
+      "annotations": {
+        "36": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.62). Pikafish preferred Chariot h5–h3 (-0.82)."
+        },
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.31). Pikafish preferred Chariot h5–g5 (-0.93)."
+        },
+        "44": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.55). Pikafish preferred Horse e7–d5 (-1.76)."
+        },
+        "46": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.13). Pikafish preferred Chariot e5–d5 (-3.49)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 11."
     },
     {
       "id": "wxf-2025-men-r3-g12",
@@ -13517,7 +16037,26 @@
         "b5b6",
         "h2f3",
         "h3f4"
-      ]
+      ],
+      "annotations": {
+        "16": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.34). Pikafish preferred Elephant c9–e7 (-1.15)."
+        },
+        "23": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.96). Pikafish preferred Soldier c3–c4 (+3.42)."
+        },
+        "111": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.38). Pikafish preferred Cannon f1–e1 (+1.87)."
+        },
+        "124": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.26). Pikafish preferred Pawn i6–i5 (-0.40)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 35."
     },
     {
       "id": "wxf-2025-men-r3-g13",
@@ -13628,7 +16167,26 @@
         "i7g5",
         "d0e1",
         "i5i7"
-      ]
+      ],
+      "annotations": {
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.00). Pikafish preferred Cannon h3–h4 (-2.48)."
+        },
+        "42": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+3.18). Pikafish preferred Chariot a4–g4 (+5.39)."
+        },
+        "49": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.00). Pikafish preferred Soldier c3–c4 (-2.52)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+2.49). Pikafish preferred Elephant g5–e7 (+4.00)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 24."
     },
     {
       "id": "wxf-2025-men-r3-g14",
@@ -13687,7 +16245,26 @@
         "g7h5",
         "c7b7",
         "a5e5"
-      ]
+      ],
+      "annotations": {
+        "10": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.53). Pikafish preferred Horse g7–h5 (-0.27)."
+        },
+        "19": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.44). Pikafish preferred Horse c2–d4 (+0.76)."
+        },
+        "20": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.89). Pikafish preferred Cannon h8–g8 (-0.44)."
+        },
+        "21": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.20). Pikafish preferred Horse c2–d4 (+0.89)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r3-g15",
@@ -13749,7 +16326,26 @@
         "a1b1",
         "c7d5",
         "d2d5"
-      ]
+      ],
+      "annotations": {
+        "34": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.01). Pikafish preferred Cannon h5–f5 (-1.18)."
+        },
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.78). Pikafish preferred Chariot d2–d7 (-1.60)."
+        },
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.85). Pikafish preferred Horse c7–d5 (-3.57)."
+        },
+        "46": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.82). Pikafish preferred Chariot b7–a7 (-4.65)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 11."
     },
     {
       "id": "wxf-2025-men-r3-g16",
@@ -13871,7 +16467,26 @@
         "f8f6",
         "g1g8",
         "f6e6"
-      ]
+      ],
+      "annotations": {
+        "74": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-2.87). Pikafish preferred Cannon g7–g6 (+0.53)."
+        },
+        "77": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.05). Pikafish preferred Horse h6–i8 (+2.74)."
+        },
+        "78": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.91). Pikafish preferred Elephant e7–c9 (+0.05)."
+        },
+        "96": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.86). Pikafish preferred Elephant g5–e7 (-1.97)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 37."
     },
     {
       "id": "wxf-2025-men-r3-g17",
@@ -13961,7 +16576,26 @@
         "d4c6",
         "d8e8",
         "f7f8"
-      ]
+      ],
+      "annotations": {
+        "25": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.62). Pikafish preferred Chariot b0–b4 (+1.39)."
+        },
+        "67": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-5.85). Pikafish preferred Horse f5–g7 (+0.42)."
+        },
+        "68": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-2.66). Pikafish preferred Horse f4–g2 (+5.85)."
+        },
+        "72": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot h3–h2 (-4.85)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 34."
     },
     {
       "id": "wxf-2025-men-r3-g19",
@@ -14021,7 +16655,26 @@
         "f4d4",
         "c6d6",
         "d2d5"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.88). Pikafish preferred Cannon b8–b3 (-1.15)."
+        },
+        "37": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+1.28). Pikafish preferred Elephant c0–a2 (+2.24)."
+        },
+        "38": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-7.03). Pikafish preferred Cannon c4–c5 (-1.28)."
+        },
+        "42": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-9.18). Pikafish preferred Cannon c4–c7 (-8.34)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 11."
     },
     {
       "id": "wxf-2025-men-r3-g20",
@@ -14089,7 +16742,26 @@
         "e2c4",
         "f9e8",
         "a6c7"
-      ]
+      ],
+      "annotations": {
+        "11": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.09). Pikafish preferred Horse b0–c2 (-0.12)."
+        },
+        "19": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.42). Pikafish preferred Cannon e2–c2 (-2.74)."
+        },
+        "43": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-6.52). Pikafish preferred Horse i2–g1 (-5.56)."
+        },
+        "52": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+5.69). Pikafish preferred Cannon f3–f4 (+6.29)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 13."
     },
     {
       "id": "wxf-2025-men-r3-g21",
@@ -14167,7 +16839,26 @@
         "g4f6",
         "d5f5",
         "g7f5"
-      ]
+      ],
+      "annotations": {
+        "45": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.89). Pikafish preferred Chariot c4–b4 (+0.08)."
+        },
+        "50": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+1.84). Pikafish preferred Cannon c7–c5 (+4.36)."
+        },
+        "54": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.05). Pikafish preferred Cannon g7–g8 (+2.06)."
+        },
+        "59": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-1.82). Pikafish preferred Soldier f6–e6 (+1.02)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r3-g22",
@@ -14259,7 +16950,26 @@
         "e3e4",
         "e5e4",
         "d5f6"
-      ]
+      ],
+      "annotations": {
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.83). Pikafish preferred Advisor d9–e8 (-1.42)."
+        },
+        "57": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.23). Pikafish preferred Chariot a8–a9 (+3.16)."
+        },
+        "60": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.11). Pikafish preferred Pawn e6–e5 (-2.66)."
+        },
+        "76": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Elephant e7–c5 (-5.55)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 19."
     },
     {
       "id": "wxf-2025-men-r3-g23",
@@ -14367,7 +17077,26 @@
         "c6h6",
         "f3h3",
         "f2f7"
-      ]
+      ],
+      "annotations": {
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.51). Pikafish preferred Horse c7–b5 (-0.75)."
+        },
+        "41": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.16). Pikafish preferred Chariot i0–h0 (+2.15)."
+        },
+        "42": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.63). Pikafish preferred Horse c7–b5 (-0.16)."
+        },
+        "92": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-7.78). Pikafish preferred Chariot b3–d3 (-6.61)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 23."
     },
     {
       "id": "wxf-2025-men-r3-g25",
@@ -14436,7 +17165,26 @@
         "a8c9",
         "a6i6",
         "c9b7"
-      ]
+      ],
+      "annotations": {
+        "13": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.82). Pikafish preferred Chariot h4–h6 (+0.19)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.24). Pikafish preferred Cannon g7–g6 (+2.67)."
+        },
+        "33": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.72). Pikafish preferred Cannon b2–g2 (-1.24)."
+        },
+        "38": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+1.73). Pikafish preferred Chariot c4–c2 (+4.84)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r3-g3",
@@ -14555,7 +17303,26 @@
         "f5d6",
         "d1d6",
         "i8i9"
-      ]
+      ],
+      "annotations": {
+        "52": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Cannon f7–f2 (-0.25)."
+        },
+        "56": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Cannon f7–f2 (-0.34)."
+        },
+        "64": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Cannon f7–f2 (-0.33)."
+        },
+        "68": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Cannon f7–f2 (-0.32)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r3-g5",
@@ -14677,7 +17444,26 @@
         "f2e1",
         "f1h2",
         "f0f4"
-      ]
+      ],
+      "annotations": {
+        "73": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.75). Pikafish preferred Cannon g3–f3 (+2.83)."
+        },
+        "75": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.20). Pikafish preferred Cannon g3–g6 (+1.36)."
+        },
+        "85": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.48). Pikafish preferred Horse g8–h6 (+1.89)."
+        },
+        "92": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.72). Pikafish preferred Pawn i6–i5 (-1.49)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 26."
     },
     {
       "id": "wxf-2025-men-r3-g6",
@@ -14742,7 +17528,26 @@
         "g8h8",
         "f6f3",
         "g3h5"
-      ]
+      ],
+      "annotations": {
+        "20": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.90). Pikafish preferred Cannon h7–i7 (-0.01)."
+        },
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.22). Pikafish preferred Chariot a6–c6 (-1.09)."
+        },
+        "34": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.98). Pikafish preferred Pawn a5–a4 (-1.94)."
+        },
+        "42": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.39). Pikafish preferred Chariot a6–d6 (-3.64)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 12."
     },
     {
       "id": "wxf-2025-men-r3-g9",
@@ -14896,7 +17701,26 @@
         "i7h9",
         "f8f7",
         "e9g9"
-      ]
+      ],
+      "annotations": {
+        "88": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.59). Pikafish preferred General f8–f9 (+3.75)."
+        },
+        "105": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.32). Pikafish preferred Advisor e1–f2 (0.00)."
+        },
+        "106": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.02). Pikafish preferred Cannon i0–i4 (+2.32)."
+        },
+        "124": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.28). Pikafish preferred Cannon h5–d5 (+0.28)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 34."
     },
     {
       "id": "wxf-2025-men-r4-g10",
@@ -14966,7 +17790,26 @@
         "d3e3",
         "i6i5",
         "g0e2"
-      ]
+      ],
+      "annotations": {
+        "19": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.46). Pikafish preferred Soldier c3–c4 (+0.27)."
+        },
+        "22": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.20). Pikafish preferred Cannon h7–h4 (+0.81)."
+        },
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.24). Pikafish preferred Cannon g3–i3 (-0.33)."
+        },
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.56). Pikafish preferred Chariot h3–h0 (+2.24)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r4-g11",
@@ -15033,7 +17876,26 @@
         "g3g1",
         "b1b2",
         "g1h1"
-      ]
+      ],
+      "annotations": {
+        "37": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.31). Pikafish preferred Chariot g4–h4 (-0.61)."
+        },
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.58). Pikafish preferred Horse h0–i2 (-3.25)."
+        },
+        "47": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.63). Pikafish preferred Horse h0–i2 (-4.32)."
+        },
+        "51": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-7.87). Pikafish preferred Cannon b1–b6 (-6.60)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 13."
     },
     {
       "id": "wxf-2025-men-r4-g13",
@@ -15165,7 +18027,26 @@
         "h8g8",
         "g9f9",
         "d0d1"
-      ]
+      ],
+      "annotations": {
+        "51": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.73). Pikafish preferred Elephant g0–i2 (+1.47)."
+        },
+        "58": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-2.14). Pikafish preferred Advisor f9–e8 (+0.66)."
+        },
+        "60": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.55). Pikafish preferred Advisor f9–e8 (-2.14)."
+        },
+        "116": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-7.72). Pikafish preferred Elephant g5–i7 (-4.88)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 29."
     },
     {
       "id": "wxf-2025-men-r4-g14",
@@ -15300,7 +18181,26 @@
         "g2f0",
         "e2g0",
         "g8g0"
-      ]
+      ],
+      "annotations": {
+        "109": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot c9–c8 (-8.22)."
+        },
+        "112": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+8.98). Pikafish preferred Chariot d5–d0 (+300.00)."
+        },
+        "113": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Soldier e6–e7 (-8.98)."
+        },
+        "116": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (0.00). Pikafish preferred Chariot d5–d0 (+300.00)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 30."
     },
     {
       "id": "wxf-2025-men-r4-g15",
@@ -15388,7 +18288,26 @@
         "h6d6",
         "e8d7",
         "d6d7"
-      ]
+      ],
+      "annotations": {
+        "14": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.78). Pikafish preferred Horse f8–d7 (-0.62)."
+        },
+        "48": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-6.95). Pikafish preferred Cannon g0–i0 (-5.92)."
+        },
+        "66": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-8.55). Pikafish preferred Elephant e7–c5 (-7.08)."
+        },
+        "68": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Advisor e8–d7 (-9.24)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 18."
     },
     {
       "id": "wxf-2025-men-r4-g16",
@@ -15468,7 +18387,26 @@
         "f6f5",
         "c5e7",
         "f5a5"
-      ]
+      ],
+      "annotations": {
+        "19": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.08). Pikafish preferred Cannon b2–b1 (-0.30)."
+        },
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.87). Pikafish preferred Horse b5–d4 (+1.72)."
+        },
+        "31": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.90). Pikafish preferred Soldier c3–c4 (-0.87)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.52). Pikafish preferred Pawn a5–a4 (+2.90)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r4-g17",
@@ -15575,7 +18513,22 @@
         "h4h2",
         "i2h0",
         "g3h1"
-      ]
+      ],
+      "annotations": {
+        "17": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.49). Pikafish preferred Chariot d6–c6 (+0.36)."
+        },
+        "20": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.16). Pikafish preferred Chariot h5–b5 (+0.70)."
+        },
+        "91": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.15). Pikafish preferred Horse f6–g4 (-0.13)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 23."
     },
     {
       "id": "wxf-2025-men-r4-g18",
@@ -15654,7 +18607,26 @@
         "b7b3",
         "c6c3",
         "f5f3"
-      ]
+      ],
+      "annotations": {
+        "13": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.49). Pikafish preferred Soldier e3–e4 (-0.10)."
+        },
+        "45": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.37). Pikafish preferred Chariot a5–a9 (-3.19)."
+        },
+        "53": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.77). Pikafish preferred Chariot a9–a3 (-3.58)."
+        },
+        "55": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-6.67). Pikafish preferred Horse g2–h4 (-5.74)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 16."
     },
     {
       "id": "wxf-2025-men-r4-g19",
@@ -15749,7 +18721,26 @@
         "d1d0",
         "e0e1",
         "h0h1"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.41). Pikafish preferred Cannon h3–c3 (-0.62)."
+        },
+        "31": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-1.12). Pikafish preferred Chariot b0–b2 (+2.41)."
+        },
+        "52": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.55). Pikafish preferred Chariot f7–g7 (+3.13)."
+        },
+        "75": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot e6–e7 (-10.72)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 20."
     },
     {
       "id": "wxf-2025-men-r4-g21",
@@ -15896,7 +18887,26 @@
         "g0g1",
         "e1e0",
         "g1g5"
-      ]
+      ],
+      "annotations": {
+        "111": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.78). Pikafish preferred Chariot h9–h8 (-0.20)."
+        },
+        "116": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.19). Pikafish preferred Advisor e8–f7 (+3.00)."
+        },
+        "117": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.02). Pikafish preferred Elephant i2–g4 (-2.19)."
+        },
+        "125": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.20). Pikafish preferred General e1–d1 (-3.27)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 33."
     },
     {
       "id": "wxf-2025-men-r4-g22",
@@ -16011,7 +19021,26 @@
         "d4d1",
         "d0d1",
         "d3c3"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.20). Pikafish preferred Chariot h5–h6 (+2.31)."
+        },
+        "66": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.09). Pikafish preferred Cannon b4–d4 (-0.03)."
+        },
+        "68": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.27). Pikafish preferred General e9–f9 (-0.62)."
+        },
+        "71": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-4.11). Pikafish preferred Horse f7–g5 (+2.34)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 36."
     },
     {
       "id": "wxf-2025-men-r4-g23",
@@ -16083,7 +19112,26 @@
         "c0c9",
         "d9e8",
         "c9a9"
-      ]
+      ],
+      "annotations": {
+        "32": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.33). Pikafish preferred Cannon d7–b7 (-1.22)."
+        },
+        "34": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.83). Pikafish preferred Chariot d3–b3 (-3.99)."
+        },
+        "40": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-5.99). Pikafish preferred Chariot f8–f7 (-4.88)."
+        },
+        "43": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+4.90). Pikafish preferred Horse c2–d4 (+5.83)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 14."
     },
     {
       "id": "wxf-2025-men-r4-g24",
@@ -16209,7 +19257,26 @@
         "e3e4",
         "d4c2",
         "e4f4"
-      ]
+      ],
+      "annotations": {
+        "12": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.80). Pikafish preferred Elephant c9–e7 (-0.34)."
+        },
+        "28": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.89). Pikafish preferred Cannon c4–c3 (-4.50)."
+        },
+        "101": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+7.10). Pikafish preferred Elephant c0–a2 (+300.00)."
+        },
+        "103": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+5.54). Pikafish preferred Elephant c0–a2 (+7.20)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 27."
     },
     {
       "id": "wxf-2025-men-r4-g5",
@@ -16360,7 +19427,26 @@
         "e4d2",
         "e1d2",
         "e6b6"
-      ]
+      ],
+      "annotations": {
+        "36": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.34). Pikafish preferred Chariot c8–f8 (+1.00)."
+        },
+        "37": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.31). Pikafish preferred Chariot h5–h6 (+0.34)."
+        },
+        "100": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.49). Pikafish preferred Horse h1–f2 (+1.98)."
+        },
+        "105": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.13). Pikafish preferred Horse d5–b4 (-0.61)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 34."
     },
     {
       "id": "wxf-2025-men-r4-g6",
@@ -16480,7 +19566,26 @@
         "d0e1",
         "g9e7",
         "e6c6"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.70). Pikafish preferred Cannon a2–a1 (+0.57)."
+        },
+        "25": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.78). Pikafish preferred Chariot b0–b9 (-0.39)."
+        },
+        "87": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.61). Pikafish preferred Chariot d3–f3 (-0.89)."
+        },
+        "90": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.02). Pikafish preferred Chariot f4–e4 (+4.22)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 26."
     },
     {
       "id": "wxf-2025-men-r4-g9",
@@ -16565,7 +19670,26 @@
         "e9e8",
         "d9d1",
         "c1c0"
-      ]
+      ],
+      "annotations": {
+        "31": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.76). Pikafish preferred Chariot d7–d9 (-1.69)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.06). Pikafish preferred Cannon g3–a3 (+2.76)."
+        },
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.88). Pikafish preferred Elephant c0–e2 (-1.06)."
+        },
+        "69": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot d9–d8 (-4.30)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 17."
     },
     {
       "id": "wxf-2025-men-r1-g1",
@@ -16632,7 +19756,26 @@
         "c3d1",
         "e1f1",
         "c6e6"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.36). Pikafish preferred Horse g2–e3 (-0.86)."
+        },
+        "22": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.43). Pikafish preferred Chariot a9–d9 (+2.36)."
+        },
+        "32": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.97). Pikafish preferred Cannon a2–b2 (+3.30)."
+        },
+        "33": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.28). Pikafish preferred Elephant c0–a2 (-1.97)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 13."
     },
     {
       "id": "wxf-2025-men-r1-g10",
@@ -16702,7 +19845,26 @@
         "f2e2",
         "e9f9",
         "e5d5"
-      ]
+      ],
+      "annotations": {
+        "16": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.98). Pikafish preferred Horse e3–c2 (-0.29)."
+        },
+        "25": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+0.77). Pikafish preferred Chariot h0–h3 (+1.50)."
+        },
+        "35": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.65). Pikafish preferred Soldier f5–f6 (+1.91)."
+        },
+        "54": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.94). Pikafish preferred Advisor f7–e8 (-0.17)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 13."
     },
     {
       "id": "wxf-2025-men-r1-g12",
@@ -16813,7 +19975,26 @@
         "e4c4",
         "g4c4",
         "e6e4"
-      ]
+      ],
+      "annotations": {
+        "27": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.08). Pikafish preferred Cannon b2–i2 (+1.86)."
+        },
+        "35": {
+          "glyph": "?",
+          "comment": "Mistake (⚡ Turning point). Loses the initiative (-1.44). Pikafish preferred Chariot f8–f5 (+0.53)."
+        },
+        "37": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.87). Pikafish preferred Chariot a0–b0 (0.00)."
+        },
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.89). Pikafish preferred Chariot c6–c3 (+2.87)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 18."
     },
     {
       "id": "wxf-2025-men-r1-g14",
@@ -16892,7 +20073,26 @@
         "c3e3",
         "e0e1",
         "d3d2"
-      ]
+      ],
+      "annotations": {
+        "33": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.53). Pikafish preferred Soldier e3–e4 (-0.43)."
+        },
+        "45": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.31). Pikafish preferred Chariot c2–c0 (-1.68)."
+        },
+        "47": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.88). Pikafish preferred Soldier e3–e4 (-4.20)."
+        },
+        "58": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+4.70). Pikafish preferred Cannon h7–h4 (+5.30)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 16."
     },
     {
       "id": "wxf-2025-men-r1-g15",
@@ -16975,7 +20175,14 @@
         "e8f7",
         "e3e4",
         "c7e8"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.37). Pikafish preferred Chariot h8–h1 (-0.15)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r1-g17",
@@ -17051,7 +20258,26 @@
         "g2e3",
         "i7g9",
         "e3g4"
-      ]
+      ],
+      "annotations": {
+        "25": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (+0.20). Pikafish preferred Horse f4–g2 (+0.65)."
+        },
+        "30": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.94). Pikafish preferred Chariot a9–b9 (-0.20)."
+        },
+        "40": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-1.48). Pikafish preferred Horse g7–f9 (-1.05)."
+        },
+        "58": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.42). Pikafish preferred Elephant e7–c9 (-1.60)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 15."
     },
     {
       "id": "wxf-2025-men-r1-g2",
@@ -17159,7 +20385,26 @@
         "c6e7",
         "c3a4",
         "e7d5"
-      ]
+      ],
+      "annotations": {
+        "43": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.58). Pikafish preferred Cannon e2–e1 (+1.89)."
+        },
+        "60": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.25). Pikafish preferred Cannon d6–e6 (-0.11)."
+        },
+        "81": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.40). Pikafish preferred Horse c6–a7 (+3.41)."
+        },
+        "89": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.79). Pikafish preferred Horse e4–c5 (+3.98)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 23."
     },
     {
       "id": "wxf-2025-men-r1-g22",
@@ -17213,7 +20458,26 @@
         "i0i4",
         "c5d5",
         "i4c4"
-      ]
+      ],
+      "annotations": {
+        "16": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.70). Pikafish preferred Chariot h9–h5 (-0.39)."
+        },
+        "22": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-1.71). Pikafish preferred Cannon g7–g8 (-1.48)."
+        },
+        "28": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.97). Pikafish preferred Chariot e5–d5 (-2.10)."
+        },
+        "38": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.94). Pikafish preferred Pawn e5–e4 (-4.24)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 9."
     },
     {
       "id": "wxf-2025-men-r1-g23",
@@ -17337,7 +20601,26 @@
         "h9f9",
         "e9f9",
         "i4i5"
-      ]
+      ],
+      "annotations": {
+        "84": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.35). Pikafish preferred Cannon e3–e4 (-0.21)."
+        },
+        "85": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.18). Pikafish preferred Chariot h3–e3 (+4.35)."
+        },
+        "101": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (0.00). Pikafish preferred Chariot h3–e3 (+4.23)."
+        },
+        "105": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (0.00). Pikafish preferred Chariot h3–e3 (+4.34)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r1-g24",
@@ -17412,7 +20695,22 @@
         "i6i5",
         "a6i6",
         "c2c5"
-      ]
+      ],
+      "annotations": {
+        "19": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.72). Pikafish preferred Chariot h6–h9 (-0.14)."
+        },
+        "23": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.61). Pikafish preferred Horse g2–i1 (-2.15)."
+        },
+        "31": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.68). Pikafish preferred Advisor d0–e1 (-4.04)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 15."
     },
     {
       "id": "wxf-2025-men-r1-g25",
@@ -17533,7 +20831,26 @@
         "d5f4",
         "e2d2",
         "d9e9"
-      ]
+      ],
+      "annotations": {
+        "42": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.87). Pikafish preferred Chariot h9–h7 (+0.01)."
+        },
+        "65": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+7.87). Pikafish preferred Horse c7–d9 (+300.00)."
+        },
+        "67": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+3.25). Pikafish preferred Horse d7–e5 (+8.29)."
+        },
+        "91": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.19). Pikafish preferred Elephant c0–e2 (-0.24)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 26."
     },
     {
       "id": "wxf-2025-men-r1-g3",
@@ -17643,7 +20960,26 @@
         "d5d6",
         "d4b5",
         "d6d7"
-      ]
+      ],
+      "annotations": {
+        "10": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.45). Pikafish preferred Horse h9–g7 (-0.64)."
+        },
+        "16": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.99). Pikafish preferred Cannon f7–f8 (-1.46)."
+        },
+        "26": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-4.13). Pikafish preferred Horse c7–e6 (-3.48)."
+        },
+        "94": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Horse d4–b3 (-4.35)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 23."
     },
     {
       "id": "wxf-2025-men-r1-g5",
@@ -17733,7 +21069,26 @@
         "b3b9",
         "h7h4",
         "d8e8"
-      ]
+      ],
+      "annotations": {
+        "35": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.76). Pikafish preferred Cannon d8–h8 (+2.12)."
+        },
+        "59": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+5.69). Pikafish preferred Soldier e3–e4 (+7.12)."
+        },
+        "65": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+5.61). Pikafish preferred Cannon c6–c4 (+7.63)."
+        },
+        "74": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Cannon h7–h9 (-6.48)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 18."
     },
     {
       "id": "wxf-2025-men-r1-g6",
@@ -17809,7 +21164,26 @@
         "i9i5",
         "i6i5",
         "i2g0"
-      ]
+      ],
+      "annotations": {
+        "35": {
+          "glyph": "?",
+          "comment": "Mistake (⚡ Turning point). Loses the initiative (-1.83). Pikafish preferred Cannon c2–e2 (+0.40)."
+        },
+        "40": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.75). Pikafish preferred Cannon g3–f3 (+3.11)."
+        },
+        "42": {
+          "glyph": "?",
+          "comment": "Mistake (⚡ Turning point). Loses the initiative (-1.62). Pikafish preferred Chariot d8–d9 (+0.75)."
+        },
+        "46": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.09). Pikafish preferred Cannon g3–f3 (-1.25)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r1-g7",
@@ -17972,7 +21346,26 @@
         "d9d8",
         "c9c3",
         "d0d1"
-      ]
+      ],
+      "annotations": {
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+2.13). Pikafish preferred Cannon c7–c6 (+4.07)."
+        },
+        "105": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot c5–e5 (-0.67)."
+        },
+        "125": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.28). Pikafish preferred Soldier f8–f9 (-0.93)."
+        },
+        "145": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred General f1–e1 (-5.15)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 37."
     },
     {
       "id": "wxf-2025-men-r1-g8",
@@ -18034,7 +21427,26 @@
         "d8d6",
         "e6g7",
         "e0d0"
-      ]
+      ],
+      "annotations": {
+        "12": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.51). Pikafish preferred Horse b9–a7 (-0.31)."
+        },
+        "16": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.55). Pikafish preferred Cannon h3–g3 (-1.45)."
+        },
+        "19": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.63). Pikafish preferred Soldier e3–e4 (+2.52)."
+        },
+        "34": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.21). Pikafish preferred Chariot i2–i3 (-1.63)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 11."
     },
     {
       "id": "wxf-2025-men-r1-g9",
@@ -18113,7 +21525,26 @@
         "c3d3",
         "d0e0",
         "i3e3"
-      ]
+      ],
+      "annotations": {
+        "45": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.85). Pikafish preferred Horse c1–a0 (-1.74)."
+        },
+        "49": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.60). Pikafish preferred Elephant e2–c0 (-3.74)."
+        },
+        "57": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.91). Pikafish preferred Advisor e1–d0 (-5.62)."
+        },
+        "58": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+5.89). Pikafish preferred Cannon i5–e5 (+6.91)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 16."
     },
     {
       "id": "wxf-2025-men-r2-g10",
@@ -18275,7 +21706,26 @@
         "d7e5",
         "g9e7",
         "e5d3"
-      ]
+      ],
+      "annotations": {
+        "17": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.10). Pikafish preferred Cannon h2–f2 (-0.57)."
+        },
+        "29": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.57). Pikafish preferred Horse c2–b4 (+1.69)."
+        },
+        "30": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-3.74). Pikafish preferred Cannon c4–c0 (+0.57)."
+        },
+        "123": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+1.13). Pikafish preferred Advisor f2–e1 (+2.89)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r2-g12",
@@ -18335,7 +21785,14 @@
         "e2g4",
         "a3c4",
         "c0e2"
-      ]
+      ],
+      "annotations": {
+        "23": {
+          "glyph": "!?",
+          "comment": "Alternative line. Suboptimal (-0.07). Pikafish preferred Chariot a0–b0 (+0.18)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r2-g13",
@@ -18393,7 +21850,26 @@
         "d5b4",
         "e6e5",
         "f4f8"
-      ]
+      ],
+      "annotations": {
+        "20": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.31). Pikafish preferred Chariot a6–d6 (+0.31)."
+        },
+        "23": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.14). Pikafish preferred Chariot d1–f1 (+0.46)."
+        },
+        "24": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.92). Pikafish preferred Cannon h6–h5 (+0.14)."
+        },
+        "31": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.01). Pikafish preferred Soldier c3–c4 (+0.62)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r2-g14",
@@ -18523,7 +21999,26 @@
         "g5e6",
         "i8i0",
         "e0f0"
-      ]
+      ],
+      "annotations": {
+        "84": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.23). Pikafish preferred Horse d4–b5 (-0.18)."
+        },
+        "100": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.47). Pikafish preferred Horse f4–d3 (-3.13)."
+        },
+        "103": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+3.10). Pikafish preferred Horse f7–h6 (+5.45)."
+        },
+        "106": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.20). Pikafish preferred Cannon i8–i5 (-2.55)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 28."
     },
     {
       "id": "wxf-2025-men-r2-g15",
@@ -18593,7 +22088,22 @@
         "f0e1",
         "i3e3",
         "e0f0"
-      ]
+      ],
+      "annotations": {
+        "44": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.32). Pikafish preferred Chariot a6–f6 (-1.29)."
+        },
+        "48": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-4.10). Pikafish preferred Horse c2–e3 (-1.95)."
+        },
+        "54": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Chariot d5–e5 (-5.79)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 13."
     },
     {
       "id": "wxf-2025-men-r2-g16",
@@ -18662,7 +22172,26 @@
         "h3h5",
         "a5a6",
         "h5c5"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.59). Pikafish preferred Horse g2–e3 (+0.01)."
+        },
+        "22": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.73). Pikafish preferred Cannon e3–a3 (+2.59)."
+        },
+        "23": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.83). Pikafish preferred Horse g2–e3 (-0.73)."
+        },
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.95). Pikafish preferred Pawn a6–a5 (+2.98)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r2-g17",
@@ -18816,7 +22345,26 @@
       "metadataNote": "Source black-player tag repeats Red. Official title and reciprocal result-table rows identify Davide Nastasio (40), Black against Vladimir Medvedev (42), Round 2; Red wins.",
       "metadataEvidenceUrls": [
         "https://www.wxf-xiangqi.org/images/2025wxf_shanghai2/2025_19th_World_Xiangqi_Championship19.pdf"
-      ]
+      ],
+      "annotations": {
+        "38": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.68). Pikafish preferred Horse h5–f4 (-1.96)."
+        },
+        "52": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.46). Pikafish preferred Chariot a8–d8 (-0.70)."
+        },
+        "116": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Elephant e7–c5 (-5.73)."
+        },
+        "119": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+5.60). Pikafish preferred Chariot f6–h6 (+300.00)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 33."
     },
     {
       "id": "wxf-2025-men-r2-g18",
@@ -18906,7 +22454,26 @@
         "f8f7",
         "e8f7",
         "g9f9"
-      ]
+      ],
+      "annotations": {
+        "53": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.27). Pikafish preferred Chariot f7–g7 (0.00)."
+        },
+        "54": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-4.27). Pikafish preferred Cannon g0–d0 (+4.27)."
+        },
+        "64": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-2.13). Pikafish preferred Cannon i0–d0 (+2.15)."
+        },
+        "72": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-16.29). Pikafish preferred Chariot h3–h0 (-7.20)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 27."
     },
     {
       "id": "wxf-2025-men-r2-g20",
@@ -19013,7 +22580,26 @@
         "c5c7",
         "f5h6",
         "d3d6"
-      ]
+      ],
+      "annotations": {
+        "30": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.89). Pikafish preferred Chariot h6–g6 (-0.33)."
+        },
+        "36": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.50). Pikafish preferred Cannon c0–c4 (-0.43)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.98). Pikafish preferred Cannon h0–h8 (-2.46)."
+        },
+        "83": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-4.22). Pikafish preferred Horse f5–h6 (+0.49)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 42."
     },
     {
       "id": "wxf-2025-men-r2-g21",
@@ -19131,7 +22717,26 @@
         "e4d6",
         "e7d7",
         "d6e4"
-      ]
+      ],
+      "annotations": {
+        "61": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.37). Pikafish preferred Horse g6–e7 (-0.08)."
+        },
+        "79": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.89). Pikafish preferred Chariot e6–g6 (-1.32)."
+        },
+        "98": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-1.28). Pikafish preferred Chariot g6–g3 (+2.06)."
+        },
+        "99": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-2.29). Pikafish preferred Horse f6–d7 (+1.28)."
+        }
+      },
+      "summary": "Master-level draw. Balanced defense and piece coordination throughout the endgame."
     },
     {
       "id": "wxf-2025-men-r2-g22",
@@ -19202,7 +22807,26 @@
         "g4h4",
         "g2i3",
         "g5h3"
-      ]
+      ],
+      "annotations": {
+        "15": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.14). Pikafish preferred Soldier c3–c4 (-0.21)."
+        },
+        "25": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-2.46). Pikafish preferred Soldier c4–c5 (-1.42)."
+        },
+        "28": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.95). Pikafish preferred Pawn c5–c4 (+2.31)."
+        },
+        "55": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.03). Pikafish preferred Horse d0–c2 (-0.63)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 14."
     },
     {
       "id": "wxf-2025-men-r2-g23",
@@ -19278,7 +22902,26 @@
         "f5f8",
         "d9c7",
         "c8e8"
-      ]
+      ],
+      "annotations": {
+        "38": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-3.36). Pikafish preferred Chariot g5–g9 (-1.55)."
+        },
+        "56": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-11.56). Pikafish preferred Chariot g3–i3 (-6.64)."
+        },
+        "57": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (+0.54). Pikafish preferred Chariot f5–f8 (+11.56)."
+        },
+        "58": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-14.24). Pikafish preferred Cannon a3–e3 (-0.54)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 15."
     },
     {
       "id": "wxf-2025-men-r2-g24",
@@ -19392,7 +23035,26 @@
         "f1f0",
         "g1g0",
         "f0f1"
-      ]
+      ],
+      "annotations": {
+        "39": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-1.71). Pikafish preferred Cannon b0–c0 (+0.95)."
+        },
+        "41": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.28). Pikafish preferred Chariot f4–f2 (-0.03)."
+        },
+        "42": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-0.84). Pikafish preferred Cannon h2–e2 (+3.28)."
+        },
+        "55": {
+          "glyph": "??",
+          "comment": "Critical blunder (⚡ Turning point). Concedes decisive advantage (-300.00). Pikafish preferred Chariot b2–b5 (+0.73)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 20."
     },
     {
       "id": "wxf-2025-men-r2-g25",
@@ -19574,7 +23236,26 @@
         "d5h5",
         "d2d1",
         "e1e2"
-      ]
+      ],
+      "annotations": {
+        "39": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-1.19). Pikafish preferred Soldier e3–e4 (+0.58)."
+        },
+        "108": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.70). Pikafish preferred Cannon b1–g1 (-0.97)."
+        },
+        "132": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.51). Pikafish preferred Chariot f1–f5 (-3.91)."
+        },
+        "133": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+3.91). Pikafish preferred Chariot g3–f3 (+5.51)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 41."
     },
     {
       "id": "wxf-2025-men-r2-g3",
@@ -19732,7 +23413,26 @@
         "f7e5",
         "g7e7",
         "c8c9"
-      ]
+      ],
+      "annotations": {
+        "64": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.16). Pikafish preferred Chariot f1–f6 (-2.54)."
+        },
+        "65": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+3.51). Pikafish preferred Cannon i6–i9 (+5.16)."
+        },
+        "116": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-4.77). Pikafish preferred Elephant c9–e7 (-1.88)."
+        },
+        "142": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-6.52). Pikafish preferred Chariot g7–g1 (-5.07)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 35."
     },
     {
       "id": "wxf-2025-men-r2-g4",
@@ -19841,7 +23541,26 @@
         "a1a0",
         "a2c0",
         "f9f8"
-      ]
+      ],
+      "annotations": {
+        "36": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-2.51). Pikafish preferred Cannon d5–e5 (+0.23)."
+        },
+        "44": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-2.28). Pikafish preferred Advisor e8–f9 (-0.05)."
+        },
+        "87": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-300.00). Pikafish preferred Horse h8–i6 (-4.21)."
+        },
+        "89": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-5.25). Pikafish preferred Elephant g0–e2 (-2.27)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 23."
     },
     {
       "id": "wxf-2025-men-r2-g6",
@@ -19938,7 +23657,26 @@
         "b4b0",
         "d5d0",
         "c5b3"
-      ]
+      ],
+      "annotations": {
+        "66": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (+2.37). Pikafish preferred Cannon b3–d3 (+3.48)."
+        },
+        "75": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.22). Pikafish preferred Chariot h6–d6 (-3.00)."
+        },
+        "77": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.76). Pikafish preferred Horse h7–g9 (-4.45)."
+        },
+        "79": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-7.06). Pikafish preferred Horse f6–d7 (-5.20)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 20."
     },
     {
       "id": "wxf-2025-men-r2-g7",
@@ -20006,7 +23744,26 @@
         "a6a7",
         "b7b8",
         "a7a8"
-      ]
+      ],
+      "annotations": {
+        "18": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-0.77). Pikafish preferred Pawn c6–c5 (+0.03)."
+        },
+        "24": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-1.66). Pikafish preferred Chariot h9–h0 (-0.83)."
+        },
+        "46": {
+          "glyph": "?!",
+          "comment": "Inaccuracy. Suboptimal (-3.73). Pikafish preferred Horse i7–h5 (-2.94)."
+        },
+        "50": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.62). Pikafish preferred Cannon b7–b8 (-3.89)."
+        }
+      },
+      "summary": "Red victory. Decisive tactical turning point around move 13."
     },
     {
       "id": "wxf-2025-men-r2-g9",
@@ -20083,7 +23840,26 @@
         "d3e3",
         "e2g4",
         "f5d4"
-      ]
+      ],
+      "annotations": {
+        "21": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-0.61). Pikafish preferred Chariot b4–b5 (+0.80)."
+        },
+        "36": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (+0.73). Pikafish preferred Chariot h9–h8 (+2.36)."
+        },
+        "51": {
+          "glyph": "??",
+          "comment": "Critical blunder. Concedes decisive advantage (-3.58). Pikafish preferred Chariot b4–b3 (-1.07)."
+        },
+        "59": {
+          "glyph": "?",
+          "comment": "Mistake. Loses the initiative (-5.56). Pikafish preferred Chariot b6–b5 (-4.35)."
+        }
+      },
+      "summary": "Black victory. Successful counterattack seizing the initiative around move 15."
     }
   ]
 }

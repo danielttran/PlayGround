@@ -35,6 +35,12 @@
       "file": "master-classics.json",
       "label": "Selected classical master games",
       "sourceManifest": "data/master-classics-manifest.json"
+    },
+    {
+      "file": "engine-games.json",
+      "label": "Modern Engine Championship",
+      "engineGame": true,
+      "sourceManifest": "data/engine-games-manifest.json"
     }
   ]
 }

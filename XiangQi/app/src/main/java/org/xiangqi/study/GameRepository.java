@@ -23,10 +23,13 @@ public final class GameRepository {
     public GameRepository(Context context) { this.context = context.getApplicationContext(); }
 
     public static final class Game {
-        public String id, event, round, date, red, black, result, sourceUrl, startFen, timeControl="", collection="";
+        public String id, event, round, date, red, black, result, sourceUrl, startFen, timeControl="", collection="", summary="";
         public boolean imported, engineGame;
+        public int bookPlies;
         public String importCollectionId="", engineIdentity="", metadataNote="";
         public final List<String> moves = new ArrayList<>();
+        public final Map<Integer, String> moveComments = new HashMap<>();
+        public final Map<Integer, String> moveGlyphs = new HashMap<>();
         public String title() { return red + " · " + black; }
         public Position initial() { return startFen.isEmpty() ? Position.initial() : Position.fromFen(startFen); }
         public JSONObject json() throws Exception {
@@ -36,6 +39,7 @@ public final class GameRepository {
             j.put("startFen", startFen); j.put("timeControl",timeControl); j.put("collection",collection);
             j.put("engineGame",engineGame); j.put("importCollectionId",importCollectionId);
             j.put("engineIdentity",engineIdentity); j.put("metadataNote",metadataNote);
+            j.put("bookPlies", bookPlies); j.put("summary", summary);
             j.put("moves", new JSONArray(moves)); return j;
         }
     }
@@ -246,6 +250,21 @@ public final class GameRepository {
             g.result = j.optString("result", "*"); g.sourceUrl = j.optString("sourceUrl", "");
             g.startFen = j.optString("startFen", ""); g.timeControl=j.optString("timeControl", ""); g.collection=j.optString("collection", ""); g.imported = imported;
             g.engineGame=j.optBoolean("engineGame",false);
+            g.bookPlies=j.optInt("bookPlies",0);
+            g.summary=j.optString("summary","");
+            JSONObject anns=j.optJSONObject("annotations");
+            if(anns!=null){
+                Iterator<String> it=anns.keys();
+                while(it.hasNext()){
+                    String k=it.next();
+                    try{
+                        int plyNum=Integer.parseInt(k);
+                        JSONObject ann=anns.getJSONObject(k);
+                        g.moveComments.put(plyNum,ann.optString("comment",""));
+                        g.moveGlyphs.put(plyNum,ann.optString("glyph",""));
+                    }catch(Exception ignored){}
+                }
+            }
             g.engineIdentity=j.optString("engineIdentity","");g.metadataNote=j.optString("metadataNote","");
             g.importCollectionId=saved?j.optString("importCollectionId",""):"";
             JSONArray moves = j.getJSONArray("moves");
