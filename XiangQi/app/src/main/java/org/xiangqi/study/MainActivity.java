@@ -32,8 +32,8 @@ import java.util.concurrent.*;
 
 /** Dependency-free native Android library, replay board and local analysis workspace. */
 public final class MainActivity extends Activity {
-    private static final int BG=0xff1e2520, SURFACE=0xff2d372f, LIGHT=0xffe7e7d5, MUTED=0xffb8c8b8,
-        ACCENT=0xffb3cfa6, INK=0xff20342c, LINE=0xff465647;
+    private static final int BG=0xff121c17, SURFACE=0xff1c2921, LIGHT=0xffedf1e7, MUTED=0xffaab9ac,
+        ACCENT=0xffc0d7a6, INK=0xff192c1e, LINE=0xff35463a;
     private static final int IMPORT=101, EXPORT=102;
     private final Handler handler=new Handler(Looper.getMainLooper());
     // File operations outlive configuration changes and stay ordered: a recreated
@@ -57,6 +57,7 @@ public final class MainActivity extends Activity {
     private LinearLayout root,content,analysisBox,replayBoardRow,replayContextRow,gameTitle,movePanels;
     private ListView libraryList,movesView;
     private MoveRecordAdapter movesAdapter;
+    private int renderedPly=-1;private String renderedGame="";
     private Spinner librarySortPicker,libraryImportPicker;
     private EditText librarySearch;
     private LibraryAdapter libraryAdapter;
@@ -349,12 +350,13 @@ public final class MainActivity extends Activity {
 
     private void buildReplay() {
         seeking=false;replayProgress=null;
-        root.removeAllViews();content=new ReplayLayout();root.addView(content,new LinearLayout.LayoutParams(-1,-1));
-        LinearLayout nav=row();boolean fromHome=getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false);Button back=button(fromHome?"‹  Database":"‹  Library",this::returnDatabase,false);back.setTextSize(12);back.setSingleLine(true);back.setMinWidth(0);back.setMinimumWidth(0);back.setPadding(dp(3),0,dp(3),0);back.setContentDescription(fromHome?"Database":"Library");nav.addView(back,new LinearLayout.LayoutParams(dp(72),dp(48)));
+        root.removeAllViews();content=new ReplayLayout();boolean withNavigation=getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false);root.addView(content,new LinearLayout.LayoutParams(-1,withNavigation?0:-1,withNavigation?1:0));
+        if(withNavigation)root.addView(AppNavigation.create(this,"database",tab->{saveState();stopAutoplay();startActivity(new Intent(this,HomeActivity.class).putExtra("homeScreen",tab).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));}),new LinearLayout.LayoutParams(-1,dp(62)));
+        renderedPly=-1;LinearLayout nav=row();boolean fromHome=getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false);Button back=iconButton("back",fromHome?"Database":"Library",this::returnDatabase);nav.addView(back,new LinearLayout.LayoutParams(dp(44),dp(48)));
         gameTitle=column();pad(gameTitle,6,0,6,0);
         for(boolean redSide:new boolean[]{true,false}){TextView player=text((redSide?"Red · ":"Black · ")+PlayerNames.display(redSide?game.red:game.black),13,redSide?0xfff0a69c:LIGHT);player.setSingleLine(true);player.setEllipsize(TextUtils.TruncateAt.END);gameTitle.addView(player,new LinearLayout.LayoutParams(-1,-2));}
         gameTitle.setContentDescription("Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+". "+game.event+". "+game.round+". Open game information.");gameTitle.setFocusable(true);gameTitle.setOnClickListener(v->gameInformation());nav.addView(gameTitle,new LinearLayout.LayoutParams(0,-2,1));
-        Button menu=button("⋮",()->{},false);menu.setTextSize(25);menu.setContentDescription("Game menu");menu.setOnClickListener(v->gameMenu(menu));nav.addView(menu,new LinearLayout.LayoutParams(dp(44),dp(48)));int headerHeight=Math.max(dp(48),Math.round(((TextView)gameTitle.getChildAt(0)).getPaint().getFontSpacing())*2);content.addView(nav,new LinearLayout.LayoutParams(-1,headerHeight));
+        Button menu=iconButton("menu","Game menu",()->{});menu.setOnClickListener(v->gameMenu(menu));nav.addView(menu,new LinearLayout.LayoutParams(dp(44),dp(48)));int headerHeight=Math.max(dp(48),Math.round(((TextView)gameTitle.getChildAt(0)).getPaint().getFontSpacing())*2);content.addView(nav,new LinearLayout.LayoutParams(-1,headerHeight));
         positionLabel=null;eventLabel=null;
         board=new BoardView(this);StudySettings appearance=StudySettings.load(this);board.setAppearance(appearance.boardStyle,appearance.glyphStyle,appearance.discStyle);
         board.setCoordinates(appearance.coordinateStyle);
@@ -370,19 +372,20 @@ public final class MainActivity extends Activity {
             public void onStopTrackingTouch(SeekBar slider){if(!activeReplaySlider(slider))return;boolean wasSeeking=seeking;seeking=false;if(wasSeeking)resumeAnalysis();}
         });
         content.addView(replayProgress,new LinearLayout.LayoutParams(-1,dp(28)));
-        LinearLayout controls=row();previousGameButton=skipGameButton(true);previousGameButton.setContentDescription("Previous game");controls.addView(weight(previousGameButton,1));
-        nextGameButton=skipGameButton(false);nextGameButton.setContentDescription("Next game");controls.addView(weight(nextGameButton,1));
-        autoplayButton=button("▶",this::toggleAutoplay,true); autoplayButton.setContentDescription("Play replay"); controls.addView(weight(autoplayButton,1));
-        Button previousMove=button("‹",()->navigate(ply-1),false);previousMove.setContentDescription("Previous move");controls.addView(weight(previousMove,1));
-        Button nextMove=button("›",()->navigate(ply+1),false);nextMove.setContentDescription("Next move");controls.addView(weight(nextMove,1));content.addView(controls,new LinearLayout.LayoutParams(-1,dp(48)));
-        for(int i=0;i<controls.getChildCount();i++){LinearLayout.LayoutParams spacing=(LinearLayout.LayoutParams)controls.getChildAt(i).getLayoutParams();spacing.topMargin=0;spacing.bottomMargin=0;}
+        LinearLayout controls=row();previousGameButton=skipGameButton(true);controls.addView(previousGameButton,new LinearLayout.LayoutParams(dp(44),dp(44)));
+        nextGameButton=skipGameButton(false);LinearLayout.LayoutParams nextSize=new LinearLayout.LayoutParams(dp(44),dp(44));nextSize.leftMargin=dp(8);controls.addView(nextGameButton,nextSize);
+        controls.addView(new Space(this),new LinearLayout.LayoutParams(0,1,1));
+        autoplayButton=iconButton("play","Play replay",this::toggleAutoplay);autoplayButton.setBackground(shape(ACCENT,0,22));autoplayButton.setForeground(new AppIcon("play",INK,dp(21)));controls.addView(autoplayButton,new LinearLayout.LayoutParams(dp(44),dp(44)));
+        controls.addView(new Space(this),new LinearLayout.LayoutParams(0,1,1));
+        Button previousMove=iconButton("left","Previous move",()->navigate(ply-1));controls.addView(previousMove,new LinearLayout.LayoutParams(dp(44),dp(44)));
+        Button nextMove=iconButton("right","Next move",()->navigate(ply+1));LinearLayout.LayoutParams lastSize=new LinearLayout.LayoutParams(dp(44),dp(44));lastSize.leftMargin=dp(8);controls.addView(nextMove,lastSize);content.addView(controls,new LinearLayout.LayoutParams(-1,dp(52)));
         replayContextRow=row();replayContextRow.setBackground(shape(SURFACE,0,6));pad(replayContextRow,8,4,8,4);
         variationLabel=text("",12,ACCENT);variationLabel.setMaxLines(3);variationLabel.setEllipsize(TextUtils.TruncateAt.END);replayContextRow.addView(variationLabel,new LinearLayout.LayoutParams(0,-2,1));
         exploreButton=button("Return to recorded game",()->{if(vsEngine)stopEngineGame();else toggleExplore();},false);exploreButton.setTextSize(11);exploreButton.setSingleLine(true);exploreButton.setPadding(dp(4),0,dp(4),0);exploreButton.setMinHeight(dp(32));exploreButton.setMinimumHeight(dp(32));replayContextRow.addView(exploreButton,new LinearLayout.LayoutParams(dp(146),dp(32)));
         LinearLayout.LayoutParams contextParams=new LinearLayout.LayoutParams(-1,-2);contextParams.topMargin=dp(2);contextParams.bottomMargin=dp(4);content.addView(replayContextRow,contextParams);
         movePanels=row();movePanels.setBaselineAligned(false);movePanels.setGravity(Gravity.TOP);content.addView(movePanels,new LinearLayout.LayoutParams(-1,0,1));
         LinearLayout recordBox=column();movePanels.addView(recordBox,new LinearLayout.LayoutParams(0,-1,1));
-        TextView movesTitle=text("RECORD · RED / BLACK",10,MUTED);pad(movesTitle,2,2,2,2);recordBox.addView(movesTitle);
+        LinearLayout headings=row();pad(headings,3,4,3,4);headings.addView(text("Turn",11,MUTED),new LinearLayout.LayoutParams(dp(54),-2));headings.addView(text("Played",11,MUTED),new LinearLayout.LayoutParams(0,-2,1));headings.addView(text("Pikafish best",11,MUTED),new LinearLayout.LayoutParams(0,-2,1.1f));recordBox.addView(headings);
         movesView=new ListView(this);movesView.setContentDescription("Move record");movesView.setItemsCanFocus(true);movesView.setDividerHeight(0);movesView.setBackgroundColor(BG);movesAdapter=new MoveRecordAdapter();movesView.setAdapter(movesAdapter);recordBox.addView(movesView,new LinearLayout.LayoutParams(-1,0,1));
         analysisBox=column();analysisBox.setBackground(shape(SURFACE,0,6));pad(analysisBox,5,2,5,2);analysisText=text(analysisIntro(),11,MUTED);analysisScroll=new ScrollView(this);analysisScroll.setContentDescription("Analysis details");
         LinearLayout engineContent=column();engineContent.addView(text("ENGINE LINES",10,ACCENT));engineContent.addView(analysisText);analysisScroll.addView(engineContent,new ScrollView.LayoutParams(-1,-2));
@@ -404,20 +407,7 @@ public final class MainActivity extends Activity {
     }
 
     private void gameInformation(){String info="Red: "+PlayerNames.display(game.red)+"\nBlack: "+PlayerNames.display(game.black)+"\n\n"+replayEvent()+(game.date.isEmpty()?"":"\n"+game.date)+(game.metadataNote.isEmpty()||StudySettings.load(this).hideResults?"":"\n\n"+game.metadataNote);AlertDialog.Builder details=dialog("Game information").setMessage(info).setPositiveButton("Close",null);Uri source=Uri.parse(game.sourceUrl==null?"":game.sourceUrl);if("https".equalsIgnoreCase(source.getScheme())||"http".equalsIgnoreCase(source.getScheme()))details.setNeutralButton("View source",(d,w)->openSource(game.sourceUrl));gameInformationDialog=details.create();gameInformationDialog.setOnDismissListener(d->{if(gameInformationDialog==d)gameInformationDialog=null;});gameInformationDialog.show();}
-    private Button skipGameButton(boolean previous){Button control=button("",()->navigateGame(previous?-1:1),false);control.setForeground(new SkipGameIcon(previous));control.setForegroundGravity(Gravity.CENTER);return control;}
-    private final class SkipGameIcon extends Drawable {
-        private final boolean previous;private final Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);private final Path triangle=new Path();private int alpha=255;
-        SkipGameIcon(boolean previous){this.previous=previous;}
-        @Override public void draw(Canvas canvas){boolean enabled=false;for(int state:getState())if(state==android.R.attr.state_enabled)enabled=true;paint.setColor(LIGHT);paint.setAlpha(enabled?alpha:Math.round(alpha*.4f));int saved=canvas.save();Rect bounds=getBounds();canvas.translate(bounds.left,bounds.top);canvas.scale(bounds.width()/24f,bounds.height()/24f);if(!previous){canvas.translate(24,0);canvas.scale(-1,1);}canvas.drawRect(4,4,6,20,paint);triangle.reset();triangle.moveTo(8,12);triangle.lineTo(20,4);triangle.lineTo(20,20);triangle.close();canvas.drawPath(triangle,paint);canvas.restoreToCount(saved);}
-        @Override public boolean isStateful(){return true;}
-        @Override public int getIntrinsicWidth(){return dp(23);}
-        @Override public int getIntrinsicHeight(){return dp(23);}
-        @Override protected boolean onStateChange(int[] state){invalidateSelf();return true;}
-        @Override public void setAlpha(int alpha){this.alpha=alpha;invalidateSelf();}
-        @Override public void setColorFilter(ColorFilter filter){paint.setColorFilter(filter);invalidateSelf();}
-        @Override public int getOpacity(){return PixelFormat.TRANSLUCENT;}
-    }
-
+    private Button skipGameButton(boolean previous){return iconButton(previous?"previous-game":"next-game",previous?"Previous game":"Next game",()->navigateGame(previous?-1:1));}
     private void updateReplay() {
         if(library||board==null)return;
         if(replayProgress!=null){replayProgress.setMax(workingMoves.size());replayProgress.setKeyProgressIncrement(1);replayProgress.setProgress(ply);replayProgress.setEnabled(!workingMoves.isEmpty());}
@@ -425,10 +415,6 @@ public final class MainActivity extends Activity {
         if(!exploring&&!vsEngine)board.setContentDescription("Xiangqi board. "+(p.redToMove?"Red":"Black")+" to move. Recorded game. Tap a piece, then a legal destination to try a variation.");
         board.setAnalysisLines(analysisEnabled&&!vsEngine?lastResult:null,p.redToMove);
         evaluationBar.setEvaluation(analysisEnabled&&!vsEngine,lastResult==null?null:lastResult.score);
-        String bestMove=game.moveBestMoves.get(ply);
-        if(!exploring&&!vsEngine&&bestMove!=null&&!bestMove.isEmpty()&&(!analysisEnabled||lastResult==null)){
-            board.setHint(bestMove);
-        }
         board.setContentDescription(board.getContentDescription()+" Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+".");
         analysisBox.setVisibility(analysisEnabled&&!vsEngine?View.VISIBLE:View.GONE);
         exploreButton.setText(vsEngine?"Stop playing":"Return to recorded game");
@@ -440,75 +426,30 @@ public final class MainActivity extends Activity {
             variationLabel.setOnClickListener(exploring?v->legalMoves():null);
             variationLabel.setContentDescription(exploring?"Explore mode. Open legal moves list.":variationLabel.getText());
         } else {
-            exploreButton.setVisibility(View.GONE);
-            variationLabel.setOnClickListener(null);
-            replayContextRow.setVisibility(View.VISIBLE);variationLabel.setVisibility(View.VISIBLE);
-            String comment=game.moveComments.get(ply);
-            String glyph=game.moveGlyphs.get(ply);
-            if(game.engineGame){
-                variationLabel.setOnClickListener(null);
-                if(ply>0&&ply<=game.bookPlies){
-                    variationLabel.setText("📖 Opening book · move "+((ply+1)/2)+" of "+(game.bookPlies/2));
-                    variationLabel.setTextColor(0xff80deea);
-                } else if(ply>game.bookPlies){
-                    variationLabel.setText("⚡ Engine play · "+(p.redToMove?game.red:game.black));
-                    variationLabel.setTextColor(ACCENT);
-                } else {
-                    variationLabel.setText("Starting position · "+game.event.replaceAll(" \\(Match.*",""));
-                    variationLabel.setTextColor(MUTED);
-                }
-            } else if(!game.moveComments.isEmpty()){
-                List<Integer> notePlies=new ArrayList<>(game.moveComments.keySet());
-                Collections.sort(notePlies);
-                int nextTarget=-1;
-                for(int pNum:notePlies){if(pNum>ply){nextTarget=pNum;break;}}
-                if(nextTarget==-1&&!notePlies.isEmpty())nextTarget=notePlies.get(0);
-                final int jumpTo=nextTarget;
-                variationLabel.setOnClickListener(v->navigate(jumpTo));
-                if(comment!=null&&!comment.isEmpty()){
-                    String prefix=(glyph!=null&&!glyph.isEmpty()?glyph+" ":"");
-                    String suffix="  [Tap: next note ›]";
-                    SpannableString span=new SpannableString(prefix+comment+suffix);
-                    int color=glyph!=null&&glyph.contains("??")?0xffff4d4d:glyph!=null&&glyph.contains("?")?0xffff9800:ACCENT;
-                    span.setSpan(new ForegroundColorSpan(color),0,Math.min(span.length(),prefix.length()+18),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    span.setSpan(new StyleSpan(Typeface.BOLD),0,Math.min(span.length(),prefix.length()+18),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    span.setSpan(new ForegroundColorSpan(0xff80deea),span.length()-suffix.length(),span.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    variationLabel.setText(span);
-                } else {
-                    StringBuilder sb=new StringBuilder();
-                    sb.append("💬 Pikafish: ").append(game.moveComments.size()).append(" notes (m.");
-                    for(int i=0;i<notePlies.size();i++){
-                        int pNum=notePlies.get(i);String g=game.moveGlyphs.get(pNum);
-                        if(i>0)sb.append(",");
-                        sb.append((pNum+1)/2).append(g!=null?g:"");
-                    }
-                    sb.append(") · Tap to jump to m.").append((jumpTo+1)/2).append(" ›");
-                    SpannableString span=new SpannableString(sb.toString());
-                    int tapIdx=sb.indexOf("Tap to jump");
-                    if(tapIdx>=0)span.setSpan(new ForegroundColorSpan(0xff80deea),tapIdx,sb.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    variationLabel.setText(span);
-                }
-            } else {
-                variationLabel.setOnClickListener(null);
-                if(!game.summary.isEmpty()){
-                    variationLabel.setText(game.summary);
-                } else {
-                    variationLabel.setText("Move "+((ply+1)/2)+" · Master classical record");
-                }
-                variationLabel.setTextColor(MUTED);
-            }
-            variationLabel.setContentDescription(variationLabel.getText());
+            exploreButton.setVisibility(View.GONE);variationLabel.setOnClickListener(null);
+            boolean book=game.engineGame&&ply>0&&ply<=game.bookPlies;
+            replayContextRow.setVisibility(book?View.VISIBLE:View.GONE);
+            variationLabel.setText(book?"Opening book · move "+((ply+1)/2):"");
         }
         refreshGameNavigation();
         renderMoves(); saveState();
     }
 
     private void renderMoves() {
-        if(movesView==null||movesAdapter==null)return;movesAdapter.notifyDataSetChanged();int current=ply==0?0:(ply-1+(positions.get(0).redToMove?0:1))/2;
-        int visible=current-movesView.getFirstVisiblePosition();View selected=visible>=0&&visible<movesView.getChildCount()?movesView.getChildAt(visible):null;
+        if(movesView==null||movesAdapter==null)return;
+        boolean changed=renderedPly!=ply||!game.id.equals(renderedGame);renderedPly=ply;renderedGame=game.id;
+        movesAdapter.notifyDataSetChanged();if(!changed)return;
+        int current=Math.max(0,ply-1),visible=current-movesView.getFirstVisiblePosition();
+        View selected=visible>=0&&visible<movesView.getChildCount()?movesView.getChildAt(visible):null;
         if(selected==null||selected.getTop()<0||selected.getBottom()>movesView.getHeight())movesView.setSelectionFromTop(current,0);
     }
-    private int recordRows(){return (workingMoves.size()+(positions.get(0).redToMove?0:1)+1)/2;}
+    private int recordRows(){return workingMoves.size();}
+    private String savedAlternative(int index){return exploring||vsEngine?null:game.moveBestMoves.get(index+1);}
+    private void exploreAlternative(int index){
+        String best=savedAlternative(index);if(best==null||index<0||index>=workingMoves.size())return;
+        if(!positions.get(index).legalMoves().contains(best)){error("Suggestion unavailable","This saved suggestion does not match the move's starting position.");return;}
+        navigate(index);makeMove(best);
+    }
     private final class MoveRecordAdapter extends BaseAdapter {
         @Override public int getCount(){return recordRows()+1;}
         @Override public int getViewTypeCount(){return 2;}
@@ -519,44 +460,29 @@ public final class MainActivity extends Activity {
         @Override public long getItemId(int position){return position;}
         @Override public View getView(int position,View convert,ViewGroup parent){
             if(position==recordRows()){
-                TextView result=convert instanceof TextView?(TextView)convert:text("",12,ACCENT);pad(result,3,6,3,8);
-                String value=exploring||vsEngine?"Variation · unfinished": "1-0".equals(game.result)?"Result: 1–0 · Red wins":"0-1".equals(game.result)?"Result: 0–1 · Black wins":"1/2-1/2".equals(game.result)?"Result: ½–½ · Draw":"Result: unrecorded";
+                TextView result=convert instanceof TextView?(TextView)convert:text("",12,ACCENT);pad(result,3,10,3,12);
+                String value=exploring||vsEngine?"Variation · unfinished":"1-0".equals(game.result)?"Result: 1–0 · Red wins":"0-1".equals(game.result)?"Result: 0–1 · Black wins":"1/2-1/2".equals(game.result)?"Result: ½–½ · Draw":"Result: unrecorded";
                 result.setText(value);result.setContentDescription(value);result.setLayoutParams(new AbsListView.LayoutParams(-1,-2));return result;
             }
             MoveRecordRow row=convert instanceof MoveRecordRow?(MoveRecordRow)convert:new MoveRecordRow();row.bind(position);return row;
         }
     }
     private final class MoveRecordRow extends LinearLayout {
-        private final TextView number,red,black;
-        MoveRecordRow(){super(MainActivity.this);setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setLayoutParams(new AbsListView.LayoutParams(-1,dp(28)));number=text("",10,MUTED);number.setSingleLine(true);number.setGravity(Gravity.CENTER_VERTICAL);addView(number,new LinearLayout.LayoutParams(dp(30),-1));red=cell();black=cell();addView(red,new LinearLayout.LayoutParams(0,-1,1));addView(black,new LinearLayout.LayoutParams(0,-1,1));}
-        private TextView cell(){TextView label=text("",12,LIGHT);label.setSingleLine(true);label.setGravity(Gravity.CENTER_VERTICAL);label.setTypeface(Typeface.MONOSPACE,Typeface.NORMAL);pad(label,2,0,1,0);return label;}
-        void bind(int row){number.setText(getString(R.string.move_record_number,row+1));bindCell(red,row*2-(positions.get(0).redToMove?0:1));bindCell(black,row*2+1-(positions.get(0).redToMove?0:1));}
-        private void bindCell(TextView label,int index){
-            boolean valid=index>=0&&index<workingMoves.size();
-            if(!valid){label.setText("");label.setFocusable(false);label.setContentDescription("");label.setOnClickListener(null);label.setBackground(null);return;}
-            String base=pretty(workingMoves.get(index));
-            int plyNum=index+1;
-            String glyph=game.moveGlyphs.get(plyNum);
-            boolean isBook=game.engineGame&&index<game.bookPlies;
-            if(glyph!=null&&!glyph.isEmpty()){
-                String full=base+" "+glyph;
-                SpannableString span=new SpannableString(full);
-                int color=glyph.contains("??")?0xffff4d4d:glyph.contains("?")?0xffff9800:glyph.contains("!")?0xff00e676:0xffffeb3b;
-                span.setSpan(new ForegroundColorSpan(color),base.length()+1,full.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                span.setSpan(new StyleSpan(Typeface.BOLD),base.length()+1,full.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                label.setText(span);
-            } else if(isBook){
-                String full=base+" 📖";
-                SpannableString span=new SpannableString(full);
-                span.setSpan(new ForegroundColorSpan(0xff80deea),base.length()+1,full.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                label.setText(span);
-            } else {
-                label.setText(base);
-            }
-            label.setFocusable(true);
-            label.setContentDescription("After half-move "+plyNum+", "+workingMoves.get(index)+(isBook?" (opening book)":"")+(glyph!=null?" "+glyph:""));
-            label.setOnClickListener(v->navigate(plyNum));
-            label.setBackground(ply==plyNum?shape(SURFACE,0,8):null);
+        private final TextView number,played,best;
+        MoveRecordRow(){super(MainActivity.this);setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setLayoutParams(new AbsListView.LayoutParams(-1,dp(38)));pad(this,3,0,3,0);number=text("",10,MUTED);number.setSingleLine(true);addView(number,new LinearLayout.LayoutParams(dp(54),-2));played=cell(LIGHT);best=cell(ACCENT);addView(played,new LinearLayout.LayoutParams(0,-1,1));addView(best,new LinearLayout.LayoutParams(0,-1,1.1f));}
+        private TextView cell(int color){TextView label=text("",12,color);label.setSingleLine(true);label.setGravity(Gravity.CENTER_VERTICAL);label.setTypeface(Typeface.MONOSPACE,Typeface.NORMAL);pad(label,2,0,2,0);return label;}
+        void bind(int index){
+            int halfPly=index+1;boolean red=positions.get(index).redToMove;
+            int moveNumber=(index+(positions.get(0).redToMove?0:1))/2+1;
+            number.setText(moveNumber+" "+(red?"Red":"Black"));number.setTextColor(red?0xfff39699:MUTED);
+            String actual=workingMoves.get(index),glyph=exploring||vsEngine?null:game.moveGlyphs.get(halfPly);
+            String display=pretty(actual)+(glyph==null||glyph.isEmpty()?"":" "+glyph)+(game.engineGame&&index<game.bookPlies?" 📖":"");
+            played.setText(display);played.setFocusable(true);played.setContentDescription("After half-move "+halfPly+", "+actual);played.setOnClickListener(v->navigate(halfPly));
+            String comment=exploring||vsEngine?null:game.moveComments.get(halfPly);
+            played.setOnLongClickListener(comment==null?null:v->{gameInformationDialog=dialog("Move "+moveNumber+" · "+(red?"Red":"Black")).setMessage(comment).setPositiveButton("Close",null).show();return true;});
+            String alternative=savedAlternative(index);best.setText(alternative==null||alternative.isEmpty()?"—":pretty(alternative));best.setFocusable(alternative!=null&&!alternative.isEmpty());best.setOnClickListener(alternative==null||alternative.isEmpty()?null:v->exploreAlternative(index));
+            best.setContentDescription(alternative==null||alternative.isEmpty()?"No saved suggestion for half-move "+halfPly:"Pikafish suggestion for half-move "+halfPly+", "+alternative+". Explore alternative.");
+            setBackground(ply==halfPly?shape(0xff2e4231,0,8):null);
         }
     }
 
@@ -566,10 +492,10 @@ public final class MainActivity extends Activity {
     private void toggleAutoplay() {
         boolean wasPlaying=vsEngine;cancelGameSearch(true);updateReplay();if(wasPlaying)resumeAnalysis();
         if(autoplay){stopAutoplay();return;} if(ply>=workingMoves.size())moveTo(0);
-        autoplay=true; autoplayButton.setText("Ⅱ"); autoplayButton.setContentDescription("Pause replay"); handler.postDelayed(playTick,replayDelay());
+        autoplay=true; autoplayButton.setText("");autoplayButton.setForeground(new AppIcon("pause",INK,dp(21))); autoplayButton.setContentDescription("Pause replay"); handler.postDelayed(playTick,replayDelay());
     }
     private final Runnable playTick=new Runnable(){public void run(){if(!autoplay||library)return;if(ply>=workingMoves.size()){stopAutoplay();return;}moveTo(ply+1);if(ply>=workingMoves.size())stopAutoplay();else if(autoplay)handler.postDelayed(this,replayDelay());}};
-    private void stopAutoplay() { autoplay=false; handler.removeCallbacks(playTick); if(autoplayButton!=null){autoplayButton.setText("▶");autoplayButton.setContentDescription("Play replay");} }
+    private void stopAutoplay() { autoplay=false; handler.removeCallbacks(playTick); if(autoplayButton!=null){autoplayButton.setText("");autoplayButton.setForeground(new AppIcon("play",INK,dp(21)));autoplayButton.setContentDescription("Play replay");} }
     private long replayDelay(){long value=prefs.getLong("replayDelayMillis",1000);return value>=500&&value<=60000?value:1000;}
     private String replayDelayLabel(){return getString(R.string.replay_delay_label,java.text.NumberFormat.getNumberInstance().format(replayDelay()/1000.0));}
     private void replaySpeed(Runnable changed){
@@ -791,82 +717,9 @@ public final class MainActivity extends Activity {
         if(library)renderCards();else if(eventLabel!=null)eventLabel.setText(replayEvent());
     }
     private void settings() {
-        StudySettings saved=StudySettings.load(this);
-        LinearLayout body=column();pad(body,18,8,18,12);
-        CheckBox hide=new CheckBox(this);hide.setText(R.string.hide_game_results);hide.setTextColor(LIGHT);hide.setChecked(saved.hideResults);
-        hide.setContentDescription("Hide game results, including accessibility announcements");body.addView(hide);
-        TextView spoilerNote=text("Results stay hidden in the library and game information. Scroll to the end of a record to reveal its result. Engine evaluations stay visible.",12,MUTED);pad(spoilerNote,0,0,0,10);body.addView(spoilerNote);
-        Button speed=button(getString(R.string.replay_speed_label,replayDelayLabel()),()->{},false);speed.setContentDescription("Replay speed");speed.setOnClickListener(v->replaySpeed(()->speed.setText(getString(R.string.replay_speed_label,replayDelayLabel()))));body.addView(speed);
-        String[] boardIds=AppearancePresets.boardIds(),discIds=AppearancePresets.discIds();
-        ArrowChoice boards=settingChoice(body,"Board style",AppearancePresets.boardLabels(),index(saved.boardStyle,boardIds));
-        ArrowChoice discs=settingChoice(body,"Piece finish",AppearancePresets.discLabels(),index(saved.discStyle,discIds));
-        ArrowChoice coordinates=settingChoice(body,"Board coordinates",new String[]{"Off","ICCS · a–i / 0–9","Numeric · 0–8 / 0–9"},index(saved.coordinateStyle,"none","iccs","numeric"));
-        ArrowChoice glyphs=settingChoice(body,"Chinese piece characters",new String[]{"Traditional Chinese","Simplified Chinese"},index(saved.glyphStyle,"traditional","simplified"));
-        String[] animationLabels={"Off","100 ms","200 ms (default)","300 ms","500 ms","800 ms"};int[] animationTimes={0,100,200,300,500,800};int animationSelected=2;for(int i=0;i<animationTimes.length;i++)if(animationTimes[i]==StudySettings.moveAnimationMillis(this))animationSelected=i;
-        ArrowChoice animation=settingChoice(body,"Move slide duration",animationLabels,animationSelected);
-        TextView previewLabel=text("Live board preview",13,ACCENT);pad(previewLabel,0,12,0,5);body.addView(previewLabel);
-        BoardView preview=new BoardView(this);preview.setPosition(library||positions.isEmpty()?Position.initial():positions.get(ply).copy(),"",false);
-        preview.setAppearance(saved.boardStyle,saved.glyphStyle,saved.discStyle);preview.setCoordinates(saved.coordinateStyle);preview.setCustomColors(saved.boardColor,saved.redBackground,saved.blackBackground);body.addView(preview,new LinearLayout.LayoutParams(-1,-2));
-        Runnable refreshColors=()->{StudySettings s=StudySettings.load(this);preview.setCustomColors(s.boardColor,s.redBackground,s.blackBackground);if(!library)applyAppearance();};
-        LinearLayout colors=column();body.addView(colors,body.indexOfChild(previewLabel));
-        colors.addView(button("Board color",()->customColor("Board color","boardColor",preview.getBoardColor(),refreshColors),false));
-        colors.addView(button("Red piece background",()->customColor("Red piece background","redBackground",preview.getPieceBackground(true),refreshColors),false));
-        colors.addView(button("Black piece background",()->customColor("Black piece background","blackBackground",preview.getPieceBackground(false),refreshColors),false));
-        colors.addView(button("Reset custom colors",()->{StudySettings.resetCustomColors(this);refreshColors.run();},false));
-        Runnable changed=()->{
-            boolean wasHidden=StudySettings.load(this).hideResults;
-            StudySettings.save(this,boardIds[boards.getSelectedItemPosition()],
-                new String[]{"traditional","simplified"}[glyphs.getSelectedItemPosition()],
-                discIds[discs.getSelectedItemPosition()],new String[]{"none","iccs","numeric"}[coordinates.getSelectedItemPosition()],hide.isChecked());
-            StudySettings s=StudySettings.load(this);preview.setAppearance(s.boardStyle,s.glyphStyle,s.discStyle);preview.setCoordinates(s.coordinateStyle);preview.setCustomColors(s.boardColor,s.redBackground,s.blackBackground);
-            if(!library||wasHidden!=s.hideResults)applyAppearance();
-        };
-
-        boards.onPresetSelected(position->{StudySettings.selectBoardPreset(this,boardIds[position]);changed.run();});
-        discs.onPresetSelected(position->{StudySettings.selectDiscPreset(this,discIds[position]);changed.run();});
-        glyphs.onPresetSelected(position->changed.run());coordinates.onPresetSelected(position->changed.run());hide.setOnCheckedChangeListener((button,checked)->changed.run());
-        animation.onPresetSelected(position->{StudySettings.setMoveAnimationMillis(this,animationTimes[position]);if(board!=null)board.setMoveAnimationMillis(animationTimes[position]);preview.setMoveAnimationMillis(animationTimes[position]);});
-        body.removeView(hide);body.removeView(spoilerNote);body.removeView(speed);body.addView(speed);body.addView(hide);body.addView(spoilerNote);
-        body.removeView(previewLabel);body.removeView(preview);
-        int available=Math.max(dp(240),getResources().getDisplayMetrics().heightPixels-dp(180));
-        int previewWidth=Math.min(dp(220),Math.min(getResources().getDisplayMetrics().widthPixels-dp(80),(int)(available*.35f/1.10f)));
-        LinearLayout panel=new LinearLayout(this){@Override protected void onMeasure(int width,int height){int cap=MeasureSpec.getMode(height)==MeasureSpec.UNSPECIFIED?available:Math.min(available,MeasureSpec.getSize(height));
-            previewLabel.measure(width,MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED));
-            int boardWidth=Math.max(0,Math.min(previewWidth,Math.min(MeasureSpec.getSize(width)-getPaddingLeft()-getPaddingRight(),(int)((cap-previewLabel.getMeasuredHeight()-dp(72))/1.10f))));
-            boolean showPreview=boardWidth>=dp(32);previewLabel.setVisibility(showPreview?VISIBLE:GONE);preview.setVisibility(showPreview?VISIBLE:GONE);preview.getLayoutParams().width=boardWidth;
-            super.onMeasure(width,MeasureSpec.makeMeasureSpec(cap,MeasureSpec.EXACTLY));}};panel.setOrientation(LinearLayout.VERTICAL);pad(panel,12,0,12,0);panel.addView(previewLabel);
-        LinearLayout.LayoutParams previewSize=new LinearLayout.LayoutParams(previewWidth,-2);previewSize.gravity=Gravity.CENTER_HORIZONTAL;panel.addView(preview,previewSize);
-        ScrollView scroll=new ScrollView(this);scroll.addView(body);panel.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
-        settingsDialog=dialog("Study settings").setView(panel).setPositiveButton("Done",null)
-            .setNeutralButton("Engine settings",(d,w)->{
-                engineSettingsDialog=EngineSettings.show(this,()->{
-                cancelAnalysis();resumeAnalysis();
-                });engineSettingsDialog.setOnDismissListener(closed->{if(engineSettingsDialog==closed)engineSettingsDialog=null;});
-            }).create();
-        final AlertDialog shownSettings=settingsDialog;shownSettings.setOnDismissListener(d->{if(settingsDialog==shownSettings){if(presetDialog!=null)presetDialog.dismiss();settingsDialog=null;}});shownSettings.show();
-    }
-    private void customColor(String title,String surface,int initial,Runnable changed) {
-        colorDialog=ColorPickerDialog.show(this,title,initial,color->{StudySettings.setCustomColor(this,surface,color);changed.run();});
-        colorDialog.setOnDismissListener(dialog->{if(colorDialog==dialog)colorDialog=null;});
-    }
-    private ArrowChoice settingChoice(LinearLayout body,String label,String[] choices,int selected){
-        ArrowChoice choice=new ArrowChoice(label,choices,selected);body.addView(choice,new LinearLayout.LayoutParams(-1,-2));return choice;
-    }
-    /** Only explicit arrow presses change settings; construction preserves custom colors. */
-    private final class ArrowChoice extends LinearLayout {
-        private final String[] choices;private final TextView value;private int selected;private java.util.function.IntConsumer chosen;
-        ArrowChoice(String label,String[] choices,int selected){
-            super(MainActivity.this);this.choices=choices;this.selected=selected;setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setMinimumHeight(dp(56));pad(this,0,4,0,4);setContentDescription(label);
-            Button previous=button("‹",()->step(-1),false);previous.setContentDescription("Previous "+label);previous.setPadding(0,0,0,0);addView(previous,new LinearLayout.LayoutParams(dp(48),dp(48)));
-            LinearLayout names=column();TextView title=text(label,11,ACCENT);title.setGravity(Gravity.CENTER);names.addView(title);value=text(choices[selected],14,LIGHT);value.setGravity(Gravity.CENTER);value.setMaxLines(2);value.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);names.addView(value);addView(names,new LinearLayout.LayoutParams(0,-2,1));
-            Button next=button("›",()->step(1),false);next.setContentDescription("Next "+label);next.setPadding(0,0,0,0);addView(next,new LinearLayout.LayoutParams(dp(48),dp(48)));
-        }
-        int getSelectedItemPosition(){return selected;}
-        void onPresetSelected(java.util.function.IntConsumer listener){chosen=listener;}
-        private void step(int direction){selected=Math.floorMod(selected+direction,choices.length);value.setText(choices[selected]);if(chosen!=null)chosen.accept(selected);}
+        stopAutoplay();startActivity(new Intent(this,HomeActivity.class).putExtra("homeScreen","options").putExtra("optionsStandalone",true));
     }
     private static int index(String selected,String... choices){for(int i=0;i<choices.length;i++)if(choices[i].equals(selected))return i;return 0;}
-
     private GameRepository.Game currentGame() {
         if(game!=null){GameRepository.Game current=find(game.id);if(current!=null)return current;}
         return prefs==null?null:find(prefs.getString("lastGame",""));
@@ -1058,7 +911,7 @@ public final class MainActivity extends Activity {
     }
     @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();out.putString("pendingExport",pendingExport);out.putString("pendingImportName",pendingImportName);out.putBoolean("pendingImportEngine",pendingImportEngine);out.putBundle("importDraft",saveImportDraft());}
     @Override protected void onRestoreInstanceState(Bundle in){super.onRestoreInstanceState(in);pendingExport=in.getString("pendingExport");}
-    @Override protected void onStart(){super.onStart();foreground=true;if(loaded){if(library)renderCards();else refreshGameNavigation();if(getIntent().hasExtra(HomeActivity.REVIEW_ID)){handler.removeCallbacks(personalNotesRefresh);handler.post(personalNotesRefresh);}}resumeAnalysis();}
+    @Override protected void onStart(){super.onStart();foreground=true;if(loaded){applyAppearance();if(!library){board.setFlipped(flipped);updateReplay();}if(library)renderCards();else refreshGameNavigation();if(getIntent().hasExtra(HomeActivity.REVIEW_ID)){handler.removeCallbacks(personalNotesRefresh);handler.post(personalNotesRefresh);}}resumeAnalysis();}
     @Override protected void onStop(){super.onStop();foreground=false;ComputerReview.pause();handler.removeCallbacks(personalNotesRefresh);cancelLibrarySearch();seeking=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
     @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);cancelLibrarySearch();libraryWorker.shutdownNow();handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(errorDialog!=null)errorDialog.dismiss();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(legalMovesDialog!=null)legalMovesDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
     private void returnDatabase(){if(getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false)){saveState();finish();}else showLibrary();}
@@ -1081,6 +934,7 @@ public final class MainActivity extends Activity {
         return line;
     }
     private GradientDrawable shape(int fill,int stroke,int radius){GradientDrawable d=new GradientDrawable();d.setColor(fill);d.setCornerRadius(dp(radius));if(stroke!=0)d.setStroke(dp(1),stroke);return d;}
+    private Button iconButton(String icon,String description,Runnable run){Button control=button("",run,false);control.setMinHeight(dp(44));control.setMinimumHeight(dp(44));control.setMinWidth(0);control.setMinimumWidth(0);control.setPadding(0,0,0,0);control.setForeground(new AppIcon(icon,LIGHT,dp(21)));control.setForegroundGravity(Gravity.CENTER);control.setContentDescription(description);control.setTooltipText(description);return control;}
     private Button button(String label,Runnable action,boolean primary){Button b=new Button(this);b.setAllCaps(false);b.setText(label);b.setTextSize(14);b.setTextColor(primary?INK:LIGHT);b.setBackground(shape(primary?ACCENT:SURFACE,0,12));b.setMinimumHeight(dp(48));b.setMinHeight(dp(48));b.setPadding(dp(10),dp(6),dp(10),dp(6));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(dp(2),dp(3),dp(2),dp(3));b.setLayoutParams(p);b.setOnClickListener(v->action.run());return b;}
     private View weight(View v,float value){LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,dp(48),value);p.setMargins(dp(2),dp(3),dp(2),dp(3));v.setLayoutParams(p);return v;}
     private void pad(View view,int l,int t,int r,int b){view.setPadding(dp(l),dp(t),dp(r),dp(b));}

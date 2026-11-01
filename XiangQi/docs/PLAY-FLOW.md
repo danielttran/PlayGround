@@ -1,10 +1,10 @@
 # Playing and reviewing games
 
-Version 0.8.0 introduces a native Play / Database / Options launcher. The established replay viewer, bundled games, annotations, imported collections and appearance choices remain available.
+Version 0.9.0 refines the native Play / Database / Options launcher. The replay viewer, bundled games, annotations, imported collections and appearance choices remain available.
 
 ## Play
 
-New Game offers Red, Black or Random. Difficulty is selected in Options and copied into each new game; changing the default never changes a game already underway. Levels 1–100 use increasing search depth and node/time budgets and a decreasing allowance for weaker candidate moves. Level 100 is named Elite. The scale has **not been calibrated against a human rating pool** and does not claim 2800 Elo.
+New Game shows a live board preview. Red and Black orient it for the selected side; Random leaves the preview orientation alone until a side is assigned at game start. This survives activity recreation. Tap the compact Computer difficulty row, or Playing difficulty in Options, for a 1–100 slider and direct number entry. The level is copied into each new game; changing the default never changes a game already underway. Levels use increasing search depth and node/time budgets and a decreasing allowance for weaker candidate moves. Level 100 is named Elite. The scale has **not been calibrated against a human rating pool** and does not claim 2800 Elo.
 
 Every move queues an ordered SQLite transaction. The database stores the initial FEN, complete move history, side, level, timestamps, result and hint usage. Process recreation loads the stored record. Multiple unfinished games remain independently resumable from My Games.
 
@@ -15,6 +15,10 @@ The playing screen uses the existing BoardView turn dot. It has no saved-status 
 My Games holds personal computer games. Human and Engine retain the shipped collections; Imports retains each separately named user batch. Search and sorting run off the UI thread. Played games can be deleted and restored through the Undo action. Source records are never edited by playing from a library position.
 
 Only completed personal games can be materialized for review. The result screen links to My Games and New Game; it does not automatically reveal annotations.
+
+Personal, human, engine and imported games share one review layout. Each half-move has a labelled Red/Black turn, the recorded move, and its saved Pikafish alternative when available. SQL analyses remain indexed by position; materialized review suggestions use the played move's one-based ply, matching library annotations. Missing advice displays a dash. Tap the advice to explore from the correct pre-move position, or long-press the recorded move for its full annotation. Background note refreshes preserve manual scrolling, including the result at the end of the record. Existing book markers remain available.
+
+Options groups appearance, playback, spoiler and computer settings into compact rows. Board/piece/coordinate/Chinese-character choices still use arrows with a live preview, and custom colors retain their existing latest-change-wins behavior. Viewer settings return to the same game, position and analysis toggle without changing the launcher's remembered tab.
 
 ## Analysis
 

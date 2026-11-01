@@ -33,7 +33,7 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
         assertEquals(fixture.position().toFen(),store.load(fixture.id).position().toFen());
         assertTrue(store.putAnalysis(fixture.id,0,0,100,"b2e2","b2e2 b9c7",12));assertTrue(store.putAnalysis(fixture.id,0,1,80,"b9c7","b9c7",12));assertTrue(store.putAnalysis(fixture.id,0,2,70,"h0g2","h0g2",12));
         try{store.review(fixture.id);fail("An unfinished game must never expose hidden notes");}catch(IllegalArgumentException expected){}
-        fixture.result="0-1";fixture.reason="Surrender";fixture.updated++;store.save(fixture);GameRepository.Game review=store.review(fixture.id);assertEquals(2,review.moveComments.size());assertEquals("b2e2",review.moveBestMoves.get(0));
+        fixture.result="0-1";fixture.reason="Surrender";fixture.updated++;store.save(fixture);GameRepository.Game review=store.review(fixture.id);assertEquals(2,review.moveComments.size());assertEquals("b2e2",review.moveBestMoves.get(1));assertEquals("b9c7",review.moveBestMoves.get(2));assertNull(review.moveBestMoves.get(0));
         store.setDeleted(fixture.id,true);assertNull(store.load(fixture.id));assertFalse(store.putAnalysis(fixture.id,0,0,0,"b2e2","",1));store.setDeleted(fixture.id,false);assertEquals(3,store.analyzed(fixture.id));
         fixture.result="*";fixture.moves.remove(1);fixture.revision++;fixture.updated++;store.save(fixture);assertNull(store.analysis(fixture.id,2));assertFalse("Old analysis cannot overwrite an undone game",store.putAnalysis(fixture.id,0,2,0,"a0a1","",1));
     }
@@ -68,7 +68,7 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
     }
     public void testScreensAndResumeAfterRecreation()throws Exception{
         showFixture();screenshot("play");main(()->call("showScreen",new Class<?>[]{String.class},"options"));
-        main(()->{SeekBar slider=findSlider(activity.getWindow().getDecorView());assertNotNull(slider);slider.setProgress(99);assertEquals(100,preferences.getInt("level",0));assertEquals("Changing the default must not change an existing game",40,current().level);});screenshot("options");
+        screenshot("options");main(()->{call("difficulty");AlertDialog sheet=(AlertDialog)get("dialog");SeekBar slider=findSlider(sheet.getWindow().getDecorView());assertNotNull(slider);slider.setProgress(99);assertEquals(100,preferences.getInt("level",0));assertEquals("Changing the default must not change an existing game",40,current().level);sheet.dismiss();});
         main(()->call("showScreen",new Class<?>[]{String.class},"database"));await(()->{try{return ((android.widget.BaseAdapter)get("adapter")).getCount()>0;}catch(Exception e){return false;}},6000,"Personal database did not show saved game");screenshot("database");
         main(()->{set("playing",true);call("showScreen",new Class<?>[]{String.class},"play");});
         android.app.Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(HomeActivity.class.getName(),null,false);main(activity::recreate);
@@ -80,6 +80,52 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
             set("collection","imports");set("importId","batch-b");set("query","Engine");set("order","newest");call("saveScope");
             set("collection","human");call("loadScope");assertEquals("Human search must survive selecting another import","Lai",get("query"));assertEquals("oldest",get("order"));});
     }
+    public void testNewGameSidePreviewAndSpacingSurviveRecreation()throws Exception{
+        main(()->{set("setup",true);call("showScreen",new Class<?>[]{String.class},"play");});
+        main(()->{View black=findDescription(activity.getWindow().getDecorView(),"Play as Black");assertNotNull(black);black.performClick();assertEquals(Boolean.TRUE,get("setupFlip"));assertEquals(Boolean.TRUE,field(get("setupBoard"),"flipped"));
+            findDescription(activity.getWindow().getDecorView(),"Play as Random").performClick();assertEquals("Random must keep the current preview orientation",Boolean.TRUE,get("setupFlip"));
+            View red=findDescription(activity.getWindow().getDecorView(),"Play as Red");red.performClick();assertEquals(Boolean.FALSE,field(get("setupBoard"),"flipped"));
+            findDescription(activity.getWindow().getDecorView(),"Play as Random").performClick();assertEquals(Boolean.FALSE,get("setupFlip"));
+            findDescription(activity.getWindow().getDecorView(),"Play as Black").performClick();findDescription(activity.getWindow().getDecorView(),"Play as Random").performClick();
+        });getInstrumentation().waitForIdleSync();
+        main(()->{View red=findDescription(activity.getWindow().getDecorView(),"Play as Red"),black=findDescription(activity.getWindow().getDecorView(),"Play as Black"),random=findDescription(activity.getWindow().getDecorView(),"Play as Random");assertTrue("Red and Black controls must have a visible gap",bounds(black).left-bounds(red).right>=6);assertTrue(bounds(random).left-bounds(black).right>=6);});
+        screenshot("new-game");recreateHome();main(()->{assertEquals("Random",get("side"));assertEquals(Boolean.TRUE,get("setupFlip"));assertEquals(Boolean.TRUE,field(get("setupBoard"),"flipped"));});
+    }
+    public void testSavedReviewSuggestionsMatchEachPlayedTurnAndExploreCorrectPosition()throws Exception{
+        fixture.moves.addAll(Arrays.asList("b2e2","b9c7"));fixture.result="0-1";store.save(fixture);
+        store.putAnalysis(fixture.id,0,0,25,"h2e2","h2e2 h9g7",18);store.putAnalysis(fixture.id,0,1,10,"h9g7","h9g7 b0c2",18);store.putAnalysis(fixture.id,0,2,5,"b0c2","b0c2",18);
+        GameRepository.Game data=store.review(fixture.id);assertEquals("h2e2",data.moveBestMoves.get(1));assertEquals("h9g7",data.moveBestMoves.get(2));assertNull(data.moveBestMoves.get(0));
+        studyPreferences.edit().putBoolean("analysisEnabled",false).commit();MainActivity viewer=(MainActivity)getInstrumentation().startActivitySync(new Intent(activity,MainActivity.class).putExtra(HomeActivity.FROM_HOME,true).putExtra(HomeActivity.REVIEW_ID,fixture.id).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        try{await(()->Boolean.TRUE.equals(field(viewer,"loaded")),20000,"Review did not open");main(()->{
+            ListView record=(ListView)field(viewer,"movesView");assertEquals(3,record.getCount());View first=record.getAdapter().getView(0,null,record);assertNotNull(findText(first,"b2–e2"));View alternative=findText(first,"h2–e2");assertNotNull("The same row must show the pre-move suggestion",alternative);alternative.performClick();
+            assertEquals(Boolean.TRUE,field(viewer,"exploring"));assertEquals(1,field(viewer,"ply"));@SuppressWarnings("unchecked") List<Position> positions=(List<Position>)field(viewer,"positions");assertEquals(Position.initial().play("h2e2").toFen(),positions.get(1).toFen());
+            invoke(viewer,"toggleExplore");assertEquals(Boolean.FALSE,field(viewer,"exploring"));@SuppressWarnings("unchecked") List<Position> mainline=(List<Position>)field(viewer,"positions");assertEquals(Position.initial().play("b2e2").toFen(),mainline.get(1).toFen());
+            View second=record.getAdapter().getView(1,null,record);assertNotNull(findText(second,"b9–c7"));assertNotNull("Black's advice must stay on Black's row",findText(second,"h9–g7"));
+        });capture(viewer,"review");}finally{main(viewer::finish);}
+    }
+    public void testReviewRefreshDoesNotPullScrollAwayFromResult()throws Exception{
+        studyPreferences.edit().putBoolean("analysisEnabled",false).commit();String source=((GameRepository.Game)((List<?>)get("sources")).get(0)).id;
+        MainActivity viewer=(MainActivity)getInstrumentation().startActivitySync(new Intent(activity,MainActivity.class).putExtra(HomeActivity.FROM_HOME,true).putExtra(HomeActivity.SOURCE_ID,source).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        try{await(()->Boolean.TRUE.equals(field(viewer,"loaded")),20000,"Source viewer did not open");main(()->{ListView record=(ListView)field(viewer,"movesView");record.setSelection(record.getCount()-1);});getInstrumentation().waitForIdleSync();
+            final int[] before={0};final android.graphics.Rect[] board={null};main(()->{ListView record=(ListView)field(viewer,"movesView");before[0]=record.getFirstVisiblePosition();board[0]=bounds((View)field(viewer,"board"));invoke(viewer,"updateReplay");});getInstrumentation().waitForIdleSync();
+            main(()->{assertEquals("A notes refresh must preserve manual record scrolling",before[0],((ListView)field(viewer,"movesView")).getFirstVisiblePosition());assertEquals(board[0],bounds((View)field(viewer,"board")));});
+        }finally{main(viewer::finish);}
+    }
+    public void testViewerOptionsReturnPreservesPositionAndAnalysisToggle()throws Exception{
+        studyPreferences.edit().putBoolean("analysisEnabled",false).commit();String source=((GameRepository.Game)((List<?>)get("sources")).get(0)).id;
+        MainActivity viewer=(MainActivity)getInstrumentation().startActivitySync(new Intent(activity,MainActivity.class).putExtra(HomeActivity.FROM_HOME,true).putExtra(HomeActivity.SOURCE_ID,source).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));HomeActivity options=null;
+        try{await(()->Boolean.TRUE.equals(field(viewer,"loaded")),20000,"Viewer did not load");android.app.Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(HomeActivity.class.getName(),null,false);
+            main(()->{try{Field enabled=MainActivity.class.getDeclaredField("analysisEnabled");enabled.setAccessible(true);enabled.setBoolean(viewer,true);}catch(Exception e){throw new AssertionError(e);}invoke(viewer,"settings");});
+            options=(HomeActivity)monitor.waitForActivityWithTimeout(15000);getInstrumentation().removeMonitor(monitor);assertNotNull(options);final HomeActivity shown=options;await(()->Boolean.TRUE.equals(field(shown,"ready")),20000,"Options did not load");
+            main(()->{assertEquals(Boolean.TRUE,field(shown,"standaloneOptions"));assertEquals("play",preferences.getString("screen",""));});
+            android.app.Instrumentation.ActivityMonitor rotation=getInstrumentation().addMonitor(HomeActivity.class.getName(),null,false);main(shown::recreate);options=(HomeActivity)rotation.waitForActivityWithTimeout(15000);getInstrumentation().removeMonitor(rotation);assertNotNull(options);final HomeActivity rotated=options;await(()->Boolean.TRUE.equals(field(rotated,"ready")),20000,"Rotated Options did not load");
+            main(()->{assertEquals("options",field(rotated,"screen"));assertEquals("play",preferences.getString("screen",""));StudySettings.selectBoardPreset(rotated,"moss");rotated.finish();});await(()->Boolean.TRUE.equals(field(viewer,"foreground")),10000,"Viewer did not resume");
+            main(()->{assertEquals(source,((GameRepository.Game)field(viewer,"game")).id);assertEquals(Boolean.TRUE,field(viewer,"analysisEnabled"));assertEquals(org.xiangqi.study.core.AppearancePresets.board("moss").background,field(field(viewer,"board"),"boardColor"));invoke(viewer,"stopSearch");});
+        }finally{if(options!=null&&!options.isDestroyed()){final HomeActivity remaining=options;main(remaining::finish);}main(viewer::finish);}
+    }
+    private static android.graphics.Rect bounds(View view){int[] at=new int[2];view.getLocationOnScreen(at);return new android.graphics.Rect(at[0],at[1],at[0]+view.getWidth(),at[1]+view.getHeight());}
+    private static Object field(Object target,String name){try{Field f=target.getClass().getDeclaredField(name);f.setAccessible(true);return f.get(target);}catch(Exception e){throw new AssertionError(e);}}
+    private static void invoke(Object target,String name){try{Method m=target.getClass().getDeclaredMethod(name);m.setAccessible(true);m.invoke(target);}catch(Exception e){throw new AssertionError(e);}}
     public void testPendingSearchSurvivesLeavingDatabase()throws Exception{
         main(()->{set("collection","human");call("loadScope");call("showScreen",new Class<?>[]{String.class},"database");
             EditText search=(EditText)findDescription(activity.getWindow().getDecorView(),"Database search");assertNotNull(search);search.setText("Lai");
@@ -94,11 +140,11 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
     public void testDeletingReviewedGameInvalidatesReturnButtonAndUndoRestoresIt()throws Exception{
         fixture.result="0-1";store.save(fixture);SharedPreferences study=activity.getSharedPreferences("study",0);String old=study.getString("lastGame",null);study.edit().putString("lastGame",fixture.id).commit();
         try{
-            main(()->{set("personal",new ArrayList<>(Collections.singletonList(fixture)));set("collection","personal");call("showScreen",new Class<?>[]{String.class},"database");assertTrue(visible(activity.getWindow().getDecorView()).contains("Return to current game"));call("delete",new Class<?>[]{String.class},fixture.id);});
+            main(()->{set("personal",new ArrayList<>(Collections.singletonList(fixture)));set("collection","personal");call("showScreen",new Class<?>[]{String.class},"database");assertNotNull(findDescription(activity.getWindow().getDecorView(),"Return to current game"));call("delete",new Class<?>[]{String.class},fixture.id);});
             await(()->fixture.id.equals(get("deletedId")),5000,"Delete did not complete");
-            main(()->{assertFalse("Deleted records must not remain the return target",visible(activity.getWindow().getDecorView()).contains("Return to current game"));View undo=findText(activity.getWindow().getDecorView(),"Undo");assertNotNull(undo);undo.performClick();});
+            main(()->{assertNull("Deleted records must not remain the return target",findDescription(activity.getWindow().getDecorView(),"Return to current game"));View undo=findText(activity.getWindow().getDecorView(),"Undo");assertNotNull(undo);undo.performClick();});
             await(()->"".equals(get("deletedId")),5000,"Undo did not complete");assertNotNull(store.load(fixture.id));
-            main(()->assertTrue("Restored records must again be valid return targets",visible(activity.getWindow().getDecorView()).contains("Return to current game")));
+            main(()->assertNotNull("Restored records must again be valid return targets",findDescription(activity.getWindow().getDecorView(),"Return to current game")));
         }finally{SharedPreferences.Editor e=study.edit();if(old==null)e.remove("lastGame");else e.putString("lastGame",old);e.commit();}
     }
     public void testMalformedStartingFenShowsErrorInsteadOfCrashing()throws Exception{
@@ -145,10 +191,13 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
     private static View findDescription(View v,String description){if(description.contentEquals(v.getContentDescription()==null?"":v.getContentDescription()))return v;if(v instanceof ViewGroup){ViewGroup g=(ViewGroup)v;for(int i=0;i<g.getChildCount();i++){View found=findDescription(g.getChildAt(i),description);if(found!=null)return found;}}return null;}
     private static View findText(View v,String text){if(v instanceof TextView&&text.contentEquals(((TextView)v).getText()))return v;if(v instanceof ViewGroup){ViewGroup g=(ViewGroup)v;for(int i=0;i<g.getChildCount();i++){View found=findText(g.getChildAt(i),text);if(found!=null)return found;}}return null;}
     private void screenshot(String name)throws Exception{
-        getInstrumentation().waitForIdleSync();CountDownLatch drawn=new CountDownLatch(1);main(()->activity.getWindow().getDecorView().postOnAnimation(()->activity.getWindow().getDecorView().postOnAnimation(drawn::countDown)));assertTrue("Screen did not draw",drawn.await(5,TimeUnit.SECONDS));
+        capture(activity,name);
+    }
+    private void capture(Activity target,String name)throws Exception{
+        getInstrumentation().waitForIdleSync();CountDownLatch drawn=new CountDownLatch(1);main(()->target.getWindow().getDecorView().postOnAnimation(()->target.getWindow().getDecorView().postOnAnimation(drawn::countDown)));assertTrue("Screen did not draw",drawn.await(5,TimeUnit.SECONDS));
         Thread.sleep(300);android.view.accessibility.AccessibilityNodeInfo active=getInstrumentation().getUiAutomation().getRootInActiveWindow();assertNotNull(active);assertEquals("A system overlay invalidates a UI screenshot","org.xiangqi.study",String.valueOf(active.getPackageName()));
         android.graphics.Bitmap bitmap=getInstrumentation().getUiAutomation().takeScreenshot();assertNotNull(bitmap);
-        java.io.File file=new java.io.File(activity.getExternalFilesDir(null),"audit-"+name+".png");try(java.io.FileOutputStream out=new java.io.FileOutputStream(file)){assertTrue(bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out));}bitmap.recycle();
+        java.io.File file=new java.io.File(target.getExternalFilesDir(null),"audit-"+name+".png");try(java.io.FileOutputStream out=new java.io.FileOutputStream(file)){assertTrue(bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out));}bitmap.recycle();
     }
     private void dismissEmulatorBootDialog()throws Exception{
         android.view.accessibility.AccessibilityNodeInfo root=getInstrumentation().getUiAutomation().getRootInActiveWindow();if(root==null)return;

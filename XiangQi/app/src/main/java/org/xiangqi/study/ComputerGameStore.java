@@ -95,8 +95,11 @@ public final class ComputerGameStore extends SQLiteOpenHelper {
         g.sourceUrl="";g.timeControl="Untimed";g.collection="My Games";g.moves.addAll(saved.moves);g.metadataNote=saved.reason+(saved.source.isEmpty()?"":"\nStarted from: "+saved.source);
         g.summary=analyzed(id)>=saved.moves.size()+1?"Pikafish review · maximum strength":"Pikafish review preparing · reopen to refresh";
         for(int ply=0;ply<=saved.moves.size();ply++){
-            Analysis before=analysis(id,ply);if(before!=null&&!before.best.isEmpty())g.moveBestMoves.put(ply,before.best);
-            if(ply==0)continue;Analysis previous=analysis(id,ply-1);if(previous==null||before==null)continue;
+            if(ply==0)continue;Analysis previous=analysis(id,ply-1),before=analysis(id,ply);
+            // All recorded suggestions use the played move's one-based ply,
+            // matching source annotations. The analysis itself is pre-move.
+            if(previous!=null&&!previous.best.isEmpty())g.moveBestMoves.put(ply,previous.best);
+            if(previous==null||before==null)continue;
             boolean redMover=Position.fromFen(saved.startFen).redToMove==((ply&1)==1);
             int loss=(previous.score-before.score)*(redMover?1:-1);String actual=saved.moves.get(ply-1);
             if(actual.equals(previous.best))loss=0;

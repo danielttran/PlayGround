@@ -30,6 +30,7 @@ public final class GameRepository {
         public final List<String> moves = new ArrayList<>();
         public final Map<Integer, String> moveComments = new HashMap<>();
         public final Map<Integer, String> moveGlyphs = new HashMap<>();
+        /** Alternative for the move at this one-based ply, evaluated before it. */
         public final Map<Integer, String> moveBestMoves = new HashMap<>();
         public String title() { return red + " · " + black; }
         public Position initial() { return startFen.isEmpty() ? Position.initial() : Position.fromFen(startFen); }
