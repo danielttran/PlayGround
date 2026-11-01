@@ -25,6 +25,13 @@ The delivery gate is `scripts/build.ps1 -Check`: clean native assembly, lint, te
 
 The user chose installation with their own later visual check because the Moto is locked. Physical-phone UI tests are therefore deferred; a non-UI native search/cancellation check and installed/SD-file verification remain part of delivery. No security or phone wake settings need to change.
 
+## Moto delivery verified
+
+- Application code commit: `44d22b2f44887f94d400f31228788fecc3b57284`. The clean native build and lint passed with **0 errors / 14 warnings**. Latest stable Pikafish **2026-09-06**, matching NNUE `7d13d73569a9b571ba0eb20cf1596247bc2a42738967e61afef6482b231e900e`, payload hashes, notices and APK v2 signature passed verification.
+- Delivered **0.9.1 / code 29**, **52,397,936 bytes**, SHA-256 `39103050ecca3415df20c0ad826edf6c02255e7a640ab65122ec891c1f5e8592`. The installed base APK and **SanDisk SD card / Download / XiangqiStudy-latest.apk** match the PC file. Dist contains only the latest delivery APK.
+- Moto g stylus (2022), Android 12: actual ARM64 native continuous search/cancellation passed in **2.385 seconds**. The normal launcher opened successfully. No new crash-buffer entries followed deployment start; the phone's wake setting stayed at its original value of zero. Physical UI checks were deferred at the user's request; the emulator theme captures and covered UI assertions are the visual evidence for this update.
+- Full logs and delivery proof are retained locally under `test-results/theme-0.9.1-*`. This delivery-record follow-up changes no application code or APK inputs.
+
 ## Limits
 
 Contrast checks and covered lifecycle/UI scenarios do not prove every device or accessibility configuration. Playing levels remain uncalibrated difficulty settings; engine behavior and tournament-rule limits are unchanged from the 0.9.0 audit.
