@@ -832,7 +832,7 @@
   ],
   "curationPolicy": "data/curation-policy.json",
   "classicalRegulationsUrl": "https://www.wxf-xiangqi.org/images/2025wxf_shanghai/19th_WXF__World_Xiangqi_Championship_Regulations.pdf",
-  "assetSha256": "adbc0e9d4391991c270b74f7d1238d1ed2d16b1a4275a469b7276e9daaf27490",
+  "assetSha256": "70c627f6dfe6fadc861bfc1e60859333892f734921ab7c25b2f5fd85cab723d3",
   "metadataPolicySha256": "35993807e58888e71dcf3155c1f1ea629245814bcd8d612e1f01df6400915b33",
   "resultCrossChecks": {
     "games": 204,

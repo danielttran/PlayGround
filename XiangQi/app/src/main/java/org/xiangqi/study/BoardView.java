@@ -375,7 +375,7 @@ public class BoardView extends View {
         float sourceInset=best?radius*.82f:0,destInset=best&&position.board[to]!=0?radius*.94f:radius*.15f;
         if(!best)destInset=radius*1.04f;
         startX+=ux*sourceInset;startY+=uy*sourceInset;endX-=ux*destInset;endY-=uy*destInset;
-        paint.setStyle(Paint.Style.STROKE);paint.setColor(color);paint.setAlpha(102);
+        paint.setStyle(Paint.Style.STROKE);paint.setColor(color);paint.setAlpha(best?220:130);
         paint.setStrokeWidth(step*width);paint.setStrokeCap(Paint.Cap.ROUND);
         canvas.drawLine(startX,startY,endX,endY,paint);
         float headLength=Math.min(step*head,length*.32f);double angle=Math.atan2(dy,dx);

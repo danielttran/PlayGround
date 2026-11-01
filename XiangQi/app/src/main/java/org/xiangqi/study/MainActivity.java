@@ -403,6 +403,10 @@ public final class MainActivity extends Activity {
         if(!exploring&&!vsEngine)board.setContentDescription("Xiangqi board. "+(p.redToMove?"Red":"Black")+" to move. Recorded game. Tap a piece, then a legal destination to try a variation.");
         board.setAnalysisLines(analysisEnabled&&!vsEngine?lastResult:null,p.redToMove);
         evaluationBar.setEvaluation(analysisEnabled&&!vsEngine,lastResult==null?null:lastResult.score);
+        String bestMove=game.moveBestMoves.get(ply);
+        if(!exploring&&!vsEngine&&bestMove!=null&&!bestMove.isEmpty()&&(!analysisEnabled||lastResult==null)){
+            board.setHint(bestMove);
+        }
         board.setContentDescription(board.getContentDescription()+" Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+".");
         analysisBox.setVisibility(analysisEnabled&&!vsEngine?View.VISIBLE:View.GONE);
         exploreButton.setText(vsEngine?"Stop playing":"Return to recorded game");

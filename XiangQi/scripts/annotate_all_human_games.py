@@ -114,29 +114,34 @@ def analyze_single_game(game):
                 'board_snapshot': board_history[i]
             })
 
-    # If fewer than 3 candidates, pick top tactical alternatives (delta >= 20)
-    if len(candidates) < 3:
+    # Strict threshold: keep only genuine errors (Inaccuracies >= 60 cp, Mistakes, Blunders, Turning points)
+    # If completely clean (0 errors >= 60), include at most 1 notable alternative if delta >= 35
+    if len(candidates) == 0:
         for i in range(4, len(moves)):
             best_move, pre_score, pv = evals[i]
             played = moves[i]
             post_score = -evals[i+1][1]
             delta = pre_score - post_score
-            if played != best_move and delta >= 20:
-                if not any(c['ply'] == i + 1 for c in candidates):
-                    candidates.append({
-                        'ply': i + 1,
-                        'delta': delta,
-                        'played': played,
-                        'best_move': best_move,
-                        'pre_score': pre_score,
-                        'post_score': post_score,
-                        'is_turning_point': False,
-                        'board_snapshot': board_history[i]
-                    })
+            if played != best_move and delta >= 35:
+                candidates.append({
+                    'ply': i + 1,
+                    'delta': delta,
+                    'played': played,
+                    'best_move': best_move,
+                    'pre_score': pre_score,
+                    'post_score': post_score,
+                    'is_turning_point': False,
+                    'board_snapshot': board_history[i]
+                })
+        candidates.sort(key=lambda x: -x['delta'])
+        candidates = candidates[:1]
 
-    # Sort candidates by delta descending and pick top 3 to 5 curated moments
-    candidates.sort(key=lambda x: -x['delta'])
-    curated = sorted(candidates[:4], key=lambda x: x['ply'])
+    # Upper bound of 8 in wild games to keep UI clean, but no artificial lower cap
+    if len(candidates) > 8:
+        candidates.sort(key=lambda x: -x['delta'])
+        candidates = candidates[:8]
+
+    curated = sorted(candidates, key=lambda x: x['ply'])
 
     annotations = {}
     tp_move = None
@@ -148,38 +153,36 @@ def analyze_single_game(game):
         mover = "Red" if is_red else "Black"
         move_num = (ply + 1) // 2
 
+        loss = delta / 100.0
+        loss_str = f"-{loss:.2f}"
+
         if delta >= 250:
             glyph = "??"
-            tag = "Critical blunder"
+            tag = f"Critical blunder ({loss_str})"
+            desc = f"Decisive error by {mover}."
         elif delta >= 120:
             glyph = "?"
-            tag = "Mistake"
+            tag = f"Mistake ({loss_str})"
+            desc = f"Loses the advantage for {mover}."
         elif delta >= 60:
             glyph = "?!"
-            tag = "Inaccuracy"
+            tag = f"Inaccuracy ({loss_str})"
+            desc = f"Inaccurate move by {mover}."
         else:
             glyph = "!?"
-            tag = "Alternative line"
+            tag = f"Alternative line ({loss_str})"
+            desc = f"Suboptimal choice by {mover}."
 
         if item['is_turning_point']:
-            tag += " (⚡ Turning point)"
+            tag += " · ⚡ Turning point"
             if tp_move is None:
                 tp_move = move_num
 
         best_desc = format_move(item['board_snapshot'], item['best_move'])
-        eval_pre_str = f"+{item['pre_score']/100.0:.2f}" if item['pre_score'] > 0 else f"{item['pre_score']/100.0:.2f}"
-        eval_post_str = f"+{item['post_score']/100.0:.2f}" if item['post_score'] > 0 else f"{item['post_score']/100.0:.2f}"
-
-        if delta >= 250:
-            reason = f"Concedes decisive advantage ({eval_post_str})."
-        elif delta >= 120:
-            reason = f"Loses the initiative ({eval_post_str})."
-        else:
-            reason = f"Suboptimal ({eval_post_str})."
-
-        comment = f"{tag}. {reason} Pikafish preferred {best_desc} ({eval_pre_str})."
+        comment = f"{tag}. {desc} Pikafish preferred {best_desc}."
         annotations[str(ply)] = {
             'glyph': glyph,
+            'bestMove': item['best_move'],
             'comment': comment
         }
 
@@ -230,6 +233,7 @@ def process_pack(pack_file):
 
 def main():
     packs = [
+        'tactical-miniatures.json',
         'games.json',
         'world-2023-games.json',
         'historical-games.json',
@@ -244,7 +248,7 @@ def main():
         process_pack(p)
 
     print(f"\n==========================================")
-    print(f"ALL 7 HUMAN PACKS ANNOTATED IN {time.time()-t_all:.1f}s!")
+    print(f"ALL 8 HUMAN PACKS ANNOTATED IN {time.time()-t_all:.1f}s!")
     print(f"==========================================")
 
 if __name__ == '__main__':

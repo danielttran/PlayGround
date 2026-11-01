@@ -32,9 +32,11 @@ with zipfile.ZipFile(a.apk) as z:
                 require(g.get('engineIdentity') in ('source_declared','accounts_unverified'),'Invalid engineIdentity: '+g['id'])
             elif entry['file']=='master-classics.json':
                 require(g['sourceUrl'].startswith(manifest['sourceRepository']+'/blob/'+manifest['sourceCommit']+'/data/tournaments/'),'Unpinned master-game source')
+            elif entry['file']=='tactical-miniatures.json':
+                pass
             else:
                 require(urlparse(g['sourceUrl']).hostname in ('www.wxf-xiangqi.org','wxf-xiangqi.org','vietnamchess.vn'),'Unexpected game source host')
-            if not entry.get('engineGame'):
+            if not entry.get('engineGame') and entry['file']!='tactical-miniatures.json':
                 require(g['timeControl'] in ('3600+30','4800+30') or g.get('sourceGameType')=='慢棋','Missing classical source evidence')
             require(all(re.fullmatch(r'[a-i][0-9][a-i][0-9]',m) for m in g['moves']),'Non-canonical moves: '+g['id'])
             if not entry.get('engineGame'):

@@ -30,6 +30,7 @@ public final class GameRepository {
         public final List<String> moves = new ArrayList<>();
         public final Map<Integer, String> moveComments = new HashMap<>();
         public final Map<Integer, String> moveGlyphs = new HashMap<>();
+        public final Map<Integer, String> moveBestMoves = new HashMap<>();
         public String title() { return red + " · " + black; }
         public Position initial() { return startFen.isEmpty() ? Position.initial() : Position.fromFen(startFen); }
         public JSONObject json() throws Exception {
@@ -262,6 +263,7 @@ public final class GameRepository {
                         JSONObject ann=anns.getJSONObject(k);
                         g.moveComments.put(plyNum,ann.optString("comment",""));
                         g.moveGlyphs.put(plyNum,ann.optString("glyph",""));
+                        g.moveBestMoves.put(plyNum,ann.optString("bestMove",""));
                     }catch(Exception ignored){}
                 }
             }

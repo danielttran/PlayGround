@@ -37,6 +37,11 @@
       "sourceManifest": "data/master-classics-manifest.json"
     },
     {
+      "file": "tactical-miniatures.json",
+      "label": "Classical Tactical Miniatures",
+      "sourceManifest": "data/tactical-miniatures-manifest.json"
+    },
+    {
       "file": "engine-games.json",
       "label": "Modern Engine Championship",
       "engineGame": true,
