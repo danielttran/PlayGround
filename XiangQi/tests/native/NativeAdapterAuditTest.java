@@ -52,6 +52,13 @@ public final class NativeAdapterAuditTest {
             check(position.legalMoves().contains(result.bestMove),"Actual native returned illegal move");check(result.depth>0&&!result.pv.isEmpty(),"Actual native analysis missing");
         }
         check(actual.assetOpens==1,"Verified NNUE must be reused without reopening asset");
+        long hintStarted=System.nanoTime();Engine.Result hint=PikafishEngine.analyze(actual,Position.initial(),Position.START_FEN,Collections.emptyList(),new PikafishEngine.Options(128,2000,2,64,1),null);
+        check(Position.initial().legalMoves().contains(hint.bestMove)&&System.nanoTime()-hintStarted<TimeUnit.SECONDS.toNanos(8),"Maximum-strength two-second hint did not return promptly");
+        for(int level:new int[]{1,25,50,75,100}){
+            int depth=1+(int)Math.round(13*Math.pow((level-1)/99.0,1.35));long nodes=Math.round(500*Math.pow(400,(level-1)/99.0));
+            Engine.Result limited=PikafishEngine.analyze(actual,Position.initial(),Position.START_FEN,Collections.emptyList(),new PikafishEngine.Options(depth,150+level*15L,2,64,level==100?1:5,nodes),null);
+            check(limited.depth>0&&Position.initial().legalMoves().contains(limited.bestMove),"Level "+level+" failed to complete a legal native reply");
+        }
         for(Position multiRoot:new Position[]{Position.initial(),position}){
             List<Engine.Result> realProgress=new ArrayList<>();
             Engine.Result multi=PikafishEngine.analyze(actual,multiRoot,multiRoot.toFen(),Collections.emptyList(),new PikafishEngine.Options(4,0,1,32,3),realProgress::add);

@@ -24,7 +24,7 @@ public final class GameRepository {
 
     public static final class Game {
         public String id, event, round, date, red, black, result, sourceUrl, startFen, timeControl="", collection="", summary="";
-        public boolean imported, engineGame;
+        public boolean imported, engineGame,personalGame;
         public int bookPlies;
         public String importCollectionId="", engineIdentity="", metadataNote="";
         public final List<String> moves = new ArrayList<>();

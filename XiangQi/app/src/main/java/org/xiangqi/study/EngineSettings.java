@@ -27,34 +27,26 @@ public final class EngineSettings {
     public static PikafishEngine.Options load(Context context) {
         SharedPreferences p = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
         int cores = Math.max(1, Runtime.getRuntime().availableProcessors());
-        return new PikafishEngine.Options(p.getInt("depth",128), p.getLong("millis",0),
-            p.getInt("threads",cores), p.getInt("hashMb",defaultHash(context)),p.getInt("lines",1));
+        return new PikafishEngine.Options(128,0,cores,defaultHash(context),p.getInt("lines",1));
+    }
+    /** Finite tasks use the same unrestricted engine, with an automatic time budget. */
+    public static PikafishEngine.Options timed(Context context,long millis,int lines){
+        PikafishEngine.Options maximum=load(context);return new PikafishEngine.Options(128,millis,maximum.threads,maximum.hashMb,lines);
     }
     /** Caller retains the dialog and dismisses it when the activity is destroyed. */
     public static AlertDialog show(Activity activity, Runnable changed) {
         PikafishEngine.Options current=load(activity);
-        int[] depths={12,18,24,30,40,64,128}, hashes={64,128,256,512};
-        long[] times={0,3000,10000,30000,60000};
         LinearLayout content=new LinearLayout(activity); content.setOrientation(LinearLayout.VERTICAL);
         int pad=Math.round(20*activity.getResources().getDisplayMetrics().density); content.setPadding(pad,pad,pad,pad);
         TextView note=new TextView(activity);
-        note.setText(activity.getString(R.string.engine_settings_summary,PikafishRelease.VERSION));
         content.addView(note);
-        Spinner depth=spinner(activity,content,"Maximum depth",strings(depths,""),index(depths,current.maxDepth));
-        Spinner time=spinner(activity,content,"Time per position",new String[]{"Until stopped / depth limit","3 seconds","10 seconds","30 seconds","60 seconds"},index(times,current.millis));
+        note.setText("Pikafish "+PikafishRelease.VERSION+" always analyzes at maximum strength. Resources are managed automatically. Computer difficulty affects playing only.");
         Spinner lines=spinner(activity,content,"Analysis lines",new String[]{"1 line per side","2 lines per side","3 lines per side","4 lines per side","5 lines per side"},current.lines-1);
         TextView arrows=new TextView(activity);arrows.setText(R.string.analysis_arrows_help);content.addView(arrows);
-        List<Integer> coreValues=new ArrayList<>();int cores=Math.max(1,Runtime.getRuntime().availableProcessors());
-        for(int i=1;i<=cores;i++)coreValues.add(i);
-        String[] coreLabels=new String[coreValues.size()];for(int i=0;i<coreLabels.length;i++)coreLabels[i]=coreValues.get(i)+(i+1==cores?" (all available cores)":"");
-        Spinner threads=spinner(activity,content,"Engine threads",coreLabels,Math.min(current.threads,cores)-1);
-        Spinner hash=spinner(activity,content,"Hash memory",strings(hashes," MiB"),index(hashes,current.hashMb));
         ScrollView scroll=new ScrollView(activity);scroll.addView(content);
         return new AlertDialog.Builder(activity).setTitle("Analysis settings").setView(scroll)
             .setNegativeButton("Cancel",null).setPositiveButton("Save",(dialog,which)->{
                 activity.getSharedPreferences(PREFS,Context.MODE_PRIVATE).edit()
-                    .putInt("depth",depths[depth.getSelectedItemPosition()]).putLong("millis",times[time.getSelectedItemPosition()])
-                    .putInt("threads",coreValues.get(threads.getSelectedItemPosition())).putInt("hashMb",hashes[hash.getSelectedItemPosition()])
                     .putInt("lines",lines.getSelectedItemPosition()+1).apply();
                 if(changed!=null)changed.run();
             }).show();

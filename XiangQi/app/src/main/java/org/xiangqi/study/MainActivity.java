@@ -88,6 +88,15 @@ public final class MainActivity extends Activity {
     private AlertDialog settingsDialog,engineSettingsDialog,colorDialog,presetDialog,playSideDialog,legalMovesDialog,goToDialog,importCollectionDialog,pasteDialog,replaySpeedDialog,gameInformationDialog,errorDialog;
     private float swipeStartX,swipeStartY;
     private boolean swipeTracking,swipeConsumed,swipeBlocked;
+    private final Runnable personalNotesRefresh=new Runnable(){public void run(){
+        String id=getIntent().getStringExtra(HomeActivity.REVIEW_ID);if(id==null||destroyed||!foreground||library)return;
+        if(!analysisEnabled)ComputerReview.start(MainActivity.this,id);
+        io.execute(()->{try{GameRepository.Game refreshed=ComputerGameStore.get(MainActivity.this).review(id);runOnUiThread(()->{
+            if(destroyed||!foreground||library||game==null||!game.id.equals(id))return;
+            game.moveComments.clear();game.moveComments.putAll(refreshed.moveComments);game.moveGlyphs.clear();game.moveGlyphs.putAll(refreshed.moveGlyphs);game.moveBestMoves.clear();game.moveBestMoves.putAll(refreshed.moveBestMoves);game.summary=refreshed.summary;
+            updateReplay();handler.postDelayed(personalNotesRefresh,2500);
+        });}catch(Exception e){android.util.Log.w("PersonalReview","Could not refresh saved notes",e);}});
+    }};
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state); prefs=getSharedPreferences("study",MODE_PRIVATE); repository=new GameRepository(this);
@@ -113,13 +122,20 @@ public final class MainActivity extends Activity {
         io.execute(()->{
             try {
                 List<GameRepository.Game> loadedGames=repository.load();
+                String personalId=getIntent().getStringExtra(HomeActivity.REVIEW_ID);
+                final GameRepository.Game personalReview=personalId==null?null:ComputerGameStore.get(this).review(personalId);
                 String draftText="",draftError="";
                 if(draftToRestore!=null&&"paste".equals(draftToRestore.getString("kind")))try{draftText=ImportDraftStore.read(this,draftToRestore.getString("token",""));}catch(Exception error){draftError=getString(R.string.import_draft_restore_error);}
                 final String savedDraftText=draftText,savedDraftError=draftError;
                 runOnUiThread(()->{
                     if(destroyed)return; games=loadedGames; loaded=true;restoreLibrarySelection();validateImportSelection();
                     boolean importedReady=!prefs.getString("newImportId","").isEmpty();prefs.edit().remove("newImportId").apply();String id=prefs.getString("lastGame",""); GameRepository.Game resume=find(id);
-                    if(!importedReady&&!prefs.getBoolean("library",true)&&resume!=null) openGame(resume,true); else showLibrary();
+                    String selectedId=getIntent().getStringExtra(HomeActivity.SOURCE_ID);GameRepository.Game selected=selectedId==null?null:find(selectedId);
+                    if(personalReview!=null)openGame(personalReview,true);
+                    else if(selected!=null)openGame(selected,true);
+                    else if(getIntent().getBooleanExtra(HomeActivity.OPEN_IMPORT,false)){showLibrary();if(draftToRestore==null)importMenu();}
+                    else if(!importedReady&&!prefs.getBoolean("library",true)&&resume!=null) openGame(resume,true); else showLibrary();
+                    if(personalReview!=null){handler.removeCallbacks(personalNotesRefresh);handler.post(personalNotesRefresh);}
                     if(!handleIntent(getIntent())){
                         if(importedReady){restoredImportDraft=null;discardImportDraft(draftToRestore);}
                         else restoreImportDraft(draftToRestore,savedDraftText,savedDraftError);
@@ -328,7 +344,7 @@ public final class MainActivity extends Activity {
     private void buildReplay() {
         seeking=false;replayProgress=null;
         root.removeAllViews();content=new ReplayLayout();root.addView(content,new LinearLayout.LayoutParams(-1,-1));
-        LinearLayout nav=row();Button back=button("‹  Library",this::showLibrary,false);back.setTextSize(12);back.setSingleLine(true);back.setMinWidth(0);back.setMinimumWidth(0);back.setPadding(dp(3),0,dp(3),0);back.setContentDescription("Library");nav.addView(back,new LinearLayout.LayoutParams(dp(66),dp(48)));
+        LinearLayout nav=row();boolean fromHome=getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false);Button back=button(fromHome?"‹  Database":"‹  Library",this::returnDatabase,false);back.setTextSize(12);back.setSingleLine(true);back.setMinWidth(0);back.setMinimumWidth(0);back.setPadding(dp(3),0,dp(3),0);back.setContentDescription(fromHome?"Database":"Library");nav.addView(back,new LinearLayout.LayoutParams(dp(72),dp(48)));
         gameTitle=column();pad(gameTitle,6,0,6,0);
         for(boolean redSide:new boolean[]{true,false}){TextView player=text((redSide?"Red · ":"Black · ")+PlayerNames.display(redSide?game.red:game.black),13,redSide?0xfff0a69c:LIGHT);player.setSingleLine(true);player.setEllipsize(TextUtils.TruncateAt.END);gameTitle.addView(player,new LinearLayout.LayoutParams(-1,-2));}
         gameTitle.setContentDescription("Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+". "+game.event+". "+game.round+". Open game information.");gameTitle.setFocusable(true);gameTitle.setOnClickListener(v->gameInformation());nav.addView(gameTitle,new LinearLayout.LayoutParams(0,-2,1));
@@ -600,6 +616,7 @@ public final class MainActivity extends Activity {
     private boolean activeReplayPosition(GameRepository.Game selectedGame,int selectedPly,Position selectedPosition){return !destroyed&&!library&&game==selectedGame&&ply==selectedPly&&ply<positions.size()&&positions.get(ply)==selectedPosition;}
 
     private List<GameRepository.Game> navigationGames() {
+        if(getIntent().hasExtra(HomeActivity.REVIEW_ID))return Collections.singletonList(game);
         if(!preparedLibraryCurrent()){requestLibrarySearch(0);return Collections.emptyList();}
         return gameIndex(preparedLibrary.matches)>=0?preparedLibrary.matches:preparedLibrary.ordered;
     }
@@ -636,6 +653,13 @@ public final class MainActivity extends Activity {
         });
     }
     private void chooseEngineSide(){
+        stopAutoplay();cancelAnalysis();saveState();
+        startActivity(new Intent(this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra(HomeActivity.START_FEN,positions.get(ply).toFen()).putExtra(HomeActivity.SOURCE_TITLE,game.title()+" · "+game.event));
+        if(getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false))finish();
+        return;
+        /* Legacy entry is kept below as a private compatibility helper. */
+    }
+    private void legacyChooseEngineSide(){
         stopAutoplay();final GameRepository.Game selectedGame=game;final int selectedPly=ply;final Position selectedPosition=positions.get(ply);
         playSideDialog=dialog("Play against engine").setMessage("Start from the current position. Choose your side.\n\nThe computer uses the time-per-position setting, or 3 seconds per move when analysis is untimed. Your recorded game is preserved.")
             .setPositiveButton("Play as Red",(d,w)->{if(activeReplayPosition(selectedGame,selectedPly,selectedPosition))startEngineGame(true);}).setNegativeButton("Play as Black",(d,w)->{if(activeReplayPosition(selectedGame,selectedPly,selectedPosition))startEngineGame(false);}).setNeutralButton("Cancel",null).create();
@@ -679,6 +703,7 @@ public final class MainActivity extends Activity {
     }
 
     private void analyze() {
+        ComputerReview.pause();
         analysisEnabled=true;prefs.edit().putBoolean("analysisEnabled",true).apply();
         stopAutoplay();cancelGameSearch(true);cancelAnalysis();updateReplay();resumeAnalysis();
     }
@@ -751,7 +776,7 @@ public final class MainActivity extends Activity {
     }
 
     private String replayEvent() {
-        return (game.imported?"My imports · ":"")+(game.engineGame?"Engine game":"Human game")+"\n"+game.event+" · "+game.round+(StudySettings.load(this).hideResults?"":" · "+displayResult(game.result))
+        return (game.imported?"My imports · ":"")+(game.personalGame?"My Games":game.engineGame?"Engine game":"Human game")+"\n"+game.event+" · "+game.round+(StudySettings.load(this).hideResults?"":" · "+displayResult(game.result))
             +(game.timeControl.isEmpty()?"":"\n"+timeControl(game.timeControl));
     }
     private void applyAppearance() {
@@ -858,7 +883,7 @@ public final class MainActivity extends Activity {
             if(qualifies&&!swipeConsumed){cancelChildTouch(event);swipeConsumed=true;}
             if(action==MotionEvent.ACTION_UP){
                 boolean consumed=swipeConsumed;swipeTracking=false;swipeConsumed=false;
-                if(qualifies){if(library)returnToCurrentGame();else showLibrary();}
+                if(qualifies){if(library)returnToCurrentGame();else returnDatabase();}
                 if(consumed)return true;
             }else if(swipeConsumed)return true;
         }
@@ -939,7 +964,7 @@ public final class MainActivity extends Activity {
         SharedPreferences.Editor completed=prefs.edit().putString("libraryTab","imports").putString("selectedImportId",importedId).putString("newImportId",importedId).putBoolean("library",true);
         if(!pasteSession.isEmpty())completed.putString("completedPasteSession",pasteSession);
         completed.commit();
-        runOnUiThread(()->{if(destroyed)return;games=updated;selectLibrary("imports",importedId);prefs.edit().remove("newImportId").apply();toast("Imported "+added+" game"+(added==1?"":"s")+" into a separate collection. Saved on this device.");});
+        runOnUiThread(()->{if(destroyed)return;if(getIntent().getBooleanExtra(HomeActivity.OPEN_IMPORT,false)){getSharedPreferences("home",MODE_PRIVATE).edit().putString("collection","imports").putString("importId",importedId).apply();prefs.edit().remove("newImportId").apply();finish();return;}games=updated;selectLibrary("imports",importedId);prefs.edit().remove("newImportId").apply();toast("Imported "+added+" game"+(added==1?"":"s")+" into a separate collection. Saved on this device.");});
     }
     private void importHelp() { dialog("Supported imports").setMessage("Name your collection and choose Human games or Engine games. Each import appears separately under My imports and never changes the built-in Human or Engine collections.\n\nImport .pgn text using ICCS coordinates (a0–i9), or a normalized JSON pack. Example:\n\n[Red \"Player\"]\n[Black \"Opponent\"]\n[Result \"*\"]\n\n1. b2e2 b9c7 *\n\nComments and side variations in PGN are ignored; the main line is imported. Custom positions use a FEN tag. Every move must be legal, or the whole import is rejected. Duplicate move records within this import are skipped. The same game can be kept in different collections.\n\nFile limit: 5 MB. Binary XQF / CBR / CBL, Chinese move notation and WXF move notation need conversion to ICCS PGN before importing.").setPositiveButton("Got it",null).show(); }
     private void exportGame() {
@@ -1027,10 +1052,11 @@ public final class MainActivity extends Activity {
     }
     @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();out.putString("pendingExport",pendingExport);out.putString("pendingImportName",pendingImportName);out.putBoolean("pendingImportEngine",pendingImportEngine);out.putBundle("importDraft",saveImportDraft());}
     @Override protected void onRestoreInstanceState(Bundle in){super.onRestoreInstanceState(in);pendingExport=in.getString("pendingExport");}
-    @Override protected void onStart(){super.onStart();foreground=true;if(loaded){if(library)renderCards();else refreshGameNavigation();}resumeAnalysis();}
-    @Override protected void onStop(){super.onStop();foreground=false;cancelLibrarySearch();seeking=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
+    @Override protected void onStart(){super.onStart();foreground=true;if(loaded){if(library)renderCards();else refreshGameNavigation();if(getIntent().hasExtra(HomeActivity.REVIEW_ID)){handler.removeCallbacks(personalNotesRefresh);handler.post(personalNotesRefresh);}}resumeAnalysis();}
+    @Override protected void onStop(){super.onStop();foreground=false;ComputerReview.pause();handler.removeCallbacks(personalNotesRefresh);cancelLibrarySearch();seeking=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
     @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);cancelLibrarySearch();libraryWorker.shutdownNow();handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(errorDialog!=null)errorDialog.dismiss();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(legalMovesDialog!=null)legalMovesDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
-    @Override public void onBackPressed(){if(!library)showLibrary();else super.onBackPressed();}
+    private void returnDatabase(){if(getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false)){saveState();finish();}else showLibrary();}
+    @Override public void onBackPressed(){if(getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false))returnDatabase();else if(!library)showLibrary();else super.onBackPressed();}
 
     private AlertDialog.Builder dialog(String title){return new AlertDialog.Builder(this,android.R.style.Theme_Material_Dialog_Alert).setTitle(title);}
     private void error(String title,String message){if(errorDialog!=null)errorDialog.dismiss();AlertDialog shown=dialog(title).setMessage(message).setPositiveButton("OK",null).create();errorDialog=shown;shown.setOnDismissListener(d->{if(errorDialog==shown)errorDialog=null;});shown.show();}

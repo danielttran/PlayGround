@@ -27,6 +27,8 @@ public final class PlayerNamesTest {
         check("Unknown imported player".equals(PlayerNames.display("Unknown imported player")),"Unknown Latin import stays unchanged");
         check("张三".equals(PlayerNames.display("张三")),"Unknown Chinese import stays unchanged");
         check("".equals(PlayerNames.display(null)),"Missing optional source name is safe");
+        check("Bu Fengbo".equals(PlayerNames.readable("Bu Fengbo · 卜风波")),"Preserve a supplied Latin label when its source Chinese spelling differs");
+        check(PlayerNames.source("Bu Fengbo · 卜风波").startsWith("Source label"),"A supplied label does not claim an independently verified identity");
         check(PlayerNames.fold("Nguyễn Thành Bảo").equals("nguyen thanh bao"),"Diacritic-insensitive search");
         check(PlayerNames.fold("Đặng Hùng Việt").equals("dang hung viet"),"Vietnamese crossed-D search");
         check("Yu Jianguo".equals(PlayerNames.readable("余建国")),"Contemporary Italian federation spelling");

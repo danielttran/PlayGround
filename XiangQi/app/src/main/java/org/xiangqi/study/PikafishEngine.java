@@ -34,21 +34,27 @@ public final class PikafishEngine {
     private static final String NETWORK_SHA256 = PikafishRelease.NNUE_SHA256;
     private static File verifiedNetwork;
     private static long verifiedModified;
+    private static final java.util.concurrent.Semaphore SEARCH_SLOT=new java.util.concurrent.Semaphore(1,true);
     private PikafishEngine() {}
 
     /** A zero time limit searches until the requested depth or explicit cancellation. */
     public static final class Options {
         public final int maxDepth, threads, hashMb, lines;
         public final long millis;
+        public final long maxNodes;
         public Options(int maxDepth, long millis, int threads, int hashMb) {
             this(maxDepth, millis, threads, hashMb, 1);
         }
         public Options(int maxDepth, long millis, int threads, int hashMb, int lines) {
+            this(maxDepth,millis,threads,hashMb,lines,0);
+        }
+        public Options(int maxDepth,long millis,int threads,int hashMb,int lines,long maxNodes) {
             this.maxDepth = Math.max(1, Math.min(maxDepth, 128));
             this.millis = millis <= 0 ? 0 : Math.max(50, Math.min(millis, 3600000));
             this.threads = Math.max(1, Math.min(threads, Math.max(1, Runtime.getRuntime().availableProcessors())));
             this.hashMb = Math.max(16, Math.min(hashMb, 512));
             this.lines = Math.max(1, Math.min(lines, 5));
+            this.maxNodes=Math.max(0,maxNodes);
         }
     }
 
@@ -117,6 +123,11 @@ public final class PikafishEngine {
     }
 
     public static Engine.Result analyze(Context context, Position position, String startFen, List<String> history, Options options, Engine.ProgressListener listener) throws Exception {
+        SEARCH_SLOT.acquire();
+        try{return search(context,position,startFen,history,options,listener);}
+        finally{SEARCH_SLOT.release();}
+    }
+    private static Engine.Result search(Context context, Position position, String startFen, List<String> history, Options options, Engine.ProgressListener listener) throws Exception {
         if (options == null) throw new IllegalArgumentException("Analysis options are required");
         if (!available(context)) throw new IllegalStateException("Pikafish requires Android 10 or later and a supported bundled device ABI");
         Position root = position.copy(); List<String> legal = root.legalMoves();
@@ -153,7 +164,7 @@ public final class PikafishEngine {
             command(output, "isready"); await(lines, "readyok", 20000);
             command(output, "ucinewgame");
             command(output, positionCommand);
-            command(output, "go depth " + options.maxDepth + (options.millis > 0 ? " movetime " + options.millis : ""));
+            command(output, "go depth " + options.maxDepth + (options.millis > 0 ? " movetime " + options.millis : "")+(options.maxNodes>0?" nodes "+options.maxNodes:""));
             long deadline = options.millis <= 0 ? Long.MAX_VALUE : System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(options.millis + 5000);
             Engine.Result result = new Engine.Result();
             int publishedDepth = 0;

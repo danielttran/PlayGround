@@ -229,7 +229,19 @@ public final class PlayerNames {
     private PlayerNames() {}
     private static void add(String chinese,String readable,String aliases,String source){NAMES.put(chinese,new Name(chinese,readable,aliases,source,false));}
     private static void alias(String variant,String canonical){NAMES.put(variant,NAMES.get(canonical));}
-    private static Name name(String original){if(original==null)return null;Name exact=EXACT.get(original.trim());return exact==null?NAMES.get(han(original)):exact;}
+    private static Name name(String original){
+        if(original==null)return null;Name exact=EXACT.get(original.trim());if(exact!=null)return exact;
+        String chinese=han(original);Name known=NAMES.get(chinese);if(known!=null)return known;
+        // Some source packs already contain a Latin spelling beside an unfamiliar
+        // traditional form or source typo. Preserve that supplied spelling without
+        // inventing a canonical identity or claiming independent verification.
+        int separator=original.indexOf('·');
+        if(separator>0&&!chinese.isEmpty()){
+            String supplied=original.substring(0,separator).trim();
+            if(supplied.matches("[A-Za-z][A-Za-z .’'()/-]*"))return new Name(chinese,supplied,"","Source label supplies this romanization; identity not independently verified",false);
+        }
+        return null;
+    }
     private static String han(String original){StringBuilder value=new StringBuilder();original.codePoints().filter(c->Character.UnicodeScript.of(c)==Character.UnicodeScript.HAN).forEach(value::appendCodePoint);return value.toString();}
     public static boolean mapped(String original){return name(original)!=null;}
     public static boolean pinyinFallback(String original){Name value=name(original);return value!=null&&value.pinyin;}
