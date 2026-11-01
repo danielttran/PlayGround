@@ -9,6 +9,9 @@ final class AppIcon extends Drawable {
     AppIcon(String name,int color,int size){this.name=name;this.color=color;this.size=size;}
     @Override public void draw(Canvas c){int save=c.save();Rect b=getBounds();c.translate(b.left,b.top);c.scale(b.width()/24f,b.height()/24f);p.setColor(color);p.setAlpha(enabled?alpha:Math.round(alpha*.4f));p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(1.6f);p.setStrokeCap(Paint.Cap.ROUND);p.setStrokeJoin(Paint.Join.ROUND);path.reset();
         switch(name){
+            case "light":c.drawCircle(12,12,4,p);for(int i=0;i<8;i++){double a=i*Math.PI/4;c.drawLine(12+(float)Math.cos(a)*7,12+(float)Math.sin(a)*7,12+(float)Math.cos(a)*10,12+(float)Math.sin(a)*10,p);}break;
+            case "dark":path.moveTo(15,3);path.cubicTo(3,1,0,18,12,21);path.cubicTo(18,22,22,17,22,12);path.cubicTo(15,17,9,10,15,3);c.drawPath(path,p);break;
+            case "system":c.drawRoundRect(2,4,22,17,2,2,p);c.drawLine(12,17,12,21,p);c.drawLine(7,21,17,21,p);break;
             case "back":case "left":path.moveTo(15,5);path.lineTo(8,12);path.lineTo(15,19);c.drawPath(path,p);break;
             case "right":path.moveTo(9,5);path.lineTo(16,12);path.lineTo(9,19);c.drawPath(path,p);break;
             case "menu":p.setStyle(Paint.Style.FILL);for(int y:new int[]{5,12,19})c.drawCircle(12,y,1.6f,p);break;

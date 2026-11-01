@@ -16,9 +16,9 @@ import java.util.function.BooleanSupplier;
 public final class ComputerGameFlowTest extends InstrumentationTestCase {
     private HomeActivity activity;private ComputerGameStore store;private ComputerGameStore.SavedGame fixture;
     private SharedPreferences preferences;private Map<String,?> previous;private CountDownLatch unblock;
-    private SharedPreferences studyPreferences;private Map<String,?> previousStudy;
+    private SharedPreferences studyPreferences,appearancePreferences;private Map<String,?> previousStudy,previousAppearance;
     @Override protected void setUp()throws Exception{
-        super.setUp();dismissEmulatorBootDialog();Context c=getInstrumentation().getTargetContext();studyPreferences=c.getSharedPreferences("study",0);previousStudy=studyPreferences.getAll();preferences=c.getSharedPreferences("home",0);previous=preferences.getAll();preferences.edit().clear().putString("screen","play").commit();store=ComputerGameStore.get(c);store.getWritableDatabase().delete("games","id LIKE ?",new String[]{"played-audit-%"});
+        super.setUp();dismissEmulatorBootDialog();Context c=getInstrumentation().getTargetContext();appearancePreferences=c.getSharedPreferences(StudySettings.PREFERENCES,0);previousAppearance=appearancePreferences.getAll();studyPreferences=c.getSharedPreferences("study",0);previousStudy=studyPreferences.getAll();preferences=c.getSharedPreferences("home",0);previous=preferences.getAll();preferences.edit().clear().putString("screen","play").commit();store=ComputerGameStore.get(c);store.getWritableDatabase().delete("games","id LIKE ?",new String[]{"played-audit-%"});
         activity=(HomeActivity)getInstrumentation().startActivitySync(new Intent(c,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
         await(()->Boolean.TRUE.equals(get("ready")),20000,"Home did not load");fixture=new ComputerGameStore.SavedGame();fixture.id="played-audit-"+UUID.randomUUID();store.save(fixture);
     }
@@ -26,7 +26,7 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
         ComputerReview.pause();if(unblock!=null)unblock.countDown();if(activity!=null&&!activity.isDestroyed())main(activity::finish);getInstrumentation().waitForIdleSync();
         Field f=HomeActivity.class.getDeclaredField("IO");f.setAccessible(true);((ExecutorService)f.get(null)).submit(()->{}).get(15,TimeUnit.SECONDS);
         if(fixture!=null)store.getWritableDatabase().delete("games","id=?",new String[]{fixture.id});
-        restorePreferences(preferences,previous);restorePreferences(studyPreferences,previousStudy);super.tearDown();
+        restorePreferences(preferences,previous);restorePreferences(studyPreferences,previousStudy);restorePreferences(appearancePreferences,previousAppearance);super.tearDown();
     }
     public void testPersonalPersistenceReviewGateDeletionAndUndoRevision()throws Exception{
         fixture.moves.addAll(Arrays.asList("b2e2","b9c7"));store.save(fixture);
@@ -119,7 +119,7 @@ public final class ComputerGameFlowTest extends InstrumentationTestCase {
             options=(HomeActivity)monitor.waitForActivityWithTimeout(15000);getInstrumentation().removeMonitor(monitor);assertNotNull(options);final HomeActivity shown=options;await(()->Boolean.TRUE.equals(field(shown,"ready")),20000,"Options did not load");
             main(()->{assertEquals(Boolean.TRUE,field(shown,"standaloneOptions"));assertEquals("play",preferences.getString("screen",""));});
             android.app.Instrumentation.ActivityMonitor rotation=getInstrumentation().addMonitor(HomeActivity.class.getName(),null,false);main(shown::recreate);options=(HomeActivity)rotation.waitForActivityWithTimeout(15000);getInstrumentation().removeMonitor(rotation);assertNotNull(options);final HomeActivity rotated=options;await(()->Boolean.TRUE.equals(field(rotated,"ready")),20000,"Rotated Options did not load");
-            main(()->{assertEquals("options",field(rotated,"screen"));assertEquals("play",preferences.getString("screen",""));StudySettings.selectBoardPreset(rotated,"moss");rotated.finish();});await(()->Boolean.TRUE.equals(field(viewer,"foreground")),10000,"Viewer did not resume");
+            main(()->{assertEquals("options",field(rotated,"screen"));assertEquals("play",preferences.getString("screen",""));StudySettings.selectBoardPreset(rotated,"moss");rotated.finish();});await(()->{final boolean[] resumed={false};main(()->resumed[0]=Boolean.TRUE.equals(field(viewer,"foreground")));return resumed[0];},10000,"Viewer did not resume");
             main(()->{assertEquals(source,((GameRepository.Game)field(viewer,"game")).id);assertEquals(Boolean.TRUE,field(viewer,"analysisEnabled"));assertEquals(org.xiangqi.study.core.AppearancePresets.board("moss").background,field(field(viewer,"board"),"boardColor"));invoke(viewer,"stopSearch");});
         }finally{if(options!=null&&!options.isDestroyed()){final HomeActivity remaining=options;main(remaining::finish);}main(viewer::finish);}
     }

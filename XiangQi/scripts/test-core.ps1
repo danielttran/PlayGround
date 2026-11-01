@@ -21,6 +21,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Date sort tests failed' }
 if ($LASTEXITCODE -ne 0) { throw 'Appearance preset tests failed' }
 & $Java -Xmx512m -cp $Classes org.xiangqi.study.core.AnalysisVisualsTest
 if ($LASTEXITCODE -ne 0) { throw 'Analysis visual tests failed' }
+& $Java -Xmx512m -cp $Classes org.xiangqi.study.core.UiPaletteTest
+if ($LASTEXITCODE -ne 0) { throw 'UI palette contrast tests failed' }
 $PackManifest=Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $ProjectRoot 'app\src\main\assets\game-packs.json') | ConvertFrom-Json
 $Names=@();$Corpus=@()
 foreach($Pack in $PackManifest.packs){

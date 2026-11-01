@@ -22,11 +22,12 @@ public final class ColorPickerDialog {
     private ColorPickerDialog() {}
     public static AlertDialog show(Activity activity,String title,int initial,Listener listener) {
         float density=activity.getResources().getDisplayMetrics().density;
-        int padding=Math.round(18*density),light=0xffe7e7d5;
+        org.xiangqi.study.core.UiPalette theme=AppTheme.load(activity).colors;
+        int padding=Math.round(18*density),light=theme.text;
         LinearLayout body=new LinearLayout(activity);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(padding,padding,padding,padding);
         TextView preview=new TextView(activity);preview.setText(R.string.color_preview);preview.setTextSize(25);preview.setGravity(android.view.Gravity.CENTER);
         preview.setContentDescription("Selected color preview");body.addView(preview,new LinearLayout.LayoutParams(-1,Math.round(64*density)));
-        EditText hex=new EditText(activity);hex.setSingleLine(true);hex.setTextColor(light);hex.setHintTextColor(0xffb8c8b8);
+        EditText hex=new EditText(activity);hex.setSingleLine(true);hex.setTextColor(light);hex.setHintTextColor(theme.muted);
         hex.setHint("#RRGGBB");hex.setContentDescription("Hex color");hex.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         hex.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});body.addView(hex,new LinearLayout.LayoutParams(-1,Math.round(52*density)));
         int[] selected={initial|0xff000000};boolean[] syncing={false};
@@ -37,7 +38,7 @@ public final class ColorPickerDialog {
             body.addView(sliders[i],new LinearLayout.LayoutParams(-1,Math.round(42*density)));
         }
         ScrollView scroll=new ScrollView(activity);scroll.addView(body);
-        AlertDialog dialog=new AlertDialog.Builder(activity,android.R.style.Theme_Material_Dialog_Alert).setTitle(title).setView(scroll)
+        AlertDialog dialog=new AlertDialog.Builder(activity).setTitle(title).setView(scroll)
             .setNegativeButton("Cancel",null).setNeutralButton("Use preset",(d,w)->listener.selected(null)).setPositiveButton("Apply",null).create();
         Runnable refresh=()->{
             syncing[0]=true;
@@ -45,7 +46,7 @@ public final class ColorPickerDialog {
             for(int i=0;i<3;i++){sliders[i].setProgress(values[i]);labels[i].setText(activity.getString(R.string.color_channel,channelNames[i],values[i]));}
             String value=String.format(Locale.ROOT,"#%06X",selected[0]&0xffffff);
             if(!value.equalsIgnoreCase(hex.getText().toString())){hex.setText(value);hex.setSelection(hex.length());}
-            hex.setError(null);preview.setBackgroundColor(selected[0]);preview.setTextColor(Color.luminance(selected[0])>.42?Color.BLACK:Color.WHITE);
+            hex.setError(null);preview.setBackgroundColor(selected[0]);preview.setTextColor(Color.luminance(selected[0])>.179?Color.BLACK:Color.WHITE);
             if(dialog.isShowing())dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
             syncing[0]=false;
         };
@@ -67,12 +68,12 @@ public final class ColorPickerDialog {
                 int color=palette[row*4+column];Button swatch=new Button(activity);String name=String.format(Locale.ROOT,"#%06X",color&0xffffff);
                 swatch.setText(name.substring(1));swatch.setTextSize(10);swatch.setAllCaps(false);swatch.setContentDescription("Choose color "+name);
                 GradientDrawable background=new GradientDrawable();background.setColor(color);background.setCornerRadius(7*density);background.setStroke(Math.round(density),0xffa0a0a0);swatch.setBackground(background);
-                swatch.setTextColor(Color.luminance(color)>.42?Color.BLACK:Color.WHITE);swatch.setPadding(0,0,0,0);
+                swatch.setTextColor(Color.luminance(color)>.179?Color.BLACK:Color.WHITE);swatch.setPadding(0,0,0,0);
                 LinearLayout.LayoutParams layout=new LinearLayout.LayoutParams(0,Math.round(48*density),1);layout.setMargins(Math.round(2*density),Math.round(3*density),Math.round(2*density),Math.round(3*density));line.addView(swatch,layout);
                 swatch.setOnClickListener(view->{selected[0]=color;refresh.run();});
             }
         }
         dialog.setOnShowListener(d->{refresh.run();dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view->{listener.selected(selected[0]);dialog.dismiss();});});
-        dialog.show();return dialog;
+        refresh.run();dialog.show();return dialog;
     }
 }

@@ -1,6 +1,6 @@
 # Playing and reviewing games
 
-Version 0.9.0 refines the native Play / Database / Options launcher. The replay viewer, bundled games, annotations, imported collections and appearance choices remain available.
+Version 0.9.1 adds app themes to the native Play / Database / Options launcher. The replay viewer, bundled games, annotations, imported collections and appearance choices remain available.
 
 ## Play
 
@@ -19,6 +19,8 @@ Only completed personal games can be materialized for review. The result screen 
 Personal, human, engine and imported games share one review layout. Each half-move has a labelled Red/Black turn, the recorded move, and its saved Pikafish alternative when available. SQL analyses remain indexed by position; materialized review suggestions use the played move's one-based ply, matching library annotations. Missing advice displays a dash. Tap the advice to explore from the correct pre-move position, or long-press the recorded move for its full annotation. Background note refreshes preserve manual scrolling, including the result at the end of the record. Existing book markers remain available.
 
 Options groups appearance, playback, spoiler and computer settings into compact rows. Board/piece/coordinate/Chinese-character choices still use arrows with a live preview, and custom colors retain their existing latest-change-wins behavior. Viewer settings return to the same game, position and analysis toggle without changing the launcher's remembered tab.
+
+Display mode offers System, Light and Dark; System follows Android's current appearance. Cobalt, Amber, Plum and Graphite each have light and dark palettes. Cobalt Dark is the default. The selected app palette applies to Play, Database, review, navigation, native controls and dialogs; it does not replace any board/piece preset or custom color. Theme changes preserve unfinished games, selected side and level, review variations, analysis toggle and manual move-record scrolling.
 
 ## Analysis
 

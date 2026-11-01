@@ -1,0 +1,244 @@
+<resources>
+    <style name="AppTheme.Light" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <style name="AppTheme.Dark" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="AppTheme.Cobalt.Light" parent="AppTheme.Light">
+        <item name="android:windowBackground">#F4F6FA</item>
+        <item name="android:colorBackground">#F4F6FA</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:colorForeground">#182030</item>
+        <item name="android:textColorPrimary">#182030</item>
+        <item name="android:textColorSecondary">#566276</item>
+        <item name="android:textColorHint">#566276</item>
+        <item name="android:textColorLink">#2E58B5</item>
+        <item name="android:colorAccent">#2E58B5</item>
+        <item name="android:colorControlActivated">#2E58B5</item>
+        <item name="android:colorControlNormal">#566276</item>
+        <item name="android:colorButtonNormal">#E7EBF4</item>
+        <item name="android:alertDialogTheme">@style/AppDialog.Cobalt.Light</item>
+    </style>
+    <style name="AppDialog.Cobalt.Light" parent="android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:colorForeground">#182030</item>
+        <item name="android:textColorPrimary">#182030</item>
+        <item name="android:textColorSecondary">#566276</item>
+        <item name="android:textColorHint">#566276</item>
+        <item name="android:textColorLink">#2E58B5</item>
+        <item name="android:colorAccent">#2E58B5</item>
+        <item name="android:colorControlActivated">#2E58B5</item>
+        <item name="android:colorControlNormal">#566276</item>
+        <item name="android:colorButtonNormal">#E7EBF4</item>
+    </style>
+    <style name="AppTheme.Cobalt.Dark" parent="AppTheme.Dark">
+        <item name="android:windowBackground">#11151D</item>
+        <item name="android:colorBackground">#11151D</item>
+        <item name="android:colorBackgroundFloating">#1C2230</item>
+        <item name="android:colorForeground">#EDF2FC</item>
+        <item name="android:textColorPrimary">#EDF2FC</item>
+        <item name="android:textColorSecondary">#AAB5C8</item>
+        <item name="android:textColorHint">#AAB5C8</item>
+        <item name="android:textColorLink">#A9C4FF</item>
+        <item name="android:colorAccent">#A9C4FF</item>
+        <item name="android:colorControlActivated">#A9C4FF</item>
+        <item name="android:colorControlNormal">#AAB5C8</item>
+        <item name="android:colorButtonNormal">#293144</item>
+        <item name="android:alertDialogTheme">@style/AppDialog.Cobalt.Dark</item>
+    </style>
+    <style name="AppDialog.Cobalt.Dark" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">#1C2230</item>
+        <item name="android:colorBackground">#1C2230</item>
+        <item name="android:colorBackgroundFloating">#1C2230</item>
+        <item name="android:colorForeground">#EDF2FC</item>
+        <item name="android:textColorPrimary">#EDF2FC</item>
+        <item name="android:textColorSecondary">#AAB5C8</item>
+        <item name="android:textColorHint">#AAB5C8</item>
+        <item name="android:textColorLink">#A9C4FF</item>
+        <item name="android:colorAccent">#A9C4FF</item>
+        <item name="android:colorControlActivated">#A9C4FF</item>
+        <item name="android:colorControlNormal">#AAB5C8</item>
+        <item name="android:colorButtonNormal">#293144</item>
+    </style>
+    <style name="AppTheme.Amber.Light" parent="AppTheme.Light">
+        <item name="android:windowBackground">#F7F7F8</item>
+        <item name="android:colorBackground">#F7F7F8</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:colorForeground">#24272D</item>
+        <item name="android:textColorPrimary">#24272D</item>
+        <item name="android:textColorSecondary">#5A606A</item>
+        <item name="android:textColorHint">#5A606A</item>
+        <item name="android:textColorLink">#8A5900</item>
+        <item name="android:colorAccent">#8A5900</item>
+        <item name="android:colorControlActivated">#8A5900</item>
+        <item name="android:colorControlNormal">#5A606A</item>
+        <item name="android:colorButtonNormal">#EAECEF</item>
+        <item name="android:alertDialogTheme">@style/AppDialog.Amber.Light</item>
+    </style>
+    <style name="AppDialog.Amber.Light" parent="android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:colorForeground">#24272D</item>
+        <item name="android:textColorPrimary">#24272D</item>
+        <item name="android:textColorSecondary">#5A606A</item>
+        <item name="android:textColorHint">#5A606A</item>
+        <item name="android:textColorLink">#8A5900</item>
+        <item name="android:colorAccent">#8A5900</item>
+        <item name="android:colorControlActivated">#8A5900</item>
+        <item name="android:colorControlNormal">#5A606A</item>
+        <item name="android:colorButtonNormal">#EAECEF</item>
+    </style>
+    <style name="AppTheme.Amber.Dark" parent="AppTheme.Dark">
+        <item name="android:windowBackground">#18191C</item>
+        <item name="android:colorBackground">#18191C</item>
+        <item name="android:colorBackgroundFloating">#24262B</item>
+        <item name="android:colorForeground">#F1F1F3</item>
+        <item name="android:textColorPrimary">#F1F1F3</item>
+        <item name="android:textColorSecondary">#B8BAC2</item>
+        <item name="android:textColorHint">#B8BAC2</item>
+        <item name="android:textColorLink">#F0C46E</item>
+        <item name="android:colorAccent">#F0C46E</item>
+        <item name="android:colorControlActivated">#F0C46E</item>
+        <item name="android:colorControlNormal">#B8BAC2</item>
+        <item name="android:colorButtonNormal">#303238</item>
+        <item name="android:alertDialogTheme">@style/AppDialog.Amber.Dark</item>
+    </style>
+    <style name="AppDialog.Amber.Dark" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">#24262B</item>
+        <item name="android:colorBackground">#24262B</item>
+        <item name="android:colorBackgroundFloating">#24262B</item>
+        <item name="android:colorForeground">#F1F1F3</item>
+        <item name="android:textColorPrimary">#F1F1F3</item>
+        <item name="android:textColorSecondary">#B8BAC2</item>
+        <item name="android:textColorHint">#B8BAC2</item>
+        <item name="android:textColorLink">#F0C46E</item>
+        <item name="android:colorAccent">#F0C46E</item>
+        <item name="android:colorControlActivated">#F0C46E</item>
+        <item name="android:colorControlNormal">#B8BAC2</item>
+        <item name="android:colorButtonNormal">#303238</item>
+    </style>
+    <style name="AppTheme.Plum.Light" parent="AppTheme.Light">
+        <item name="android:windowBackground">#F8F4FA</item>
+        <item name="android:colorBackground">#F8F4FA</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:colorForeground">#2D2035</item>
+        <item name="android:textColorPrimary">#2D2035</item>
+        <item name="android:textColorSecondary">#6C5879</item>
+        <item name="android:textColorHint">#6C5879</item>
+        <item name="android:textColorLink">#754096</item>
+        <item name="android:colorAccent">#754096</item>
+        <item name="android:colorControlActivated">#754096</item>
+        <item name="android:colorControlNormal">#6C5879</item>
+        <item name="android:colorButtonNormal">#EFE7F4</item>
+        <item name="android:alertDialogTheme">@style/AppDialog.Plum.Light</item>
+    </style>
+    <style name="AppDialog.Plum.Light" parent="android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:colorForeground">#2D2035</item>
+        <item name="android:textColorPrimary">#2D2035</item>
+        <item name="android:textColorSecondary">#6C5879</item>
+        <item name="android:textColorHint">#6C5879</item>
+        <item name="android:textColorLink">#754096</item>
+        <item name="android:colorAccent">#754096</item>
+        <item name="android:colorControlActivated">#754096</item>
+        <item name="android:colorControlNormal">#6C5879</item>
+        <item name="android:colorButtonNormal">#EFE7F4</item>
+    </style>
+    <style name="AppTheme.Plum.Dark" parent="AppTheme.Dark">
+        <item name="android:windowBackground">#1A141F</item>
+        <item name="android:colorBackground">#1A141F</item>
+        <item name="android:colorBackgroundFloating">#29212F</item>
+        <item name="android:colorForeground">#F4ECFA</item>
+        <item name="android:textColorPrimary">#F4ECFA</item>
+        <item name="android:textColorSecondary">#C3B0CF</item>
+        <item name="android:textColorHint">#C3B0CF</item>
+        <item name="android:textColorLink">#D6AFEA</item>
+        <item name="android:colorAccent">#D6AFEA</item>
+        <item name="android:colorControlActivated">#D6AFEA</item>
+        <item name="android:colorControlNormal">#C3B0CF</item>
+        <item name="android:colorButtonNormal">#392F41</item>
+        <item name="android:alertDialogTheme">@style/AppDialog.Plum.Dark</item>
+    </style>
+    <style name="AppDialog.Plum.Dark" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">#29212F</item>
+        <item name="android:colorBackground">#29212F</item>
+        <item name="android:colorBackgroundFloating">#29212F</item>
+        <item name="android:colorForeground">#F4ECFA</item>
+        <item name="android:textColorPrimary">#F4ECFA</item>
+        <item name="android:textColorSecondary">#C3B0CF</item>
+        <item name="android:textColorHint">#C3B0CF</item>
+        <item name="android:textColorLink">#D6AFEA</item>
+        <item name="android:colorAccent">#D6AFEA</item>
+        <item name="android:colorControlActivated">#D6AFEA</item>
+        <item name="android:colorControlNormal">#C3B0CF</item>
+        <item name="android:colorButtonNormal">#392F41</item>
+    </style>
+    <style name="AppTheme.Graphite.Light" parent="AppTheme.Light">
+        <item name="android:windowBackground">#F6F5F2</item>
+        <item name="android:colorBackground">#F6F5F2</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:colorForeground">#292725</item>
+        <item name="android:textColorPrimary">#292725</item>
+        <item name="android:textColorSecondary">#67635E</item>
+        <item name="android:textColorHint">#67635E</item>
+        <item name="android:textColorLink">#373B42</item>
+        <item name="android:colorAccent">#373B42</item>
+        <item name="android:colorControlActivated">#373B42</item>
+        <item name="android:colorControlNormal">#67635E</item>
+        <item name="android:colorButtonNormal">#EAE8E2</item>
+        <item name="android:alertDialogTheme">@style/AppDialog.Graphite.Light</item>
+    </style>
+    <style name="AppDialog.Graphite.Light" parent="android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+        <item name="android:colorForeground">#292725</item>
+        <item name="android:textColorPrimary">#292725</item>
+        <item name="android:textColorSecondary">#67635E</item>
+        <item name="android:textColorHint">#67635E</item>
+        <item name="android:textColorLink">#373B42</item>
+        <item name="android:colorAccent">#373B42</item>
+        <item name="android:colorControlActivated">#373B42</item>
+        <item name="android:colorControlNormal">#67635E</item>
+        <item name="android:colorButtonNormal">#EAE8E2</item>
+    </style>
+    <style name="AppTheme.Graphite.Dark" parent="AppTheme.Dark">
+        <item name="android:windowBackground">#161616</item>
+        <item name="android:colorBackground">#161616</item>
+        <item name="android:colorBackgroundFloating">#242424</item>
+        <item name="android:colorForeground">#F2F1EE</item>
+        <item name="android:textColorPrimary">#F2F1EE</item>
+        <item name="android:textColorSecondary">#BCB9B4</item>
+        <item name="android:textColorHint">#BCB9B4</item>
+        <item name="android:textColorLink">#DEDBD5</item>
+        <item name="android:colorAccent">#DEDBD5</item>
+        <item name="android:colorControlActivated">#DEDBD5</item>
+        <item name="android:colorControlNormal">#BCB9B4</item>
+        <item name="android:colorButtonNormal">#333333</item>
+        <item name="android:alertDialogTheme">@style/AppDialog.Graphite.Dark</item>
+    </style>
+    <style name="AppDialog.Graphite.Dark" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">#242424</item>
+        <item name="android:colorBackground">#242424</item>
+        <item name="android:colorBackgroundFloating">#242424</item>
+        <item name="android:colorForeground">#F2F1EE</item>
+        <item name="android:textColorPrimary">#F2F1EE</item>
+        <item name="android:textColorSecondary">#BCB9B4</item>
+        <item name="android:textColorHint">#BCB9B4</item>
+        <item name="android:textColorLink">#DEDBD5</item>
+        <item name="android:colorAccent">#DEDBD5</item>
+        <item name="android:colorControlActivated">#DEDBD5</item>
+        <item name="android:colorControlNormal">#BCB9B4</item>
+        <item name="android:colorButtonNormal">#333333</item>
+    </style>
+</resources>

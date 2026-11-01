@@ -11,12 +11,13 @@ import java.util.Locale;
 
 /** Slim, Red-relative evaluation rail; off and pending never retain an old score. */
 public final class EvaluationBarView extends View {
-    static final int RED=0xffcf554a,BLACK=0xff202b33,NEUTRAL=0xff657169;
+    static final int RED=0xffcf554a,BLACK=0xff202b33,NEUTRAL=0xff687080;
+    private final int border;
     private final Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Path clip=new Path();
     private boolean active,flipped;
     private Integer score;
-    public EvaluationBarView(Context context){super(context);setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);setVisibility(GONE);describe();}
+    public EvaluationBarView(Context context){super(context);border=AppTheme.load(context).colors.line;setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);setVisibility(GONE);describe();}
     public void setEvaluation(boolean active,Integer score){this.active=active;this.score=active?score:null;setVisibility(active?VISIBLE:GONE);describe();invalidate();}
     public void setFlipped(boolean flipped){this.flipped=flipped;describe();invalidate();}
     private void describe(){
@@ -42,7 +43,7 @@ public final class EvaluationBarView extends View {
         paint.setColor(Color.WHITE);paint.setAlpha(active?170:115);paint.setStrokeWidth(Math.max(1,density));
         canvas.drawLine(0,height*.5f,width*.28f,height*.5f,paint);canvas.drawLine(width*.72f,height*.5f,width,height*.5f,paint);
         paint.setAlpha(255);canvas.restoreToCount(save);
-        paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(Math.max(1,density*.7f));paint.setColor(0xff93a193);
+        paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(Math.max(1,density*.7f));paint.setColor(border);
         canvas.drawRoundRect(.5f,.5f,width-.5f,height-.5f,Math.min(width*.35f,3*density),Math.min(width*.35f,3*density),paint);paint.setStyle(Paint.Style.FILL);
     }
 }

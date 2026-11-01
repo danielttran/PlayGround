@@ -32,8 +32,8 @@ import java.util.concurrent.*;
 
 /** Dependency-free native Android library, replay board and local analysis workspace. */
 public final class MainActivity extends Activity {
-    private static final int BG=0xff121c17, SURFACE=0xff1c2921, LIGHT=0xffedf1e7, MUTED=0xffaab9ac,
-        ACCENT=0xffc0d7a6, INK=0xff192c1e, LINE=0xff35463a;
+    private int BG,SURFACE,LIGHT,MUTED,ACCENT,INK,LINE,SELECTED,RED,BLACK;
+    private AppTheme appTheme;
     private static final int IMPORT=101, EXPORT=102;
     private final Handler handler=new Handler(Looper.getMainLooper());
     // File operations outlive configuration changes and stay ordered: a recreated
@@ -100,6 +100,7 @@ public final class MainActivity extends Activity {
     }};
 
     @Override public void onCreate(Bundle state) {
+        appTheme=AppTheme.load(this);appTheme.apply(this);org.xiangqi.study.core.UiPalette colors=appTheme.colors;BG=colors.background;SURFACE=colors.surface;LIGHT=colors.text;MUTED=colors.muted;ACCENT=colors.accent;INK=colors.onAccent;LINE=colors.line;SELECTED=colors.selected;RED=colors.red;BLACK=colors.black;
         super.onCreate(state);
         // Preserve home-screen shortcuts pinned before HomeActivity became the
         // launcher. Explicit internal viewer/import intents keep their old route.
@@ -111,9 +112,9 @@ public final class MainActivity extends Activity {
         if(state!=null){pendingImportName=state.getString("pendingImportName","Imported games");pendingImportEngine=state.getBoolean("pendingImportEngine",false);restoredImportDraft=state.getBundle("importDraft");}
         flipped=prefs.getBoolean("flipped",false);
         analysisEnabled=prefs.getBoolean("analysisEnabled",false);
-        getWindow().setStatusBarColor(BG); getWindow().setNavigationBarColor(BG);
         getWindow().getDecorView().setSystemUiVisibility(0);
         if(Build.VERSION.SDK_INT>=30)getWindow().setDecorFitsSystemWindows(false);
+        appTheme.decorate(this);
         root=new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL); root.setBackgroundColor(BG);
         root.setPadding(dp(12),dp(8),dp(12),dp(8));
         root.setOnApplyWindowInsetsListener((v,insets)->{
@@ -147,6 +148,7 @@ public final class MainActivity extends Activity {
                         if(importedReady){restoredImportDraft=null;discardImportDraft(draftToRestore);}
                         else restoreImportDraft(draftToRestore,savedDraftText,savedDraftError);
                     }
+                    if(state!=null&&!library&&game!=null&&game.id.equals(state.getString("recordGame",""))&&movesView!=null){final ListView record=movesView;final String idToRestore=game.id;final int positionToRestore=ply;record.post(()->{if(!destroyed&&!library&&record==movesView&&game.id.equals(idToRestore)&&ply==positionToRestore)record.setSelectionFromTop(state.getInt("recordFirst",0),state.getInt("recordTop",0));});}
                 });
             } catch(Exception e) { runOnUiThread(()->{ if(!destroyed) { root.removeAllViews(); root.addView(text("The library could not be loaded.",20,LIGHT)); root.addView(text(message(e),14,MUTED)); root.addView(button("Retry",()->recreate(),true)); } }); }
         });
@@ -354,7 +356,7 @@ public final class MainActivity extends Activity {
         if(withNavigation)root.addView(AppNavigation.create(this,"database",tab->{saveState();stopAutoplay();startActivity(new Intent(this,HomeActivity.class).putExtra("homeScreen",tab).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));}),new LinearLayout.LayoutParams(-1,dp(62)));
         renderedPly=-1;LinearLayout nav=row();boolean fromHome=getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false);Button back=iconButton("back",fromHome?"Database":"Library",this::returnDatabase);nav.addView(back,new LinearLayout.LayoutParams(dp(44),dp(48)));
         gameTitle=column();pad(gameTitle,6,0,6,0);
-        for(boolean redSide:new boolean[]{true,false}){TextView player=text((redSide?"Red · ":"Black · ")+PlayerNames.display(redSide?game.red:game.black),13,redSide?0xfff0a69c:LIGHT);player.setSingleLine(true);player.setEllipsize(TextUtils.TruncateAt.END);gameTitle.addView(player,new LinearLayout.LayoutParams(-1,-2));}
+        for(boolean redSide:new boolean[]{true,false}){TextView player=text((redSide?"Red · ":"Black · ")+PlayerNames.display(redSide?game.red:game.black),13,redSide?RED:LIGHT);player.setSingleLine(true);player.setEllipsize(TextUtils.TruncateAt.END);gameTitle.addView(player,new LinearLayout.LayoutParams(-1,-2));}
         gameTitle.setContentDescription("Red: "+PlayerNames.display(game.red)+". Black: "+PlayerNames.display(game.black)+". "+game.event+". "+game.round+". Open game information.");gameTitle.setFocusable(true);gameTitle.setOnClickListener(v->gameInformation());nav.addView(gameTitle,new LinearLayout.LayoutParams(0,-2,1));
         Button menu=iconButton("menu","Game menu",()->{});menu.setOnClickListener(v->gameMenu(menu));nav.addView(menu,new LinearLayout.LayoutParams(dp(44),dp(48)));int headerHeight=Math.max(dp(48),Math.round(((TextView)gameTitle.getChildAt(0)).getPaint().getFontSpacing())*2);content.addView(nav,new LinearLayout.LayoutParams(-1,headerHeight));
         positionLabel=null;eventLabel=null;
@@ -474,7 +476,7 @@ public final class MainActivity extends Activity {
         void bind(int index){
             int halfPly=index+1;boolean red=positions.get(index).redToMove;
             int moveNumber=(index+(positions.get(0).redToMove?0:1))/2+1;
-            number.setText(moveNumber+" "+(red?"Red":"Black"));number.setTextColor(red?0xfff39699:MUTED);
+            number.setText(moveNumber+" "+(red?"Red":"Black"));number.setTextColor(red?RED:MUTED);
             String actual=workingMoves.get(index),glyph=exploring||vsEngine?null:game.moveGlyphs.get(halfPly);
             String display=pretty(actual)+(glyph==null||glyph.isEmpty()?"":" "+glyph)+(game.engineGame&&index<game.bookPlies?" 📖":"");
             played.setText(display);played.setFocusable(true);played.setContentDescription("After half-move "+halfPly+", "+actual);played.setOnClickListener(v->navigate(halfPly));
@@ -482,7 +484,7 @@ public final class MainActivity extends Activity {
             played.setOnLongClickListener(comment==null?null:v->{gameInformationDialog=dialog("Move "+moveNumber+" · "+(red?"Red":"Black")).setMessage(comment).setPositiveButton("Close",null).show();return true;});
             String alternative=savedAlternative(index);best.setText(alternative==null||alternative.isEmpty()?"—":pretty(alternative));best.setFocusable(alternative!=null&&!alternative.isEmpty());best.setOnClickListener(alternative==null||alternative.isEmpty()?null:v->exploreAlternative(index));
             best.setContentDescription(alternative==null||alternative.isEmpty()?"No saved suggestion for half-move "+halfPly:"Pikafish suggestion for half-move "+halfPly+", "+alternative+". Explore alternative.");
-            setBackground(ply==halfPly?shape(0xff2e4231,0,8):null);
+            setBackground(ply==halfPly?shape(SELECTED,0,8):null);
         }
     }
 
@@ -909,15 +911,15 @@ public final class MainActivity extends Activity {
         if(game!=null){edit.putString("lastGame",game.id);if(!exploring)edit.putInt("ply:"+game.id,ply);edit.putBoolean("exploring:"+game.id,exploring);if(exploring){edit.putString("variationMoves:"+game.id,new JSONArray(workingMoves).toString()).putInt("variationPly:"+game.id,ply);}}
         edit.apply();
     }
-    @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();out.putString("pendingExport",pendingExport);out.putString("pendingImportName",pendingImportName);out.putBoolean("pendingImportEngine",pendingImportEngine);out.putBundle("importDraft",saveImportDraft());}
+    @Override protected void onSaveInstanceState(Bundle out){super.onSaveInstanceState(out);saveState();if(!library&&game!=null&&movesView!=null&&movesView.getChildCount()>0){out.putString("recordGame",game.id);out.putInt("recordFirst",movesView.getFirstVisiblePosition());out.putInt("recordTop",movesView.getChildAt(0).getTop());}out.putString("pendingExport",pendingExport);out.putString("pendingImportName",pendingImportName);out.putBoolean("pendingImportEngine",pendingImportEngine);out.putBundle("importDraft",saveImportDraft());}
     @Override protected void onRestoreInstanceState(Bundle in){super.onRestoreInstanceState(in);pendingExport=in.getString("pendingExport");}
-    @Override protected void onStart(){super.onStart();foreground=true;if(loaded){applyAppearance();if(!library){board.setFlipped(flipped);updateReplay();}if(library)renderCards();else refreshGameNavigation();if(getIntent().hasExtra(HomeActivity.REVIEW_ID)){handler.removeCallbacks(personalNotesRefresh);handler.post(personalNotesRefresh);}}resumeAnalysis();}
+    @Override protected void onStart(){super.onStart();if(appTheme!=null&&!appTheme.matches(AppTheme.load(this))){recreate();return;}foreground=true;if(loaded){applyAppearance();if(!library){board.setFlipped(flipped);updateReplay();}if(library)renderCards();else refreshGameNavigation();if(getIntent().hasExtra(HomeActivity.REVIEW_ID)){handler.removeCallbacks(personalNotesRefresh);handler.post(personalNotesRefresh);}}resumeAnalysis();}
     @Override protected void onStop(){super.onStop();foreground=false;ComputerReview.pause();handler.removeCallbacks(personalNotesRefresh);cancelLibrarySearch();seeking=false;boolean wasPlaying=vsEngine;stopAutoplay();cancelGameSearch(true);cancelAnalysis();if(wasPlaying&&!library&&board!=null)updateReplay();saveState();}
     @Override protected void onDestroy(){destroyed=true;cancelGameSearch(true);cancelLibrarySearch();libraryWorker.shutdownNow();handler.removeCallbacksAndMessages(null);engine.shutdownNow();if(errorDialog!=null)errorDialog.dismiss();if(gameInformationDialog!=null)gameInformationDialog.dismiss();if(replaySpeedDialog!=null)replaySpeedDialog.dismiss();if(importCollectionDialog!=null)importCollectionDialog.dismiss();if(pasteDialog!=null)pasteDialog.dismiss();if(goToDialog!=null)goToDialog.dismiss();if(playSideDialog!=null)playSideDialog.dismiss();if(legalMovesDialog!=null)legalMovesDialog.dismiss();if(colorDialog!=null)colorDialog.dismiss();if(presetDialog!=null)presetDialog.dismiss();if(settingsDialog!=null)settingsDialog.dismiss();if(engineSettingsDialog!=null)engineSettingsDialog.dismiss();super.onDestroy();}
     private void returnDatabase(){if(getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false)){saveState();finish();}else showLibrary();}
     @Override public void onBackPressed(){if(getIntent().getBooleanExtra(HomeActivity.FROM_HOME,false))returnDatabase();else if(!library)showLibrary();else super.onBackPressed();}
 
-    private AlertDialog.Builder dialog(String title){return new AlertDialog.Builder(this,android.R.style.Theme_Material_Dialog_Alert).setTitle(title);}
+    private AlertDialog.Builder dialog(String title){return new AlertDialog.Builder(this).setTitle(title);}
     private void error(String title,String message){if(errorDialog!=null)errorDialog.dismiss();AlertDialog shown=dialog(title).setMessage(message).setPositiveButton("OK",null).create();errorDialog=shown;shown.setOnDismissListener(d->{if(errorDialog==shown)errorDialog=null;});shown.show();}
     private void toast(String message){Toast.makeText(this,message,Toast.LENGTH_LONG).show();}
     private static String message(Exception e){String value=e.getMessage()==null?e.getClass().getSimpleName():e.getMessage();return value.length()>2000?value.substring(0,2000)+"…":value;}
@@ -928,7 +930,7 @@ public final class MainActivity extends Activity {
     private LinearLayout row(){LinearLayout l=new LinearLayout(this);l.setOrientation(LinearLayout.HORIZONTAL);l.setGravity(Gravity.CENTER_VERTICAL);return l;}
     private TextView text(String value,int size,int color){TextView v=new TextView(this);v.setText(value);v.setTextSize(size);v.setTextColor(color);v.setFontFeatureSettings("kern");return v;}
     private LinearLayout playerRow(String side,String name,int size){
-        LinearLayout line=row();pad(line,0,2,0,2);TextView label=text(side,11,"RED".equals(side)?0xfff1a294:0xffbfd5cf);
+        LinearLayout line=row();pad(line,0,2,0,2);TextView label=text(side,11,"RED".equals(side)?RED:BLACK);
         label.setTypeface(null,Typeface.BOLD);line.addView(label,new LinearLayout.LayoutParams(dp(49),-2));
         TextView player=text(PlayerNames.display(name),size,LIGHT);player.setTypeface(null,Typeface.BOLD);line.addView(player,new LinearLayout.LayoutParams(0,-2,1));
         return line;
